@@ -5,6 +5,7 @@
 ** dqsqd.cpp
 */
 
+#include <irrlicht/irrlicht.h>
 #include <iostream>
 
 int main()
