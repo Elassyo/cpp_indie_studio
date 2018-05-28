@@ -14,6 +14,8 @@ set(SRC_INTERFACE
 set(SRC_FILES
         src/AObject.cpp
         src/AObject.hpp
+        src/ATransformableObject.cpp
+        src/ATransformableObject.hpp
         )
 
 add_executable(

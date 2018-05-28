@@ -20,7 +20,7 @@ const irr::core::vector3df &bomb::AObject::getPos() const
 	return _pos;
 }
 
-irr::core::vector3df &bomb::AObject::getRPos() const
+irr::core::vector3df &bomb::AObject::getRPos()
 {
 	return _pos;
 }
@@ -35,7 +35,7 @@ const irr::core::vector3df &bomb::AObject::getScale() const
 	return _scale;
 }
 
-irr::core::vector3df &bomb::AObject::getRScale() const
+irr::core::vector3df &bomb::AObject::getRScale()
 {
 	return _scale;
 }
@@ -50,7 +50,7 @@ const irr::core::vector3df &bomb::AObject::getRotation() const
 	return _rotation;
 }
 
-irr::core::vector3df &bomb::AObject::getRRotation() const
+irr::core::vector3df &bomb::AObject::getRRotation()
 {
 	return _rotation;
 }

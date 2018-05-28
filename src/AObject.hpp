@@ -25,16 +25,16 @@ namespace bomb {
 		);
 
 		const irr::core::vector3df &getPos() const;
-		irr::core::vector3df &getRPos() const;
+		irr::core::vector3df &getRPos();
 		void setPos(const irr::core::vector3df &pos);
 		const irr::core::vector3df &getScale() const;
-		irr::core::vector3df &getRScale() const;
+		irr::core::vector3df &getRScale();
 		void setScale(const irr::core::vector3df &scale);
 		const irr::core::vector3df &getRotation() const;
-		irr::core::vector3df &getRRotation() const;
+		irr::core::vector3df &getRRotation();
 		void setRotation(const irr::core::vector3df &rotation);
 
-	private:
+	protected:
 		irr::core::vector3df _pos;
 		irr::core::vector3df _scale;
 		irr::core::vector3df _rotation;
