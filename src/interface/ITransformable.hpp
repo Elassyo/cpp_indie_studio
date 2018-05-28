@@ -16,6 +16,7 @@ namespace bomb {
 		virtual void move(const irr::core::vector3df &) = 0;
 		virtual void rotate(const irr::core::vector3df &) = 0;
 		virtual void scale(const irr::core::vector3df &) = 0;
+		virtual ~ITransformable() = 0;
 	};
 }
 

@@ -14,6 +14,7 @@ namespace bomb {
 	class ISerializable {
 	public:
 		virtual std::string toString() = 0;
+		virtual ~ISerializable() = 0;
 	};
 }
 
