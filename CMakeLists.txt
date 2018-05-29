@@ -18,6 +18,13 @@ set(SRC_MAP
         src/map/MapGenerator.hpp
         )
 
+set(SRC_MENU
+        src/Menu/GraphicButton.cpp
+        src/Menu/Include/GraphicButton.hpp
+        src/Menu/Menu.cpp
+        src/Menu/Include/Menu.hpp
+        )
+
 set(SRC_FILES
         src/AObject.cpp
         src/AObject.hpp
@@ -32,6 +39,7 @@ add_executable(
         ${SRC_INTERFACE}
         ${SRC_FILES}
         ${SRC_MAP}
+        ${SRC_MENU}
         src/main.cpp
 )
 target_link_libraries(bomberman Irrlicht)
