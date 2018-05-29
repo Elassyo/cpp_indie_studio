@@ -5,6 +5,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -Wextra -std=c++17")
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
+set(SRC_EXCEPTION
+        src/exception/Exception.cpp
+        src/exception/Exception.hpp
+        )
+
 set(SRC_INTERFACE
         src/interface/ISerializable.hpp
         src/interface/IRenderable.hpp
@@ -32,6 +37,7 @@ add_executable(
         ${SRC_INTERFACE}
         ${SRC_FILES}
         ${SRC_MAP}
+        ${SRC_EXCEPTION}
         src/main.cpp
 )
 target_link_libraries(bomberman Irrlicht)

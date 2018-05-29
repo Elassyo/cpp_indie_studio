@@ -11,13 +11,20 @@
 #include "Map.hpp"
 
 namespace bomb {
+	typedef std::vector<std::pair<irr::core::vector3di, size_t>> MapPattern;
+
 	class MapGenerator {
 	public:
 		enum Pattern {
-			RANDOM
+			RANDOM,
+			BASIC
 		};
 
-		static Map &generator(size_t size, Pattern pattern = RANDOM);
+		static Map &generate(size_t size, Pattern idPattern = RANDOM);
+
+	private:
+		static Map &paternToMap(const MapPattern &pattern);
+		 static MapPattern genBasic(int size);
 	};
 }
 
