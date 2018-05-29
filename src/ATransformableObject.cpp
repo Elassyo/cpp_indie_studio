@@ -15,6 +15,12 @@ bomb::ATransformableObject::ATransformableObject(
 {
 }
 
+bomb::ATransformableObject::ATransformableObject(
+	const bomb::ATransformableObject &ex):
+	AObject(ex)
+{
+}
+
 void bomb::ATransformableObject::move(const irr::core::vector3df &df)
 {
 	_pos += df;

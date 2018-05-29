@@ -23,6 +23,7 @@ namespace bomb {
 			const irr::core::vector3df &scale = {0, 0, 0},
 			const irr::core::vector3df &rotation = {0, 0, 0}
 		);
+		AObject(const AObject &ex);
 
 		const irr::core::vector3df &getPos() const;
 		irr::core::vector3df &getRPos();

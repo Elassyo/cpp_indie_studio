@@ -15,6 +15,11 @@ bomb::AObject::AObject(
 {
 }
 
+bomb::AObject::AObject(const bomb::AObject &ex):
+	_pos(ex._pos), _scale(ex._scale), _rotation(ex._rotation)
+{
+}
+
 const irr::core::vector3df &bomb::AObject::getPos() const
 {
 	return _pos;

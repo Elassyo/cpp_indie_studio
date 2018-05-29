@@ -11,17 +11,27 @@ set(SRC_INTERFACE
         src/interface/ITransformable.hpp
         )
 
+set(SRC_MAP
+        src/map/Map.cpp
+        src/map/Map.hpp
+        src/map/MapGenerator.cpp
+        src/map/MapGenerator.hpp
+        )
+
 set(SRC_FILES
         src/AObject.cpp
         src/AObject.hpp
         src/ATransformableObject.cpp
         src/ATransformableObject.hpp
+        src/map/MapWall.cpp
+        src/map/MapWall.hpp
         )
 
 add_executable(
         bomberman
         ${SRC_INTERFACE}
         ${SRC_FILES}
+        ${SRC_MAP}
         src/main.cpp
 )
 target_link_libraries(bomberman Irrlicht)

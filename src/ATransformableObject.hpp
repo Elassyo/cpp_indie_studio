@@ -21,6 +21,7 @@ namespace bomb {
 			const irr::core::vector3df &scale = {0, 0, 0},
 			const irr::core::vector3df &rotation = {0, 0, 0}
 		);
+		ATransformableObject(const ATransformableObject &ex);
 
 		void move(const irr::core::vector3df &df) override;
 		void rotate(const irr::core::vector3df &df) override;
