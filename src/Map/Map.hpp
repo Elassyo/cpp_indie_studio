@@ -6,14 +6,14 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_MAP_HPP
-#define CPP_INDIE_STUDIO_MAP_HPP
+	#define CPP_INDIE_STUDIO_MAP_HPP
 
-#include <vector>
-#include <memory>
-#include "src/interface/ISerializable.hpp"
-#include "src/interface/IRenderable.hpp"
-#include "src/map/MapWall.hpp"
+	#include <memory>
+	#include <vector>
 
+	#include "../Interface/ISerializable.hpp"
+	#include "../Interface/IRenderable.hpp"
+	#include "../Map/MapWall.hpp"
 
 namespace bomb {
 	typedef std::pair<std::unique_ptr<bomb::MapWall>,

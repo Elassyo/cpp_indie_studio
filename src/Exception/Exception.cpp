@@ -1,8 +1,8 @@
 //
 // EPITECH PROJECT, 2018
-// cpp_bombade
+// cpp_indie_studio
 // File description:
-// ArcExecption.cpp
+// Exception.cpp
 //
 
 #include "Exception.hpp"
@@ -11,10 +11,10 @@ bomb::Exception::Exception(
 	const std::string &context,
 	const std::string &message)
 {
-	_error = context + ": "  + message;
+	_what = context + ": "  + message;
 }
 
-const char *bomb::Exception::what() const throw()
+const char *bomb::Exception::what() const noexcept
 {
-	return _error.c_str();
+	return _what.c_str();
 }

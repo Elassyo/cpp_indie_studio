@@ -1,33 +1,35 @@
 cmake_minimum_required(VERSION 3.10)
 project(cpp_indie_studio)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -Wextra -std=c++17")
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -Wextra")
 set(CMAKE_AUTOMOC ON)
 
 set(SRC_EXCEPTION
-        src/exception/Exception.cpp
-        src/exception/Exception.hpp
+        src/Exception/Exception.cpp
+        src/Exception/Exception.hpp
         )
 
 set(SRC_INTERFACE
-        src/interface/ISerializable.hpp
-        src/interface/IRenderable.hpp
-        src/interface/ITransformable.hpp
+        src/Interface/ISerializable.hpp
+        src/Interface/IRenderable.hpp
+        src/Interface/ITransformable.hpp
         )
 
 set(SRC_MAP
-        src/map/Map.cpp
-        src/map/Map.hpp
-        src/map/MapGenerator.cpp
-        src/map/MapGenerator.hpp
+        src/Map/Map.cpp
+        src/Map/Map.hpp
+        src/Map/MapGenerator.cpp
+        src/Map/MapGenerator.hpp
+        src/Map/MapWall.cpp
+        src/Map/MapWall.hpp
         )
 
 set(SRC_MENU
         src/Menu/GraphicButton.cpp
-        src/Menu/Include/GraphicButton.hpp
+        src/Menu/GraphicButton.hpp
         src/Menu/Menu.cpp
-        src/Menu/Include/Menu.hpp
+        src/Menu/Menu.hpp
         )
 
 set(SRC_FILES
@@ -35,8 +37,6 @@ set(SRC_FILES
         src/AObject.hpp
         src/ATransformableObject.cpp
         src/ATransformableObject.hpp
-        src/map/MapWall.cpp
-        src/map/MapWall.hpp
         )
 
 add_executable(
@@ -46,6 +46,7 @@ add_executable(
         ${SRC_MAP}
         ${SRC_EXCEPTION}
         ${SRC_MENU}
-        src/main.cpp
+        src/Bomberman.cpp
 )
+
 target_link_libraries(bomberman Irrlicht)

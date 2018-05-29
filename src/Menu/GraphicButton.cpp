@@ -5,7 +5,7 @@
 // Created by Gregory EPLE
 //
 
-#include "Include/GraphicButton.hpp"
+#include "GraphicButton.hpp"
 
 bomb::GraphicButton::GraphicButton(irr::gui::IGUIButton *button,
 				   MenuPage page) :

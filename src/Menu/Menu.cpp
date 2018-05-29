@@ -5,23 +5,21 @@
 // Created by Gregory EPLE
 //
 
-#include "Include/Menu.hpp"
+#include "Menu.hpp"
 
 bomb::Menu::Menu(irr::gui::IGUIEnvironment *gui, MenuPage page) :
 	_gui(gui), _page(page)
 {
-	_buttons.push_back(GraphicButton(createButton({100, 75}, {100, 50},
-						      L"PLAY"), MAIN));
-	_buttons.push_back(GraphicButton(createButton({100, 150}, {100, 50},
-						      L"OPTION"), MAIN));
-	_buttons.push_back(GraphicButton(createButton({100, 225}, {100, 50},
-						      L"EXIT"), MAIN));
-	_buttons.push_back(GraphicButton(createButton({75, 125}, {150, 100},
-						      L"Back to main"),
-					 OPTION));
-	_buttons.push_back(GraphicButton(createButton({0, 0}, {50, 50},
-						      L"MENU"),
-					 CLOSE));
+	_buttons.emplace_back(createButton({100, 75}, {100, 50},
+		L"PLAY"), MAIN);
+	_buttons.emplace_back(createButton({100, 150}, {100, 50},
+		L"OPTION"), MAIN);
+	_buttons.emplace_back(createButton({100, 225}, {100, 50},
+		L"EXIT"), MAIN);
+	_buttons.emplace_back(createButton({75, 125}, {150, 100},
+		L"Back to main"), OPTION);
+	_buttons.emplace_back(createButton({0, 0}, {50, 50},
+		L"MENU"), CLOSE);
 	updateButtons();
 }
 
@@ -32,7 +30,7 @@ irr::gui::IGUIButton *bomb::Menu::createButton(irr::core::vector2di pos,
 	return _gui->addButton(irr::core::rect<irr::s32>(pos.X, pos.Y,
 							 pos.X + size.X,
 							 pos.Y + size.Y),
-			       0, -1, text);
+		nullptr, -1, text);
 }
 
 void bomb::Menu::changePage(MenuPage page)

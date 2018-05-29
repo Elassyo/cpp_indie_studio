@@ -1,36 +1,41 @@
 ##
 ## EPITECH PROJECT, 2018
-## Arcade
+## cpp_indie_studio
 ## File description:
-## Global Makefile
+## Makefile
 ##
 
-BINARY_NAME	= bomberman
+NAME		=	bomberman
 
-BUILD_DIR	= build
-DEST		= .
+BUILD_DIR	=	cmake-build-debug
 
-RM		= rm -f
-MKDIR		= mkdir -p
+CMAKE		=	cmake
+MKDIR		=	mkdir
+RM		=	rm -rf
 
-all:	${BINARY_NAME}
+all: $(NAME)
 
-cmake:	| $(BUILD_DIR)
-	(cd $(BUILD_DIR) && cmake ..)
-
-$(BINARY_NAME):	cmake | $(BUILD_DIR)
-	make -C $(BUILD_DIR) bomberman
-	cp $(BUILD_DIR)/bomberman ${BINARY_NAME}
+cmake-gen:
+	cd $(BUILD_DIR) && \
+	$(CMAKE) -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug $(SRC_DIR)
 
 $(BUILD_DIR):
 	$(MKDIR) $@
+	$(MAKE) -C . SRC_DIR=$(abspath .) cmake-gen
 
-clean:
-	$(RM) -r $(BUILD_DIR)
+$(NAME): | $(BUILD_DIR)
+	$(CMAKE) --build $(BUILD_DIR) --target $@
+	cp $(BUILD_DIR)/$@ $@
 
-fclean:	clean
-	$(RM) ${BINARY_NAME}
+install: | $(BUILD_DIR)
+	$(CMAKE) --build $(BUILD_DIR) --target install
 
-re:	fclean all
+clean: | $(BUILD_DIR)
+	$(CMAKE) --build $(BUILD_DIR) --target clean
 
-.PHONY:	all cmake clean fclean re core
+fclean:
+	$(RM) $(BUILD_DIR)
+
+re: fclean all
+
+.PHONY:	all cmake-gen clean fclean re core
