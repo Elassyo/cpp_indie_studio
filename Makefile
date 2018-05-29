@@ -34,7 +34,7 @@ clean: | $(BUILD_DIR)
 	$(CMAKE) --build $(BUILD_DIR) --target clean
 
 fclean:
-	$(RM) $(BUILD_DIR)
+	$(RM) $(BUILD_DIR) $(NAME)
 
 re: fclean all
 
