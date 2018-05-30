@@ -9,7 +9,7 @@
 #define CPP_INDIE_STUDIO_GAMEWINDOW_HPP
 
 #include <irrlicht/irrlicht.h>
-#include "src/interface/IAssetLoader.hpp"
+#include "src/Interface/IAssetLoader.hpp"
 
 namespace bomb {
 	class GameWindow : public IAssetLoader {

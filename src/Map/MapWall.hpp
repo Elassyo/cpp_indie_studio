@@ -8,7 +8,7 @@
 #ifndef CPP_INDIE_STUDIO_MAPWALL_HPP
 #define CPP_INDIE_STUDIO_MAPWALL_HPP
 
-#include "src/AObject.hpp"
+#include "../AObject.hpp"
 
 namespace bomb {
 	class MapWall :
@@ -28,7 +28,7 @@ namespace bomb {
 		);
 		MapWall(const MapWall &ex);
 
-		bool bomb(size_t dammage = 1);
+		bool bomb(size_t damage = 1);
 		size_t getHp() const;
 		void setHp(size_t hp);
 

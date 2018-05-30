@@ -22,11 +22,11 @@ bomb::MapWall::MapWall(const bomb::MapWall &ex):
 {
 }
 
-bool bomb::MapWall::bomb(size_t dammage)
+bool bomb::MapWall::bomb(size_t damage)
 {
 	switch (_status) {
 	case BREAKABLE:
-		_hp -= dammage;
+		_hp -= damage;
 		break;
 	case UNBREAKABLE:
 		break;

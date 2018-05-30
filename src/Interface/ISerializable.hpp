@@ -6,15 +6,16 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_ISERIALIZABLE_HPP
-#define CPP_INDIE_STUDIO_ISERIALIZABLE_HPP
+	#define CPP_INDIE_STUDIO_ISERIALIZABLE_HPP
 
-#include <string>
+	#include <string>
 
 namespace bomb {
 	class ISerializable {
 	public:
+		virtual ~ISerializable() = default;
+
 		virtual std::string toString() = 0;
-		virtual ~ISerializable() = 0;
 	};
 }
 
