@@ -14,7 +14,7 @@ set(SRC_INTERFACE
         src/interface/ISerializable.hpp
         src/interface/IRenderable.hpp
         src/interface/ITransformable.hpp
-        )
+        src/interface/IAssetLoader.hpp)
 
 set(SRC_MAP
         src/map/Map.cpp
@@ -37,7 +37,7 @@ set(SRC_FILES
         src/ATransformableObject.hpp
         src/map/MapWall.cpp
         src/map/MapWall.hpp
-        )
+        src/render/GameWindow.cpp src/render/GameWindow.hpp)
 
 add_executable(
         bomberman
