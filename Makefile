@@ -1,6 +1,6 @@
 ##
 ## EPITECH PROJECT, 2018
-## Arcade
+## Bomberman
 ## File description:
 ## Global Makefile
 ##

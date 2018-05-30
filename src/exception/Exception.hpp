@@ -1,12 +1,12 @@
 //
 // EPITECH PROJECT, 2018
-// cpp_arcade
+// cpp_indie_studio
 // File description:
-// ArcExecption.hpp
+// Execption.hpp
 //
 
-#ifndef CPP_ARCADE_ARCEXECPTION_HPP
-#define CPP_ARCADE_ARCEXECPTION_HPP
+#ifndef CPP_INDIE_STUDIO_EXECPTION_HPP
+#define CPP_INDIE_STUDIO_EXECPTION_HPP
 
 #include <stdexcept>
 #include <string>
@@ -25,4 +25,4 @@ namespace bomb {
 	};
 }
 
-#endif /* CPP_ARCADE_ARCEXECPTION_HPP */
+#endif /* CPP_INDIE_STUDIO_EXECPTION_HPP */

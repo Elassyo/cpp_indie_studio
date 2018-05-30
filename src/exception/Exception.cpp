@@ -2,7 +2,7 @@
 // EPITECH PROJECT, 2018
 // cpp_bombade
 // File description:
-// ArcExecption.cpp
+// Exception.cpp
 //
 
 #include "Exception.hpp"

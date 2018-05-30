@@ -24,7 +24,7 @@ namespace bomb {
 
 	private:
 		static Map &paternToMap(const MapPattern &pattern);
-		 static MapPattern genBasic(int size);
+		static MapPattern genBasic(int size);
 	};
 }
 

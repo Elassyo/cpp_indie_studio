@@ -35,11 +35,11 @@
 *~
 #*#
 cmake-*
-arcade
+bomberman
 .*.vim
 build/
 doc/latex
-scores.arcade/
+scores.bomberman/
 
 # tests
 tests_run
