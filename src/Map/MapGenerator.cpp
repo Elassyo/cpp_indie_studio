@@ -5,20 +5,20 @@
 // MapGenerator.cpp
 //
 
-#include <src/exception/Exception.hpp>
+#include "../Exception/Exception.hpp"
 #include "MapGenerator.hpp"
 
 const size_t nbPattern = 1;
 
 bomb::Map &bomb::MapGenerator::paternToMap(const bomb::MapPattern &pattern)
 {
-	/* TO DO */
+	/* TODO */
 	/*bomb::Map x =  bomb::Map();
 	return x;*/
 }
 
-bomb::Map &
-bomb::MapGenerator::generate(size_t size, bomb::MapGenerator::Pattern idPattern)
+bomb::Map &bomb::MapGenerator::generate(size_t size,
+	bomb::MapGenerator::Pattern idPattern)
 {
 	bomb::MapPattern pattern;
 

@@ -6,9 +6,9 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_MAPGENERATOR_HPP
-#define CPP_INDIE_STUDIO_MAPGENERATOR_HPP
+	#define CPP_INDIE_STUDIO_MAPGENERATOR_HPP
 
-#include "Map.hpp"
+	#include "Map.hpp"
 
 namespace bomb {
 	typedef std::vector<std::pair<irr::core::vector3di, size_t>> MapPattern;

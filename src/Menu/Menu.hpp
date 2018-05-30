@@ -6,10 +6,11 @@
 //
 
 #ifndef CPP_TEST_STUDIO_MENU_HPP
-#define CPP_TEST_STUDIO_MENU_HPP
+	#define CPP_TEST_STUDIO_MENU_HPP
 
-#include <vector>
-#include "GraphicButton.hpp"
+	#include <vector>
+
+	#include "GraphicButton.hpp"
 
 namespace bomb {
 	class Menu {
@@ -17,10 +18,12 @@ namespace bomb {
 		Menu(irr::gui::IGUIEnvironment *gui, MenuPage page = MAIN);
 		void changePage(MenuPage page = UNDEFINED);
 		void handleEvent();
+
 	private:
 		irr::gui::IGUIButton *createButton(irr::core::vector2di pos,
 						   irr::core::vector2di size,
 						   const wchar_t *text = L"");
+
 		void updateButtons();
 		irr::gui::IGUIEnvironment *_gui;
 		MenuPage _page;

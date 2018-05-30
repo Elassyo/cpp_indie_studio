@@ -6,11 +6,12 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_AOBJECT_HPP
-#define CPP_INDIE_STUDIO_AOBJECT_HPP
+	#define CPP_INDIE_STUDIO_AOBJECT_HPP
 
-#include <irrlicht/vector3d.h>
-#include "src/interface/ISerializable.hpp"
-#include "src/interface/IRenderable.hpp"
+	#include <irrlicht/vector3d.h>
+
+	#include "Interface/ISerializable.hpp"
+	#include "Interface/IRenderable.hpp"
 
 namespace bomb {
 	class AObject :
@@ -24,6 +25,7 @@ namespace bomb {
 			const irr::core::vector3df &rotation = {0, 0, 0}
 		);
 		AObject(const AObject &ex);
+		~AObject() override = default;
 
 		const irr::core::vector3df &getPos() const;
 		irr::core::vector3df &getRPos();

@@ -6,10 +6,10 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_ATRANSFORMABLEOBJECT_HPP
-#define CPP_INDIE_STUDIO_ATRANSFORMABLEOBJECT_HPP
+	#define CPP_INDIE_STUDIO_ATRANSFORMABLEOBJECT_HPP
 
-#include "src/interface/ITransformable.hpp"
-#include "AObject.hpp"
+	#include "Interface/ITransformable.hpp"
+	#include "AObject.hpp"
 
 namespace bomb {
 	class ATransformableObject :
