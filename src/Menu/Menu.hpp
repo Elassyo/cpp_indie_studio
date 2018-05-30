@@ -15,19 +15,24 @@
 namespace bomb {
 	class Menu {
 	public:
-		Menu(irr::gui::IGUIEnvironment *gui, MenuPage page = MAIN);
+		Menu(irr::video::IVideoDriver *driver,
+		     irr::gui::IGUIEnvironment *gui, MenuPage page = MAIN);
 		void changePage(MenuPage page = UNDEFINED);
 		void handleEvent();
+		void updateButtons();
 
 	private:
 		irr::gui::IGUIButton *createButton(irr::core::vector2di pos,
 						   irr::core::vector2di size,
 						   const wchar_t *text = L"");
-
-		void updateButtons();
+		irr::core::vector2di getButtonSize() const;
+		irr::video::IVideoDriver *_driver;
 		irr::gui::IGUIEnvironment *_gui;
 		MenuPage _page;
 		std::vector<GraphicButton> _buttons;
+		irr::core::vector2df _buttonRatio;
+		irr::video::ITexture *_buttonBack;
+		irr::gui::IGUIFont *_font;
 	};
 }
 

@@ -7,19 +7,28 @@
 
 #include "Menu.hpp"
 
-bomb::Menu::Menu(irr::gui::IGUIEnvironment *gui, MenuPage page) :
-	_gui(gui), _page(page)
+bomb::Menu::Menu(irr::video::IVideoDriver *driver,
+		 irr::gui::IGUIEnvironment *gui, MenuPage page) :
+	_driver(driver), _gui(gui), _page(page), _buttonRatio({.2, .1}),
+	_buttonBack(driver->getTexture("assets/images/buttonBack.png")),
+	_font(_gui->getFont("assets/fonts/mario16.xml"))
 {
-	_buttons.emplace_back(createButton({100, 75}, {100, 50},
-		L"PLAY"), MAIN);
-	_buttons.emplace_back(createButton({100, 150}, {100, 50},
-		L"OPTION"), MAIN);
-	_buttons.emplace_back(createButton({100, 225}, {100, 50},
-		L"EXIT"), MAIN);
-	_buttons.emplace_back(createButton({75, 125}, {150, 100},
-		L"Back to main"), OPTION);
-	_buttons.emplace_back(createButton({0, 0}, {50, 50},
-		L"MENU"), CLOSE);
+	const irr::core::vector2di buttonSize = getButtonSize();
+
+	_buttons.emplace_back(GraphicButton(createButton(
+		{0, 0}, buttonSize, L"PLAY"), {0.5, 0.33}, MAIN));
+	_buttons.emplace_back(GraphicButton(createButton(
+		{0, 0}, buttonSize, L"OPTION"), {0.5, 0.5}, MAIN));
+	_buttons.emplace_back(GraphicButton(createButton(
+		{0, 0}, buttonSize, L"EXIT"), {0.5, 0.66}, MAIN));
+	_buttons.emplace_back(GraphicButton(createButton(
+		{0, 0}, buttonSize, L"Back to main"), {0.5, 0.5}, OPTION));
+	_buttons.emplace_back(GraphicButton(createButton(
+		{0, 0}, buttonSize, L"MENU"), {0.5, 0.9}, CLOSE));
+	for (GraphicButton &button : _buttons) {
+		button.setFont(_font);
+		button.setTexture(_buttonBack);
+	}
 	updateButtons();
 }
 
@@ -54,6 +63,21 @@ void bomb::Menu::handleEvent()
 
 void bomb::Menu::updateButtons()
 {
-	for (GraphicButton &button : _buttons)
+	const irr::core::vector2di buttonSize = getButtonSize();
+	const irr::core::vector2di screenSize =
+		{(int)_driver->getScreenSize().Width,
+		 (int)_driver->getScreenSize().Height};
+
+	for (GraphicButton &button : _buttons) {
 		button.setVisibility(button.isOnPage(_page));
+		button.update(buttonSize, screenSize);
+	}
+}
+
+irr::core::vector2di bomb::Menu::getButtonSize() const
+{
+	const irr::core::dimension2du &screenSize = _driver->getScreenSize();
+
+	return {(int)(_buttonRatio.X * screenSize.Width),
+		(int)(_buttonRatio.Y *screenSize.Height)};
 }
