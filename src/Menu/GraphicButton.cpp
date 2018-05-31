@@ -10,7 +10,7 @@
 bomb::GraphicButton::GraphicButton(irr::gui::IGUIButton *button,
 				   irr::core::vector2df pos,
 				   MenuPage page) :
-	_button(button), _pos(pos), _page(page)
+	_button(button), _pos(pos), _event(nullptr), _page(page)
 {
 	_button->setDrawBorder(false);
 	_button->setUseAlphaChannel(true);
@@ -42,6 +42,17 @@ void bomb::GraphicButton::setTexture(irr::video::ITexture *texture,
 	_button->setImage(texture);
 	_button->setPressedImage(pressed);
 }
+
+void (bomb::Menu::*bomb::GraphicButton::getEvent() const)()
+{
+	return _event;
+}
+
+void bomb::GraphicButton::setEvent(void (bomb::Menu::*event)())
+{
+	_event = event;
+}
+
 void bomb::GraphicButton::update(irr::core::vector2di size,
 				 irr::core::vector2di screenSize)
 {

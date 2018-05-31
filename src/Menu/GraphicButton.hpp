@@ -11,12 +11,20 @@
 	#include <irrlicht/irrlicht.h>
 
 namespace bomb {
+	class Menu;
 
 	enum MenuPage {
 		UNDEFINED,
 		CLOSE,
 		MAIN,
 		OPTION
+	};
+
+	struct ButtonInfos {
+		wchar_t *text;
+		irr::core::vector2df pos;
+		MenuPage page;
+		void (bomb::Menu::*event)();
 	};
 
 	class GraphicButton {
@@ -34,10 +42,13 @@ namespace bomb {
 		MenuPage getPage() const;
 		void update(irr::core::vector2di size,
 			    irr::core::vector2di screenSize);
+		void (bomb::Menu::*getEvent() const)();
+		void setEvent(void (bomb::Menu::*_event)());
 
 	private:
 		irr::gui::IGUIButton *_button;
 		irr::core::vector2df _pos;
+		void (bomb::Menu::*_event)();
 		MenuPage _page;
 	};
 }

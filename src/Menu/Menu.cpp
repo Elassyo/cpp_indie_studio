@@ -16,24 +16,34 @@ bomb::Menu::Menu(irr::video::IVideoDriver *driver,
 	_font(_gui->getFont("assets/fonts/mario16.xml"))
 {
 	const irr::core::vector2di buttonSize = getButtonSize();
+	std::array<ButtonInfos, 6> buttonsInfos = getButtonsInfos();
 
-	_buttons.emplace_back(GraphicButton(createButton(
-		{0, 0}, buttonSize, L"PLAY"), {0.5, 0.33}, MAIN));
-	_buttons.emplace_back(GraphicButton(createButton(
-		{0, 0}, buttonSize, L"OPTION"), {0.5, 0.5}, MAIN));
-	_buttons.emplace_back(GraphicButton(createButton(
-		{0, 0}, buttonSize, L"EXIT"), {0.5, 0.66}, MAIN));
-	_buttons.emplace_back(GraphicButton(createButton(
-		{0, 0}, buttonSize, L"Test"), {0.5, 0.5}, OPTION));
-	_buttons.emplace_back(GraphicButton(createButton(
-		{0, 0}, buttonSize, L"Back to main"), {0.5, 0.66}, OPTION));
-	_buttons.emplace_back(GraphicButton(createButton(
-		{0, 0}, buttonSize, L"MENU"), {0.5, 0.9}, CLOSE));
-	for (GraphicButton &button : _buttons) {
+	for (ButtonInfos infos : buttonsInfos) {
+		GraphicButton button(GraphicButton(
+			createButton({0, 0}, buttonSize, infos.text),
+			infos.pos, infos.page));
+		button.setEvent(infos.event);
 		button.setFont(_font);
 		button.setTexture(_buttonBack, _buttonPressed);
+		_buttons.emplace_back(button);
 	}
 	updateButtons();
+}
+
+std::array<bomb::ButtonInfos, 6> bomb::Menu::getButtonsInfos() const
+{
+	return std::array<ButtonInfos, 6>
+		{{{(wchar_t *)L"PLAY", {0.5, 0.33}, MAIN, nullptr},
+			 {(wchar_t *)L"OPTION", {0.5, 0.5}, MAIN,
+				 &bomb::Menu::goToOption},
+			 {(wchar_t *)L"EXIT", {0.5, 0.66}, MAIN,
+				 &bomb::Menu::closeMenu},
+			 {(wchar_t *)L"Test", {0.5, 0.5}, OPTION, nullptr},
+			 {(wchar_t *)L"Back to main", {0.5, 0.66}, OPTION,
+				 &bomb::Menu::goToMain},
+			 {(wchar_t *)L"MENU", {0.5, 0.9}, CLOSE,
+				 &bomb::Menu::goToMain}}};
+
 }
 
 irr::gui::IGUIButton *bomb::Menu::createButton(irr::core::vector2di pos,
@@ -57,12 +67,9 @@ void bomb::Menu::changePage(MenuPage page)
 
 void bomb::Menu::handleEvent()
 {
-	if (_buttons[2].isPressed())
-		changePage(CLOSE);
-	else if (_buttons[1].isPressed())
-		changePage(OPTION);
-	else if (_buttons[5].isPressed() || _buttons[4].isPressed())
-		changePage(MAIN);
+	for (GraphicButton button : _buttons)
+		if (button.isPressed() && button.getEvent())
+			(*this.*button.getEvent())();
 }
 
 void bomb::Menu::updateButtons()
@@ -84,4 +91,19 @@ irr::core::vector2di bomb::Menu::getButtonSize() const
 
 	return {(int)(_buttonRatio.X * screenSize.Width),
 		(int)(_buttonRatio.Y *screenSize.Height)};
+}
+
+void bomb::Menu::goToMain()
+{
+	changePage(MAIN);
+}
+
+void bomb::Menu::goToOption()
+{
+	changePage(OPTION);
+}
+
+void bomb::Menu::closeMenu()
+{
+	changePage(CLOSE);
 }
