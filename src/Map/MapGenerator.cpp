@@ -5,51 +5,62 @@
 // MapGenerator.cpp
 //
 
+#include <iostream>
 #include "../Exception/Exception.hpp"
 #include "MapGenerator.hpp"
 
-const size_t nbPattern = 1;
+const std::unordered_map<bomb::MapGenerator::Type, bomb::MapConstructor (bomb::MapGenerator::*)()>
+	bomb::MapGenerator::typeGenerator = {
+	{bomb::MapGenerator::RANDOM, &bomb::MapGenerator::generateRandom},
+	{bomb::MapGenerator::BASIC, &bomb::MapGenerator::generateBasic},
+};
 
-bomb::Map &bomb::MapGenerator::paternToMap(const bomb::MapPattern &pattern)
+bomb::MapGenerator::MapGenerator(unsigned int seed,
+	unsigned int size,
+	bomb::MapGenerator::Type type) :
+	_seed(seed), _size(size), _type(type)
 {
-	/* TODO */
-	/*bomb::Map x =  bomb::Map();
-	return x;*/
+	if (_type == END_VALUE)
+		throw bomb::Exception("Genereator", "Invalide Type");
 }
 
-bomb::Map &bomb::MapGenerator::generate(size_t size,
-	bomb::MapGenerator::Pattern idPattern)
+bomb::MapConstructor bomb::MapGenerator::generate()
 {
-	bomb::MapPattern pattern;
-
-	if (idPattern == RANDOM)
-		idPattern = (Pattern)(random() % nbPattern + 1);
-	switch (idPattern) {
-	case BASIC:
-		pattern = genBasic((int)size);
-		break;
-	case RANDOM:
-	default:
-		throw bomb::Exception("Generator", "Pattern not found");
-	}
-	return paternToMap(pattern);
+	srandom(_seed);
+	auto map = (this->*(bomb::MapGenerator::typeGenerator.at(_type)))();
+	return map;
 }
 
-const long GenBasicProba = 90;
-bomb::MapPattern bomb::MapGenerator::genBasic(int size)
+bomb::MapConstructor bomb::MapGenerator::generateRandom()
 {
-	bomb::MapPattern pattern;
+	auto i = (MapGenerator::Type)(random() % (END_VALUE - 1) + 1);
+	std::cout << i << " " << RANDOM << BASIC << END_VALUE << std::endl;
+	auto map = (this->*(bomb::MapGenerator::typeGenerator.at(i)))();
+	return map;
+}
 
-	for (int i = 0; i < size; i++) {
-		for (int j = 0; j < size; j++) {
-			if ((i == 0 || i == 1 || i == size || i == size - 1)
-				&& (j == 0 || j == 1 || j == size || j == size - 1))
-				continue;
-			else if (i % 2 == 1 && j % 2 == 1)
-				pattern.push_back(std::make_pair<irr::core::vector3di, size_t>({i, j, 0}, 0));
-			else if (random() % 100 <= GenBasicProba)
-				pattern.push_back(std::make_pair<irr::core::vector3di, size_t>({i, j, 0}, 1));
+bomb::MapConstructor bomb::MapGenerator::generateBasic()
+{
+	MapConstructor build;
+
+	for (unsigned int x = 0; x < _size; x++) {
+		for (unsigned int y = 0; y < _size; y++) {
+			if (isCorner(x, y)) continue;
+			if (x % 2 == 1 && y % 2 == 1 && x != _size - 1 && y != _size - 1)
+				build.addBlock({(int)x, (int)y, 0}, bomb::MapConstructor::UNBREAKABLE);
+			else if (random() % 100 <= GEN_BASIC_PROBA)
+				build.addBlock({(int)x, (int)y, 0}, bomb::MapConstructor::BREAKABLE);
 		}
 	}
-	return pattern;
+	return build;
+}
+
+bool bomb::MapGenerator::isCorner(unsigned int x, unsigned int y)
+{
+	return (
+		((x == 0 && (y == 0 || y == 1)) || (y == 0 && x == 1))
+			|| ((x == _size - 1 && (y == 0 || y == 1)) || (y == 0 && x == _size - 2))
+			|| ((x == 0 && (y == _size - 1 || y == _size - 2)) || (y == _size - 1 && x == 1))
+			|| ((x == _size - 1 && (y == _size - 1 || y == _size - 2)) || (y == _size - 1 && x == _size - 2))
+	);
 }

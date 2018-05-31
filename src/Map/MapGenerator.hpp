@@ -6,25 +6,38 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_MAPGENERATOR_HPP
-	#define CPP_INDIE_STUDIO_MAPGENERATOR_HPP
+#define CPP_INDIE_STUDIO_MAPGENERATOR_HPP
 
-	#include "Map.hpp"
+#include <unordered_map>
+#include "Map.hpp"
+#include "MapConstructor.hpp"
+
+#define GEN_BASIC_PROBA (90)
 
 namespace bomb {
-	typedef std::vector<std::pair<irr::core::vector3di, size_t>> MapPattern;
-
 	class MapGenerator {
 	public:
-		enum Pattern {
+		enum Type {
 			RANDOM,
-			BASIC
+			BASIC,
+			END_VALUE
 		};
 
-		static Map &generate(size_t size, Pattern idPattern = RANDOM);
+		MapGenerator(unsigned int seed,
+			unsigned int size,
+			bomb::MapGenerator::Type = RANDOM);
+		MapConstructor generate();
 
 	private:
-		static Map &paternToMap(const MapPattern &pattern);
-		static MapPattern genBasic(int size);
+		static const std::unordered_map<bomb::MapGenerator::Type, MapConstructor (bomb::MapGenerator::*)()> typeGenerator;
+		MapConstructor generateRandom();
+		MapConstructor generateBasic();
+
+		bool isCorner(unsigned int x, unsigned int y);
+
+		unsigned int _seed;
+		unsigned int _size;
+		Type _type;
 	};
 }
 

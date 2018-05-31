@@ -23,6 +23,8 @@ set(SRC_MAP
         src/Map/MapGenerator.hpp
         src/Map/MapWall.cpp
         src/Map/MapWall.hpp
+        src/Map/MapConstructor.cpp
+        src/Map/MapConstructor.hpp
         )
 
 set(SRC_MENU
@@ -48,5 +50,11 @@ add_executable(
         ${SRC_MENU}
         src/Bomberman.cpp
 )
-
 target_link_libraries(bomberman Irrlicht)
+
+add_executable(tests_map_gen
+        ${SRC_MAP}
+        ${SRC_EXCEPTION}
+        ${SRC_FILES}
+        tests/MapGen.cpp)
+target_link_libraries(tests_map_gen Irrlicht)
