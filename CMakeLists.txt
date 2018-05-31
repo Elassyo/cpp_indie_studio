@@ -4,6 +4,8 @@ project(cpp_indie_studio)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -Wextra")
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
 
 set(SRC_EXCEPTION
         src/Exception/Exception.cpp
@@ -14,6 +16,7 @@ set(SRC_INTERFACE
         src/Interface/ISerializable.hpp
         src/Interface/IRenderable.hpp
         src/Interface/ITransformable.hpp
+        src/Interface/IAssetLoader.hpp
         )
 
 set(SRC_MAP
@@ -39,6 +42,10 @@ set(SRC_FILES
         src/AObject.hpp
         src/ATransformableObject.cpp
         src/ATransformableObject.hpp
+        src/Map/MapWall.cpp
+        src/Map/MapWall.hpp
+        src/Render/GameWindow.cpp
+        src/Render/GameWindow.hpp
         )
 
 add_executable(

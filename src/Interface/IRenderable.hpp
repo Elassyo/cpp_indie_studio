@@ -8,12 +8,13 @@
 #ifndef CPP_INDIE_STUDIO_IRENDERABLE_HPP
 	#define CPP_INDIE_STUDIO_IRENDERABLE_HPP
 
+	#include "src/Render/GameWindow.hpp"
+
 namespace bomb {
 	class IRenderable {
 	public:
+		virtual void render(const bomb::GameWindow &) = 0;
 		virtual ~IRenderable() = default;
-
-		virtual void render() = 0;
 	};
 }
 
