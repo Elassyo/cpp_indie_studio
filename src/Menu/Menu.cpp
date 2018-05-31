@@ -12,6 +12,7 @@ bomb::Menu::Menu(irr::video::IVideoDriver *driver,
 	_driver(driver), _gui(gui), _page(page),
 	_buttonRatio(irr::core::vector2df(.2, .1)),
 	_buttonBack(driver->getTexture("assets/images/buttonBack.png")),
+	_buttonPressed(driver->getTexture("assets/images/buttonPressed.png")),
 	_font(_gui->getFont("assets/fonts/mario16.xml"))
 {
 	const irr::core::vector2di buttonSize = getButtonSize();
@@ -23,12 +24,14 @@ bomb::Menu::Menu(irr::video::IVideoDriver *driver,
 	_buttons.emplace_back(GraphicButton(createButton(
 		{0, 0}, buttonSize, L"EXIT"), {0.5, 0.66}, MAIN));
 	_buttons.emplace_back(GraphicButton(createButton(
-		{0, 0}, buttonSize, L"Back to main"), {0.5, 0.5}, OPTION));
+		{0, 0}, buttonSize, L"Test"), {0.5, 0.5}, OPTION));
+	_buttons.emplace_back(GraphicButton(createButton(
+		{0, 0}, buttonSize, L"Back to main"), {0.5, 0.66}, OPTION));
 	_buttons.emplace_back(GraphicButton(createButton(
 		{0, 0}, buttonSize, L"MENU"), {0.5, 0.9}, CLOSE));
 	for (GraphicButton &button : _buttons) {
 		button.setFont(_font);
-		button.setTexture(_buttonBack);
+		button.setTexture(_buttonBack, _buttonPressed);
 	}
 	updateButtons();
 }
@@ -40,7 +43,7 @@ irr::gui::IGUIButton *bomb::Menu::createButton(irr::core::vector2di pos,
 	return _gui->addButton(irr::core::rect<irr::s32>(pos.X, pos.Y,
 							 pos.X + size.X,
 							 pos.Y + size.Y),
-		nullptr, -1, text);
+			       nullptr, -1, text);
 }
 
 void bomb::Menu::changePage(MenuPage page)
@@ -54,11 +57,11 @@ void bomb::Menu::changePage(MenuPage page)
 
 void bomb::Menu::handleEvent()
 {
-	if (_buttons[0].isPressed() || _buttons[2].isPressed())
+	if (_buttons[2].isPressed())
 		changePage(CLOSE);
 	else if (_buttons[1].isPressed())
 		changePage(OPTION);
-	else if (_buttons[3].isPressed() || _buttons[4].isPressed())
+	else if (_buttons[5].isPressed() || _buttons[4].isPressed())
 		changePage(MAIN);
 }
 

@@ -28,7 +28,8 @@ namespace bomb {
 		bool isOnPage(MenuPage page) const;
 		void setVisibility(bool visibility);
 		void setFont(irr::gui::IGUIFont *font);
-		void setTexture(irr::video::ITexture *texture);
+		void setTexture(irr::video::ITexture *texture,
+				irr::video::ITexture *pressed);
 		void setPage(MenuPage page);
 		MenuPage getPage() const;
 		void update(irr::core::vector2di size,

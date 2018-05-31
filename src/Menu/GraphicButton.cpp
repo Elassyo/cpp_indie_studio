@@ -13,6 +13,7 @@ bomb::GraphicButton::GraphicButton(irr::gui::IGUIButton *button,
 	_button(button), _pos(pos), _page(page)
 {
 	_button->setDrawBorder(false);
+	_button->setUseAlphaChannel(true);
 }
 
 bool bomb::GraphicButton::isPressed() const
@@ -35,11 +36,12 @@ void bomb::GraphicButton::setFont(irr::gui::IGUIFont *font)
 	_button->setOverrideFont(font);
 }
 
-void bomb::GraphicButton::setTexture(irr::video::ITexture *texture)
+void bomb::GraphicButton::setTexture(irr::video::ITexture *texture,
+				     irr::video::ITexture *pressed)
 {
 	_button->setImage(texture);
+	_button->setPressedImage(pressed);
 }
-
 void bomb::GraphicButton::update(irr::core::vector2di size,
 				 irr::core::vector2di screenSize)
 {

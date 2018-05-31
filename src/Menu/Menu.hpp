@@ -32,6 +32,7 @@ namespace bomb {
 		std::vector<GraphicButton> _buttons;
 		irr::core::vector2df _buttonRatio;
 		irr::video::ITexture *_buttonBack;
+		irr::video::ITexture *_buttonPressed;
 		irr::gui::IGUIFont *_font;
 	};
 }
