@@ -12,6 +12,7 @@ bomb::GraphicButton::GraphicButton(irr::gui::IGUIButton *button,
 				   MenuPage page) :
 	_button(button), _pos(pos), _event(nullptr), _page(page)
 {
+	_button->setScaleImage(true);
 	_button->setDrawBorder(false);
 	_button->setUseAlphaChannel(true);
 }

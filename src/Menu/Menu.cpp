@@ -10,7 +10,7 @@
 bomb::Menu::Menu(irr::video::IVideoDriver *driver,
 		 irr::gui::IGUIEnvironment *gui, MenuPage page) :
 	_driver(driver), _gui(gui), _page(page),
-	_buttonRatio(irr::core::vector2df(.2, .1)),
+	_buttonRatio(irr::core::vector2df(.15, .1)),
 	_buttonBack(driver->getTexture("assets/images/buttonBack.png")),
 	_buttonPressed(driver->getTexture("assets/images/buttonPressed.png")),
 	_font(_gui->getFont("assets/fonts/mario16.xml"))
