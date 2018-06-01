@@ -18,6 +18,11 @@ set(SRC_INTERFACE
         src/Interface/IAssetLoader.hpp
         src/Interface/IRenderWindow.hpp)
 
+set(SRC_SCENE
+        src/Scene/GameScene.cpp
+        src/Scene/GameScene.hpp)
+
+
 set(SRC_MAP
         src/Map/Map.cpp
         src/Map/Map.hpp
@@ -47,11 +52,15 @@ set(SRC_FILES
         src/Map/MapWall.hpp
         src/Render/GameEngine.cpp
         src/Render/GameEngine.hpp
-        src/AnimatedObject.cpp src/AnimatedObject.hpp src/StaticObject.cpp src/StaticObject.hpp)
+        src/AnimatedObject.cpp
+        src/AnimatedObject.hpp
+        src/StaticObject.cpp
+        src/StaticObject.hpp)
 
 add_executable(
         bomberman
         ${SRC_INTERFACE}
+        ${SRC_SCENE}
         ${SRC_FILES}
         ${SRC_MAP}
         ${SRC_EXCEPTION}

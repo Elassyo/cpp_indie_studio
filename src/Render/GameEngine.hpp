@@ -36,11 +36,13 @@ namespace bomb {
 			 irr::core::vector3df pos, irr::core::vector3df rot,
 			 irr::core::vector3df scale) override;
 		void deleteObject(std::unique_ptr<IObject>);
+		void addCamera();
 		~GameEngine();
 	private:
-		std::unique_ptr<irr::IrrlichtDevice> _device;
-		std::unique_ptr<irr::video::IVideoDriver> _videoDriver;
-		std::unique_ptr<irr::scene::ISceneManager> _sceneManager;
+		irr::IrrlichtDevice *_device;
+		irr::video::IVideoDriver *_videoDriver;
+		irr::scene::ISceneManager *_sceneManager;
+		irr::scene::ICameraSceneNode *_camera;
 	};
 }
 #endif /* CPP_INDIE_STUDIO_GAMEWINDOW_HPP */

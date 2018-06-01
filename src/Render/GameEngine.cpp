@@ -8,20 +8,17 @@
 #include "GameEngine.hpp"
 
 bomb::GameEngine::GameEngine(const std::wstring &winName, uint x, uint y,
-			     irr::video::E_DRIVER_TYPE driver_type)
+			     irr::video::E_DRIVER_TYPE driver_type) :
+	_device(irr::createDevice(driver_type, irr::core::dimension2d
+		(x, y))), _videoDriver(_device->getVideoDriver()),
+	_sceneManager(_device->getSceneManager())
 {
-	_device.reset(irr::createDevice(driver_type, irr::core::dimension2d
-		(x, y)));
-	_sceneManager.reset(_device->getSceneManager());
-	_videoDriver.reset(_device->getVideoDriver());
 	_device->setWindowCaption(winName.c_str());
 }
 
 bomb::GameEngine::~GameEngine()
 {
 	_device->drop();
-	_videoDriver->drop();
-	_sceneManager->drop();
 }
 
 void bomb::GameEngine::refresh()
@@ -74,4 +71,9 @@ bomb::GameEngine::getStaticObject(const std::string &path,
 void bomb::GameEngine::deleteObject(std::unique_ptr<bomb::IObject> obj)
 {
 	_sceneManager->addToDeletionQueue(obj->getSceneNode());
+}
+
+void bomb::GameEngine::addCamera()
+{
+	_camera = _sceneManager->addCameraSceneNode();
 }
