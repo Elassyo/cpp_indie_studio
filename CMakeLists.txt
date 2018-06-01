@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.9)
 project(cpp_indie_studio)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -61,7 +61,6 @@ add_executable(
         ${SRC_MENU}
         src/Bomberman.cpp
 )
-target_link_libraries(bomberman Irrlicht)
 
 add_executable(tests_map_gen
         ${SRC_MAP}
@@ -69,3 +68,5 @@ add_executable(tests_map_gen
         ${SRC_FILES}
         tests/MapGen.cpp)
 target_link_libraries(tests_map_gen Irrlicht)
+
+target_link_libraries(bomberman Irrlicht)
