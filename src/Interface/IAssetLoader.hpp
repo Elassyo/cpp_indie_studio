@@ -15,10 +15,20 @@
 namespace bomb {
 	class IAssetLoader {
 	public:
-		virtual irr::gui::IGUIEnvironment * loadGui()
+		virtual irr::gui::IGUIEnvironment *loadGui()
 		= 0;
 		virtual irr::video::ITexture * loadTexture
 			(const std::string &) = 0;
+		virtual std::unique_ptr<bomb::AnimatedObject> getAnimatedObject
+			(const std::string &path,
+			 irr::core::vector3df pos, irr::core::vector3df rot,
+			 irr::core::vector3df scale) = 0;
+		virtual std::unique_ptr<bomb::StaticObject> getStaticObject
+			(const std::string &path,
+			 irr::core::vector3df pos, irr::core::vector3df rot,
+			 irr::core::vector3df scale) = 0;
+		virtual void deleteObject(std::unique_ptr<IObject>) = 0;
+
 	};
 }
 

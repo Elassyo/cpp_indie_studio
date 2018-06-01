@@ -70,3 +70,8 @@ bomb::GameEngine::getStaticObject(const std::string &path,
 	ptr->setScale(scale);
 	return ptr;
 }
+
+void bomb::GameEngine::deleteObject(std::unique_ptr<bomb::IObject> obj)
+{
+	_sceneManager->addToDeletionQueue(obj->getSceneNode());
+}

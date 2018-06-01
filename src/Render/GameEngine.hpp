@@ -12,9 +12,11 @@
 #include "../AnimatedObject.hpp"
 #include "../StaticObject.hpp"
 #include "../Interface/IAssetLoader.hpp"
+#include "../Interface/IRenderWindow.hpp"
 
 namespace bomb {
-	class GameEngine : public IAssetLoader {
+	class GameEngine : virtual public IAssetLoader, virtual public
+		IRenderWindow{
 	public:
 		GameEngine(const std::wstring &winName, uint x, uint y,
 			   irr::video::E_DRIVER_TYPE);
@@ -28,11 +30,12 @@ namespace bomb {
 		std::unique_ptr<bomb::AnimatedObject> getAnimatedObject
 			(const std::string &path,
 			 irr::core::vector3df pos, irr::core::vector3df rot,
-			 irr::core::vector3df scale);
+			 irr::core::vector3df scale) override;
 		std::unique_ptr<bomb::StaticObject> getStaticObject
 			(const std::string &path,
 			 irr::core::vector3df pos, irr::core::vector3df rot,
-			 irr::core::vector3df scale);
+			 irr::core::vector3df scale) override;
+		void deleteObject(std::unique_ptr<IObject>);
 		~GameEngine();
 	private:
 		std::unique_ptr<irr::IrrlichtDevice> _device;
