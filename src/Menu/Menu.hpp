@@ -14,6 +14,8 @@
 
 	#include "GraphicButton.hpp"
 
+	#include "GraphicText.hpp"
+
 namespace bomb {
 	class Menu {
 	public:
@@ -25,6 +27,7 @@ namespace bomb {
 
 	private:
 		std::array<ButtonInfos, 6> getButtonsInfos() const;
+		GraphicText createTitle(const wchar_t *text = L"");
 		irr::gui::IGUIButton *createButton(irr::core::vector2di pos,
 						   irr::core::vector2di size,
 						   const wchar_t *text = L"");
@@ -35,11 +38,13 @@ namespace bomb {
 		irr::video::IVideoDriver *_driver;
 		irr::gui::IGUIEnvironment *_gui;
 		MenuPage _page;
-		std::vector<GraphicButton> _buttons;
 		irr::core::vector2df _buttonRatio;
 		irr::video::ITexture *_buttonBack;
 		irr::video::ITexture *_buttonPressed;
 		irr::gui::IGUIFont *_font;
+		irr::gui::IGUIFont *_titleFont;
+		GraphicText _title;
+		std::vector<GraphicButton> _buttons;
 	};
 }
 

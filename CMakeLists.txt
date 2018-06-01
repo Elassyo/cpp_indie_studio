@@ -33,6 +33,10 @@ set(SRC_MAP
 set(SRC_MENU
         src/Menu/GraphicButton.cpp
         src/Menu/GraphicButton.hpp
+        src/Menu/GraphicElement.cpp
+        src/Menu/GraphicElement.hpp
+        src/Menu/GraphicText.cpp
+        src/Menu/GraphicText.hpp
         src/Menu/Menu.cpp
         src/Menu/Menu.hpp
         )

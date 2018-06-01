@@ -10,20 +10,24 @@
 bomb::Menu::Menu(irr::video::IVideoDriver *driver,
 		 irr::gui::IGUIEnvironment *gui, MenuPage page) :
 	_driver(driver), _gui(gui), _page(page),
-	_buttonRatio(irr::core::vector2df(.15, .1)),
+	_buttonRatio(irr::core::vector2df(.125, .1)),
 	_buttonBack(driver->getTexture("assets/images/buttonBack.png")),
 	_buttonPressed(driver->getTexture("assets/images/buttonPressed.png")),
-	_font(_gui->getFont("assets/fonts/mario16.xml"))
+	_font(_gui->getFont("assets/fonts/mario16.xml")),
+	_titleFont(_gui->getFont("assets/fonts/marioColor36.xml")),
+	_title(createTitle(L"SUPER\nBOMBERMAN\nBROS."))
 {
 	const irr::core::vector2di buttonSize = getButtonSize();
 	std::array<ButtonInfos, 6> buttonsInfos = getButtonsInfos();
 
+	_gui->getSkin()->setFont(_font);
+	_gui->getSkin()->setColor(irr::gui::EGDC_BUTTON_TEXT,
+				  irr::video::SColor(255, 255, 255, 255));
 	for (ButtonInfos infos : buttonsInfos) {
 		GraphicButton button(GraphicButton(
 			createButton({0, 0}, buttonSize, infos.text),
 			infos.pos, infos.page));
 		button.setEvent(infos.event);
-		button.setFont(_font);
 		button.setTexture(_buttonBack, _buttonPressed);
 		_buttons.emplace_back(button);
 	}
@@ -33,17 +37,27 @@ bomb::Menu::Menu(irr::video::IVideoDriver *driver,
 std::array<bomb::ButtonInfos, 6> bomb::Menu::getButtonsInfos() const
 {
 	return std::array<ButtonInfos, 6>
-		{{{(wchar_t *)L"PLAY", {0.5, 0.33}, MAIN, nullptr},
-			 {(wchar_t *)L"OPTION", {0.5, 0.5}, MAIN,
+		{{{(wchar_t *)L"PLAY", {0.5, 0.35}, MAIN, nullptr},
+			 {(wchar_t *)L"OPTION", {0.5, 0.55}, MAIN,
 				 &bomb::Menu::goToOption},
-			 {(wchar_t *)L"EXIT", {0.5, 0.66}, MAIN,
+			 {(wchar_t *)L"EXIT", {0.5, 0.75}, MAIN,
 				 &bomb::Menu::closeMenu},
-			 {(wchar_t *)L"Test", {0.5, 0.5}, OPTION, nullptr},
-			 {(wchar_t *)L"Back to main", {0.5, 0.66}, OPTION,
+			 {(wchar_t *)L"Test", {0.5, 0.55}, OPTION, nullptr},
+			 {(wchar_t *)L"Back to main", {0.5, 0.75}, OPTION,
 				 &bomb::Menu::goToMain},
 			 {(wchar_t *)L"MENU", {0.5, 0.9}, CLOSE,
 				 &bomb::Menu::goToMain}}};
 
+}
+
+bomb::GraphicText bomb::Menu::createTitle(const wchar_t *title)
+{
+	GraphicText text(_gui->addStaticText(title,
+					     irr::core::rect<irr::s32>(0, 0,
+								       1, 1)),
+			 {0.5, 0.15});
+	text.setFont(_titleFont);
+	return text;
 }
 
 irr::gui::IGUIButton *bomb::Menu::createButton(irr::core::vector2di pos,
@@ -79,6 +93,8 @@ void bomb::Menu::updateButtons()
 		{(int)_driver->getScreenSize().Width,
 		 (int)_driver->getScreenSize().Height};
 
+	_title.update({1, 1}, screenSize);
+	_title.setVisibility(_title.isOnPage(_page));
 	for (GraphicButton &button : _buttons) {
 		button.setVisibility(button.isOnPage(_page));
 		button.update(buttonSize, screenSize);
