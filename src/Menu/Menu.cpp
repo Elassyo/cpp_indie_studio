@@ -7,7 +7,7 @@
 
 #include "Menu.hpp"
 
-bomb::Menu::Menu(irr::video::IVideoDriver *driver,
+bomb::menu::Menu::Menu(irr::video::IVideoDriver *driver,
 		 irr::gui::IGUIEnvironment *gui, MenuPage page) :
 	_driver(driver), _gui(gui), _page(page),
 	_buttonRatio(irr::core::vector2df(.125, .1)),
@@ -34,23 +34,23 @@ bomb::Menu::Menu(irr::video::IVideoDriver *driver,
 	updateButtons();
 }
 
-std::array<bomb::ButtonInfos, 6> bomb::Menu::getButtonsInfos() const
+std::array<bomb::menu::ButtonInfos, 6> bomb::menu::Menu::getButtonsInfos() const
 {
 	return std::array<ButtonInfos, 6>
 		{{{(wchar_t *)L"PLAY", {0.5, 0.35}, MAIN, nullptr},
 			 {(wchar_t *)L"OPTION", {0.5, 0.55}, MAIN,
-				 &bomb::Menu::goToOption},
+				 &bomb::menu::Menu::goToOption},
 			 {(wchar_t *)L"EXIT", {0.5, 0.75}, MAIN,
-				 &bomb::Menu::closeMenu},
+				 &bomb::menu::Menu::closeMenu},
 			 {(wchar_t *)L"Test", {0.5, 0.55}, OPTION, nullptr},
 			 {(wchar_t *)L"Back to main", {0.5, 0.75}, OPTION,
-				 &bomb::Menu::goToMain},
+				 &bomb::menu::Menu::goToMain},
 			 {(wchar_t *)L"MENU", {0.5, 0.9}, CLOSE,
-				 &bomb::Menu::goToMain}}};
+				 &bomb::menu::Menu::goToMain}}};
 
 }
 
-bomb::GraphicText bomb::Menu::createTitle(const wchar_t *title)
+bomb::menu::GraphicText bomb::menu::Menu::createTitle(const wchar_t *title)
 {
 	GraphicText text(_gui->addStaticText(title,
 					     irr::core::rect<irr::s32>(0, 0,
@@ -60,7 +60,7 @@ bomb::GraphicText bomb::Menu::createTitle(const wchar_t *title)
 	return text;
 }
 
-irr::gui::IGUIButton *bomb::Menu::createButton(irr::core::vector2di pos,
+irr::gui::IGUIButton *bomb::menu::Menu::createButton(irr::core::vector2di pos,
 					       irr::core::vector2di size,
 					       const wchar_t *text)
 {
@@ -70,7 +70,7 @@ irr::gui::IGUIButton *bomb::Menu::createButton(irr::core::vector2di pos,
 			       nullptr, -1, text);
 }
 
-void bomb::Menu::changePage(MenuPage page)
+void bomb::menu::Menu::changePage(MenuPage page)
 {
 	if (page == UNDEFINED)
 		_page = _page == CLOSE ? MAIN : CLOSE;
@@ -79,14 +79,14 @@ void bomb::Menu::changePage(MenuPage page)
 	updateButtons();
 }
 
-void bomb::Menu::handleEvent()
+void bomb::menu::Menu::handleEvent()
 {
 	for (GraphicButton button : _buttons)
 		if (button.isPressed() && button.getEvent())
 			(*this.*button.getEvent())();
 }
 
-void bomb::Menu::updateButtons()
+void bomb::menu::Menu::updateButtons()
 {
 	const irr::core::vector2di buttonSize = getButtonSize();
 	const irr::core::vector2di screenSize =
@@ -101,7 +101,7 @@ void bomb::Menu::updateButtons()
 	}
 }
 
-irr::core::vector2di bomb::Menu::getButtonSize() const
+irr::core::vector2di bomb::menu::Menu::getButtonSize() const
 {
 	const irr::core::dimension2du &screenSize = _driver->getScreenSize();
 
@@ -109,17 +109,17 @@ irr::core::vector2di bomb::Menu::getButtonSize() const
 		(int)(_buttonRatio.Y *screenSize.Height)};
 }
 
-void bomb::Menu::goToMain()
+void bomb::menu::Menu::goToMain()
 {
 	changePage(MAIN);
 }
 
-void bomb::Menu::goToOption()
+void bomb::menu::Menu::goToOption()
 {
 	changePage(OPTION);
 }
 
-void bomb::Menu::closeMenu()
+void bomb::menu::Menu::closeMenu()
 {
 	changePage(CLOSE);
 }
