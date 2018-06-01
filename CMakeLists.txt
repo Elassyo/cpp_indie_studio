@@ -4,7 +4,6 @@ project(cpp_indie_studio)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -Wextra")
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 
 set(SRC_EXCEPTION
@@ -17,7 +16,7 @@ set(SRC_INTERFACE
         src/Interface/IRenderable.hpp
         src/Interface/ITransformable.hpp
         src/Interface/IAssetLoader.hpp
-        )
+        src/Interface/IRenderWindow.hpp)
 
 set(SRC_MAP
         src/Map/Map.cpp
@@ -36,15 +35,13 @@ set(SRC_MENU
         )
 
 set(SRC_FILES
-        src/AObject.cpp
-        src/AObject.hpp
-        src/ATransformableObject.cpp
-        src/ATransformableObject.hpp
+        src/IObject.cpp
+        src/IObject.hpp
         src/Map/MapWall.cpp
         src/Map/MapWall.hpp
-        src/Render/GameWindow.cpp
-        src/Render/GameWindow.hpp
-        )
+        src/Render/GameEngine.cpp
+        src/Render/GameEngine.hpp
+        src/AnimatedObject.cpp src/AnimatedObject.hpp src/StaticObject.cpp src/StaticObject.hpp)
 
 add_executable(
         bomberman

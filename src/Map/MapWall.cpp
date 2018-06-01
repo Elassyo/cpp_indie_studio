@@ -8,17 +8,10 @@
 #include "MapWall.hpp"
 
 bomb::MapWall::MapWall(
-	const irr::core::vector3df &pos,
-	const irr::core::vector3df &scale,
-	const irr::core::vector3df &rotation,
+	StaticObject &obj,
 	bomb::MapWall::Status status,
-	size_t hp):
-	AObject(pos, scale, rotation), _status(status), _hp(hp)
-{
-}
-
-bomb::MapWall::MapWall(const bomb::MapWall &ex):
-	AObject(ex)
+	size_t hp) :
+	_status(status), _hp(hp), _obj(obj)
 {
 }
 
