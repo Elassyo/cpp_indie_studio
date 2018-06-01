@@ -7,56 +7,39 @@
 
 #include "GraphicButton.hpp"
 
-bomb::GraphicButton::GraphicButton(irr::gui::IGUIButton *button,
-				   irr::core::vector2df pos,
-				   MenuPage page) :
-	_button(button), _pos(pos), _page(page)
+bomb::menu::GraphicButton::GraphicButton(irr::gui::IGUIButton *button,
+					 irr::core::vector2df pos,
+					 MenuPage page) :
+	GraphicElement(button, pos, page), _event(nullptr)
 {
-	_button->setDrawBorder(false);
+	button->setScaleImage(true);
+	button->setDrawBorder(false);
+	button->setUseAlphaChannel(true);
 }
 
-bool bomb::GraphicButton::isPressed() const
+bool bomb::menu::GraphicButton::isPressed() const
 {
-	return _button->isPressed();
+	return ((irr::gui::IGUIButton *)_element)->isPressed();
 }
 
-bool bomb::GraphicButton::isOnPage(MenuPage page) const
+void bomb::menu::GraphicButton::setFont(irr::gui::IGUIFont *font)
 {
-	return _page == page;
+	((irr::gui::IGUIButton *)_element)->setOverrideFont(font);
 }
 
-void bomb::GraphicButton::setVisibility(bool visibility)
+void bomb::menu::GraphicButton::setTexture(irr::video::ITexture *texture,
+					   irr::video::ITexture *pressed)
 {
-	_button->setVisible(visibility);
+	((irr::gui::IGUIButton *)_element)->setImage(texture);
+	((irr::gui::IGUIButton *)_element)->setPressedImage(pressed);
 }
 
-void bomb::GraphicButton::setFont(irr::gui::IGUIFont *font)
+void (bomb::menu::Menu::*bomb::menu::GraphicButton::getEvent() const)()
 {
-	_button->setOverrideFont(font);
+	return _event;
 }
 
-void bomb::GraphicButton::setTexture(irr::video::ITexture *texture)
+void bomb::menu::GraphicButton::setEvent(void (bomb::menu::Menu::*event)())
 {
-	_button->setImage(texture);
+	_event = event;
 }
-
-void bomb::GraphicButton::update(irr::core::vector2di size,
-				 irr::core::vector2di screenSize)
-{
-	_button->setMinSize({(unsigned int)size.X, (unsigned int)size.Y});
-	_button->setMaxSize({(unsigned int)size.X, (unsigned int)size.Y});
-	_button->setRelativePosition({(int)(screenSize.X * _pos.X - size.X / 2),
-				      (int)(screenSize.Y
-					    * _pos.Y - size.Y / 2)});
-}
-
-void bomb::GraphicButton::setPage(MenuPage page)
-{
-	_page = page;
-}
-
-bomb::MenuPage bomb::GraphicButton::getPage() const
-{
-	return _page;
-}
-

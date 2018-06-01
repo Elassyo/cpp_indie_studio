@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.9)
 project(cpp_indie_studio)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -25,11 +25,17 @@ set(SRC_MAP
         src/Map/MapGenerator.hpp
         src/Map/MapWall.cpp
         src/Map/MapWall.hpp
+        src/Map/MapConstructor.cpp
+        src/Map/MapConstructor.hpp
         )
 
 set(SRC_MENU
         src/Menu/GraphicButton.cpp
         src/Menu/GraphicButton.hpp
+        src/Menu/GraphicElement.cpp
+        src/Menu/GraphicElement.hpp
+        src/Menu/GraphicText.cpp
+        src/Menu/GraphicText.hpp
         src/Menu/Menu.cpp
         src/Menu/Menu.hpp
         )
@@ -52,5 +58,12 @@ add_executable(
         ${SRC_MENU}
         src/Bomberman.cpp
 )
+
+add_executable(tests_map_gen
+        ${SRC_MAP}
+        ${SRC_EXCEPTION}
+        ${SRC_FILES}
+        tests/MapGen.cpp)
+target_link_libraries(tests_map_gen Irrlicht)
 
 target_link_libraries(bomberman Irrlicht)
