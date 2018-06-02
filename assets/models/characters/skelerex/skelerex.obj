@@ -1,6 +1,6 @@
 # Blender v2.79 (sub 0) OBJ File: 'test-bones.blend'
 # www.blender.org
-mtllib test-bones.mtl
+mtllib skelerex.mtl
 o v_Object01
 v -2.152197 21.194096 16.854094
 v -2.260008 20.785891 16.763454
