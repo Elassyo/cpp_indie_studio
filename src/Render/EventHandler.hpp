@@ -8,4 +8,18 @@
 #ifndef CPP_INDIE_STUDIO_EVENTHANDLER_HPP
 #define CPP_INDIE_STUDIO_EVENTHANDLER_HPP
 
+#include <memory>
+
+#include "../Interface/IEventScene.hpp"
+
+namespace bomb {
+	class EventHandler : virtual public irr::IEventReceiver {
+	public:
+		bool OnEvent(const irr::SEvent &event) override;
+
+	private:
+		std::shared_ptr<IEventScene> _evtScene;
+	};
+}
+
 #endif /* CPP_INDIE_STUDIO_EVENTHANDLER_HPP */
