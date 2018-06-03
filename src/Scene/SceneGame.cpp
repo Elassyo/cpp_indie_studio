@@ -9,8 +9,11 @@
 
 bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
 {
-	loader.getAnimatedObject("assets/models/bob-bomb.x", {0, 0, 0},
-				{0, 0, 0});
+	_blocksTextures = loader.loadTexture("assets/models/blocks/spritesheet.png");
+	loader.getStaticObject("assets/models/blocks/brick.obj", {0, 0, 0},
+				{0, 0, 0})->setTexture(0, _blocksTextures);
+	loader.addCamera(irr::core::vector3df(0, 30, -40),
+			irr::core::vector3df(0, 5, 0));
 	return BEGIN;
 }
 
@@ -24,8 +27,8 @@ void bomb::scene::SceneGame::save()
 {
 }
 
-void bomb::scene::SceneGame::reset(
-	__attribute__((unused))bomb::IAssetLoader &loader)
+void bomb::scene::SceneGame::reset(__attribute__((unused))
+				bomb::IAssetLoader &loader)
 {
 }
 

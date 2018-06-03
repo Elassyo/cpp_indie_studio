@@ -48,8 +48,11 @@ void bomb::AnimatedObject::setScale(const irr::core::vector3df &newScale)
 	return _inode->setScale(newScale);
 }
 
-void bomb::AnimatedObject::setTexture(uint32_t layer, irr::video::ITexture *texture)
+void bomb::AnimatedObject::setTexture(uint32_t layer,
+				irr::video::ITexture *texture)
 {
+	_inode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	_inode->setMD2Animation(irr::scene::EMAT_STAND);
 	_inode->setMaterialTexture(layer, texture);
 }
 

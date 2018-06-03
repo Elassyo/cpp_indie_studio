@@ -22,6 +22,8 @@ namespace bomb {
 			void reset(IAssetLoader &loader) override;
 			void clean() override;
 			std::string nextScene() override;
+		private:
+			irr::video::ITexture *_blocksTextures;
 		};
 	}
 }
