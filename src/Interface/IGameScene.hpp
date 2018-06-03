@@ -18,7 +18,7 @@ namespace bomb {
 			CONTINUE,
 			END
 		};
-		class IGameScene {
+		class IGameScene : virtual public IEventScene {
 		public:
 			virtual ~IGameScene() = default;
 			virtual bomb::scene::SceneStatus

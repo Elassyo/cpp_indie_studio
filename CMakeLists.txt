@@ -16,7 +16,9 @@ set(SRC_INTERFACE
         src/Interface/IRenderable.hpp
         src/Interface/ITransformable.hpp
         src/Interface/IAssetLoader.hpp
-        src/Interface/IRenderWindow.hpp src/Interface/IGameScene.hpp src/Interface/IEventScene.hpp)
+        src/Interface/IRenderWindow.hpp
+        src/Interface/IGameScene.hpp
+        src/Interface/IEventScene.hpp)
 
 set(SRC_SCENE
         src/Scene/SceneLauncher.cpp
@@ -56,7 +58,9 @@ set(SRC_FILES
         src/AnimatedObject.cpp
         src/AnimatedObject.hpp
         src/StaticObject.cpp
-        src/StaticObject.hpp src/Render/EventHandler.cpp src/Render/EventHandler.hpp)
+        src/StaticObject.hpp
+        src/Render/EventHandler.cpp
+        src/Render/EventHandler.hpp)
 
 add_executable(
         bomberman

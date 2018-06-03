@@ -15,10 +15,11 @@
 namespace bomb {
 	class EventHandler : virtual public irr::IEventReceiver {
 	public:
+		void injectScene(std::shared_ptr<scene::IEventScene>);
 		bool OnEvent(const irr::SEvent &event) override;
 
 	private:
-		std::shared_ptr<IEventScene> _evtScene;
+		std::shared_ptr<scene::IEventScene> _evtScene;
 	};
 }
 
