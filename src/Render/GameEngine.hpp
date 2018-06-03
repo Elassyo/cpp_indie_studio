@@ -36,7 +36,8 @@ namespace bomb {
 			 irr::core::vector3df pos, irr::core::vector3df rot,
 			 irr::core::vector3df scale) override;
 		void deleteObject(std::unique_ptr<IObject>);
-		void addCamera();
+		void addCamera(const irr::core::vector3df &pos,
+			       const irr::core::vector3df &rot);
 		~GameEngine();
 	private:
 		irr::IrrlichtDevice *_device;

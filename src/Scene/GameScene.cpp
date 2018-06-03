@@ -10,7 +10,7 @@
 bomb::scene::GameScene::GameScene(bomb::GameEngine &gameEngine) :
 	_gameEngine(gameEngine)
 {
-	gameEngine.addCamera();
+	gameEngine.addCamera({0, 0, 0}, {0, 0, 0});
 }
 
 void bomb::scene::GameScene::gameLoop()

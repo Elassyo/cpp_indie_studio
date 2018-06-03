@@ -16,11 +16,11 @@ set(SRC_INTERFACE
         src/Interface/IRenderable.hpp
         src/Interface/ITransformable.hpp
         src/Interface/IAssetLoader.hpp
-        src/Interface/IRenderWindow.hpp)
+        src/Interface/IRenderWindow.hpp src/Interface/IGameScene.hpp)
 
 set(SRC_SCENE
         src/Scene/GameScene.cpp
-        src/Scene/GameScene.hpp)
+        src/Scene/GameScene.hpp src/Scene/SceneLauncher.cpp src/Scene/SceneLauncher.hpp)
 
 
 set(SRC_MAP

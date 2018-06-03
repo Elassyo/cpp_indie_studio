@@ -6,6 +6,7 @@
 //
 
 #include "GameEngine.hpp"
+#include "../Exception/Exception.hpp"
 
 bomb::GameEngine::GameEngine(const std::wstring &winName, uint x, uint y,
 			     irr::video::E_DRIVER_TYPE driver_type) :
@@ -73,7 +74,12 @@ void bomb::GameEngine::deleteObject(std::unique_ptr<bomb::IObject> obj)
 	_sceneManager->addToDeletionQueue(obj->getSceneNode());
 }
 
-void bomb::GameEngine::addCamera()
+void bomb::GameEngine::addCamera(const irr::core::vector3df &pos,
+				 const irr::core::vector3df &rot)
 {
 	_camera = _sceneManager->addCameraSceneNode();
+	if (!_camera)
+		throw Exception("GameEngine", "Can't create camera");
+	_camera->setPosition(pos);
+	_camera->setRotation(rot);
 }
