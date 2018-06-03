@@ -2,8 +2,5 @@
 // EPITECH PROJECT, 2018
 // cpp_indie_studio
 // File description:
-// AObject.cpp
+// EventHandler.cpp
 //
-
-#include "IObject.hpp"
-
