@@ -19,8 +19,10 @@ set(SRC_INTERFACE
         src/Interface/IRenderWindow.hpp src/Interface/IGameScene.hpp src/Interface/IEventScene.hpp)
 
 set(SRC_SCENE
-        src/Scene/GameScene.cpp
-        src/Scene/GameScene.hpp src/Scene/SceneLauncher.cpp src/Scene/SceneLauncher.hpp)
+        src/Scene/SceneLauncher.cpp
+        src/Scene/SceneLauncher.hpp
+        src/Scene/SceneGame.hpp
+        src/Scene/SceneGame.cpp)
 
 
 set(SRC_MAP

@@ -8,10 +8,11 @@
 #ifndef CPP_INDIE_STUDIO_SCENELAUNCHER_HPP
 #define CPP_INDIE_STUDIO_SCENELAUNCHER_HPP
 
-#include <iostream>
-#include <unordered_map>
 #include "../Render/GameEngine.hpp"
 #include "../Interface/IGameScene.hpp"
+#include "SceneGame.hpp"
+#include <iostream>
+#include <unordered_map>
 
 namespace bomb {
 	namespace scene {

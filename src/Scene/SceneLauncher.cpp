@@ -6,21 +6,21 @@
 //
 
 #include "SceneLauncher.hpp"
-#include "../Render/GameEngine.hpp"
 #include "../Exception/Exception.hpp"
 
 bomb::scene::SceneLauncher::SceneLauncher(GameEngine &ge) :
 		_gameEngine(ge)
 {
+	_scenes["game_test"] = std::make_shared<bomb::scene::SceneGame>();
 }
 
 void bomb::scene::SceneLauncher::launchScene(const std::string &sceneName)
 {
 	if (_scenes.find(sceneName) == _scenes.end())
 		throw Exception("SceneLauncher", "Scene " + sceneName +
-						 "doesn't exist");
+						 " doesn't exist");
 	std::shared_ptr<IGameScene> gs = _scenes[sceneName];
-	SceneStatus sts = gs->start();
+	SceneStatus sts = gs->start(_gameEngine);
 
 	if (sts != BEGIN)
 		throw Exception("SceneLauncher", "Cannot launch scene " + sceneName);

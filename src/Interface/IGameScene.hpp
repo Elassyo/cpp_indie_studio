@@ -21,7 +21,8 @@ namespace bomb {
 		class IGameScene {
 		public:
 			virtual ~IGameScene() = default;
-			virtual SceneStatus start() = 0;
+			virtual bomb::scene::SceneStatus
+			start(IAssetLoader &loader) = 0;
 			virtual SceneStatus loop(IAssetLoader &) = 0;
 			virtual void save() = 0;
 			virtual void reset(IAssetLoader &) = 0;

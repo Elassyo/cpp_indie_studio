@@ -5,12 +5,19 @@
 // Bomberman.cpp
 //
 
-#include "Scene/GameScene.hpp"
+#include "Render/GameEngine.hpp"
+#include "Scene/SceneLauncher.hpp"
+#include "Exception/Exception.hpp"
 
 int main()
 {
-	bomb::GameEngine ge(L"caca", 600, 600, irr::video::EDT_OPENGL);
-	bomb::scene::GameScene scene(ge);
+	bomb::GameEngine ge(L"BomberMario", 600, 600, irr::video::EDT_OPENGL);
+	bomb::scene::SceneLauncher launcher(ge);
 
-	scene.gameLoop();
+	try {
+		launcher.launchScene("game_test");
+	} catch (bomb::Exception &e) {
+		std::cout << e.what() << std::endl;
+	}
+	return (0);
 }
