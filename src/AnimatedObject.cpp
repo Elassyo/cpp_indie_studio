@@ -6,11 +6,14 @@
 //
 
 #include "AnimatedObject.hpp"
+#include "Exception/Exception.hpp"
 
 bomb::AnimatedObject::AnimatedObject(irr::scene::IAnimatedMeshSceneNode *inode):
 		_inode(inode)
 {
-
+	if (!inode)
+		throw Exception("AnimatedObject", "animatedMashNode cannot be"
+				    " created");
 }
 
 irr::core::vector3df bomb::AnimatedObject::getPos() const

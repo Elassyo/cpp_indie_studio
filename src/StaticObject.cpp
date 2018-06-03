@@ -6,11 +6,14 @@
 //
 
 #include "StaticObject.hpp"
+#include "Exception/Exception.hpp"
 
 bomb::StaticObject::StaticObject(irr::scene::IMeshSceneNode *inode):
 	_inode(inode)
 {
-
+	if (!inode)
+		throw Exception("AnimatedObject", "staticMashNode cannot be"
+						  " created");
 }
 
 irr::core::vector3df bomb::StaticObject::getPos() const

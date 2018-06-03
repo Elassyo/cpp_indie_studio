@@ -15,7 +15,7 @@ namespace bomb {
 		class IEventScene {
 		public:
 			virtual ~IEventScene() = default;
-			virtual void onEvent(const irr::SEvent& event) = 0;
+			virtual bool onEvent(const irr::SEvent& event) = 0;
 		};
 	}
 }

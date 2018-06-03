@@ -11,7 +11,8 @@
 bomb::GameEngine::GameEngine(const std::wstring &winName, uint x, uint y,
 			     irr::video::E_DRIVER_TYPE driver_type) :
 	_device(irr::createDevice(driver_type, irr::core::dimension2d
-		(x, y))), _videoDriver(_device->getVideoDriver()),
+		(x, y), 16, false, false, false, &_evtHandler)), _videoDriver
+	(_device->getVideoDriver()),
 	_sceneManager(_device->getSceneManager())
 {
 	_device->setWindowCaption(winName.c_str());
@@ -82,4 +83,10 @@ void bomb::GameEngine::addCamera(const irr::core::vector3df &pos,
 		throw Exception("GameEngine", "Can't create camera");
 	_camera->setPosition(pos);
 	_camera->setRotation(rot);
+}
+
+void
+bomb::GameEngine::listenEventScene(std::shared_ptr<bomb::scene::IEventScene> ptr)
+{
+	_evtHandler.injectScene(ptr);
 }

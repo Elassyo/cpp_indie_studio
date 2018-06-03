@@ -13,6 +13,7 @@
 #include "../StaticObject.hpp"
 #include "../Interface/IAssetLoader.hpp"
 #include "../Interface/IRenderWindow.hpp"
+#include "EventHandler.hpp"
 
 namespace bomb {
 	class GameEngine : virtual public IAssetLoader, virtual public
@@ -38,8 +39,10 @@ namespace bomb {
 		void deleteObject(std::unique_ptr<IObject>);
 		void addCamera(const irr::core::vector3df &pos,
 			       const irr::core::vector3df &rot) override;
+		void listenEventScene(std::shared_ptr<scene::IEventScene>);
 		~GameEngine();
 	private:
+		EventHandler _evtHandler;
 		irr::IrrlichtDevice *_device;
 		irr::video::IVideoDriver *_videoDriver;
 		irr::scene::ISceneManager *_sceneManager;
