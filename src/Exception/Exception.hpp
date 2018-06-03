@@ -19,7 +19,6 @@ namespace bomb {
 			const std::string &message = "Unknown Error");
 
 		const char *what() const noexcept override;
-
 	private:
 		std::string _what;
 	};
