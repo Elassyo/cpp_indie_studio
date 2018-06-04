@@ -8,19 +8,12 @@
 #ifndef CPP_INDIE_STUDIO_STATICOBJECT_HPP
 #define CPP_INDIE_STUDIO_STATICOBJECT_HPP
 
-#include "IObject.hpp"
+#include "AObject.hpp"
 
 namespace bomb {
-	class StaticObject : virtual public IObject {
+	class StaticObject : public AObject<irr::scene::IMeshSceneNode> {
 	public:
 		explicit StaticObject(irr::scene::IMeshSceneNode *);
-		irr::core::vector3df getPos() const override;
-		void setPos(const irr::core::vector3df &) override;
-		irr::core::vector3df getRot() const override;
-		void setRot(const irr::core::vector3df &) override;
-		irr::core::vector3df getScale() const override;
-		void setScale(const irr::core::vector3df &) override;
-		irr::scene::ISceneNode *getSceneNode() const override;
 		void setTexture(uint32_t layer, irr::video::ITexture *texture) override;
 
 		std::string toString() override;

@@ -28,11 +28,11 @@ namespace bomb {
 
 		irr::video::ITexture *loadTexture(const std::string &) override;
 
-		std::unique_ptr<bomb::AnimatedObject> getAnimatedObject
+		std::unique_ptr<bomb::AnimatedObject> createAnimatedObject
 			(const std::string &path,
 			 irr::core::vector3df pos, irr::core::vector3df rot,
 			 irr::core::vector3df scale) override;
-		std::unique_ptr<bomb::StaticObject> getStaticObject
+		std::unique_ptr<bomb::StaticObject> createStaticObject
 			(const std::string &path,
 			 irr::core::vector3df pos, irr::core::vector3df rot,
 			 irr::core::vector3df scale) override;

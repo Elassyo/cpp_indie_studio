@@ -41,10 +41,10 @@ irr::video::ITexture *bomb::GameEngine::loadTexture(const std::string &path)
 }
 
 std::unique_ptr<bomb::AnimatedObject>
-bomb::GameEngine::getAnimatedObject(const std::string &path,
-				    irr::core::vector3df pos,
-				    irr::core::vector3df rot,
-				    irr::core::vector3df scale)
+bomb::GameEngine::createAnimatedObject(const std::string &path,
+				       irr::core::vector3df pos,
+				       irr::core::vector3df rot,
+				       irr::core::vector3df scale)
 {
 	auto ptr = std::make_unique<bomb::AnimatedObject>(
 		_sceneManager->addAnimatedMeshSceneNode(
@@ -56,10 +56,10 @@ bomb::GameEngine::getAnimatedObject(const std::string &path,
 }
 
 std::unique_ptr<bomb::StaticObject>
-bomb::GameEngine::getStaticObject(const std::string &path,
-				    irr::core::vector3df pos,
-				    irr::core::vector3df rot,
-				    irr::core::vector3df scale)
+bomb::GameEngine::createStaticObject(const std::string &path,
+				     irr::core::vector3df pos,
+				     irr::core::vector3df rot,
+				     irr::core::vector3df scale)
 {
 	auto ptr = std::make_unique<bomb::StaticObject>(
 		_sceneManager->addMeshSceneNode(
