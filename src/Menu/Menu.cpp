@@ -52,10 +52,7 @@ std::array<bomb::menu::ButtonInfos, 6> bomb::menu::Menu::getButtonsInfos() const
 
 bomb::menu::GraphicText bomb::menu::Menu::createTitle(const wchar_t *title)
 {
-	GraphicText text(_gui->addStaticText(title,
-					     irr::core::rect<irr::s32>(0, 0,
-								       1, 1)),
-			 {0.5, 0.15});
+	GraphicText text(_gui->addStaticText(title, {0, 0, 1, 1}), {0.5, 0.15});
 	text.setFont(_titleFont);
 	return text;
 }
@@ -64,9 +61,7 @@ irr::gui::IGUIButton *bomb::menu::Menu::createButton(irr::core::vector2di pos,
 					       irr::core::vector2di size,
 					       const wchar_t *text)
 {
-	return _gui->addButton(irr::core::rect<irr::s32>(pos.X, pos.Y,
-							 pos.X + size.X,
-							 pos.Y + size.Y),
+	return _gui->addButton({pos.X, pos.Y, pos.X + size.X, pos.Y + size.Y},
 			       nullptr, -1, text);
 }
 
