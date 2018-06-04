@@ -52,8 +52,6 @@ Section "Core" SecCore
 
   SetOutPath "$INSTDIR"
 
-  ;ADD YOUR OWN FILES HERE...
-
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
@@ -74,8 +72,6 @@ SectionEnd
 ;Uninstaller Section
 
 Section "Uninstall"
-
-  ;ADD YOUR OWN FILES HERE...
 
   Delete "$INSTDIR\Uninstall.exe"
 

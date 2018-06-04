@@ -2,10 +2,16 @@ cmake_minimum_required(VERSION 3.9)
 project(cpp_indie_studio)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -Wextra")
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    add_compile_options("-W" "-Wall" "-Wextra")
+    add_compile_options("$<$<CONFIG:DEBUG>:-DBOMB_VERSION=LINUX_DEV>")
+    add_compile_options("$<$<CONFIG:RELEASE>:-DBOMB_VERSION=LINUX_REL>")
+elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+    add_compile_options("/DBOMB_VERSION=WINDOWS")
+endif()
 
 set(SRC_FILES
         src/Audio/AudioDevice.cpp
@@ -92,7 +98,9 @@ set(SRC_FILES
         src/AObject.cpp
         src/AObject.hpp
         src/StaticObject.cpp
-        src/StaticObject.hpp)
+        src/StaticObject.hpp
+        src/Version.cpp
+        src/Version.hpp)
 
 add_executable(bomberman
         ${SRC_FILES}
@@ -106,5 +114,5 @@ target_link_libraries(tests_map_gen Irrlicht openal vorbisfile)
 
 target_link_libraries(bomberman Irrlicht openal vorbisfile)
 
-install(TARGETS bomberman DESTINATION /usr/bin/)
-install(DIRECTORY assets/ DESTINATION /usr/share/bomberman)
+install(TARGETS bomberman DESTINATION /usr/bin/ CONFIGURATIONS Release)
+install(DIRECTORY assets/ DESTINATION /usr/share/bomberman CONFIGURATIONS Release)
