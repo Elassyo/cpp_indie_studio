@@ -82,11 +82,8 @@ set(SRC_SCENE
         )
 
 add_executable(bomberman
+        ${SRC_SCENE}
         ${SRC_FILES}
-        ${SRC_MAP}
-        ${SRC_EXCEPTION}
-        ${SRC_MENU}
-        ${SRC_SCENE_HOME_MENU}
         src/Bomberman.cpp)
 
 add_executable(tests_map_gen
