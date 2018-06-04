@@ -32,7 +32,8 @@ bomb::scene::SceneGame::loop(bomb::IAssetLoader &loader)
 	return CONTINUE;
 }
 
-void bomb::scene::SceneGame::explodeBombs(bomb::IAssetLoader &loader)
+void bomb::scene::SceneGame::explodeBombs(
+	__attribute__((unused))bomb::IAssetLoader &loader)
 {
 	//Temporary
 	bomb::game::GameInfo i(loader);
