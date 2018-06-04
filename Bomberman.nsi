@@ -14,12 +14,12 @@
 ;General
 
   ;Name and file
-  Name "Indie Studio"
+  Name "Indie Studio - Bomberman"
 
-  OutFile "indiestudio-setup.exe"
+  OutFile "bomberman-setup.exe"
 
   ;Default installation folder
-  InstallDir "$LOCALAPPDATA\Indie Studio"
+  InstallDir "$LOCALAPPDATA\Bomberman"
 
   ;Request application privileges for Windows Vista
   RequestExecutionLevel user

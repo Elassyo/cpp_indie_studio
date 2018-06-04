@@ -105,3 +105,6 @@ add_executable(tests_map_gen
 target_link_libraries(tests_map_gen Irrlicht openal vorbisfile)
 
 target_link_libraries(bomberman Irrlicht openal vorbisfile)
+
+install(TARGETS bomberman DESTINATION /usr/bin/)
+install(DIRECTORY assets/ DESTINATION /usr/share/bomberman)
