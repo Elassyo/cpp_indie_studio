@@ -38,4 +38,4 @@ fclean:
 
 re: fclean all
 
-.PHONY:	all cmake-gen clean fclean re core
+.PHONY:	all cmake-gen $(NAME) clean fclean re

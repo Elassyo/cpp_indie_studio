@@ -8,20 +8,20 @@
 #include "AnimatedObject.hpp"
 #include "Exception/Exception.hpp"
 
-bomb::AnimatedObject::AnimatedObject(irr::scene::IAnimatedMeshSceneNode *inode):
-		AObject(inode)
+bomb::AnimatedObject::AnimatedObject(irr::scene::IAnimatedMeshSceneNode *node):
+		AObject(node), _node(node)
 {
-	if (!inode)
-		throw Exception("AnimatedObject", "animatedMashNode cannot be"
+	if (!node)
+		throw Exception("AnimatedObject", "animatedMeshNode cannot be"
 				    " created");
 }
 
 void bomb::AnimatedObject::setTexture(uint32_t layer,
 				irr::video::ITexture *texture)
 {
-	_inode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-	_inode->setMD2Animation(irr::scene::EMAT_STAND);
-	_inode->setMaterialTexture(layer, texture);
+	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	_node->setMD2Animation(irr::scene::EMAT_STAND);
+	_node->setMaterialTexture(layer, texture);
 }
 
 std::string bomb::AnimatedObject::toString()
