@@ -5,8 +5,10 @@
 // GameEngine.cpp
 //
 
-#include "GameEngine.hpp"
+#include <memory>
+
 #include "../Exception/Exception.hpp"
+#include "GameEngine.hpp"
 
 bomb::GameEngine::GameEngine(const std::wstring &winName, uint w, uint h,
 	irr::video::E_DRIVER_TYPE driver_type) :
@@ -55,7 +57,7 @@ irr::video::ITexture *bomb::GameEngine::loadTexture(const std::string &path)
 std::unique_ptr<bomb::AudioFile> bomb::GameEngine::loadAudioFile(
 	const std::string &path)
 {
-	return std::unique_ptr<bomb::AudioFile>(new AudioFile(path));
+	return std::make_unique<AudioFile>(path);
 }
 
 std::unique_ptr<bomb::AnimatedObject> bomb::GameEngine::createAnimatedObject(

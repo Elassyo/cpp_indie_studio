@@ -6,7 +6,6 @@
 */
 
 #include <iostream>
-#include <random>
 #include "../src/Map/MapGenerator.hpp"
 
 int main()
