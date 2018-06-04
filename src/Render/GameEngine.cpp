@@ -8,12 +8,13 @@
 #include "GameEngine.hpp"
 #include "../Exception/Exception.hpp"
 
-bomb::GameEngine::GameEngine(const std::wstring &winName, uint x, uint y,
+bomb::GameEngine::GameEngine(const std::wstring &winName, uint w, uint h,
 			     irr::video::E_DRIVER_TYPE driver_type) :
-	_device(irr::createDevice(driver_type, irr::core::dimension2d
-		(x, y), 16, false, false, false, &_evtHandler)), _videoDriver
-	(_device->getVideoDriver()),
-	_sceneManager(_device->getSceneManager())
+	_device(irr::createDevice(driver_type, irr::core::dimension2d(w, h), 16,
+		false, false, false, &_evtHandler)),
+	_videoDriver(_device->getVideoDriver()),
+	_sceneManager(_device->getSceneManager()),
+	_audioDev(new AudioDevice())
 {
 	_device->setWindowCaption(winName.c_str());
 }
@@ -91,7 +92,8 @@ void bomb::GameEngine::addCamera(const irr::core::vector3df &pos,
 }
 
 void
-bomb::GameEngine::listenEventScene(std::shared_ptr<bomb::scene::IEventScene> ptr)
+bomb::GameEngine::listenEventScene(
+	std::shared_ptr<bomb::scene::IEventScene> ptr)
 {
 	_evtHandler.injectScene(ptr);
 }

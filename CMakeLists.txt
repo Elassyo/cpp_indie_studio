@@ -7,6 +7,11 @@ set(CMAKE_AUTOMOC ON)
 
 
 set(SRC_FILES
+        src/Audio/AudioDevice.cpp
+        src/Audio/AudioDevice.hpp
+        src/Audio/AudioFile.cpp
+        src/Audio/AudioFile.hpp
+
         src/Exception/Exception.cpp
         src/Exception/Exception.hpp
 
@@ -56,7 +61,7 @@ set(SRC_FILES
         src/Render/EventHandler.hpp
         src/Render/GameEngine.cpp
         src/Render/GameEngine.hpp
-        
+
         src/AnimatedObject.cpp
         src/AnimatedObject.hpp
         src/AObject.cpp
