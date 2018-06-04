@@ -22,7 +22,9 @@ namespace bomb {
 	class Map :
 		virtual public ISerializable,
 		virtual public IRenderable {
-
+	public:
+		void render() override;
+		std::string toString() override;
 	private:
 		std::vector<bomb::MapCoord> _blocks;
 	};

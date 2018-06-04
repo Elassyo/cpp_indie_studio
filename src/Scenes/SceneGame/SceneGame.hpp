@@ -6,9 +6,10 @@
 */
 
 #ifndef CPP_INDIE_STUDIO_SCENEGAME_HPP
-#define CPP_INDIE_STUDIO_SCENEGAME_HPP
+	#define CPP_INDIE_STUDIO_SCENEGAME_HPP
 
-#include "../Interface/IGameScene.hpp"
+	#include "../../Interface/IGameScene.hpp"
+	#include "Bomb.hpp"
 
 namespace bomb {
 	namespace scene {
@@ -22,8 +23,13 @@ namespace bomb {
 			void reset(IAssetLoader &loader) override;
 			void clean() override;
 			std::string nextScene() override;
+			bool onEvent(const irr::SEvent &event) override;
+
 		private:
 			irr::video::ITexture *_blocksTextures;
+			std::vector<std::unique_ptr<bomb::object::Bomb>> _bombs;
+
+			void explodeBombs();
 		};
 	}
 }

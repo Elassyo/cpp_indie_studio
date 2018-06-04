@@ -10,6 +10,7 @@
 
 #include "IRenderWindow.hpp"
 #include "IAssetLoader.hpp"
+#include "IEventScene.hpp"
 
 namespace bomb {
 	namespace scene {
@@ -28,6 +29,7 @@ namespace bomb {
 			virtual void reset(IAssetLoader &) = 0;
 			virtual void clean() = 0;
 			virtual std::string nextScene() = 0;
+			bool onEvent(const irr::SEvent &event) override = 0;
 		};
 	}
 }

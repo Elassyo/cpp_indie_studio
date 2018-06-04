@@ -6,7 +6,7 @@
 //
 
 #include "Render/GameEngine.hpp"
-#include "Scene/SceneLauncher.hpp"
+#include "Scenes/SceneLauncher.hpp"
 #include "Exception/Exception.hpp"
 
 int main()

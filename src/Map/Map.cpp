@@ -6,3 +6,12 @@
 //
 
 #include "Map.hpp"
+
+void bomb::Map::render()
+{
+}
+
+std::string bomb::Map::toString()
+{
+	return std::__cxx11::string();
+}

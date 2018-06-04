@@ -35,8 +35,7 @@ bomb::MapConstructor bomb::MapGenerator::generateRandom()
 {
 	auto i = (MapGenerator::Type)(random() % (END_VALUE - 1) + 1);
 	std::cout << i << " " << RANDOM << BASIC << END_VALUE << std::endl;
-	auto map = (this->*(bomb::MapGenerator::typeGenerator.at(i)))();
-	return map;
+	return (this->*(bomb::MapGenerator::typeGenerator.at(i)))();
 }
 
 bomb::MapConstructor bomb::MapGenerator::generateBasic()
@@ -45,11 +44,15 @@ bomb::MapConstructor bomb::MapGenerator::generateBasic()
 
 	for (unsigned int x = 0; x < _size; x++) {
 		for (unsigned int y = 0; y < _size; y++) {
-			if (isCorner(x, y)) continue;
-			if (x % 2 == 1 && y % 2 == 1 && x != _size - 1 && y != _size - 1)
-				build.addBlock({(int)x, (int)y, 0}, bomb::MapConstructor::UNBREAKABLE);
+			if (isCorner(x, y))
+				continue;
+			if (x % 2 == 1 && y % 2 == 1 && x != _size - 1
+				&& y != _size - 1)
+				build.addBlock({(int)x, (int)y, 0},
+					bomb::MapConstructor::UNBREAKABLE);
 			else if (random() % 100 <= GEN_BASIC_PROBA)
-				build.addBlock({(int)x, (int)y, 0}, bomb::MapConstructor::BREAKABLE);
+				build.addBlock({(int)x, (int)y, 0},
+					bomb::MapConstructor::BREAKABLE);
 		}
 	}
 	return build;
@@ -57,10 +60,13 @@ bomb::MapConstructor bomb::MapGenerator::generateBasic()
 
 bool bomb::MapGenerator::isCorner(unsigned int x, unsigned int y)
 {
-	return (
-		((x == 0 && (y == 0 || y == 1)) || (y == 0 && x == 1))
-			|| ((x == _size - 1 && (y == 0 || y == 1)) || (y == 0 && x == _size - 2))
-			|| ((x == 0 && (y == _size - 1 || y == _size - 2)) || (y == _size - 1 && x == 1))
-			|| ((x == _size - 1 && (y == _size - 1 || y == _size - 2)) || (y == _size - 1 && x == _size - 2))
+	return (((x == 0 && (y == 0 || y == 1)) || (y == 0 && x == 1))
+			|| ((x == _size - 1 && (y == 0 || y == 1))
+			|| (y == 0 && x == _size - 2))
+			|| ((x == 0 && (y == _size - 1 || y == _size - 2))
+			|| (y == _size - 1 && x == 1))
+			|| ((x == _size - 1 && (y == _size - 1
+			|| y == _size - 2))
+			|| (y == _size - 1 && x == _size - 2))
 	);
 }

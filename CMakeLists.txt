@@ -20,12 +20,21 @@ set(SRC_INTERFACE
         src/Interface/IGameScene.hpp
         src/Interface/IEventScene.hpp)
 
-set(SRC_SCENE
-        src/Scene/SceneLauncher.cpp
-        src/Scene/SceneLauncher.hpp
-        src/Scene/SceneGame.hpp
-        src/Scene/SceneGame.cpp)
+set(SRC_SCENE_GAME
+        src/Scenes/SceneGame/SceneGame.hpp
+        src/Scenes/SceneGame/SceneGame.cpp
+        src/Scenes/SceneGame/Bomb.cpp
+        src/Scenes/SceneGame/Bomb.hpp
+        src/Scenes/General/GameInfo.hpp)
 
+
+set(SRC_SCENE
+        src/Scenes/SceneLauncher.cpp
+        src/Scenes/SceneLauncher.hpp
+        src/Scenes/General/Clock.cpp
+        src/Scenes/General/Clock.hpp
+        src/Scenes/General/AActivator.cpp
+        src/Scenes/General/AActivator.hpp)
 
 set(SRC_MAP
         src/Map/Map.cpp
@@ -35,8 +44,7 @@ set(SRC_MAP
         src/Map/MapWall.cpp
         src/Map/MapWall.hpp
         src/Map/MapConstructor.cpp
-        src/Map/MapConstructor.hpp
-        )
+        src/Map/MapConstructor.hpp)
 
 set(SRC_MENU
         src/Menu/GraphicButton.cpp
@@ -46,8 +54,7 @@ set(SRC_MENU
         src/Menu/GraphicText.cpp
         src/Menu/GraphicText.hpp
         src/Menu/Menu.cpp
-        src/Menu/Menu.hpp
-        )
+        src/Menu/Menu.hpp)
 
 set(SRC_FILES
         src/IObject.hpp
@@ -66,12 +73,12 @@ add_executable(
         bomberman
         ${SRC_INTERFACE}
         ${SRC_SCENE}
+        ${SRC_SCENE_GAME}
         ${SRC_FILES}
         ${SRC_MAP}
         ${SRC_EXCEPTION}
         ${SRC_MENU}
-        src/Bomberman.cpp
-)
+        src/Bomberman.cpp)
 
 add_executable(tests_map_gen
         ${SRC_MAP}

@@ -10,7 +10,7 @@
 
 #include "../Render/GameEngine.hpp"
 #include "../Interface/IGameScene.hpp"
-#include "SceneGame.hpp"
+#include "SceneGame/SceneGame.hpp"
 #include <iostream>
 #include <unordered_map>
 

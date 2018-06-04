@@ -17,7 +17,7 @@ bomb::scene::SceneLauncher::SceneLauncher(GameEngine &ge) :
 void bomb::scene::SceneLauncher::launchScene(const std::string &sceneName)
 {
 	if (_scenes.find(sceneName) == _scenes.end())
-		throw Exception("SceneLauncher", "Scene " + sceneName +
+		throw Exception("SceneLauncher", "Scenes " + sceneName +
 						 " doesn't exist");
 	std::shared_ptr<IGameScene> gs = _scenes[sceneName];
 	SceneStatus sts = gs->start(_gameEngine);
