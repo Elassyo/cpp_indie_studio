@@ -24,7 +24,7 @@ set(SRC_SCENE_GAME
         src/Scenes/SceneGame/SceneGame.cpp
         src/Scenes/SceneGame/Bomb.cpp
         src/Scenes/SceneGame/Bomb.hpp
-        src/Scenes/General/GameInfo.hpp)
+        src/Scenes/General/GameInfo.hpp src/Scenes/General/PlayerInfo.cpp src/Scenes/General/PlayerInfo.hpp src/Scenes/General/GameInfo.cpp)
 
 
 set(SRC_SCENE

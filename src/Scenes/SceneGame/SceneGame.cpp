@@ -27,16 +27,16 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
 }
 
 bomb::scene::SceneStatus
-bomb::scene::SceneGame::loop(__attribute__((unused))bomb::IAssetLoader &loader)
+bomb::scene::SceneGame::loop(bomb::IAssetLoader &loader)
 {
-	explodeBombs();
+	explodeBombs(loader);
 	return CONTINUE;
 }
 
-void bomb::scene::SceneGame::explodeBombs()
+void bomb::scene::SceneGame::explodeBombs(bomb::IAssetLoader &loader)
 {
 	//Temporary
-	bomb::game::GameInfo i;bomb::Map m;
+	bomb::game::GameInfo i(loader); bomb::Map m;
 
 	for (auto &bomb : _bombs)
 		bomb.get()->tryToActivate(i, m);
@@ -60,7 +60,8 @@ std::string bomb::scene::SceneGame::nextScene()
 	return std::__cxx11::string();
 }
 
-bool bomb::scene::SceneGame::onEvent(const irr::SEvent &event)
+bool bomb::scene::SceneGame::onEvent(__attribute__((unused))
+				const irr::SEvent &event)
 {
 	return true;
 }

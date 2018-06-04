@@ -21,13 +21,9 @@ namespace bomb {
 	public:
 		GameEngine(const std::wstring &winName, uint x, uint y,
 			   irr::video::E_DRIVER_TYPE);
-
 		void refresh() override;
-
 		irr::gui::IGUIEnvironment *loadGui() override;
-
 		irr::video::ITexture *loadTexture(const std::string &) override;
-
 		std::unique_ptr<bomb::AnimatedObject> createAnimatedObject
 			(const std::string &path,
 			 irr::core::vector3df pos, irr::core::vector3df rot,
