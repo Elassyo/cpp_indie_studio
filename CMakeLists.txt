@@ -8,8 +8,7 @@ set(CMAKE_AUTOMOC ON)
 
 set(SRC_EXCEPTION
         src/Exception/Exception.cpp
-        src/Exception/Exception.hpp
-        )
+        src/Exception/Exception.hpp)
 
 set(SRC_INTERFACE
         src/Interface/ISerializable.hpp

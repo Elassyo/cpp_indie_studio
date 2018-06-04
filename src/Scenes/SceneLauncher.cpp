@@ -21,10 +21,12 @@ void bomb::scene::SceneLauncher::launchScene(const std::string &sceneName)
 						 " doesn't exist");
 	std::shared_ptr<IGameScene> gs = _scenes[sceneName];
 	SceneStatus sts = gs->start(_gameEngine);
-
 	if (sts != BEGIN)
-		throw Exception("SceneLauncher", "Cannot launch scene " + sceneName);
+		throw Exception("SceneLauncher", "Cannot launch scene "
+				+ sceneName);
 	while (gs->loop(_gameEngine) == CONTINUE) {
+		if (!_gameEngine.isRunning())
+			break;
 		_gameEngine.refresh();
 	}
 	std::string next = gs->nextScene();

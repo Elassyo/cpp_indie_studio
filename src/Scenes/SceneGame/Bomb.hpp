@@ -22,6 +22,7 @@ namespace bomb {
 			bool isActivable(game::GameInfo &infos, Map &map)
 			override;
 			bool activate(game::GameInfo &infos, Map &map) override;
+			void setProperties(game::GameInfo &infos, uint8_t idx);
 		private:
 			bomb::IAssetLoader &loader;
 			bomb::utils::Clock _timer;
