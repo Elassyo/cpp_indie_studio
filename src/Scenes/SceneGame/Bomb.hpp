@@ -17,7 +17,7 @@ namespace bomb {
 		class Bomb : public bomb::game::AActivator {
 		public:
 			Bomb(IAssetLoader &loader,
-			     const irr::core::vector3df &pos, const long time);
+			     const irr::core::vector3df &pos, long time);
 		protected:
 			bool isActivable(game::GameInfo &infos, Map &map)
 			override;

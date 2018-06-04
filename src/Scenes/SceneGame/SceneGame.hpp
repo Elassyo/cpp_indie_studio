@@ -24,12 +24,10 @@ namespace bomb {
 			void clean() override;
 			std::string nextScene() override;
 			bool onEvent(const irr::SEvent &event) override;
-
 		private:
+			void explodeBombs();
 			irr::video::ITexture *_blocksTextures;
 			std::vector<std::unique_ptr<bomb::object::Bomb>> _bombs;
-
-			void explodeBombs();
 		};
 	}
 }
