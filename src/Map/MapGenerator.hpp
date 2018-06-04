@@ -9,6 +9,7 @@
 #define CPP_INDIE_STUDIO_MAPGENERATOR_HPP
 
 #include <unordered_map>
+#include <time.h>
 #include "Map.hpp"
 #include "MapConstructor.hpp"
 
@@ -23,8 +24,8 @@ namespace bomb {
 			END_VALUE
 		};
 
-		MapGenerator(unsigned int seed,
-			unsigned int size,
+		MapGenerator(unsigned int size,
+			unsigned int seed = time(nullptr),
 			bomb::MapGenerator::Type = RANDOM);
 		MapConstructor generate();
 

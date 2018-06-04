@@ -35,10 +35,10 @@ bomb::scene::SceneGame::loop(bomb::IAssetLoader &loader)
 void bomb::scene::SceneGame::explodeBombs(bomb::IAssetLoader &loader)
 {
 	//Temporary
-	bomb::game::GameInfo i(loader); bomb::Map m;
-
-	for (auto &bomb : _bombs)
-		bomb.get()->tryToActivate(i, m);
+//	bomb::game::GameInfo i(loader); bomb::Map m;
+//
+//	for (auto &bomb : _bombs)
+//		bomb.get()->tryToActivate(i, m);
 }
 
 void bomb::scene::SceneGame::save()

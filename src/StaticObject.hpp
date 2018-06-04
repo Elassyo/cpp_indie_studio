@@ -6,17 +6,20 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_STATICOBJECT_HPP
-#define CPP_INDIE_STUDIO_STATICOBJECT_HPP
+	#define CPP_INDIE_STUDIO_STATICOBJECT_HPP
 
-#include "AObject.hpp"
+	#include "AObject.hpp"
 
 namespace bomb {
-	class StaticObject : public AObject<irr::scene::IMeshSceneNode> {
+	class StaticObject : public AObject {
 	public:
-		explicit StaticObject(irr::scene::IMeshSceneNode *);
+		explicit StaticObject(irr::scene::IMeshSceneNode *node);
 		void setTexture(uint32_t layer, irr::video::ITexture *texture) override;
 
 		std::string toString() override;
+
+	private:
+		irr::scene::IMeshSceneNode *_node;
 	};
 }
 

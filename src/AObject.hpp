@@ -11,10 +11,9 @@
 	#include "Interface/IObject.hpp"
 
 namespace bomb {
-	template <class T>
 	class AObject : virtual public bomb::IObject {
 	public:
-		explicit AObject<T>(T *);
+		explicit AObject(irr::scene::ISceneNode *);
 		irr::core::vector3df getPos() const override;
 		void setPos(const irr::core::vector3df &) override;
 		irr::core::vector3df getRot() const override;
@@ -24,8 +23,8 @@ namespace bomb {
 
 		irr::scene::ISceneNode *getSceneNode() const override;
 
-	protected:
-		T *_inode;
+	private:
+		irr::scene::ISceneNode *_node;
 	};
 }
 

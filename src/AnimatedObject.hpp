@@ -6,18 +6,23 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_ANIMATEDOBJECT_HPP
-#define CPP_INDIE_STUDIO_ANIMATEDOBJECT_HPP
+	#define CPP_INDIE_STUDIO_ANIMATEDOBJECT_HPP
 
-#include <irrlicht/irrlicht.h>
-#include "AObject.hpp"
+	#include <irrlicht/irrlicht.h>
+	#include "AObject.hpp"
 
 namespace bomb {
-	class AnimatedObject : public AObject<irr::scene::IAnimatedMeshSceneNode> {
+	class AnimatedObject : public AObject {
 	public:
-		explicit AnimatedObject(irr::scene::IAnimatedMeshSceneNode *);
-		void setTexture(uint32_t layer, irr::video::ITexture *texture) override;
+		explicit AnimatedObject
+			(irr::scene::IAnimatedMeshSceneNode *node);
+		void setTexture(uint32_t layer,
+			irr::video::ITexture *texture) override;
 
 		std::string toString() override;
+
+	private:
+		irr::scene::IAnimatedMeshSceneNode *_node;
 	};
 }
 

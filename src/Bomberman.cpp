@@ -19,5 +19,5 @@ int main()
 	} catch (bomb::Exception &e) {
 		std::cout << e.what() << std::endl;
 	}
-	return (0);
+	return 0;
 }

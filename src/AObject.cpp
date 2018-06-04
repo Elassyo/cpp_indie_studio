@@ -7,53 +7,42 @@
 
 #include "AObject.hpp"
 
-template<class T>
-bomb::AObject<T>::AObject(T *inode) :
-	_inode(inode)
+bomb::AObject::AObject(irr::scene::ISceneNode *inode) :
+	_node(inode)
 {
 }
 
-template<class T>
-irr::core::vector3df bomb::AObject<T>::getPos() const
+irr::core::vector3df bomb::AObject::getPos() const
 {
-	return _inode->getAbsolutePosition();
+	return _node->getAbsolutePosition();
 }
 
-template<class T>
-void bomb::AObject<T>::setPos(const irr::core::vector3df &newPos)
+void bomb::AObject::setPos(const irr::core::vector3df &newPos)
 {
-	_inode->setPosition(newPos);
+	_node->setPosition(newPos);
 }
 
-template<class T>
-irr::core::vector3df bomb::AObject<T>::getRot() const
+irr::core::vector3df bomb::AObject::getRot() const
 {
-	return _inode->getRotation();
+	return _node->getRotation();
 }
 
-template<class T>
-void bomb::AObject<T>::setRot(const irr::core::vector3df &newRot)
+void bomb::AObject::setRot(const irr::core::vector3df &newRot)
 {
-	_inode->setRotation(newRot);
+	_node->setRotation(newRot);
 }
 
-template<class T>
-irr::core::vector3df bomb::AObject<T>::getScale() const
+irr::core::vector3df bomb::AObject::getScale() const
 {
-	return _inode->getScale();
+	return _node->getScale();
 }
 
-template<class T>
-void bomb::AObject<T>::setScale(const irr::core::vector3df &newScale)
+void bomb::AObject::setScale(const irr::core::vector3df &newScale)
 {
-	_inode->setScale(newScale);
+	_node->setScale(newScale);
 }
 
-template<class T>
-irr::scene::ISceneNode *bomb::AObject<T>::getSceneNode() const
+irr::scene::ISceneNode *bomb::AObject::getSceneNode() const
 {
-	return _inode;
+	return _node;
 }
-
-template class bomb::AObject<irr::scene::IAnimatedMeshSceneNode>;
-template class bomb::AObject<irr::scene::IMeshSceneNode>;

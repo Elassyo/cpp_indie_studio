@@ -8,7 +8,7 @@
 #include "GameInfo.hpp"
 
 bomb::game::GameInfo::GameInfo(bomb::IAssetLoader &loader) :
-	_loader(loader)
+	_loader(loader), _mapGenerator(10)
 {
 	_characters.resize(5);
 	_characters[SHYGUY_BLACK] = loader.createAnimatedObject(
@@ -21,7 +21,16 @@ bomb::game::GameInfo::GameInfo(bomb::IAssetLoader &loader) :
 		"assets/models/characters/shyGuy/shyGuyWhite.obj");
 	_characters[SKELEREX] = loader.createAnimatedObject(
 		"assets/models/characters/skelerex/skelerex.obj");
+	createMap(loader);
 	reset();
+}
+
+void bomb::game::GameInfo::createMap(IAssetLoader &loader)
+{
+	bomb::MapConstructor pattern = _mapGenerator.generate();
+
+	pattern.dumpMap();
+	_map = std::move(pattern.construct(loader, {0, 0, 0}, {10, 10, 1}, {0, 0, 0}));
 }
 
 void bomb::game::GameInfo::reset()

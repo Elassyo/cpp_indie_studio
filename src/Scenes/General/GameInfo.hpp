@@ -11,7 +11,8 @@
 	#define NB_PLAYERS() (4)
 
 	#include <vector>
-	#include "../../AnimatedObject.hpp"
+#include <src/Map/MapGenerator.hpp>
+#include "../../AnimatedObject.hpp"
 	#include "PlayerInfo.hpp"
 	#include "../../Interface/IAssetLoader.hpp"
 	#include "../../Map/Map.hpp"
@@ -33,9 +34,13 @@ namespace bomb {
 			std::vector<std::unique_ptr<AnimatedObject>>
 				_characters;
 			std::array<PlayerInfo, NB_PLAYERS()> _players;
-			bomb::Map _map;
+
+			bomb::MapGenerator _mapGenerator;
+			std::unique_ptr<bomb::Map> _map;
 
 			void reset();
+			void createMap(IAssetLoader &loader);
+
 		};
 	}
 }

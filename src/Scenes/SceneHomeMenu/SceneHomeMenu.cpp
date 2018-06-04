@@ -7,13 +7,15 @@
 
 #include "SceneHomeMenu.hpp"
 
-bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(IAssetLoader &loader)
+bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(
+	__attribute__((unused))IAssetLoader &loader)
 {
 	return BEGIN;
 }
 
 bomb::scene::SceneStatus
-bomb::scene::SceneHomeMenu::loop(bomb::IAssetLoader &loader)
+bomb::scene::SceneHomeMenu::loop(
+	__attribute__((unused))bomb::IAssetLoader &loader)
 {
 	return CONTINUE;
 }
