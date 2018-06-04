@@ -6,6 +6,7 @@
 */
 
 #include <iostream>
+#include <random>
 #include "../src/Map/MapGenerator.hpp"
 
 int main()
@@ -17,4 +18,5 @@ int main()
 	bomb::MapGenerator generator(x, mapSize, bomb::MapGenerator::BASIC);
 	auto e = generator.generate();
 	e.dumpMap(mapSize);
+	return 0;
 }

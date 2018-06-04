@@ -25,22 +25,30 @@ namespace bomb {
 			   irr::video::E_DRIVER_TYPE);
 		~GameEngine();
 
+		bool isRunning() const;
+		void listenEventScene(
+			std::shared_ptr<scene::IEventScene> scene);
+
 		void refresh() override;
+
 		irr::gui::IGUIEnvironment *loadGui() override;
-		irr::video::ITexture *loadTexture(const std::string &) override;
-		std::unique_ptr<bomb::AnimatedObject> createAnimatedObject
-			(const std::string &path,
-			 irr::core::vector3df pos, irr::core::vector3df rot,
-			 irr::core::vector3df scale) override;
-		std::unique_ptr<bomb::StaticObject> createStaticObject
-			(const std::string &path,
-			 irr::core::vector3df pos, irr::core::vector3df rot,
-			 irr::core::vector3df scale) override;
-		void deleteObject(std::unique_ptr<IObject>) override;
+		irr::video::ITexture *loadTexture(
+			const std::string &path) override;
+		std::unique_ptr<AudioFile> loadAudioFile(
+			const std::string &path) override;
+		std::unique_ptr<bomb::AnimatedObject> createAnimatedObject(
+			const std::string &path,
+			irr::core::vector3df pos,
+			irr::core::vector3df rot,
+			irr::core::vector3df scale) override;
+		std::unique_ptr<bomb::StaticObject> createStaticObject(
+			const std::string &path,
+			irr::core::vector3df pos,
+			irr::core::vector3df rot,
+			irr::core::vector3df scale) override;
+		void deleteObject(std::unique_ptr<IObject> obj) override;
 		void addCamera(const irr::core::vector3df &pos,
 			       const irr::core::vector3df &rot) override;
-		void listenEventScene(std::shared_ptr<scene::IEventScene>);
-		bool isRunning();
 
 	private:
 		EventHandler _evtHandler;

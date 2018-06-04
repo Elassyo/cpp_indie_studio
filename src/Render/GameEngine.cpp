@@ -9,7 +9,7 @@
 #include "../Exception/Exception.hpp"
 
 bomb::GameEngine::GameEngine(const std::wstring &winName, uint w, uint h,
-			     irr::video::E_DRIVER_TYPE driver_type) :
+	irr::video::E_DRIVER_TYPE driver_type) :
 	_device(irr::createDevice(driver_type, irr::core::dimension2d(w, h), 16,
 		false, false, false, &_evtHandler)),
 	_videoDriver(_device->getVideoDriver()),
@@ -24,16 +24,22 @@ bomb::GameEngine::~GameEngine()
 	_device->drop();
 }
 
+bool bomb::GameEngine::isRunning() const
+{
+	return _device->run();
+}
+
+void bomb::GameEngine::listenEventScene(
+	std::shared_ptr<bomb::scene::IEventScene> scene)
+{
+	_evtHandler.injectScene(scene);
+}
+
 void bomb::GameEngine::refresh()
 {
 	_videoDriver->beginScene(true, true, irr::video::SColor(255,0,0,255));
 	_sceneManager->drawAll();
 	_videoDriver->endScene();
-}
-
-bool bomb::GameEngine::isRunning()
-{
-	return _device->run();
 }
 
 irr::gui::IGUIEnvironment *bomb::GameEngine::loadGui()
@@ -46,11 +52,17 @@ irr::video::ITexture *bomb::GameEngine::loadTexture(const std::string &path)
 	return _videoDriver->getTexture(path.c_str());
 }
 
-std::unique_ptr<bomb::AnimatedObject>
-bomb::GameEngine::createAnimatedObject(const std::string &path,
-				       irr::core::vector3df pos,
-				       irr::core::vector3df rot,
-				       irr::core::vector3df scale)
+std::unique_ptr<bomb::AudioFile> bomb::GameEngine::loadAudioFile(
+	const std::string &path)
+{
+	return std::unique_ptr<bomb::AudioFile>(new AudioFile(path));
+}
+
+std::unique_ptr<bomb::AnimatedObject> bomb::GameEngine::createAnimatedObject(
+	const std::string &path,
+	irr::core::vector3df pos,
+	irr::core::vector3df rot,
+	irr::core::vector3df scale)
 {
 	auto ptr = std::make_unique<bomb::AnimatedObject>(
 		_sceneManager->addAnimatedMeshSceneNode(
@@ -61,11 +73,11 @@ bomb::GameEngine::createAnimatedObject(const std::string &path,
 	return ptr;
 }
 
-std::unique_ptr<bomb::StaticObject>
-bomb::GameEngine::createStaticObject(const std::string &path,
-				     irr::core::vector3df pos,
-				     irr::core::vector3df rot,
-				     irr::core::vector3df scale)
+std::unique_ptr<bomb::StaticObject> bomb::GameEngine::createStaticObject(
+	const std::string &path,
+	irr::core::vector3df pos,
+	irr::core::vector3df rot,
+	irr::core::vector3df scale)
 {
 	auto ptr = std::make_unique<bomb::StaticObject>(
 		_sceneManager->addMeshSceneNode(
@@ -82,18 +94,11 @@ void bomb::GameEngine::deleteObject(std::unique_ptr<bomb::IObject> obj)
 }
 
 void bomb::GameEngine::addCamera(const irr::core::vector3df &pos,
-				 const irr::core::vector3df &rot)
+	const irr::core::vector3df &rot)
 {
 	_camera = _sceneManager->addCameraSceneNode();
 	if (!_camera)
 		throw Exception("GameEngine", "Can't create camera");
 	_camera->setPosition(pos);
 	_camera->setRotation(rot);
-}
-
-void
-bomb::GameEngine::listenEventScene(
-	std::shared_ptr<bomb::scene::IEventScene> ptr)
-{
-	_evtHandler.injectScene(ptr);
 }
