@@ -24,7 +24,14 @@ set(SRC_SCENE_GAME
         src/Scenes/SceneGame/SceneGame.cpp
         src/Scenes/SceneGame/Bomb.cpp
         src/Scenes/SceneGame/Bomb.hpp
-        src/Scenes/General/GameInfo.hpp src/Scenes/General/PlayerInfo.cpp src/Scenes/General/PlayerInfo.hpp src/Scenes/General/GameInfo.cpp)
+        src/Scenes/General/GameInfo.hpp
+        src/Scenes/General/PlayerInfo.cpp
+        src/Scenes/General/PlayerInfo.hpp
+        src/Scenes/General/GameInfo.cpp)
+
+set(SRC_SCENE_HOME_MENU
+        src/Scenes/SceneHomeMenu/SceneHomeMenu.cpp
+        src/Scenes/SceneHomeMenu/SceneHomeMenu.hpp)
 
 
 set(SRC_SCENE
@@ -80,6 +87,7 @@ add_executable(
         ${SRC_MAP}
         ${SRC_EXCEPTION}
         ${SRC_MENU}
+        ${SRC_SCENE_HOME_MENU}
         src/Bomberman.cpp)
 
 add_executable(tests_map_gen

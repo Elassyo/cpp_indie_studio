@@ -16,8 +16,7 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
 				  {0, 0, 0})
 		->setTexture(0, _blocksTextures);
 	loader.createStaticObject("assets/models/blocks/brick.obj", {0, 2, 0},
-				  {0, 0, 0}, {0.1, 0.1, 0.1})
-		->setTexture(0, _blocksTextures);
+				  {0, 0, 0}, {0.1, 0.1, 0.1})->getPos();
 	loader.addCamera(irr::core::vector3df(0, 10, -20),
 			irr::core::vector3df(0, 5, 5));
 	_bombs.emplace_back(std::make_unique<bomb::object::Bomb>

@@ -6,9 +6,10 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_PLAYERINFO_HPP
-#define CPP_INDIE_STUDIO_PLAYERINFO_HPP
+	#define CPP_INDIE_STUDIO_PLAYERINFO_HPP
 
-#include <cstdint>
+	#include <cstdint>
+#include "../../Interface/IObject.hpp"
 
 namespace bomb {
 	namespace game {
