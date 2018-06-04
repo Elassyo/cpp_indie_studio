@@ -30,7 +30,9 @@ bool bomb::object::Bomb::activate(
 }
 
 void
-bomb::object::Bomb::setProperties(bomb::game::GameInfo &infos, uint8_t idx)
+bomb::object::Bomb::setProperties(
+	__attribute__((unused))bomb::game::GameInfo &infos,
+	__attribute__((unused))uint8_t idx)
 {
 
 }

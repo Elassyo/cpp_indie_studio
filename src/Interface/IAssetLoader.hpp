@@ -23,12 +23,12 @@ namespace bomb {
 			(const std::string &) = 0;
 		virtual std::unique_ptr<bomb::AnimatedObject> createAnimatedObject
 			(const std::string &path,
-			 irr::core::vector3df pos,
+			 irr::core::vector3df pos = {0, 0, 0},
 			 irr::core::vector3df rot = {0, 0, 0},
 			 irr::core::vector3df scale = {1, 1, 1}) = 0;
 		virtual std::unique_ptr<bomb::StaticObject> createStaticObject
 			(const std::string &path,
-			 irr::core::vector3df pos,
+			 irr::core::vector3df pos = {0, 0, 0},
 			 irr::core::vector3df rot = {0, 0, 0},
 			 irr::core::vector3df scale = {1, 1, 1}) = 0;
 		virtual void addCamera(const irr::core::vector3df &pos,
