@@ -8,10 +8,10 @@
 #include "StaticObject.hpp"
 #include "Exception/Exception.hpp"
 
-bomb::StaticObject::StaticObject(irr::scene::IMeshSceneNode *inode):
-	AObject(inode)
+bomb::StaticObject::StaticObject(irr::scene::IMeshSceneNode *node):
+	AObject(node), _node(node)
 {
-	if (!inode)
+	if (!node)
 		throw Exception("AnimatedObject", "staticMashNode cannot be"
 						  " created");
 }
@@ -19,8 +19,8 @@ bomb::StaticObject::StaticObject(irr::scene::IMeshSceneNode *inode):
 void bomb::StaticObject::setTexture(uint32_t layer,
 				irr::video::ITexture *texture)
 {
-	_inode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-	_inode->setMaterialTexture(layer, texture);
+	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	_node->setMaterialTexture(layer, texture);
 }
 
 std::string bomb::StaticObject::toString()

@@ -143,7 +143,6 @@ src/AObject.o: src/AObject.cpp.o
 # target to build an object file
 src/AObject.cpp.o:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/AObject.cpp.o
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/AObject.cpp.o
 .PHONY : src/AObject.cpp.o
 
 src/AObject.i: src/AObject.cpp.i
@@ -153,7 +152,6 @@ src/AObject.i: src/AObject.cpp.i
 # target to preprocess a source file
 src/AObject.cpp.i:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/AObject.cpp.i
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/AObject.cpp.i
 .PHONY : src/AObject.cpp.i
 
 src/AObject.s: src/AObject.cpp.s
@@ -163,7 +161,6 @@ src/AObject.s: src/AObject.cpp.s
 # target to generate assembly for a file
 src/AObject.cpp.s:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/AObject.cpp.s
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/AObject.cpp.s
 .PHONY : src/AObject.cpp.s
 
 src/AnimatedObject.o: src/AnimatedObject.cpp.o
@@ -173,7 +170,6 @@ src/AnimatedObject.o: src/AnimatedObject.cpp.o
 # target to build an object file
 src/AnimatedObject.cpp.o:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/AnimatedObject.cpp.o
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/AnimatedObject.cpp.o
 .PHONY : src/AnimatedObject.cpp.o
 
 src/AnimatedObject.i: src/AnimatedObject.cpp.i
@@ -183,7 +179,6 @@ src/AnimatedObject.i: src/AnimatedObject.cpp.i
 # target to preprocess a source file
 src/AnimatedObject.cpp.i:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/AnimatedObject.cpp.i
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/AnimatedObject.cpp.i
 .PHONY : src/AnimatedObject.cpp.i
 
 src/AnimatedObject.s: src/AnimatedObject.cpp.s
@@ -193,8 +188,67 @@ src/AnimatedObject.s: src/AnimatedObject.cpp.s
 # target to generate assembly for a file
 src/AnimatedObject.cpp.s:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/AnimatedObject.cpp.s
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/AnimatedObject.cpp.s
 .PHONY : src/AnimatedObject.cpp.s
+
+src/Audio/AudioDevice.o: src/Audio/AudioDevice.cpp.o
+
+.PHONY : src/Audio/AudioDevice.o
+
+# target to build an object file
+src/Audio/AudioDevice.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Audio/AudioDevice.cpp.o
+	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Audio/AudioDevice.cpp.o
+.PHONY : src/Audio/AudioDevice.cpp.o
+
+src/Audio/AudioDevice.i: src/Audio/AudioDevice.cpp.i
+
+.PHONY : src/Audio/AudioDevice.i
+
+# target to preprocess a source file
+src/Audio/AudioDevice.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Audio/AudioDevice.cpp.i
+	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Audio/AudioDevice.cpp.i
+.PHONY : src/Audio/AudioDevice.cpp.i
+
+src/Audio/AudioDevice.s: src/Audio/AudioDevice.cpp.s
+
+.PHONY : src/Audio/AudioDevice.s
+
+# target to generate assembly for a file
+src/Audio/AudioDevice.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Audio/AudioDevice.cpp.s
+	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Audio/AudioDevice.cpp.s
+.PHONY : src/Audio/AudioDevice.cpp.s
+
+src/Audio/AudioFile.o: src/Audio/AudioFile.cpp.o
+
+.PHONY : src/Audio/AudioFile.o
+
+# target to build an object file
+src/Audio/AudioFile.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Audio/AudioFile.cpp.o
+	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Audio/AudioFile.cpp.o
+.PHONY : src/Audio/AudioFile.cpp.o
+
+src/Audio/AudioFile.i: src/Audio/AudioFile.cpp.i
+
+.PHONY : src/Audio/AudioFile.i
+
+# target to preprocess a source file
+src/Audio/AudioFile.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Audio/AudioFile.cpp.i
+	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Audio/AudioFile.cpp.i
+.PHONY : src/Audio/AudioFile.cpp.i
+
+src/Audio/AudioFile.s: src/Audio/AudioFile.cpp.s
+
+.PHONY : src/Audio/AudioFile.s
+
+# target to generate assembly for a file
+src/Audio/AudioFile.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Audio/AudioFile.cpp.s
+	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Audio/AudioFile.cpp.s
+.PHONY : src/Audio/AudioFile.cpp.s
 
 src/Bomberman.o: src/Bomberman.cpp.o
 
@@ -260,7 +314,6 @@ src/Map/Map.o: src/Map/Map.cpp.o
 # target to build an object file
 src/Map/Map.cpp.o:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/Map.cpp.o
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Map/Map.cpp.o
 .PHONY : src/Map/Map.cpp.o
 
 src/Map/Map.i: src/Map/Map.cpp.i
@@ -270,7 +323,6 @@ src/Map/Map.i: src/Map/Map.cpp.i
 # target to preprocess a source file
 src/Map/Map.cpp.i:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/Map.cpp.i
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Map/Map.cpp.i
 .PHONY : src/Map/Map.cpp.i
 
 src/Map/Map.s: src/Map/Map.cpp.s
@@ -280,8 +332,88 @@ src/Map/Map.s: src/Map/Map.cpp.s
 # target to generate assembly for a file
 src/Map/Map.cpp.s:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/Map.cpp.s
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Map/Map.cpp.s
 .PHONY : src/Map/Map.cpp.s
+
+src/Map/MapBlocks/AMapBlock.o: src/Map/MapBlocks/AMapBlock.cpp.o
+
+.PHONY : src/Map/MapBlocks/AMapBlock.o
+
+# target to build an object file
+src/Map/MapBlocks/AMapBlock.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/MapBlocks/AMapBlock.cpp.o
+.PHONY : src/Map/MapBlocks/AMapBlock.cpp.o
+
+src/Map/MapBlocks/AMapBlock.i: src/Map/MapBlocks/AMapBlock.cpp.i
+
+.PHONY : src/Map/MapBlocks/AMapBlock.i
+
+# target to preprocess a source file
+src/Map/MapBlocks/AMapBlock.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/MapBlocks/AMapBlock.cpp.i
+.PHONY : src/Map/MapBlocks/AMapBlock.cpp.i
+
+src/Map/MapBlocks/AMapBlock.s: src/Map/MapBlocks/AMapBlock.cpp.s
+
+.PHONY : src/Map/MapBlocks/AMapBlock.s
+
+# target to generate assembly for a file
+src/Map/MapBlocks/AMapBlock.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/MapBlocks/AMapBlock.cpp.s
+.PHONY : src/Map/MapBlocks/AMapBlock.cpp.s
+
+src/Map/MapBlocks/MapBlockBreakable.o: src/Map/MapBlocks/MapBlockBreakable.cpp.o
+
+.PHONY : src/Map/MapBlocks/MapBlockBreakable.o
+
+# target to build an object file
+src/Map/MapBlocks/MapBlockBreakable.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/MapBlocks/MapBlockBreakable.cpp.o
+.PHONY : src/Map/MapBlocks/MapBlockBreakable.cpp.o
+
+src/Map/MapBlocks/MapBlockBreakable.i: src/Map/MapBlocks/MapBlockBreakable.cpp.i
+
+.PHONY : src/Map/MapBlocks/MapBlockBreakable.i
+
+# target to preprocess a source file
+src/Map/MapBlocks/MapBlockBreakable.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/MapBlocks/MapBlockBreakable.cpp.i
+.PHONY : src/Map/MapBlocks/MapBlockBreakable.cpp.i
+
+src/Map/MapBlocks/MapBlockBreakable.s: src/Map/MapBlocks/MapBlockBreakable.cpp.s
+
+.PHONY : src/Map/MapBlocks/MapBlockBreakable.s
+
+# target to generate assembly for a file
+src/Map/MapBlocks/MapBlockBreakable.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/MapBlocks/MapBlockBreakable.cpp.s
+.PHONY : src/Map/MapBlocks/MapBlockBreakable.cpp.s
+
+src/Map/MapBlocks/MapBlockUnbreakable.o: src/Map/MapBlocks/MapBlockUnbreakable.cpp.o
+
+.PHONY : src/Map/MapBlocks/MapBlockUnbreakable.o
+
+# target to build an object file
+src/Map/MapBlocks/MapBlockUnbreakable.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/MapBlocks/MapBlockUnbreakable.cpp.o
+.PHONY : src/Map/MapBlocks/MapBlockUnbreakable.cpp.o
+
+src/Map/MapBlocks/MapBlockUnbreakable.i: src/Map/MapBlocks/MapBlockUnbreakable.cpp.i
+
+.PHONY : src/Map/MapBlocks/MapBlockUnbreakable.i
+
+# target to preprocess a source file
+src/Map/MapBlocks/MapBlockUnbreakable.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/MapBlocks/MapBlockUnbreakable.cpp.i
+.PHONY : src/Map/MapBlocks/MapBlockUnbreakable.cpp.i
+
+src/Map/MapBlocks/MapBlockUnbreakable.s: src/Map/MapBlocks/MapBlockUnbreakable.cpp.s
+
+.PHONY : src/Map/MapBlocks/MapBlockUnbreakable.s
+
+# target to generate assembly for a file
+src/Map/MapBlocks/MapBlockUnbreakable.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/MapBlocks/MapBlockUnbreakable.cpp.s
+.PHONY : src/Map/MapBlocks/MapBlockUnbreakable.cpp.s
 
 src/Map/MapConstructor.o: src/Map/MapConstructor.cpp.o
 
@@ -290,7 +422,6 @@ src/Map/MapConstructor.o: src/Map/MapConstructor.cpp.o
 # target to build an object file
 src/Map/MapConstructor.cpp.o:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/MapConstructor.cpp.o
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Map/MapConstructor.cpp.o
 .PHONY : src/Map/MapConstructor.cpp.o
 
 src/Map/MapConstructor.i: src/Map/MapConstructor.cpp.i
@@ -300,7 +431,6 @@ src/Map/MapConstructor.i: src/Map/MapConstructor.cpp.i
 # target to preprocess a source file
 src/Map/MapConstructor.cpp.i:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/MapConstructor.cpp.i
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Map/MapConstructor.cpp.i
 .PHONY : src/Map/MapConstructor.cpp.i
 
 src/Map/MapConstructor.s: src/Map/MapConstructor.cpp.s
@@ -310,7 +440,6 @@ src/Map/MapConstructor.s: src/Map/MapConstructor.cpp.s
 # target to generate assembly for a file
 src/Map/MapConstructor.cpp.s:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/MapConstructor.cpp.s
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Map/MapConstructor.cpp.s
 .PHONY : src/Map/MapConstructor.cpp.s
 
 src/Map/MapGenerator.o: src/Map/MapGenerator.cpp.o
@@ -320,7 +449,6 @@ src/Map/MapGenerator.o: src/Map/MapGenerator.cpp.o
 # target to build an object file
 src/Map/MapGenerator.cpp.o:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/MapGenerator.cpp.o
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Map/MapGenerator.cpp.o
 .PHONY : src/Map/MapGenerator.cpp.o
 
 src/Map/MapGenerator.i: src/Map/MapGenerator.cpp.i
@@ -330,7 +458,6 @@ src/Map/MapGenerator.i: src/Map/MapGenerator.cpp.i
 # target to preprocess a source file
 src/Map/MapGenerator.cpp.i:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/MapGenerator.cpp.i
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Map/MapGenerator.cpp.i
 .PHONY : src/Map/MapGenerator.cpp.i
 
 src/Map/MapGenerator.s: src/Map/MapGenerator.cpp.s
@@ -340,38 +467,7 @@ src/Map/MapGenerator.s: src/Map/MapGenerator.cpp.s
 # target to generate assembly for a file
 src/Map/MapGenerator.cpp.s:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/MapGenerator.cpp.s
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Map/MapGenerator.cpp.s
 .PHONY : src/Map/MapGenerator.cpp.s
-
-src/Map/MapWall.o: src/Map/MapWall.cpp.o
-
-.PHONY : src/Map/MapWall.o
-
-# target to build an object file
-src/Map/MapWall.cpp.o:
-	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/MapWall.cpp.o
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Map/MapWall.cpp.o
-.PHONY : src/Map/MapWall.cpp.o
-
-src/Map/MapWall.i: src/Map/MapWall.cpp.i
-
-.PHONY : src/Map/MapWall.i
-
-# target to preprocess a source file
-src/Map/MapWall.cpp.i:
-	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/MapWall.cpp.i
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Map/MapWall.cpp.i
-.PHONY : src/Map/MapWall.cpp.i
-
-src/Map/MapWall.s: src/Map/MapWall.cpp.s
-
-.PHONY : src/Map/MapWall.s
-
-# target to generate assembly for a file
-src/Map/MapWall.cpp.s:
-	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Map/MapWall.cpp.s
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Map/MapWall.cpp.s
-.PHONY : src/Map/MapWall.cpp.s
 
 src/Menu/GraphicButton.o: src/Menu/GraphicButton.cpp.o
 
@@ -488,7 +584,6 @@ src/Render/EventHandler.o: src/Render/EventHandler.cpp.o
 # target to build an object file
 src/Render/EventHandler.cpp.o:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Render/EventHandler.cpp.o
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Render/EventHandler.cpp.o
 .PHONY : src/Render/EventHandler.cpp.o
 
 src/Render/EventHandler.i: src/Render/EventHandler.cpp.i
@@ -498,7 +593,6 @@ src/Render/EventHandler.i: src/Render/EventHandler.cpp.i
 # target to preprocess a source file
 src/Render/EventHandler.cpp.i:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Render/EventHandler.cpp.i
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Render/EventHandler.cpp.i
 .PHONY : src/Render/EventHandler.cpp.i
 
 src/Render/EventHandler.s: src/Render/EventHandler.cpp.s
@@ -508,7 +602,6 @@ src/Render/EventHandler.s: src/Render/EventHandler.cpp.s
 # target to generate assembly for a file
 src/Render/EventHandler.cpp.s:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Render/EventHandler.cpp.s
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Render/EventHandler.cpp.s
 .PHONY : src/Render/EventHandler.cpp.s
 
 src/Render/GameEngine.o: src/Render/GameEngine.cpp.o
@@ -518,7 +611,6 @@ src/Render/GameEngine.o: src/Render/GameEngine.cpp.o
 # target to build an object file
 src/Render/GameEngine.cpp.o:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Render/GameEngine.cpp.o
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Render/GameEngine.cpp.o
 .PHONY : src/Render/GameEngine.cpp.o
 
 src/Render/GameEngine.i: src/Render/GameEngine.cpp.i
@@ -528,7 +620,6 @@ src/Render/GameEngine.i: src/Render/GameEngine.cpp.i
 # target to preprocess a source file
 src/Render/GameEngine.cpp.i:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Render/GameEngine.cpp.i
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Render/GameEngine.cpp.i
 .PHONY : src/Render/GameEngine.cpp.i
 
 src/Render/GameEngine.s: src/Render/GameEngine.cpp.s
@@ -538,7 +629,6 @@ src/Render/GameEngine.s: src/Render/GameEngine.cpp.s
 # target to generate assembly for a file
 src/Render/GameEngine.cpp.s:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Render/GameEngine.cpp.s
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/Render/GameEngine.cpp.s
 .PHONY : src/Render/GameEngine.cpp.s
 
 src/Scenes/General/AActivator.o: src/Scenes/General/AActivator.cpp.o
@@ -946,6 +1036,33 @@ src/Scenes/SceneGame/SceneGame.cpp.s:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Scenes/SceneGame/SceneGame.cpp.s
 .PHONY : src/Scenes/SceneGame/SceneGame.cpp.s
 
+src/Scenes/SceneHomeMenu/SceneHomeMenu.o: src/Scenes/SceneHomeMenu/SceneHomeMenu.cpp.o
+
+.PHONY : src/Scenes/SceneHomeMenu/SceneHomeMenu.o
+
+# target to build an object file
+src/Scenes/SceneHomeMenu/SceneHomeMenu.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Scenes/SceneHomeMenu/SceneHomeMenu.cpp.o
+.PHONY : src/Scenes/SceneHomeMenu/SceneHomeMenu.cpp.o
+
+src/Scenes/SceneHomeMenu/SceneHomeMenu.i: src/Scenes/SceneHomeMenu/SceneHomeMenu.cpp.i
+
+.PHONY : src/Scenes/SceneHomeMenu/SceneHomeMenu.i
+
+# target to preprocess a source file
+src/Scenes/SceneHomeMenu/SceneHomeMenu.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Scenes/SceneHomeMenu/SceneHomeMenu.cpp.i
+.PHONY : src/Scenes/SceneHomeMenu/SceneHomeMenu.cpp.i
+
+src/Scenes/SceneHomeMenu/SceneHomeMenu.s: src/Scenes/SceneHomeMenu/SceneHomeMenu.cpp.s
+
+.PHONY : src/Scenes/SceneHomeMenu/SceneHomeMenu.s
+
+# target to generate assembly for a file
+src/Scenes/SceneHomeMenu/SceneHomeMenu.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/Scenes/SceneHomeMenu/SceneHomeMenu.cpp.s
+.PHONY : src/Scenes/SceneHomeMenu/SceneHomeMenu.cpp.s
+
 src/Scenes/SceneLauncher.o: src/Scenes/SceneLauncher.cpp.o
 
 .PHONY : src/Scenes/SceneLauncher.o
@@ -980,7 +1097,6 @@ src/StaticObject.o: src/StaticObject.cpp.o
 # target to build an object file
 src/StaticObject.cpp.o:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/StaticObject.cpp.o
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/StaticObject.cpp.o
 .PHONY : src/StaticObject.cpp.o
 
 src/StaticObject.i: src/StaticObject.cpp.i
@@ -990,7 +1106,6 @@ src/StaticObject.i: src/StaticObject.cpp.i
 # target to preprocess a source file
 src/StaticObject.cpp.i:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/StaticObject.cpp.i
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/StaticObject.cpp.i
 .PHONY : src/StaticObject.cpp.i
 
 src/StaticObject.s: src/StaticObject.cpp.s
@@ -1000,7 +1115,6 @@ src/StaticObject.s: src/StaticObject.cpp.s
 # target to generate assembly for a file
 src/StaticObject.cpp.s:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/StaticObject.cpp.s
-	$(MAKE) -f CMakeFiles/tests_map_gen.dir/build.make CMakeFiles/tests_map_gen.dir/src/StaticObject.cpp.s
 .PHONY : src/StaticObject.cpp.s
 
 tests/MapGen.o: tests/MapGen.cpp.o
@@ -1046,6 +1160,12 @@ help:
 	@echo "... src/AnimatedObject.o"
 	@echo "... src/AnimatedObject.i"
 	@echo "... src/AnimatedObject.s"
+	@echo "... src/Audio/AudioDevice.o"
+	@echo "... src/Audio/AudioDevice.i"
+	@echo "... src/Audio/AudioDevice.s"
+	@echo "... src/Audio/AudioFile.o"
+	@echo "... src/Audio/AudioFile.i"
+	@echo "... src/Audio/AudioFile.s"
 	@echo "... src/Bomberman.o"
 	@echo "... src/Bomberman.i"
 	@echo "... src/Bomberman.s"
@@ -1055,15 +1175,21 @@ help:
 	@echo "... src/Map/Map.o"
 	@echo "... src/Map/Map.i"
 	@echo "... src/Map/Map.s"
+	@echo "... src/Map/MapBlocks/AMapBlock.o"
+	@echo "... src/Map/MapBlocks/AMapBlock.i"
+	@echo "... src/Map/MapBlocks/AMapBlock.s"
+	@echo "... src/Map/MapBlocks/MapBlockBreakable.o"
+	@echo "... src/Map/MapBlocks/MapBlockBreakable.i"
+	@echo "... src/Map/MapBlocks/MapBlockBreakable.s"
+	@echo "... src/Map/MapBlocks/MapBlockUnbreakable.o"
+	@echo "... src/Map/MapBlocks/MapBlockUnbreakable.i"
+	@echo "... src/Map/MapBlocks/MapBlockUnbreakable.s"
 	@echo "... src/Map/MapConstructor.o"
 	@echo "... src/Map/MapConstructor.i"
 	@echo "... src/Map/MapConstructor.s"
 	@echo "... src/Map/MapGenerator.o"
 	@echo "... src/Map/MapGenerator.i"
 	@echo "... src/Map/MapGenerator.s"
-	@echo "... src/Map/MapWall.o"
-	@echo "... src/Map/MapWall.i"
-	@echo "... src/Map/MapWall.s"
 	@echo "... src/Menu/GraphicButton.o"
 	@echo "... src/Menu/GraphicButton.i"
 	@echo "... src/Menu/GraphicButton.s"
@@ -1127,6 +1253,9 @@ help:
 	@echo "... src/Scenes/SceneGame/SceneGame.o"
 	@echo "... src/Scenes/SceneGame/SceneGame.i"
 	@echo "... src/Scenes/SceneGame/SceneGame.s"
+	@echo "... src/Scenes/SceneHomeMenu/SceneHomeMenu.o"
+	@echo "... src/Scenes/SceneHomeMenu/SceneHomeMenu.i"
+	@echo "... src/Scenes/SceneHomeMenu/SceneHomeMenu.s"
 	@echo "... src/Scenes/SceneLauncher.o"
 	@echo "... src/Scenes/SceneLauncher.i"
 	@echo "... src/Scenes/SceneLauncher.s"

@@ -11,6 +11,8 @@
 #include "../Render/GameEngine.hpp"
 #include "../Interface/IGameScene.hpp"
 #include "SceneGame/SceneGame.hpp"
+#include "SceneHomeMenu/SceneHomeMenu.hpp"
+#include "../Exception/Exception.hpp"
 #include <iostream>
 #include <unordered_map>
 

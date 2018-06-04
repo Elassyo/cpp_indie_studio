@@ -1,0 +1,48 @@
+//
+// EPITECH PROJECT, 2018
+// cpp_indie_studio
+// File description:
+// AMapBlock.hpp
+//
+
+#ifndef CPP_INDIE_STUDIO_AMAPBLOCK_HPP
+#define CPP_INDIE_STUDIO_AMAPBLOCK_HPP
+
+#include <memory>
+#include <irrlicht/vector3d.h>
+#include "src/Interface/IAssetLoader.hpp"
+
+class unique_ptr;
+namespace bomb {
+	class AMapBlock {
+	public:
+		AMapBlock(IAssetLoader &loader,
+			const irr::core::vector3df &pos,
+			const irr::core::vector3df &size,
+			const irr::core::vector3df &rotation,
+			const irr::core::vector3di &mapPos,
+			const std::string &path,
+			size_t hp);
+		AMapBlock();
+
+		virtual bool explode(size_t dammage) = 0;
+		virtual std::unique_ptr<AMapBlock> clone(
+			IAssetLoader &loader,
+			const irr::core::vector3df &pos,
+			const irr::core::vector3df &size,
+			const irr::core::vector3df &rotation,
+			const irr::core::vector3di &mapPos) const = 0;
+
+		const irr::core::vector3di &getMapPos() const;
+		size_t getHp() const;
+
+	protected:
+		irr::core::vector3di _mapPos;
+		size_t _hp;
+
+	private:
+		std::unique_ptr<StaticObject> _block;
+	};
+}
+
+#endif /* CPP_INDIE_STUDIO_AMAPBLOCK_HPP */

@@ -4,30 +4,39 @@ project(cpp_indie_studio)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -Wextra")
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 
-set(SRC_EXCEPTION
+set(SRC_FILES
+        src/Audio/AudioDevice.cpp
+        src/Audio/AudioDevice.hpp
+        src/Audio/AudioFile.cpp
+        src/Audio/AudioFile.hpp
+
         src/Exception/Exception.cpp
-        src/Exception/Exception.hpp)
+        src/Exception/Exception.hpp
 
-set(SRC_INTERFACE
-        src/Interface/ISerializable.hpp
-        src/Interface/IRenderable.hpp
-        src/Interface/ITransformable.hpp
+        src/Interface/IEventScene.hpp
         src/Interface/IAssetLoader.hpp
-        src/Interface/IRenderWindow.hpp
         src/Interface/IGameScene.hpp
-        src/Interface/IEventScene.hpp)
+        src/Interface/IObject.hpp
+        src/Interface/IRenderable.hpp
+        src/Interface/IRenderWindow.hpp
+        src/Interface/ISerializable.hpp
+        src/Interface/ITransformable.hpp
+        )
 
-set(SRC_SCENE_GAME
-        src/Scenes/SceneGame/SceneGame.hpp
-        src/Scenes/SceneGame/SceneGame.cpp
-        src/Scenes/SceneGame/Bomb.cpp
-        src/Scenes/SceneGame/Bomb.hpp
+set(SRC_SCENE
+        src/Scenes/General/AActivator.cpp
+        src/Scenes/General/AActivator.hpp
+        src/Scenes/General/Clock.cpp
+        src/Scenes/General/Clock.hpp
+        src/Scenes/General/GameInfo.cpp
         src/Scenes/General/GameInfo.hpp
         src/Scenes/General/PlayerInfo.cpp
         src/Scenes/General/PlayerInfo.hpp
-        src/Scenes/General/GameInfo.cpp
+        src/Scenes/SceneGame/Bomb.cpp
+        src/Scenes/SceneGame/Bomb.hpp
         src/Scenes/SceneGame/Powers/Power.cpp
         src/Scenes/SceneGame/Powers/Power.hpp
         src/Scenes/SceneGame/Powers/SpeedUp.cpp
@@ -45,28 +54,25 @@ set(SRC_SCENE_GAME
         src/Scenes/SceneGame/Powers/WallPass.cpp
         src/Scenes/SceneGame/Powers/WallPass.hpp
         src/Scenes/SceneGame/Powers/BombPass.cpp
-        src/Scenes/SceneGame/Powers/BombPass.hpp)
-
-
-set(SRC_SCENE
+        src/Scenes/SceneGame/Powers/BombPass.hpp
+        src/Scenes/SceneGame/SceneGame.hpp
+        src/Scenes/SceneGame/SceneGame.cpp
+        src/Scenes/SceneHomeMenu/SceneHomeMenu.cpp
+        src/Scenes/SceneHomeMenu/SceneHomeMenu.hpp
         src/Scenes/SceneLauncher.cpp
         src/Scenes/SceneLauncher.hpp
-        src/Scenes/General/Clock.cpp
-        src/Scenes/General/Clock.hpp
-        src/Scenes/General/AActivator.cpp
-        src/Scenes/General/AActivator.hpp)
-
-set(SRC_MAP
         src/Map/Map.cpp
         src/Map/Map.hpp
+        src/Map/MapConstructor.cpp
+        src/Map/MapConstructor.hpp
         src/Map/MapGenerator.cpp
         src/Map/MapGenerator.hpp
-        src/Map/MapWall.cpp
-        src/Map/MapWall.hpp
-        src/Map/MapConstructor.cpp
-        src/Map/MapConstructor.hpp)
-
-set(SRC_MENU
+        src/Map/MapBlocks/AMapBlock.cpp
+        src/Map/MapBlocks/AMapBlock.hpp
+        src/Map/MapBlocks/MapBlockBreakable.cpp
+        src/Map/MapBlocks/MapBlockBreakable.hpp
+        src/Map/MapBlocks/MapBlockUnbreakable.cpp
+        src/Map/MapBlocks/MapBlockUnbreakable.hpp
         src/Menu/GraphicButton.cpp
         src/Menu/GraphicButton.hpp
         src/Menu/GraphicElement.cpp
@@ -76,38 +82,26 @@ set(SRC_MENU
         src/Menu/Menu.cpp
         src/Menu/Menu.hpp
         src/AObject.cpp
-        src/AObject.hpp)
-
-set(SRC_FILES
-        src/Interface/IObject.hpp
-        src/Map/MapWall.cpp
-        src/Map/MapWall.hpp
+        src/AObject.hpp
+        src/Render/EventHandler.cpp
+        src/Render/EventHandler.hpp
         src/Render/GameEngine.cpp
         src/Render/GameEngine.hpp
         src/AnimatedObject.cpp
         src/AnimatedObject.hpp
         src/StaticObject.cpp
         src/StaticObject.hpp
-        src/Render/EventHandler.cpp
-        src/Render/EventHandler.hpp
-        src/AObject.cpp src/AObject.hpp)
+        )
 
-add_executable(
-        bomberman
-        ${SRC_INTERFACE}
-        ${SRC_SCENE}
-        ${SRC_SCENE_GAME}
+add_executable(bomberman
         ${SRC_FILES}
-        ${SRC_MAP}
-        ${SRC_EXCEPTION}
-        ${SRC_MENU}
+        ${SRC_SCENE}
         src/Bomberman.cpp)
 
 add_executable(tests_map_gen
-        ${SRC_MAP}
-        ${SRC_EXCEPTION}
         ${SRC_FILES}
         tests/MapGen.cpp)
-target_link_libraries(tests_map_gen Irrlicht)
 
-target_link_libraries(bomberman Irrlicht)
+target_link_libraries(tests_map_gen Irrlicht openal vorbisfile)
+
+target_link_libraries(bomberman Irrlicht openal vorbisfile)
