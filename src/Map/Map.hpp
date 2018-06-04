@@ -11,22 +11,20 @@
 	#include <memory>
 	#include <vector>
 
-	#include "../Interface/ISerializable.hpp"
-	#include "../Interface/IRenderable.hpp"
-	#include "../Map/MapWall.hpp"
+	#include "src/Interface/ISerializable.hpp"
+	#include "src/Interface/IRenderable.hpp"
+	#include "src/Map/MapBlocks/AMapBlock.hpp"
 
 namespace bomb {
-	typedef std::pair<std::unique_ptr<bomb::MapWall>,
-		irr::core::vector3di> MapCoord;
-
-	class Map :
-		virtual public ISerializable,
-		virtual public IRenderable {
+	class Map {
 	public:
-		void render() override;
-		std::string toString() override;
+		Map(const std::vector<std::shared_ptr<AMapBlock>> &_blocks);
+
+		void explode(irr::core::vector3di pos, size_t range,
+			size_t dammage);
+
 	private:
-		std::vector<bomb::MapCoord> _blocks;
+		std::vector<std::shared_ptr<bomb::AMapBlock>> _blocks;
 	};
 }
 

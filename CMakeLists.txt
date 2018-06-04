@@ -4,6 +4,7 @@ project(cpp_indie_studio)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -Wextra")
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 
 set(SRC_FILES
@@ -45,8 +46,12 @@ set(SRC_FILES
         src/Map/MapConstructor.hpp
         src/Map/MapGenerator.cpp
         src/Map/MapGenerator.hpp
-        src/Map/MapWall.cpp
-        src/Map/MapWall.hpp
+        src/Map/MapBlocks/AMapBlock.cpp
+        src/Map/MapBlocks/AMapBlock.hpp
+        src/Map/MapBlocks/MapBlockBreakable.cpp
+        src/Map/MapBlocks/MapBlockBreakable.hpp
+        src/Map/MapBlocks/MapBlockUnbreakable.cpp
+        src/Map/MapBlocks/MapBlockUnbreakable.hpp
 
         src/Menu/GraphicButton.cpp
         src/Menu/GraphicButton.hpp
@@ -67,7 +72,8 @@ set(SRC_FILES
         src/AObject.cpp
         src/AObject.hpp
         src/StaticObject.cpp
-        src/StaticObject.hpp)
+        src/StaticObject.hpp
+        )
 
 add_executable(bomberman
         ${SRC_FILES}

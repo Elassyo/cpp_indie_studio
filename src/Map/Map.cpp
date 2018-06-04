@@ -7,11 +7,17 @@
 
 #include "Map.hpp"
 
-void bomb::Map::render()
+void bomb::Map::explode(irr::core::vector3di pos, size_t range, size_t dammage)
 {
+	for (auto &e : _blocks) {
+		/* Verifier la position */
+		if (e->explode(dammage)) {
+			/* Detruit le block */
+		}
+	}
 }
 
-std::string bomb::Map::toString()
+bomb::Map::Map(const std::vector<std::shared_ptr<bomb::AMapBlock>> &_blocks)
+	: _blocks(_blocks)
 {
-	return std::__cxx11::string();
 }

@@ -15,9 +15,8 @@ const std::unordered_map<bomb::MapGenerator::Type, bomb::MapConstructor (bomb::M
 	{bomb::MapGenerator::BASIC, &bomb::MapGenerator::generateBasic},
 };
 
-bomb::MapGenerator::MapGenerator(unsigned int seed,
-	unsigned int size,
-	bomb::MapGenerator::Type type) :
+bomb::MapGenerator::MapGenerator(unsigned int size, unsigned int seed,
+		bomb::MapGenerator::Type type) :
 	_seed(seed), _size(size), _type(type)
 {
 	if (_type == END_VALUE)
@@ -40,7 +39,7 @@ bomb::MapConstructor bomb::MapGenerator::generateRandom()
 
 bomb::MapConstructor bomb::MapGenerator::generateBasic()
 {
-	MapConstructor build;
+	MapConstructor build(_size);
 
 	for (unsigned int x = 0; x < _size; x++) {
 		for (unsigned int y = 0; y < _size; y++) {

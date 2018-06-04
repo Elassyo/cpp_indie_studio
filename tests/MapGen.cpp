@@ -14,8 +14,8 @@ int main()
 	int x = (unsigned int)rand();
 	std::cout << "SEED: " << x << std::endl;
 	int mapSize = 15;
-	bomb::MapGenerator generator(x, mapSize, bomb::MapGenerator::BASIC);
+	bomb::MapGenerator generator(mapSize, x, bomb::MapGenerator::BASIC);
 	auto e = generator.generate();
-	e.dumpMap(mapSize);
+	e.dumpMap();
 	return 0;
 }
