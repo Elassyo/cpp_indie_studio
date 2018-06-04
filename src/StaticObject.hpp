@@ -17,9 +17,6 @@ namespace bomb {
 		void setTexture(uint32_t layer, irr::video::ITexture *texture) override;
 
 		std::string toString() override;
-
-	private:
-		irr::scene::IMeshSceneNode *_inode;
 	};
 }
 

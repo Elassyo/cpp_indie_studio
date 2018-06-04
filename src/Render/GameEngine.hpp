@@ -17,12 +17,12 @@
 
 namespace bomb {
 	class GameEngine : virtual public IAssetLoader, virtual public
-		IRenderWindow{
+		IRenderWindow {
 	public:
 		GameEngine(const std::wstring &winName, uint x, uint y,
 			   irr::video::E_DRIVER_TYPE);
 
-		void refresh();
+		void refresh() override;
 
 		irr::gui::IGUIEnvironment *loadGui() override;
 
@@ -36,7 +36,7 @@ namespace bomb {
 			(const std::string &path,
 			 irr::core::vector3df pos, irr::core::vector3df rot,
 			 irr::core::vector3df scale) override;
-		void deleteObject(std::unique_ptr<IObject>);
+		void deleteObject(std::unique_ptr<IObject>) override;
 		void addCamera(const irr::core::vector3df &pos,
 			       const irr::core::vector3df &rot) override;
 		void listenEventScene(std::shared_ptr<scene::IEventScene>);
