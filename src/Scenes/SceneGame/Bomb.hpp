@@ -9,7 +9,9 @@
 	#define CPP_INDIE_STUDIO_BOMB_HPP
 
 	#include "../General/AActivator.hpp"
+
 	#include "../../Interface/IAssetLoader.hpp"
+
 	#include "../General/Clock.hpp"
 
 namespace bomb {
@@ -19,9 +21,9 @@ namespace bomb {
 			Bomb(IAssetLoader &loader,
 			     const irr::core::vector3df &pos, long time);
 		protected:
-			bool isActivable(game::GameInfo &infos, Map &map)
+			bool isActivable(game::GameInfo &infos)
 			override;
-			bool activate(game::GameInfo &infos, Map &map) override;
+			bool activate(game::GameInfo &infos) override;
 			void setProperties(game::GameInfo &infos, uint8_t idx);
 		private:
 			bomb::IAssetLoader &loader;

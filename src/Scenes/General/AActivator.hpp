@@ -9,6 +9,7 @@
 	#define CPP_INDIE_STUDIO_IACTIVATOR_HPP
 
 	#include "../../Map/Map.hpp"
+
 	#include "GameInfo.hpp"
 
 namespace bomb {
@@ -16,10 +17,10 @@ namespace bomb {
 		class AActivator {
 		public:
 			AActivator();
-			bool tryToActivate(GameInfo &infos, Map &map);
+			bool tryToActivate(GameInfo &infos);
 		protected:
-			virtual bool isActivable(GameInfo &infos, Map &map) = 0;
-			virtual bool activate(GameInfo &infos, Map &map) = 0;
+			virtual bool isActivable(GameInfo &infos) = 0;
+			virtual bool activate(GameInfo &infos) = 0;
 		private:
 			bool _activated;
 		};

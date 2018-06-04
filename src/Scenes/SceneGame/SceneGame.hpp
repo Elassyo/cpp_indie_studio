@@ -9,6 +9,7 @@
 	#define CPP_INDIE_STUDIO_SCENEGAME_HPP
 
 	#include "../../Interface/IGameScene.hpp"
+
 	#include "Bomb.hpp"
 
 namespace bomb {

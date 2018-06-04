@@ -15,15 +15,13 @@ bomb::object::Bomb::Bomb(
 }
 
 bool bomb::object::Bomb::isActivable(
-	__attribute__((unused))bomb::game::GameInfo &infos,
-	__attribute__((unused))bomb::Map &map)
+	__attribute__((unused))bomb::game::GameInfo &infos)
 {
 	return _timer.isReady();
 }
 
 bool bomb::object::Bomb::activate(
-	__attribute__((unused))bomb::game::GameInfo &infos,
-	__attribute__((unused))bomb::Map &map)
+	__attribute__((unused))bomb::game::GameInfo &infos)
 {
 	loader.deleteObject(std::move(_model));
 	return true;

@@ -5,15 +5,13 @@
 // IActivator.cpp
 //
 
-
 #include "AActivator.hpp"
 
 bomb::game::AActivator::AActivator() : _activated(false) {}
 
-bool bomb::game::AActivator::tryToActivate(bomb::game::GameInfo &infos,
-					bomb::Map &map)
+bool bomb::game::AActivator::tryToActivate(bomb::game::GameInfo &infos)
 {
-	if (!_activated && isActivable(infos, map))
-		_activated = activate(infos, map);
+	if (!_activated && isActivable(infos))
+		_activated = activate(infos);
 	return _activated;
 }

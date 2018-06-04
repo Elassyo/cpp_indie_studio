@@ -24,7 +24,28 @@ set(SRC_SCENE_GAME
         src/Scenes/SceneGame/SceneGame.cpp
         src/Scenes/SceneGame/Bomb.cpp
         src/Scenes/SceneGame/Bomb.hpp
-        src/Scenes/General/GameInfo.hpp src/Scenes/General/PlayerInfo.cpp src/Scenes/General/PlayerInfo.hpp src/Scenes/General/GameInfo.cpp)
+        src/Scenes/General/GameInfo.hpp
+        src/Scenes/General/PlayerInfo.cpp
+        src/Scenes/General/PlayerInfo.hpp
+        src/Scenes/General/GameInfo.cpp
+        src/Scenes/SceneGame/Powers/Power.cpp
+        src/Scenes/SceneGame/Powers/Power.hpp
+        src/Scenes/SceneGame/Powers/SpeedUp.cpp
+        src/Scenes/SceneGame/Powers/SpeedUp.hpp
+        src/Scenes/SceneGame/Powers/SpeedDown.cpp
+        src/Scenes/SceneGame/Powers/SpeedDown.hpp
+        src/Scenes/SceneGame/Powers/FireUp.cpp
+        src/Scenes/SceneGame/Powers/FireUp.hpp
+        src/Scenes/SceneGame/Powers/FireDown.cpp
+        src/Scenes/SceneGame/Powers/FireDown.hpp
+        src/Scenes/SceneGame/Powers/BombUp.cpp
+        src/Scenes/SceneGame/Powers/BombUp.hpp
+        src/Scenes/SceneGame/Powers/BombDown.cpp
+        src/Scenes/SceneGame/Powers/BombDown.hpp
+        src/Scenes/SceneGame/Powers/WallPass.cpp
+        src/Scenes/SceneGame/Powers/WallPass.hpp
+        src/Scenes/SceneGame/Powers/BombPass.cpp
+        src/Scenes/SceneGame/Powers/BombPass.hpp)
 
 
 set(SRC_SCENE
@@ -55,8 +76,7 @@ set(SRC_MENU
         src/Menu/Menu.cpp
         src/Menu/Menu.hpp
         src/AObject.cpp
-        src/AObject.hpp
-        )
+        src/AObject.hpp)
 
 set(SRC_FILES
         src/Interface/IObject.hpp
@@ -69,7 +89,8 @@ set(SRC_FILES
         src/StaticObject.cpp
         src/StaticObject.hpp
         src/Render/EventHandler.cpp
-        src/Render/EventHandler.hpp src/AObject.cpp src/AObject.hpp)
+        src/Render/EventHandler.hpp
+        src/AObject.cpp src/AObject.hpp)
 
 add_executable(
         bomberman
