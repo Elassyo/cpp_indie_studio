@@ -30,6 +30,11 @@ void bomb::GameEngine::refresh()
 	_videoDriver->endScene();
 }
 
+bool bomb::GameEngine::isRunning()
+{
+	return _device->run();
+}
+
 irr::gui::IGUIEnvironment *bomb::GameEngine::loadGui()
 {
 	return _device->getGUIEnvironment();

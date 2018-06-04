@@ -40,6 +40,7 @@ namespace bomb {
 		void addCamera(const irr::core::vector3df &pos,
 			       const irr::core::vector3df &rot) override;
 		void listenEventScene(std::shared_ptr<scene::IEventScene>);
+		bool isRunning();
 		~GameEngine();
 	private:
 		EventHandler _evtHandler;

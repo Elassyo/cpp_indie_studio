@@ -60,8 +60,7 @@ std::string bomb::scene::SceneGame::nextScene()
 	return std::__cxx11::string();
 }
 
-bool bomb::scene::SceneGame::onEvent(__attribute__((unused))const irr::SEvent
-&event)
+bool bomb::scene::SceneGame::onEvent(const irr::SEvent &event)
 {
 	return true;
 }

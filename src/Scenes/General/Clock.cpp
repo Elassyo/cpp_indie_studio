@@ -26,7 +26,6 @@ void bomb::utils::Clock::reset()
 void bomb::utils::Clock::setTimerInterval(const long interval)
 {
         _interval = interval;
-        //dedeed
 }
 
 long bomb::utils::Clock::getEllapsedTime() const

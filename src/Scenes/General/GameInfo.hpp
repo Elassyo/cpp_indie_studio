@@ -11,6 +11,7 @@
 namespace bomb {
 	namespace game {
 		class GameInfo {
+		private:
 		};
 	}
 }

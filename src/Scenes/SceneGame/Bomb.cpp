@@ -28,3 +28,9 @@ bool bomb::object::Bomb::activate(
 	loader.deleteObject(std::move(_model));
 	return true;
 }
+
+void
+bomb::object::Bomb::setProperties(bomb::game::GameInfo &infos, uint8_t idx)
+{
+
+}
