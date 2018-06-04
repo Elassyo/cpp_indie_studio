@@ -21,12 +21,12 @@ namespace bomb {
 		= 0;
 		virtual irr::video::ITexture *loadTexture
 			(const std::string &) = 0;
-		virtual std::unique_ptr<bomb::AnimatedObject> getAnimatedObject
+		virtual std::unique_ptr<bomb::AnimatedObject> createAnimatedObject
 			(const std::string &path,
 			 irr::core::vector3df pos,
 			 irr::core::vector3df rot = {0, 0, 0},
 			 irr::core::vector3df scale = {1, 1, 1}) = 0;
-		virtual std::unique_ptr<bomb::StaticObject> getStaticObject
+		virtual std::unique_ptr<bomb::StaticObject> createStaticObject
 			(const std::string &path,
 			 irr::core::vector3df pos,
 			 irr::core::vector3df rot = {0, 0, 0},

@@ -5,11 +5,11 @@
 // AObject.hpp
 //
 
-#ifndef CPP_INDIE_STUDIO_AOBJECT_HPP
-	#define CPP_INDIE_STUDIO_AOBJECT_HPP
+#ifndef CPP_INDIE_STUDIO_IOBJECT_HPP
+	#define CPP_INDIE_STUDIO_IOBJECT_HPP
 
 	#include <irrlicht/irrlicht.h>
-	#include "Interface/ISerializable.hpp"
+	#include "ISerializable.hpp"
 
 namespace bomb {
 	class IObject :
@@ -29,4 +29,4 @@ namespace bomb {
 	};
 }
 
-#endif /* CPP_INDIE_STUDIO_AOBJECT_HPP */
+#endif /* CPP_INDIE_STUDIO_IOBJECT_HPP */

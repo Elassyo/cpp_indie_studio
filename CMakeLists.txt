@@ -53,10 +53,13 @@ set(SRC_MENU
         src/Menu/GraphicText.cpp
         src/Menu/GraphicText.hpp
         src/Menu/Menu.cpp
-        src/Menu/Menu.hpp)
+        src/Menu/Menu.hpp
+        src/AObject.cpp
+        src/AObject.hpp
+        )
 
 set(SRC_FILES
-        src/IObject.hpp
+        src/Interface/IObject.hpp
         src/Map/MapWall.cpp
         src/Map/MapWall.hpp
         src/Render/GameEngine.cpp
@@ -66,7 +69,7 @@ set(SRC_FILES
         src/StaticObject.cpp
         src/StaticObject.hpp
         src/Render/EventHandler.cpp
-        src/Render/EventHandler.hpp)
+        src/Render/EventHandler.hpp src/AObject.cpp src/AObject.hpp)
 
 add_executable(
         bomberman

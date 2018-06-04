@@ -12,11 +12,11 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
 	//Testing loader (Temporary)
 	_blocksTextures = loader.loadTexture
 		("assets/models/blocks/spritesheet.png");
-	loader.getStaticObject("assets/models/blocks/brick.obj", {0, 0, 0},
-			       {0, 0, 0})
+	loader.createStaticObject("assets/models/blocks/brick.obj", {0, 0, 0},
+				  {0, 0, 0})
 		->setTexture(0, _blocksTextures);
-	loader.getStaticObject("assets/models/blocks/brick.obj", {0, 2, 0},
-			       {0, 0, 0}, {0.1, 0.1, 0.1})
+	loader.createStaticObject("assets/models/blocks/brick.obj", {0, 2, 0},
+				  {0, 0, 0}, {0.1, 0.1, 0.1})
 		->setTexture(0, _blocksTextures);
 	loader.addCamera(irr::core::vector3df(0, 10, -20),
 			irr::core::vector3df(0, 5, 5));
