@@ -16,17 +16,42 @@ set(SRC_FILES
         src/Exception/Exception.cpp
         src/Exception/Exception.hpp
 
-        src/Interface/IEventScene.hpp
         src/Interface/IAssetLoader.hpp
+        src/Interface/IEventScene.hpp
         src/Interface/IGameScene.hpp
         src/Interface/IObject.hpp
         src/Interface/IRenderable.hpp
         src/Interface/IRenderWindow.hpp
         src/Interface/ISerializable.hpp
         src/Interface/ITransformable.hpp
-        )
 
-set(SRC_SCENE
+        src/Map/Map.cpp
+        src/Map/Map.hpp
+        src/Map/MapBlocks/AMapBlock.cpp
+        src/Map/MapBlocks/AMapBlock.hpp
+        src/Map/MapBlocks/MapBlockBreakable.cpp
+        src/Map/MapBlocks/MapBlockBreakable.hpp
+        src/Map/MapBlocks/MapBlockUnbreakable.cpp
+        src/Map/MapBlocks/MapBlockUnbreakable.hpp
+        src/Map/MapConstructor.cpp
+        src/Map/MapConstructor.hpp
+        src/Map/MapGenerator.cpp
+        src/Map/MapGenerator.hpp
+
+        src/Menu/GraphicButton.cpp
+        src/Menu/GraphicButton.hpp
+        src/Menu/GraphicElement.cpp
+        src/Menu/GraphicElement.hpp
+        src/Menu/GraphicText.cpp
+        src/Menu/GraphicText.hpp
+        src/Menu/Menu.cpp
+        src/Menu/Menu.hpp
+
+        src/Render/EventHandler.cpp
+        src/Render/EventHandler.hpp
+        src/Render/GameEngine.cpp
+        src/Render/GameEngine.hpp
+
         src/Scenes/General/AActivator.cpp
         src/Scenes/General/AActivator.hpp
         src/Scenes/General/Clock.cpp
@@ -37,64 +62,39 @@ set(SRC_SCENE
         src/Scenes/General/PlayerInfo.hpp
         src/Scenes/SceneGame/Bomb.cpp
         src/Scenes/SceneGame/Bomb.hpp
-        src/Scenes/SceneGame/Powers/Power.cpp
-        src/Scenes/SceneGame/Powers/Power.hpp
-        src/Scenes/SceneGame/Powers/SpeedUp.cpp
-        src/Scenes/SceneGame/Powers/SpeedUp.hpp
-        src/Scenes/SceneGame/Powers/SpeedDown.cpp
-        src/Scenes/SceneGame/Powers/SpeedDown.hpp
-        src/Scenes/SceneGame/Powers/FireUp.cpp
-        src/Scenes/SceneGame/Powers/FireUp.hpp
-        src/Scenes/SceneGame/Powers/FireDown.cpp
-        src/Scenes/SceneGame/Powers/FireDown.hpp
-        src/Scenes/SceneGame/Powers/BombUp.cpp
-        src/Scenes/SceneGame/Powers/BombUp.hpp
         src/Scenes/SceneGame/Powers/BombDown.cpp
         src/Scenes/SceneGame/Powers/BombDown.hpp
-        src/Scenes/SceneGame/Powers/WallPass.cpp
-        src/Scenes/SceneGame/Powers/WallPass.hpp
         src/Scenes/SceneGame/Powers/BombPass.cpp
         src/Scenes/SceneGame/Powers/BombPass.hpp
-        src/Scenes/SceneGame/SceneGame.hpp
+        src/Scenes/SceneGame/Powers/BombUp.cpp
+        src/Scenes/SceneGame/Powers/BombUp.hpp
+        src/Scenes/SceneGame/Powers/FireDown.cpp
+        src/Scenes/SceneGame/Powers/FireDown.hpp
+        src/Scenes/SceneGame/Powers/FireUp.cpp
+        src/Scenes/SceneGame/Powers/FireUp.hpp
+        src/Scenes/SceneGame/Powers/Power.cpp
+        src/Scenes/SceneGame/Powers/Power.hpp
+        src/Scenes/SceneGame/Powers/SpeedDown.cpp
+        src/Scenes/SceneGame/Powers/SpeedDown.hpp
+        src/Scenes/SceneGame/Powers/SpeedUp.cpp
+        src/Scenes/SceneGame/Powers/SpeedUp.hpp
+        src/Scenes/SceneGame/Powers/WallPass.cpp
+        src/Scenes/SceneGame/Powers/WallPass.hpp
         src/Scenes/SceneGame/SceneGame.cpp
+        src/Scenes/SceneGame/SceneGame.hpp
         src/Scenes/SceneHomeMenu/SceneHomeMenu.cpp
         src/Scenes/SceneHomeMenu/SceneHomeMenu.hpp
         src/Scenes/SceneLauncher.cpp
         src/Scenes/SceneLauncher.hpp
-        src/Map/Map.cpp
-        src/Map/Map.hpp
-        src/Map/MapConstructor.cpp
-        src/Map/MapConstructor.hpp
-        src/Map/MapGenerator.cpp
-        src/Map/MapGenerator.hpp
-        src/Map/MapBlocks/AMapBlock.cpp
-        src/Map/MapBlocks/AMapBlock.hpp
-        src/Map/MapBlocks/MapBlockBreakable.cpp
-        src/Map/MapBlocks/MapBlockBreakable.hpp
-        src/Map/MapBlocks/MapBlockUnbreakable.cpp
-        src/Map/MapBlocks/MapBlockUnbreakable.hpp
-        src/Menu/GraphicButton.cpp
-        src/Menu/GraphicButton.hpp
-        src/Menu/GraphicElement.cpp
-        src/Menu/GraphicElement.hpp
-        src/Menu/GraphicText.cpp
-        src/Menu/GraphicText.hpp
-        src/Menu/Menu.cpp
-        src/Menu/Menu.hpp
-        src/AObject.cpp
-        src/AObject.hpp
-        src/Render/EventHandler.cpp
-        src/Render/EventHandler.hpp
-        src/Render/GameEngine.cpp
-        src/Render/GameEngine.hpp
+
         src/AnimatedObject.cpp
         src/AnimatedObject.hpp
+        src/AObject.cpp
+        src/AObject.hpp
         src/StaticObject.cpp
-        src/StaticObject.hpp
-        )
+        src/StaticObject.hpp)
 
 add_executable(bomberman
-        ${SRC_SCENE}
         ${SRC_FILES}
         src/Bomberman.cpp)
 
