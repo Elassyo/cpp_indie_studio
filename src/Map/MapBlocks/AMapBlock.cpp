@@ -20,6 +20,11 @@ bomb::AMapBlock::AMapBlock(IAssetLoader &loader,
 	_block = loader.createStaticObject(path, pos, size, rotation);
 }
 
+bomb::AMapBlock::AMapBlock()
+{
+	_block = nullptr;
+}
+
 const irr::core::vector3di &bomb::AMapBlock::getMapPos() const
 {
 	return _mapPos;

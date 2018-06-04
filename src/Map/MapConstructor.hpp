@@ -8,6 +8,7 @@
 #ifndef CPP_INDIE_STUDIO_MAPCONSTRUCTOR_HPP
 #define CPP_INDIE_STUDIO_MAPCONSTRUCTOR_HPP
 
+#include <unordered_map>
 #include "src/Interface/IAssetLoader.hpp"
 #include "Map.hpp"
 
@@ -31,6 +32,9 @@ namespace bomb {
 	private:
 		unsigned int _mapSize;
 		std::vector<std::pair<irr::core::vector3di, Block>> _mapBlocks;
+
+		static const std::unordered_map<bomb::MapConstructor::Block,
+			std::shared_ptr<bomb::AMapBlock>> blockBuilder;
 	};
 }
 

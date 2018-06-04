@@ -23,8 +23,15 @@ namespace bomb {
 			const irr::core::vector3di &mapPos,
 			const std::string &path,
 			size_t hp);
+		AMapBlock();
 
 		virtual bool explode(size_t dammage) = 0;
+		virtual std::unique_ptr<AMapBlock> clone(
+			IAssetLoader &loader,
+			const irr::core::vector3df &pos,
+			const irr::core::vector3df &size,
+			const irr::core::vector3df &rotation,
+			const irr::core::vector3di &mapPos) const = 0;
 
 		const irr::core::vector3di &getMapPos() const;
 		size_t getHp() const;

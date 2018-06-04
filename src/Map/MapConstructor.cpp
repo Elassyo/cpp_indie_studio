@@ -6,15 +6,27 @@
 //
 
 #include <iostream>
+#include <src/Exception/Exception.hpp>
 #include "src/Map/MapBlocks/MapBlockBreakable.hpp"
+#include "src/Map/MapBlocks/MapBlockUnbreakable.hpp"
 #include "MapConstructor.hpp"
+
+const std::unordered_map<bomb::MapConstructor::Block,
+	std::shared_ptr<bomb::AMapBlock>> bomb::MapConstructor::blockBuilder = {
+	{bomb::MapConstructor::UNBREAKABLE,
+		std::make_shared<bomb::MapBlockUnbreakable>()},
+	{bomb::MapConstructor::BREAKABLE,
+		std::make_shared<bomb::MapBlockBreakable>()}
+};
+
 
 bomb::MapConstructor::MapConstructor(unsigned int mapSize):
 	_mapSize(mapSize)
 {
 }
 
-void bomb::MapConstructor::addBlock(const irr::core::vector3di &pos, Block block)
+void bomb::MapConstructor::addBlock(
+	const irr::core::vector3di &pos, Block block)
 {
 	_mapBlocks.emplace_back(std::make_pair(pos, block));
 }
@@ -26,15 +38,19 @@ std::unique_ptr<bomb::Map> bomb::MapConstructor::construct(
 	const irr::core::vector3df &rotation)
 {
 	std::vector<std::shared_ptr<bomb::AMapBlock>> _blocks;
-	irr::core::vector3df blockSize = {size.X / _mapSize, size.Y / _mapSize, size.Z};
+	irr::core::vector3df blockSize = {size.X / _mapSize,
+		size.Y / _mapSize, size.Z};
 	for (auto &block : _mapBlocks) {
-		irr::core::vector3df blockPos = {pos.X + block.first.X * blockSize.X, pos.Y + block.first.Y * blockSize.Y, pos.Z};
-		/* Manque la factory */
-		std::shared_ptr<bomb::AMapBlock> a = std::make_shared<bomb::MapBlockBreakable>(loader, blockPos, blockSize, rotation, block.first);
-		_blocks.emplace_back(a);
+		irr::core::vector3df blockPos =
+			{pos.X + block.first.X * blockSize.X,
+				pos.Y + block.first.Y * blockSize.Y, pos.Z};
+		if (blockBuilder.find(block.second) == blockBuilder.end())
+			throw bomb::Exception(
+				"Block Builder", "Invalid Block ID");
+		_blocks.emplace_back(blockBuilder.at(block.second)->clone(
+			loader, blockPos, blockSize, rotation, block.first));
 	}
-	auto map = std::make_unique<bomb::Map>(_blocks);
-	return map;
+	return std::make_unique<bomb::Map>(_blocks);
 }
 
 void bomb::MapConstructor::dumpMap()
