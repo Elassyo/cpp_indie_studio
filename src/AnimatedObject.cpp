@@ -12,8 +12,8 @@ bomb::AnimatedObject::AnimatedObject(irr::scene::IAnimatedMeshSceneNode *node):
 		AObject(node), _node(node)
 {
 	if (!node)
-		throw Exception("AnimatedObject", "animatedMeshNode cannot be"
-				    " created");
+		throw Exception("AnimatedObject",
+			"animatedMeshNode could not be created");
 }
 
 void bomb::AnimatedObject::setTexture(uint32_t layer,

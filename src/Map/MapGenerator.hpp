@@ -6,39 +6,45 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_MAPGENERATOR_HPP
-#define CPP_INDIE_STUDIO_MAPGENERATOR_HPP
+	#define CPP_INDIE_STUDIO_MAPGENERATOR_HPP
 
-#include <unordered_map>
-#include <time.h>
-#include "Map.hpp"
-#include "MapConstructor.hpp"
-
-#define GEN_BASIC_PROBA (90)
+	#include <ctime>
+	#include <map>
+	#include <random>
+	#include "Map.hpp"
+	#include "MapConstructor.hpp"
 
 namespace bomb {
+	constexpr int GEN_BASIC_PROB = 60;
+
 	class MapGenerator {
 	public:
-		enum Type {
+		enum GeneratorType {
 			RANDOM,
+			TYPES_BEG,
 			BASIC,
-			END_VALUE
+			TYPES_END
 		};
 
 		MapGenerator(unsigned int size,
-			unsigned int seed = time(nullptr),
-			bomb::MapGenerator::Type = RANDOM);
+			unsigned int seed = std::time(nullptr),
+			GeneratorType type = RANDOM);
 		MapConstructor generate();
 
 	private:
-		static const std::unordered_map<bomb::MapGenerator::Type, MapConstructor (bomb::MapGenerator::*)()> typeGenerator;
+		static const std::map<GeneratorType,
+			MapConstructor (bomb::MapGenerator::*)()> Generators;
+
 		MapConstructor generateRandom();
 		MapConstructor generateBasic();
 
-		bool isCorner(unsigned int x, unsigned int y);
+		bool isCorner(int x, int y);
 
 		unsigned int _seed;
 		unsigned int _size;
-		Type _type;
+		GeneratorType _type;
+
+		std::default_random_engine _rng;
 	};
 }
 

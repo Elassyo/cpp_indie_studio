@@ -10,10 +10,7 @@
 
 	#include <vector>
 
-	#include <array>
-
 	#include "GraphicButton.hpp"
-
 	#include "GraphicText.hpp"
 
 namespace bomb {
@@ -21,19 +18,21 @@ namespace bomb {
 		class Menu {
 		public:
 			Menu(irr::video::IVideoDriver *driver,
-			     irr::gui::IGUIEnvironment *gui);
+				irr::gui::IGUIEnvironment *gui);
 			void addButton(std::function <void ()> event,
-				       	const wchar_t *text,
-					irr::core::vector2df pos);
+				const wchar_t *text, irr::core::vector2df pos);
 			void updateButtons(bool areVisibles);
 			void handleEvent();
+
 		private:
 			GraphicText createTitle(const wchar_t *text = L"");
-			irr::gui::IGUIButton *
-			createButton(irr::core::vector2di pos,
-				     irr::core::vector2di size,
-				     const wchar_t *text = L"");
+			irr::gui::IGUIButton *createButton(
+				irr::core::vector2di pos,
+				irr::core::vector2di size,
+				const wchar_t *text = L"");
+
 			irr::core::vector2di getButtonSize() const;
+			
 			irr::video::IVideoDriver *_driver;
 			irr::gui::IGUIEnvironment *_gui;
 			const uint8_t _size;

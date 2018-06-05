@@ -9,7 +9,6 @@
 	#define CPP_INDIE_STUDIO_PLAYERINFO_HPP
 
 	#include <cstdint>
-#include "../../Interface/IObject.hpp"
 
 namespace bomb {
 	namespace game {
@@ -18,17 +17,19 @@ namespace bomb {
 			PlayerInfo();
 
 			uint8_t getNbBombs() const;
-			void setNbBombs(uint8_t _nbBombs);
 			uint8_t getSpeed() const;
-			void setSpeed(uint8_t _speed);
 			uint8_t getBombRange() const;
-			void setBombRange(uint8_t _bombRange);
 			bool isGhostMode() const;
-			void setGhostMode(bool _ghostMode);
 			bool isAlive() const;
-			void setAlive(bool _alive);
 			uint8_t getCharacterIndex() const;
+
+			void setNbBombs(uint8_t _nbBombs);
+			void setSpeed(uint8_t _speed);
+			void setBombRange(uint8_t _bombRange);
+			void setGhostMode(bool _ghostMode);
+			void setAlive(bool _alive);
 			void setCharacterIndex(uint8_t _characterIndex);
+
 		private:
 			uint8_t _nbBombs;
 			uint8_t _speed;

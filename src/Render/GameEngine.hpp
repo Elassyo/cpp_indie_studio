@@ -21,7 +21,7 @@ namespace bomb {
 	class GameEngine : virtual public IAssetLoader, virtual public
 		IRenderWindow {
 	public:
-		GameEngine(const std::wstring &winName, uint x, uint h,
+		GameEngine(const std::wstring &winName, unsigned int x, unsigned int h,
 			   irr::video::E_DRIVER_TYPE);
 		~GameEngine();
 

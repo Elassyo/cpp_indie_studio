@@ -9,23 +9,27 @@
 	#define CPP_TEST_STUDIO_GRAPHICBUTTON_HPP
 
 	#include <functional>
-#include <src/Scenes/General/Clock.hpp>
-#include "GraphicElement.hpp"
+
+	#include "../Scenes/General/Clock.hpp"
+	#include "GraphicElement.hpp"
 
 namespace bomb {
 	namespace menu {
 		class GraphicButton : public GraphicElement {
 		public:
 			GraphicButton(irr::gui::IGUIButton *button,
-				      irr::core::vector2df pos);
+				irr::core::vector2df pos);
+
 			bool isPressed();
+			const std::function<void()> &getEvent() const;
+
 			void setFont(irr::gui::IGUIFont *font);
 			void setTexture(irr::video::ITexture *texture,
 					irr::video::ITexture *pressed);
-			void setEvent(std::function <void ()> &);
-			const std::function<void()> &getEvent() const;
+			void setEvent(std::function <void()> &);
+
 		private:
-			std::function <void ()> _event;
+			std::function <void()> _event;
 			bomb::utils::Clock _latence;
 		};
 	}

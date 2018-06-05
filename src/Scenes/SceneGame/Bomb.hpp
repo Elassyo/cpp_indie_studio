@@ -8,10 +8,8 @@
 #ifndef CPP_INDIE_STUDIO_BOMB_HPP
 	#define CPP_INDIE_STUDIO_BOMB_HPP
 
-	#include "../General/AActivator.hpp"
-
 	#include "../../Interface/IAssetLoader.hpp"
-
+	#include "../General/AActivator.hpp"
 	#include "../General/Clock.hpp"
 
 namespace bomb {
@@ -19,14 +17,16 @@ namespace bomb {
 		class Bomb : public bomb::game::AActivator {
 		public:
 			Bomb(IAssetLoader &loader,
-			     const irr::core::vector3df &pos, long time);
+				const irr::core::vector3df &pos, long time);
+
 		protected:
 			bool isActivable(game::GameInfo &infos)
-			override;
+				override;
 			bool activate(game::GameInfo &infos) override;
 			void setProperties(game::GameInfo &infos, uint8_t idx);
+
 		private:
-			bomb::IAssetLoader &loader;
+			bomb::IAssetLoader &_loader;
 			bomb::utils::Clock _timer;
 			std::unique_ptr<AnimatedObject> _model;
 		};

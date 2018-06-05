@@ -1,18 +1,16 @@
 /.idea
+/.vs
 /cmake-build-*
 
 *~
 #*#
 cmake-*
-bomberman
-.*.vim
-build/
-doc/latex
-scores.bomberman/
 .*.vim
 
 *.lcov
 *.gcda
 *.gcno
 
-bomberman
+/bombermario
+/win/bombermario.exe
+/win/bombermario-setup.exe

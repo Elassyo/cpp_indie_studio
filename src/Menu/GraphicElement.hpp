@@ -15,12 +15,14 @@ namespace bomb {
 		class GraphicElement {
 		public:
 			GraphicElement(irr::gui::IGUIElement *element,
-				       irr::core::vector2df pos);
+				irr::core::vector2df pos);
 			void setVisibility(bool visibility);
 			void update(irr::core::vector2di size,
-				    irr::core::vector2di screenSize);
+				irr::core::vector2di screenSize);
+
 		protected:
 			irr::gui::IGUIElement *_element;
+
 		private:
 			irr::core::vector2df _pos;
 		};

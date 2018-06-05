@@ -8,31 +8,27 @@
 #include "SceneLauncher.hpp"
 
 bomb::scene::SceneLauncher::SceneLauncher(GameEngine &ge) :
-		_gameEngine(ge)
+	_gameEngine(ge)
 {
 	_scenes["game_scene"] = std::make_shared<bomb::scene::SceneGame>();
 	_scenes["home_menu"] = std::make_shared<bomb::scene::SceneHomeMenu>();
 }
 
-void bomb::scene::SceneLauncher::launchScene(const std::string &sceneName)
+void bomb::scene::SceneLauncher::launchScene(const std::string &name)
 {
-	if (_scenes.find(sceneName) == _scenes.end())
-		throw Exception("SceneLauncher", "Scenes " + sceneName +
-						 " doesn't exist");
-	std::shared_ptr<IGameScene> gs = _scenes[sceneName];
-	SceneStatus sts = gs->start(_gameEngine);
-	if (sts != BEGIN)
-		throw Exception("SceneLauncher", "Cannot launch scene "
-				+ sceneName);
-	_gameEngine.listenEventScene(gs);
-	while (gs->loop(_gameEngine) == CONTINUE) {
-		if (!_gameEngine.isRunning())
-			break;
+	auto it = _scenes.find(name);
+	if (it == _scenes.end())
+		throw Exception("SceneLauncher",
+			"Scene " + name + " doesn't exist");
+	std::shared_ptr<IGameScene> scene = it->second;
+	if (scene->start(_gameEngine) != BEGIN)
+		throw Exception("SceneLauncher",
+			"Failed to launch scene " + name);
+	_gameEngine.listenEventScene(scene);
+	while (scene->loop(_gameEngine) == CONTINUE && _gameEngine.isRunning())
 		_gameEngine.refresh();
-	}
 	_gameEngine.listenEventScene(nullptr);
-	std::string next = gs->nextScene();
-	if (next.empty())
-		return;
-	launchScene(next);
+	std::string next = scene->nextScene();
+	if (!next.empty())
+		launchScene(next);
 }

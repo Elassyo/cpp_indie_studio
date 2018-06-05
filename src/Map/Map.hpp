@@ -11,9 +11,9 @@
 	#include <memory>
 	#include <vector>
 
-	#include "src/Interface/ISerializable.hpp"
-	#include "src/Interface/IRenderable.hpp"
-	#include "src/Map/MapBlocks/AMapBlock.hpp"
+	#include "../Interface/IRenderable.hpp"
+	#include "../Interface/ISerializable.hpp"
+	#include "../Map/MapBlocks/AMapBlock.hpp"
 
 namespace bomb {
 	class Map {
@@ -21,7 +21,7 @@ namespace bomb {
 		Map(const std::vector<std::shared_ptr<AMapBlock>> &_blocks);
 
 		void explode(irr::core::vector3di pos, size_t range,
-			size_t dammage);
+			size_t damage);
 
 	private:
 		std::vector<std::shared_ptr<bomb::AMapBlock>> _blocks;

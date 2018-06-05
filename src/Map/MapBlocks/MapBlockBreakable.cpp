@@ -10,10 +10,10 @@
 bomb::MapBlockBreakable::MapBlockBreakable(
 	bomb::IAssetLoader &loader,
 	const irr::core::vector3df &pos,
-	const irr::core::vector3df &size,
+	const irr::core::vector3df &scale,
 	const irr::core::vector3df &rotation,
-	const irr::core::vector3di &mapPos):
-	AMapBlock(loader, pos, size, rotation, mapPos,
+	const irr::core::vector3di &mapPos) :
+	AMapBlock(loader, pos, scale, rotation, mapPos,
 		"assets/models/blocks/brick.obj", 1)
 {
 }
@@ -23,18 +23,19 @@ bomb::MapBlockBreakable::MapBlockBreakable():
 {
 }
 
-std::unique_ptr<bomb::AMapBlock>
-bomb::MapBlockBreakable::clone(bomb::IAssetLoader &loader,
-	const irr::core::vector3df &pos, const irr::core::vector3df &size,
+std::unique_ptr<bomb::AMapBlock> bomb::MapBlockBreakable::clone(
+	bomb::IAssetLoader &loader,
+	const irr::core::vector3df &pos,
+	const irr::core::vector3df &scale,
 	const irr::core::vector3df &rotation,
 	const irr::core::vector3di &mapPos) const
 {
 	return std::make_unique<MapBlockBreakable>
-		(loader, pos, size, rotation, mapPos);
+		(loader, pos, scale, rotation, mapPos);
 }
 
-bool bomb::MapBlockBreakable::explode(size_t dammage)
+bool bomb::MapBlockBreakable::explode(size_t damage)
 {
 	_hp -= 1;
-	return dammage <= 0;
+	return damage <= 0;
 }

@@ -8,7 +8,7 @@
 #include "GraphicButton.hpp"
 
 bomb::menu::GraphicButton::GraphicButton(irr::gui::IGUIButton *button,
-					 irr::core::vector2df pos) :
+	irr::core::vector2df pos) :
 	GraphicElement(button, pos), _event(nullptr)
 {
 	button->setScaleImage(true);

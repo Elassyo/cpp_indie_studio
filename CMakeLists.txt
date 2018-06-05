@@ -3,14 +3,29 @@ project(cpp_indie_studio)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     add_compile_options("-W" "-Wall" "-Wextra")
     add_compile_options("$<$<CONFIG:DEBUG>:-DBOMB_VERSION=LINUX_DEV>")
     add_compile_options("$<$<CONFIG:RELEASE>:-DBOMB_VERSION=LINUX_REL>")
+    set(LIBOPENAL_NAME openal)
+    set(LIBVORBISFILE_NAME vorbisfile)
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     add_compile_options("/DBOMB_VERSION=WINDOWS")
+    include_directories(
+        "C:\\irrlicht-1.8.4\\include"
+        "C:\\Program Files (x86)\\OpenAL 1.1 SDK\\include"
+        "C:\\libogg-1.3.3\\include"
+        "C:\\libvorbis-1.3.6\\include")
+    link_directories(
+        "C:\\irrlicht-1.8.4\\lib\\Win64-visualStudio"
+        "C:\\Program Files (x86)\\OpenAL 1.1 SDK\\libs\\Win64"
+        "C:\\libvorbis-1.3.6\\win32\\VS2010\\x64\\Release")
+    set(LIBOPENAL_NAME OpenAL32)
+    set(LIBVORBISFILE_NAME libvorbisfile)
+
+    set(SRC_RESOURCES
+        win/bombermario.rc)
 endif()
 
 set(SRC_FILES
@@ -100,14 +115,15 @@ set(SRC_FILES
         src/StaticObject.cpp
         src/StaticObject.hpp
         src/Version.cpp
-        src/Version.hpp)
+        src/Version.hpp
+        )
 
-add_executable(bomberman
+add_executable(bombermario
         ${SRC_FILES}
-        src/Bomberman.cpp)
+        ${SRC_RESOURCES}
+        src/BomberMario.cpp)
 
 add_executable(test_menu
-        ${SRC_SCENE}
         ${SRC_FILES}
         tests/MenuPreview.cpp)
 
@@ -115,11 +131,15 @@ add_executable(tests_map_gen
         ${SRC_FILES}
         tests/MapGen.cpp)
 
-target_link_libraries(tests_map_gen Irrlicht openal vorbisfile)
+target_link_libraries(tests_map_gen Irrlicht ${LIBOPENAL_NAME} ${LIBVORBISFILE_NAME})
 
-target_link_libraries(test_menu Irrlicht openal vorbisfile)
+target_link_libraries(test_menu Irrlicht ${LIBOPENAL_NAME} ${LIBVORBISFILE_NAME})
 
-target_link_libraries(bomberman Irrlicht openal vorbisfile)
+target_link_libraries(bombermario Irrlicht ${LIBOPENAL_NAME} ${LIBVORBISFILE_NAME})
 
-install(TARGETS bomberman DESTINATION /usr/bin/ CONFIGURATIONS Release)
-install(DIRECTORY assets/ DESTINATION /usr/share/bomberman CONFIGURATIONS Release)
+install(TARGETS bombermario DESTINATION /usr/bin/ CONFIGURATIONS Release)
+install(DIRECTORY assets/ DESTINATION /usr/share/bombermario CONFIGURATIONS Release)
+
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+    add_custom_command(TARGET bombermario POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:bombermario> ${CMAKE_SOURCE_DIR}/win/bombermario.exe)
+endif()

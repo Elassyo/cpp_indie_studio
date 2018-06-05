@@ -6,12 +6,13 @@
 //
 
 #include <memory>
-#include <src/Menu/Menu.hpp>
 
 #include "../Exception/Exception.hpp"
+#include "../Menu/Menu.hpp"
 #include "GameEngine.hpp"
 
-bomb::GameEngine::GameEngine(const std::wstring &winName, uint w, uint h,
+bomb::GameEngine::GameEngine(const std::wstring &winName,
+	unsigned int w, unsigned int h,
 	irr::video::E_DRIVER_TYPE driver_type) :
 	_device(irr::createDevice(driver_type, irr::core::dimension2d(w, h), 16,
 		false, false, false, &_evtHandler)),

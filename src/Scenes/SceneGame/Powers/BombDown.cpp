@@ -8,15 +8,12 @@
 #include "BombDown.hpp"
 
 bomb::object::BombDown::BombDown(bomb::IAssetLoader &loader,
-				 const irr::core::vector3df &pos) :
+	const irr::core::vector3df &pos) :
 	Power(loader, pos, "assets/models/powers/bombs/bombDown.obj")
 {
 }
 
-bool bomb::object::BombDown::activate(
-	__attribute__((unused))bomb::game::GameInfo &infos)
+bool bomb::object::BombDown::activate(bomb::game::GameInfo &infos)
 {
-	if (_model)
-		_loader.deleteObject(std::move(_model));
-	return true;
+	return Power::activate(infos);
 }

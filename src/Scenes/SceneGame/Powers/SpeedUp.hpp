@@ -15,7 +15,7 @@ namespace bomb {
 		class SpeedUp : public Power {
 		public:
 			SpeedUp(bomb::IAssetLoader &loader,
-			       const irr::core::vector3df &pos);
+				const irr::core::vector3df &pos);
 			bool activate(game::GameInfo &infos) override;
 		};
 	}

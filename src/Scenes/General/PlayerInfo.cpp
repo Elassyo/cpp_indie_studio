@@ -18,19 +18,9 @@ unsigned char bomb::game::PlayerInfo::getNbBombs() const
 	return _nbBombs;
 }
 
-void bomb::game::PlayerInfo::setNbBombs(unsigned char _nbBombs)
-{
-	PlayerInfo::_nbBombs = _nbBombs;
-}
-
 unsigned char bomb::game::PlayerInfo::getSpeed() const
 {
 	return _speed;
-}
-
-void bomb::game::PlayerInfo::setSpeed(unsigned char _speed)
-{
-	PlayerInfo::_speed = _speed;
 }
 
 unsigned char bomb::game::PlayerInfo::getBombRange() const
@@ -38,19 +28,9 @@ unsigned char bomb::game::PlayerInfo::getBombRange() const
 	return _bombRange;
 }
 
-void bomb::game::PlayerInfo::setBombRange(unsigned char _bombRange)
-{
-	PlayerInfo::_bombRange = _bombRange;
-}
-
 bool bomb::game::PlayerInfo::isGhostMode() const
 {
 	return _ghostMode;
-}
-
-void bomb::game::PlayerInfo::setGhostMode(bool _ghostMode)
-{
-	PlayerInfo::_ghostMode = _ghostMode;
 }
 
 bool bomb::game::PlayerInfo::isAlive() const
@@ -58,14 +38,34 @@ bool bomb::game::PlayerInfo::isAlive() const
 	return _alive;
 }
 
-void bomb::game::PlayerInfo::setAlive(bool _alive)
-{
-	PlayerInfo::_alive = _alive;
-}
-
 unsigned char bomb::game::PlayerInfo::getCharacterIndex() const
 {
 	return _characterIndex;
+}
+
+void bomb::game::PlayerInfo::setNbBombs(unsigned char _nbBombs)
+{
+	PlayerInfo::_nbBombs = _nbBombs;
+}
+
+void bomb::game::PlayerInfo::setSpeed(unsigned char _speed)
+{
+	PlayerInfo::_speed = _speed;
+}
+
+void bomb::game::PlayerInfo::setBombRange(unsigned char _bombRange)
+{
+	PlayerInfo::_bombRange = _bombRange;
+}
+
+void bomb::game::PlayerInfo::setGhostMode(bool _ghostMode)
+{
+	PlayerInfo::_ghostMode = _ghostMode;
+}
+
+void bomb::game::PlayerInfo::setAlive(bool _alive)
+{
+	PlayerInfo::_alive = _alive;
 }
 
 void bomb::game::PlayerInfo::setCharacterIndex(unsigned char _characterIndex)

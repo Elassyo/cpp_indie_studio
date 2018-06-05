@@ -7,30 +7,24 @@
 
 #include "Bomb.hpp"
 
-bomb::object::Bomb::Bomb(
-	bomb::IAssetLoader &loader, const irr::core::vector3df &pos,
-	const long time) : loader(loader), _timer(time),
+bomb::object::Bomb::Bomb(bomb::IAssetLoader &loader,
+	const irr::core::vector3df &pos, const long time) :
+	_loader(loader), _timer(time),
 	_model(loader.createAnimatedObject("assets/models/bob-bomb.x", pos))
 {
 }
 
-bool bomb::object::Bomb::isActivable(
-	__attribute__((unused))bomb::game::GameInfo &infos)
+bool bomb::object::Bomb::isActivable(bomb::game::GameInfo &infos)
 {
 	return _timer.isReady();
 }
 
-bool bomb::object::Bomb::activate(
-	__attribute__((unused))bomb::game::GameInfo &infos)
+bool bomb::object::Bomb::activate(bomb::game::GameInfo &infos)
 {
-	loader.deleteObject(std::move(_model));
+	_loader.deleteObject(std::move(_model));
 	return true;
 }
 
-void
-bomb::object::Bomb::setProperties(
-	__attribute__((unused))bomb::game::GameInfo &infos,
-	__attribute__((unused))uint8_t idx)
+void bomb::object::Bomb::setProperties(bomb::game::GameInfo &infos, uint8_t idx)
 {
-
 }
