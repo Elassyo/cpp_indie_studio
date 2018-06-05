@@ -60,6 +60,8 @@ Section "Core" SecCore
   File "libvorbis.dll"
   File "libvorbisfile.dll"
 
+  File /r "..\assets\*"
+
 SectionEnd
 
 Section "OpenAL Driver" SecOAL
@@ -92,18 +94,7 @@ SectionEnd
 
 Section "Uninstall"
 
-  Delete "$INSTDIR\bombermario.exe"
-
-  Delete "$INSTDIR\Irrlicht.dll"
-  Delete "$INSTDIR\libvorbis.dll"
-  Delete "$INSTDIR\libvorbisfile.dll"
-
-  Delete "$INSTDIR\redist\oalinst.exe"
-  RMDir "$INSTDIR\redist"
-
-  Delete "$INSTDIR\Uninstall.exe"
-
-  RMDir "$INSTDIR"
+  RMDir /r "$INSTDIR"
 
   Delete "$DESKTOP\BomberMario.lnk"
 

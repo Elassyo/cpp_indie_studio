@@ -9,33 +9,39 @@
 #include "Version.hpp"
 
 #ifndef BOMB_VERSION
-	#error Build version not specified (BOMB_VERSION not defined)
+	#error Build version not specified
 #endif
 
-std::map<bomb::VersionID,bomb::Version> bomb::Version::Versions = {
-	{ LINUX_DEV, Version("./assets/") },
-	{ LINUX_REL, Version("/usr/share/bombermario/") }
-};
-
-const bomb::Version &bomb::Version::GetVersion(VersionID version)
+#if (BOMB_VERSION == LINUX_DEV)
+bomb::Version bomb::Version::GetCurrentVersion()
 {
-	auto it = Versions.find(version);
-	if (it == Versions.end())
-		throw Exception("Version", "Unknown build version");
-	return it->second;
+	return Version("./assets/");
 }
-
-const bomb::Version &bomb::Version::GetCurrentVersion()
+#elif (BOMB_VERSION == LINUX_REL)
+bomb::Version bomb::Version::GetCurrentVersion()
 {
-	return GetVersion(BOMB_VERSION);
+	return Version("/usr/share/bombermario/");
 }
+#elif (BOMB_VERSION == WINDOWS)
+	
+	#include <ShlObj.h>
+
+bomb::Version bomb::Version::GetCurrentVersion()
+{
+	TCHAR path[MAX_PATH];
+	SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, path);
+	return Version("/usr/share/bombermario/");
+}
+#else
+	#error Invalid build version
+#endif
 
 bomb::Version::Version(const std::string &assetsPath) :
 	_assetsPath(assetsPath)
 {
 }
 
-const std::string &bomb::Version::getAssetsPath()
+const std::string &bomb::Version::getAssetsPath() const
 {
 	return _assetsPath;
 }
