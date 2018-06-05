@@ -8,29 +8,22 @@
 #ifndef CPP_INDIE_STUDIO_VERSION_HPP
 	#define CPP_INDIE_STUDIO_VERSION_HPP
 
-	#include <map>
 	#include <string>
+	
+	#define LINUX_DEV 0
+	#define LINUX_REL 1
+	#define WINDOWS 2
 
 namespace bomb {
-	enum VersionID {
-		LINUX_DEV,
-		LINUX_REL,
-		WINDOWS
-	};
 
 	class Version {
 	public:
-		static const Version &GetVersion(VersionID version);
-		static const Version &GetCurrentVersion();
+		static Version GetCurrentVersion();
 
-		Version() = default;
-
-		const std::string &getAssetsPath();
+		const std::string &getAssetsPath() const;
 
 	private:
 		explicit Version(const std::string &assetsPath);
-
-		static std::map<VersionID,Version> Versions;
 
 		std::string _assetsPath;
 	};
