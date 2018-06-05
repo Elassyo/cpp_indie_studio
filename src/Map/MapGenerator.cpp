@@ -22,6 +22,9 @@ bomb::MapGenerator::MapGenerator(unsigned int size, unsigned int seed,
 		bomb::MapGenerator::GeneratorType type) :
 	_seed(seed), _size(size), _type(type)
 {
+	if (size < 7)
+		throw bomb::Exception("Generator",
+			"Requested map size is too small");
 	if (Generators.find(type) == Generators.end())
 		throw bomb::Exception("MapGenerator", "Invalid type");
 }
@@ -29,7 +32,10 @@ bomb::MapGenerator::MapGenerator(unsigned int size, unsigned int seed,
 bomb::MapConstructor bomb::MapGenerator::generate()
 {
 	_rng.seed(_seed);
-	return (this->*(Generators.at(_type)))();
+	MapConstructor map = (this->*(Generators.at(_type)))();
+	fillCornerSpawn(map);
+	addBorder(map);
+	return map;
 }
 
 bomb::MapConstructor bomb::MapGenerator::generateRandom()
@@ -43,25 +49,50 @@ bomb::MapConstructor bomb::MapGenerator::generateBasic()
 {
 	MapConstructor map(_size);
 
-	for (int x = 0; x < _size; x++) {
-		for (int y = 0; y < _size; y++) {
-			if (isCorner(x, y))
-				continue;
-			if (x % 2 == 1 && y % 2 == 1 &&
-				x != _size - 1 && y != _size - 1)
-				map.addBlock({ x, y, 0 },
+	for (unsigned int x = 0; x < _size; x++) {
+		for (unsigned int y = 0; y < _size; y++) {
+			if (x % 2 == 0 && y % 2 == 0)
+				map.addBlock({ (int)x, (int)y, 0 },
 					bomb::MapConstructor::UNBREAKABLE);
 			else if (_rng() % 100 <= GEN_BASIC_PROB)
-				map.addBlock({ x, y, 0 },
+				map.addBlock({ (int)x, (int)y, 0 },
 					bomb::MapConstructor::BREAKABLE);
 		}
 	}
 	return map;
 }
 
-bool bomb::MapGenerator::isCorner(int x, int y)
+void bomb::MapGenerator::addBorder(MapConstructor &build)
 {
-	x = std::min(x, (int)_size - x - 1);
-	y = std::min(y, (int)_size - y - 1);
-	return (x <= 1 && y <= 1 && !(x == 1 && y == 1));
+	for (unsigned int x = 0; x < _size; x++) {
+		build.addBlock({ (int)x, 0, 0 },
+			bomb::MapConstructor::UNBREAKABLE);
+		build.addBlock({ (int)x, (int)_size - 1, 0 },
+			bomb::MapConstructor::UNBREAKABLE);
+	}
+	for (unsigned int y = 0; y < _size; y++) {
+		build.addBlock({ 0, (int)y, 0 },
+			bomb::MapConstructor::UNBREAKABLE);
+		build.addBlock({ (int)_size - 1, (int)y, 0 },
+			bomb::MapConstructor::UNBREAKABLE);
+	}
+}
+
+void bomb::MapGenerator::fillSpawn(MapConstructor &build,
+	unsigned int x, unsigned int y)
+{
+	build.rmBlock({(int)x - 1, (int)y, 0});
+	build.rmBlock({(int)x + 1, (int)y, 0});
+	build.rmBlock({(int)x, (int)y - 1, 0});
+	build.rmBlock({(int)x, (int)y + 1, 0});
+	build.rmBlock({(int)x, (int)y, 0});
+}
+
+void
+bomb::MapGenerator::fillCornerSpawn(bomb::MapConstructor &build)
+{
+	fillSpawn(build, 1, 1);
+	fillSpawn(build, _size - 2, 1);
+	fillSpawn(build, 1, _size - 2);
+	fillSpawn(build, _size - 2, _size - 2);
 }

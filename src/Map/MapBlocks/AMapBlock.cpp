@@ -17,7 +17,7 @@ bomb::AMapBlock::AMapBlock(IAssetLoader &loader,
 	size_t hp) :
 	_mapPos(mapPos), _hp(hp)
 {
-	_block = loader.createStaticObject(path, pos, size, rotation);
+	_block = loader.createStaticObject(path, pos, size / BLOCK_OBJ_SIZE, rotation);
 }
 
 bomb::AMapBlock::AMapBlock()
@@ -33,4 +33,9 @@ const irr::core::vector3di &bomb::AMapBlock::getMapPos() const
 size_t bomb::AMapBlock::getHp() const
 {
 	return _hp;
+}
+
+void bomb::AMapBlock::setTextures(irr::video::ITexture *texture)
+{
+	_block->setTexture(0, texture);
 }

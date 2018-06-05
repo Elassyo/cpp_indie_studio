@@ -28,7 +28,7 @@ void bomb::utils::Clock::setTimerInterval(const long interval)
 	_interval = interval;
 }
 
-unsigned long bomb::utils::Clock::getElapsedTime() const
+unsigned long long bomb::utils::Clock::getElapsedTime() const
 {
 	return std::chrono::duration_cast<std::chrono::milliseconds>(
 		std::chrono::steady_clock::now() - _lastReset).count();

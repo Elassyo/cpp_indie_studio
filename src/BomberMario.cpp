@@ -16,7 +16,7 @@ int main()
 	bomb::scene::SceneLauncher launcher(engine);
 
 	try {
-		launcher.launchScene("home_menu");
+		launcher.launchScene("game_scene");
 	} catch (bomb::Exception &e) {
 		std::cout << e.what() << std::endl;
 	}

@@ -32,6 +32,7 @@ namespace bomb {
 			
 			irr::video::ITexture *_blocksTextures;
 			std::vector<std::unique_ptr<bomb::object::Bomb>> _bombs;
+			bomb::game::GameInfo _gameInfo;
 		};
 	}
 }

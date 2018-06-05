@@ -19,7 +19,7 @@ namespace bomb {
 			Clock(long interval);
 			void reset();
 			void setTimerInterval(long interval);
-			unsigned long getElapsedTime() const;
+			unsigned long long getElapsedTime() const;
 			bool isReady() const;
 
 		private:

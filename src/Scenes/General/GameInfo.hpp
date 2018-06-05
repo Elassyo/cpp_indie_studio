@@ -23,6 +23,7 @@ namespace bomb {
 
 		class GameInfo {
 		public:
+
 			enum Character {
 				SHYGUY_WHITE,
 				SHYGUY_BLACK,
@@ -31,19 +32,20 @@ namespace bomb {
 				SKELEREX
 			};
 
-			GameInfo(IAssetLoader &loader);
+			GameInfo() = default;
+
+			void createMap(IAssetLoader &loader, irr::video::ITexture *pTexture);
+			int getMapSize() const;
 
 		private:
 			void reset();
-			void createMap(IAssetLoader &loader);
 
-			bomb::IAssetLoader &_loader;
 			std::map<Character, std::unique_ptr<AnimatedObject>>
 				_characters;
 			std::array<PlayerInfo, NB_PLAYERS> _players;
 
-			bomb::MapGenerator _mapGenerator;
 			std::unique_ptr<bomb::Map> _map;
+			int _mapSize;
 		};
 	}
 }

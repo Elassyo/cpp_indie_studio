@@ -25,15 +25,17 @@ namespace bomb {
 		virtual std::unique_ptr<AudioFile> loadAudioFile(
 			const std::string &path) = 0;
 		virtual std::unique_ptr<bomb::AnimatedObject>
-			createAnimatedObject(const std::string &path,
+			createAnimatedObject(
+				const std::string &path,
 				irr::core::vector3df pos = {0, 0, 0},
-				irr::core::vector3df rot = {0, 0, 0},
-				irr::core::vector3df scale = {1, 1, 1}) = 0;
+				irr::core::vector3df scale = {0, 0, 0},
+				irr::core::vector3df rot = {1, 1, 1}) = 0;
 		virtual std::unique_ptr<bomb::StaticObject>
-			createStaticObject(const std::string &path,
+			createStaticObject(
+				const std::string &path,
 				irr::core::vector3df pos = {0, 0, 0},
-				irr::core::vector3df rot = {0, 0, 0},
-				irr::core::vector3df scale = {1, 1, 1}) = 0;
+				irr::core::vector3df scale = {0, 0, 0},
+				irr::core::vector3df rot = {1, 1, 1}) = 0;
 		virtual std::unique_ptr<menu::Menu> createMenu() = 0;
 		virtual irr::scene::ICameraSceneNode *addCamera(
 			const irr::core::vector3df &pos,

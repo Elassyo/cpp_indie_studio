@@ -25,7 +25,14 @@ bomb::MapConstructor::MapConstructor(unsigned int mapSize) :
 void bomb::MapConstructor::addBlock(const irr::core::vector3di &pos,
 	BlockType type)
 {
-	_mapBlocks.emplace_back(std::make_pair(pos, type));
+	_mapBlocks[pos] = type;
+}
+
+void bomb::MapConstructor::rmBlock(const irr::core::vector3di &pos)
+{
+	auto it = _mapBlocks.find(pos);
+	if (it != _mapBlocks.end())
+		_mapBlocks.erase(it);
 }
 
 std::unique_ptr<bomb::Map> bomb::MapConstructor::construct(
@@ -36,19 +43,19 @@ std::unique_ptr<bomb::Map> bomb::MapConstructor::construct(
 {
 	std::vector<std::shared_ptr<bomb::AMapBlock>> _blocks;
 
-	irr::core::vector3df blockSize = {
-		size.X / _mapSize, size.Y / _mapSize, size.Z };
 	for (auto &block : _mapBlocks) {
 		irr::core::vector3df blockPos = {
-			pos.X + block.first.X * blockSize.X,
-			pos.Y + block.first.Y * blockSize.Y, pos.Z};
+			pos.X + block.first.X * size.X,
+			pos.Z,
+			pos.Y + block.first.Y * size.Z };
 		auto it = Blocks.find(block.second);
 		if (it == Blocks.end())
 			throw bomb::Exception("Block Builder",
-				"Invalid Block Type");
-		_blocks.emplace_back(it->second->clone(loader,
-			blockPos, blockSize, rotation, block.first));
+				"Invalid Block type");
+		_blocks.emplace_back(it->second->clone(
+			loader, blockPos, size, rotation, block.first));
 	}
+	std::cout << _blocks.size() << std::endl;
 	return std::make_unique<bomb::Map>(_blocks);
 }
 
@@ -71,4 +78,9 @@ void bomb::MapConstructor::dumpMap()
 		}
 		std::cout << std::endl;
 	}
+}
+
+int bomb::MapConstructor::getSize()
+{
+	return _mapSize;
 }

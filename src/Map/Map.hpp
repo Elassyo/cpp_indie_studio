@@ -20,8 +20,9 @@ namespace bomb {
 	public:
 		Map(const std::vector<std::shared_ptr<AMapBlock>> &_blocks);
 
-		void explode(irr::core::vector3di pos, size_t range,
-			size_t damage);
+		void explode(irr::core::vector3di pos,
+			size_t range, size_t damage);
+		void setTextures(irr::video::ITexture *texture);
 
 	private:
 		std::vector<std::shared_ptr<bomb::AMapBlock>> _blocks;

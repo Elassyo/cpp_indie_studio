@@ -21,3 +21,10 @@ void bomb::Map::explode(irr::core::vector3di pos, size_t range, size_t damage)
 		}
 	}
 }
+
+void bomb::Map::setTextures(irr::video::ITexture *texture)
+{
+	for (auto &blocks : _blocks) {
+		blocks->setTextures(texture);
+	}
+}
