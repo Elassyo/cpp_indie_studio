@@ -8,21 +8,21 @@
 #include "GameInfo.hpp"
 
 void bomb::game::GameInfo::createMap(IAssetLoader &loader,
-				irr::video::ITexture *texture)
+	irr::video::ITexture *texture)
 {
 	bomb::MapConstructor pattern = MapGenerator(11).generate();
 
 	pattern.dumpMap();
 	_characters[SHYGUY_BLACK] = loader.createAnimatedObject(
-		L"models/characters/shyGuy/shyGuyBlack.obj");
+		"models/characters/shyGuy/shyGuyBlack.obj");
 	_characters[SHYGUY_BLUE] = loader.createAnimatedObject(
-		L"models/characters/shyGuy/shyGuyBlue.obj");
+		"models/characters/shyGuy/shyGuyBlue.obj");
 	_characters[SHYGUY_RED] = loader.createAnimatedObject(
-		L"models/characters/shyGuy/shyGuyRed.obj");
+		"models/characters/shyGuy/shyGuyRed.obj");
 	_characters[SHYGUY_WHITE] = loader.createAnimatedObject(
-		L"models/characters/shyGuy/shyGuyWhite.obj");
+		"models/characters/shyGuy/shyGuyWhite.obj");
 	_characters[SKELEREX] = loader.createAnimatedObject(
-		L"models/characters/shyGuy/shyGuyWhite.obj");
+		"models/characters/shyGuy/shyGuyWhite.obj");
 	_mapSize = pattern.getSize();
 	_map = std::move(pattern.construct(loader,
 		{ 0, 0, 0 }, { 1, 1, 1 }, { 0, 0, 0 }));

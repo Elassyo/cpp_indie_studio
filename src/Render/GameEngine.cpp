@@ -20,7 +20,7 @@ bomb::GameEngine::GameEngine(const std::wstring &winName,
 	_sceneManager(_device->getSceneManager()),
 	_camera(nullptr),
 	_audioDev(new AudioDevice()),
-	_path(Version::GetCurrentVersion().getAssetsPath())
+	_assetsPath(Version::GetCurrentVersion().getAssetsPath())
 {
 	_device->setWindowCaption(winName.c_str());
 }
@@ -53,28 +53,27 @@ irr::gui::IGUIEnvironment *bomb::GameEngine::getGui()
 	return _device->getGUIEnvironment();
 }
 
-irr::video::ITexture *bomb::GameEngine::loadTexture(const std::wstring &path)
+irr::video::ITexture *bomb::GameEngine::loadTexture(const std::string &path)
 {
 
-	return _videoDriver->getTexture((_path + std::wstring(path)).c_str());
+	return _videoDriver->getTexture((_assetsPath + path).c_str());
 }
 
 std::unique_ptr<bomb::AudioFile> bomb::GameEngine::loadAudioFile(
-	const std::wstring &path)
+	const std::string &path)
 {
 	return std::make_unique<AudioFile>(path);
 }
 
 std::unique_ptr<bomb::AnimatedObject> bomb::GameEngine::createAnimatedObject(
-	const std::wstring &path,
+	const std::string &path,
 	irr::core::vector3df pos,
 	irr::core::vector3df scale,
 	irr::core::vector3df rot)
 {
 	auto ptr = std::make_unique<bomb::AnimatedObject>(
 		_sceneManager->addAnimatedMeshSceneNode(
-			_sceneManager->getMesh(
-				(_path + std::wstring(path)).c_str())));
+			_sceneManager->getMesh((_assetsPath + path).c_str())));
 	ptr->setPos(pos);
 	ptr->setRot(rot);
 	ptr->setScale(scale);
@@ -82,14 +81,14 @@ std::unique_ptr<bomb::AnimatedObject> bomb::GameEngine::createAnimatedObject(
 }
 
 std::unique_ptr<bomb::StaticObject> bomb::GameEngine::createStaticObject(
-	const std::wstring &path,
+	const std::string &path,
 	irr::core::vector3df pos,
 	irr::core::vector3df scale,
 	irr::core::vector3df rot)
 {
 	auto ptr = std::make_unique<bomb::StaticObject>(
 		_sceneManager->addMeshSceneNode(_sceneManager->getMesh(
-			(_path + std::wstring(path)).c_str())));
+			(_assetsPath + path).c_str())));
 	ptr->setPos(pos);
 	ptr->setRot(rot);
 	ptr->setScale(scale);

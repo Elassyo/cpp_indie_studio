@@ -20,12 +20,12 @@ namespace bomb {
 	public:
 		static Version GetCurrentVersion();
 
-		const std::wstring &getAssetsPath() const;
+		const std::string &getAssetsPath() const;
 
 	private:
-		explicit Version(const std::wstring &assetsPath);
+		explicit Version(const std::string &assetsPath);
 
-		std::wstring _assetsPath;
+		std::string _assetsPath;
 	};
 }
 

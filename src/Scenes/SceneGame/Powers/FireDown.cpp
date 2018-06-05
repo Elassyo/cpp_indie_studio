@@ -9,7 +9,7 @@
 
 bomb::object::FireDown::FireDown(bomb::IAssetLoader &loader,
 	const irr::core::vector3df &pos) :
-	Power(loader, pos, L"models/powers/fires/fireDown.obj")
+	Power(loader, pos, "models/powers/fires/fireDown.obj")
 {
 }
 

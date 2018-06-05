@@ -10,8 +10,7 @@
 bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
 {
 	//Testing loader (Temporary)
-	_blocksTextures = loader.loadTexture(
-		L"models/blocks/spritesheet.png");
+	_blocksTextures = loader.loadTexture("models/blocks/spritesheet.png");
 	_gameInfo.createMap(loader, _blocksTextures);
 	loader.addCamera(
 		irr::core::vector3df((float)_gameInfo.getMapSize() / 2,

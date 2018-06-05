@@ -34,16 +34,16 @@ namespace bomb {
 
 		irr::gui::IGUIEnvironment *getGui() override;
 		irr::video::ITexture *loadTexture(
-			const std::wstring &path) override;
+			const std::string &path) override;
 		std::unique_ptr<AudioFile> loadAudioFile(
-			const std::wstring &path) override;
+			const std::string &path) override;
 		std::unique_ptr<bomb::AnimatedObject> createAnimatedObject(
-			const std::wstring &path,
+			const std::string &path,
 			irr::core::vector3df pos,
 			irr::core::vector3df rot,
 			irr::core::vector3df scale) override;
 		std::unique_ptr<bomb::StaticObject> createStaticObject(
-			const std::wstring &path,
+			const std::string &path,
 			irr::core::vector3df pos,
 			irr::core::vector3df rot,
 			irr::core::vector3df scale) override;
@@ -59,7 +59,7 @@ namespace bomb {
 		irr::scene::ISceneManager *_sceneManager;
 		irr::scene::ICameraSceneNode *_camera;
 		std::unique_ptr<AudioDevice> _audioDev;
-		std::wstring _path;
+		std::string _assetsPath;
 	};
 }
 #endif /* CPP_INDIE_STUDIO_GAMEENGINE_HPP */

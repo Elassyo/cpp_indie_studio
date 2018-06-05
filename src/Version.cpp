@@ -30,18 +30,18 @@ bomb::Version bomb::Version::GetCurrentVersion()
 {
 	TCHAR localAppData[MAX_PATH];
 	SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, localAppData);
-	return Version(std::wstring(localAppData + L"\\BomberMario\\");
+	return Version(std::string(localAppData) + "\\BomberMario\\");
 }
 #else
 	#error Invalid build version
 #endif
 
-bomb::Version::Version(const std::wstring &assetsPath) :
+bomb::Version::Version(const std::string &assetsPath) :
 	_assetsPath(assetsPath)
 {
 }
 
-const std::wstring &bomb::Version::getAssetsPath() const
+const std::string &bomb::Version::getAssetsPath() const
 {
 	return _assetsPath;
 }

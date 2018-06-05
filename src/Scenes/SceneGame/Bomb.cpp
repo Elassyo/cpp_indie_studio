@@ -10,7 +10,7 @@
 bomb::object::Bomb::Bomb(bomb::IAssetLoader &loader,
 	const irr::core::vector3df &pos, const long time) :
 	_loader(loader), _timer(time),
-	_model(loader.createAnimatedObject(L"models/bob-bomb.x", pos))
+	_model(loader.createAnimatedObject("models/bob-bomb.x", pos))
 {
 }
 

@@ -9,7 +9,7 @@
 
 bomb::object::BombPass::BombPass(bomb::IAssetLoader &loader,
 	const irr::core::vector3df &pos) :
-	Power(loader, pos, L"models/powers/bombPass/bombPass.obj")
+	Power(loader, pos, "models/powers/bombPass/bombPass.obj")
 {
 }
 

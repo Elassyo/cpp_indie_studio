@@ -13,7 +13,7 @@ bomb::AMapBlock::AMapBlock(IAssetLoader &loader,
 	const irr::core::vector3df &size,
 	const irr::core::vector3df &rotation,
 	const irr::core::vector3di &mapPos,
-	const std::wstring &path,
+	const std::string &path,
 	size_t hp) :
 	_mapPos(mapPos), _hp(hp)
 {
