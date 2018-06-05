@@ -6,15 +6,16 @@
 */
 
 #ifndef CPP_INDIE_STUDIO_IEVENTSCENE_HPP
-#define CPP_INDIE_STUDIO_IEVENTSCENE_HPP
+	#define CPP_INDIE_STUDIO_IEVENTSCENE_HPP
 
-#include <irrlicht/irrlicht.h>
+	#include <irrlicht/irrlicht.h>
 
 namespace bomb {
 	namespace scene {
 		class IEventScene {
 		public:
 			virtual ~IEventScene() = default;
+
 			virtual bool onEvent(const irr::SEvent& event) = 0;
 		};
 	}

@@ -6,6 +6,7 @@
 //
 
 #include <iostream>
+
 #include "SceneHomeMenu.hpp"
 
 bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(
@@ -14,14 +15,13 @@ bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(
 	std::cout << "button" << std::endl;
 	_menu = loader.createMenu();
 	_menu.get()->updateButtons(true);
-	_menu->addButton([](){std::cout << "zzddzdded" << std::endl;},
-			 L"COUCOU", {0.5, 0.5});
+	_menu->addButton([]() { std::cout << "zzddzdded" << std::endl; },
+		L"COUCOU", { 0.5, 0.5 });
 	return BEGIN;
 }
 
-bomb::scene::SceneStatus
-bomb::scene::SceneHomeMenu::loop(
-	__attribute__((unused))bomb::IAssetLoader &loader)
+bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::loop(
+	bomb::IAssetLoader &loader)
 {
 	_menu.get()->updateButtons(true);
 	return CONTINUE;
@@ -31,8 +31,7 @@ void bomb::scene::SceneHomeMenu::save()
 {
 }
 
-void bomb::scene::SceneHomeMenu::reset(__attribute__((unused))
-				bomb::IAssetLoader &loader)
+void bomb::scene::SceneHomeMenu::reset(bomb::IAssetLoader &loader)
 {
 }
 
@@ -42,11 +41,10 @@ void bomb::scene::SceneHomeMenu::clean()
 
 std::string bomb::scene::SceneHomeMenu::nextScene()
 {
-	return std::__cxx11::string();
+	return "";
 }
 
-bool bomb::scene::SceneHomeMenu::onEvent(__attribute__((unused))
-				const irr::SEvent &event)
+bool bomb::scene::SceneHomeMenu::onEvent(const irr::SEvent &event)
 {
 	return true;
 }

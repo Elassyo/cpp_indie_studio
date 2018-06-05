@@ -6,11 +6,10 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_MAPBLOCKBREAKABLE_HPP
-#define CPP_INDIE_STUDIO_MAPBLOCKBREAKABLE_HPP
+	#define CPP_INDIE_STUDIO_MAPBLOCKBREAKABLE_HPP
 
-#include "src/Interface/IAssetLoader.hpp"
-#include "AMapBlock.hpp"
-
+	#include "../../Interface/IAssetLoader.hpp"
+	#include "AMapBlock.hpp"
 
 namespace bomb {
 	class MapBlockBreakable : public AMapBlock {
@@ -18,17 +17,18 @@ namespace bomb {
 		MapBlockBreakable(
 			IAssetLoader &loader,
 			const irr::core::vector3df &pos,
-			const irr::core::vector3df &size,
+			const irr::core::vector3df &scale,
 			const irr::core::vector3df &rotation,
 			const irr::core::vector3di &mapPos
 		);
 		MapBlockBreakable();
 
-		bool explode(size_t dammage) override;
+		bool explode(size_t damage) override;
 
-		std::unique_ptr<bomb::AMapBlock>
-		clone(IAssetLoader &loader, const irr::core::vector3df &pos,
-			const irr::core::vector3df &size,
+		std::unique_ptr<bomb::AMapBlock> clone(
+			IAssetLoader &loader,
+			const irr::core::vector3df &pos,
+			const irr::core::vector3df &scale,
 			const irr::core::vector3df &rotation,
 			const irr::core::vector3di &mapPos) const override;
 	};

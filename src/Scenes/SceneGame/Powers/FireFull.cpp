@@ -13,10 +13,7 @@ bomb::object::FireFull::FireFull(bomb::IAssetLoader &loader,
 {
 }
 
-bool bomb::object::FireFull::activate(
-	__attribute__((unused))bomb::game::GameInfo &infos)
+bool bomb::object::FireFull::activate(bomb::game::GameInfo &infos)
 {
-	if (_model)
-		_loader.deleteObject(std::move(_model));
-	return true;
+	return Power::activate(infos);
 }

@@ -7,8 +7,7 @@
 
 #include "Exception.hpp"
 
-bomb::Exception::Exception(
-	const std::string &context,
+bomb::Exception::Exception(const std::string &context,
 	const std::string &message)
 {
 	_what = context + ": "  + message;

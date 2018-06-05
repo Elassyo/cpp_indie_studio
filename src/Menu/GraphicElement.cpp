@@ -8,7 +8,7 @@
 #include "GraphicElement.hpp"
 
 bomb::menu::GraphicElement::GraphicElement(irr::gui::IGUIElement *element,
-					   irr::core::vector2df pos) :
+	irr::core::vector2df pos) :
 	_element(element), _pos(pos)
 {
 }
@@ -19,7 +19,7 @@ void bomb::menu::GraphicElement::setVisibility(bool visibility)
 }
 
 void bomb::menu::GraphicElement::update(irr::core::vector2di size,
-					irr::core::vector2di screenSize)
+	irr::core::vector2di screenSize)
 {
 	_element->setMinSize({(unsigned int)size.X, (unsigned int)size.Y});
 	_element->setMaxSize({(unsigned int)size.X, (unsigned int)size.Y});

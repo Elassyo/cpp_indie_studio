@@ -1,6 +1,7 @@
 #include <irrlicht/irrlicht.h>
-#include <src/Menu/Menu.hpp>
 #include <iostream>
+
+#include "../src/Menu/Menu.hpp"
 
 using namespace irr;
 using namespace core;

@@ -8,20 +8,17 @@
 #include "Power.hpp"
 
 bomb::object::Power::Power(bomb::IAssetLoader &loader,
-			   const irr::core::vector3df &pos,
-			   std::string path) :
+	const irr::core::vector3df &pos, std::string path) :
 	_loader(loader), _model(loader.createStaticObject(path, pos))
 {
 }
 
-bool bomb::object::Power::isActivable(
-	__attribute__((unused))bomb::game::GameInfo &infos)
+bool bomb::object::Power::isActivable(bomb::game::GameInfo &infos)
 {
 	return false;
 }
 
-bool bomb::object::Power::activate(
-	__attribute__((unused))bomb::game::GameInfo &infos)
+bool bomb::object::Power::activate(bomb::game::GameInfo &infos)
 {
 	if (_model)
 		_loader.deleteObject(std::move(_model));

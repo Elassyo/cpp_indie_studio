@@ -6,22 +6,25 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_MAPCONSTRUCTOR_HPP
-#define CPP_INDIE_STUDIO_MAPCONSTRUCTOR_HPP
+	#define CPP_INDIE_STUDIO_MAPCONSTRUCTOR_HPP
 
-#include <unordered_map>
-#include "src/Interface/IAssetLoader.hpp"
-#include "Map.hpp"
+	#include <map>
+	#include <unordered_map>
+
+	#include "../Interface/IAssetLoader.hpp"
+	#include "Map.hpp"
 
 namespace bomb {
 	class MapConstructor {
 	public:
-		enum Block {
+		enum BlockType {
 			UNBREAKABLE,
 			BREAKABLE
 		};
+
 		explicit MapConstructor(unsigned int mapSize);
 
-		void addBlock(const irr::core::vector3di &, Block map);
+		void addBlock(const irr::core::vector3di &, BlockType type);
 		void rmBlock(const irr::core::vector3di &);
 
 		std::unique_ptr<bomb::Map> construct(
@@ -33,10 +36,10 @@ namespace bomb {
 		int getSize();
 	private:
 		unsigned int _mapSize;
-		std::vector<std::pair<irr::core::vector3di, Block>> _mapBlocks;
+		std::map<irr::core::vector3di, BlockType> _mapBlocks;
 
-		static const std::unordered_map<bomb::MapConstructor::Block,
-			std::shared_ptr<bomb::AMapBlock>> blockBuilder;
+		static const std::unordered_map<bomb::MapConstructor::BlockType,
+			std::shared_ptr<bomb::AMapBlock>> Blocks;
 	};
 }
 

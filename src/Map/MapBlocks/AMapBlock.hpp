@@ -6,11 +6,12 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_AMAPBLOCK_HPP
-#define CPP_INDIE_STUDIO_AMAPBLOCK_HPP
+	#define CPP_INDIE_STUDIO_AMAPBLOCK_HPP
 
-#include <memory>
-#include <irrlicht/vector3d.h>
-#include "src/Interface/IAssetLoader.hpp"
+	#include <memory>
+	#include <irrlicht/vector3d.h>
+
+	#include "../../Interface/IAssetLoader.hpp"
 
 #define BLOCK_OBJ_SIZE 2
 
@@ -20,7 +21,7 @@ namespace bomb {
 	public:
 		AMapBlock(IAssetLoader &loader,
 			const irr::core::vector3df &pos,
-			const irr::core::vector3df &size,
+			const irr::core::vector3df &scale,
 			const irr::core::vector3df &rotation,
 			const irr::core::vector3di &mapPos,
 			const std::string &path,
@@ -31,7 +32,7 @@ namespace bomb {
 		virtual std::unique_ptr<AMapBlock> clone(
 			IAssetLoader &loader,
 			const irr::core::vector3df &pos,
-			const irr::core::vector3df &size,
+			const irr::core::vector3df &scale,
 			const irr::core::vector3df &rotation,
 			const irr::core::vector3di &mapPos) const = 0;
 

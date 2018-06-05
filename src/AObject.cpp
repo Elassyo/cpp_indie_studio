@@ -17,24 +17,24 @@ irr::core::vector3df bomb::AObject::getPos() const
 	return _node->getAbsolutePosition();
 }
 
-void bomb::AObject::setPos(const irr::core::vector3df &newPos)
-{
-	_node->setPosition(newPos);
-}
-
 irr::core::vector3df bomb::AObject::getRot() const
 {
 	return _node->getRotation();
 }
 
-void bomb::AObject::setRot(const irr::core::vector3df &newRot)
-{
-	_node->setRotation(newRot);
-}
-
 irr::core::vector3df bomb::AObject::getScale() const
 {
 	return _node->getScale();
+}
+
+void bomb::AObject::setPos(const irr::core::vector3df &newPos)
+{
+	_node->setPosition(newPos);
+}
+
+void bomb::AObject::setRot(const irr::core::vector3df &newRot)
+{
+	_node->setRotation(newRot);
 }
 
 void bomb::AObject::setScale(const irr::core::vector3df &newScale)

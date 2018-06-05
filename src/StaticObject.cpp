@@ -5,15 +5,15 @@
 // StaticObject.cpp
 //
 
-#include "StaticObject.hpp"
 #include "Exception/Exception.hpp"
+#include "StaticObject.hpp"
 
 bomb::StaticObject::StaticObject(irr::scene::IMeshSceneNode *node):
 	AObject(node), _node(node)
 {
 	if (!node)
-		throw Exception("AnimatedObject", "staticMashNode cannot be"
-						  " created");
+		throw Exception("AnimatedObject",
+			"staticMashNode cannot be created");
 }
 
 void bomb::StaticObject::setTexture(uint32_t layer,

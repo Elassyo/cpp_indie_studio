@@ -6,45 +6,33 @@
 //
 
 #include <iostream>
-#include <src/Exception/Exception.hpp>
-#include "src/Map/MapBlocks/MapBlockBreakable.hpp"
-#include "src/Map/MapBlocks/MapBlockUnbreakable.hpp"
+#include "../Exception/Exception.hpp"
+#include "../Map/MapBlocks/MapBlockBreakable.hpp"
+#include "../Map/MapBlocks/MapBlockUnbreakable.hpp"
 #include "MapConstructor.hpp"
 
-const std::unordered_map<bomb::MapConstructor::Block,
-	std::shared_ptr<bomb::AMapBlock>> bomb::MapConstructor::blockBuilder = {
-	{bomb::MapConstructor::UNBREAKABLE,
-		std::make_shared<bomb::MapBlockUnbreakable>()},
-	{bomb::MapConstructor::BREAKABLE,
-		std::make_shared<bomb::MapBlockBreakable>()}
+const std::unordered_map<bomb::MapConstructor::BlockType,
+	std::shared_ptr<bomb::AMapBlock>> bomb::MapConstructor::Blocks = {
+	{ UNBREAKABLE, std::make_shared<bomb::MapBlockUnbreakable>() },
+	{ BREAKABLE, std::make_shared<bomb::MapBlockBreakable>() }
 };
 
-
-bomb::MapConstructor::MapConstructor(unsigned int mapSize):
+bomb::MapConstructor::MapConstructor(unsigned int mapSize) :
 	_mapSize(mapSize)
 {
 }
 
-void bomb::MapConstructor::addBlock(
-	const irr::core::vector3di &pos, Block block)
+void bomb::MapConstructor::addBlock(const irr::core::vector3di &pos,
+	BlockType type)
 {
-	for (auto &e : _mapBlocks) {
-		if (e.first == pos) {
-			e.second = block;
-			return;
-		}
-	}
-	_mapBlocks.emplace_back(std::make_pair(pos, block));
+	_mapBlocks[pos] = type;
 }
 
 void bomb::MapConstructor::rmBlock(const irr::core::vector3di &pos)
 {
-	for (int i = 0; i < _mapBlocks.size(); i++) {
-		if (_mapBlocks[i].first == pos) {
-			_mapBlocks.erase(_mapBlocks.begin() + i);
-			i--;
-		}
-	}
+	auto it = _mapBlocks.find(pos);
+	if (it != _mapBlocks.end())
+		_mapBlocks.erase(it);
 }
 
 std::unique_ptr<bomb::Map> bomb::MapConstructor::construct(
@@ -54,14 +42,17 @@ std::unique_ptr<bomb::Map> bomb::MapConstructor::construct(
 	const irr::core::vector3df &rotation)
 {
 	std::vector<std::shared_ptr<bomb::AMapBlock>> _blocks;
+
 	for (auto &block : _mapBlocks) {
-		irr::core::vector3df blockPos =
-			{pos.X + block.first.X * size.X, pos.Z,
-			 pos.Y + block.first.Y * size.Z};
-		if (blockBuilder.find(block.second) == blockBuilder.end())
-			throw bomb::Exception(
-				"Block Builder", "Invalid Block ID");
-		_blocks.emplace_back(blockBuilder.at(block.second)->clone(
+		irr::core::vector3df blockPos = {
+			pos.X + block.first.X * size.X,
+			pos.Z,
+			pos.Y + block.first.Y * size.Z };
+		auto it = Blocks.find(block.second);
+		if (it == Blocks.end())
+			throw bomb::Exception("Block Builder",
+				"Invalid Block type");
+		_blocks.emplace_back(it->second->clone(
 			loader, blockPos, size, rotation, block.first));
 	}
 	std::cout << _blocks.size() << std::endl;

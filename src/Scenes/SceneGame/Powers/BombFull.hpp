@@ -6,16 +6,16 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_BOMBFULL_HPP
-#define CPP_INDIE_STUDIO_BOMBFULL_HPP
+	#define CPP_INDIE_STUDIO_BOMBFULL_HPP
 
-#include "Power.hpp"
+	#include "Power.hpp"
 
 namespace bomb {
 	namespace object {
 		class BombFull : public bomb::object::Power {
 		public:
 			BombFull(bomb::IAssetLoader &loader,
-				 const irr::core::vector3df &pos);
+				const irr::core::vector3df &pos);
 			bool activate(game::GameInfo &infos) override;
 		};
 	}

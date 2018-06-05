@@ -6,26 +6,28 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_SCENELAUNCHER_HPP
-#define CPP_INDIE_STUDIO_SCENELAUNCHER_HPP
+	#define CPP_INDIE_STUDIO_SCENELAUNCHER_HPP
 
-#include "../Render/GameEngine.hpp"
-#include "../Interface/IGameScene.hpp"
-#include "SceneGame/SceneGame.hpp"
-#include "SceneHomeMenu/SceneHomeMenu.hpp"
-#include "../Exception/Exception.hpp"
-#include <iostream>
-#include <unordered_map>
+	#include <iostream>
+	#include <map>
+	
+	#include "../Exception/Exception.hpp"
+	#include "../Interface/IGameScene.hpp"
+	#include "../Render/GameEngine.hpp"
+	#include "SceneGame/SceneGame.hpp"
+	#include "SceneHomeMenu/SceneHomeMenu.hpp"
 
 namespace bomb {
 	namespace scene {
 		class SceneLauncher {
 		public:
 			explicit SceneLauncher(GameEngine &);
+
 			void launchScene(const std::string &);
+
 		private:
-			GameEngine &_gameEngine;
-			std::unordered_map
-				<std::string, std::shared_ptr<IGameScene>>
+			GameEngine & _gameEngine;
+			std::map<std::string, std::shared_ptr<IGameScene>>
 				_scenes;
 		};
 	}

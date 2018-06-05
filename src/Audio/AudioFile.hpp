@@ -5,7 +5,6 @@
 ** AudioFile.hpp
 */
 
-
 #ifndef CPP_INDIE_STUDIO_AUDIOFILE_HPP
 	#define CPP_INDIE_STUDIO_AUDIOFILE_HPP
 

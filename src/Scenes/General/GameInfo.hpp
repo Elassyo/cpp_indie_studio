@@ -8,17 +8,21 @@
 #ifndef CPP_INDIE_STUDIO_GAMEINFO_HPP
 	#define CPP_INDIE_STUDIO_GAMEINFO_HPP
 
-	#define NB_PLAYERS() (4)
-
+	#include <array>
+	#include <map>
 	#include <vector>
 	#include "../../Interface/IAssetLoader.hpp"
-	#include <src/Map/MapGenerator.hpp>
 	#include "../../AnimatedObject.hpp"
 	#include "PlayerInfo.hpp"
+	#include "../../AnimatedObject.hpp"
+	#include "../../Interface/IAssetLoader.hpp"
+	#include "../../Map/MapGenerator.hpp"
 	#include "../../Map/Map.hpp"
 
 namespace bomb {
 	namespace game {
+		constexpr int NB_PLAYERS = 4;
+
 		class GameInfo {
 		public:
 			GameInfo() = default;
@@ -26,19 +30,22 @@ namespace bomb {
 				irr::video::ITexture *pTexture);
 			int getMapSize() const;
 		private:
-			enum CHARACTERS {
+			enum Character {
 				SHYGUY_WHITE,
 				SHYGUY_BLACK,
 				SHYGUY_RED,
 				SHYGUY_BLUE,
 				SKELEREX
 			};
-			std::vector<std::unique_ptr<AnimatedObject>>
+
+			void reset();
+
+			std::map<Character, std::unique_ptr<AnimatedObject>>
 				_characters;
-			std::array<PlayerInfo, NB_PLAYERS()> _players;
+			std::array<PlayerInfo, NB_PLAYERS> _players;
+
 			std::unique_ptr<bomb::Map> _map;
 			int _mapSize;
-			void reset();
 		};
 	}
 }

@@ -2,17 +2,18 @@
 // EPITECH PROJECT, 2018
 // cpp_indie_studio
 // File description:
-// Bomberman.cpp
+// BomberMario.cpp
 //
 
+#include "Exception/Exception.hpp"
 #include "Render/GameEngine.hpp"
 #include "Scenes/SceneLauncher.hpp"
-#include "Exception/Exception.hpp"
 
 int main()
 {
-	bomb::GameEngine ge(L"BomberMario", 600, 600, irr::video::EDT_OPENGL);
-	bomb::scene::SceneLauncher launcher(ge);
+	bomb::GameEngine engine(L"BomberMario", 600, 600,
+		irr::video::EDT_OPENGL);
+	bomb::scene::SceneLauncher launcher(engine);
 
 	try {
 		launcher.launchScene("game_scene");

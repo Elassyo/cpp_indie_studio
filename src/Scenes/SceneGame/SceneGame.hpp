@@ -9,7 +9,6 @@
 	#define CPP_INDIE_STUDIO_SCENEGAME_HPP
 
 	#include "../../Interface/IGameScene.hpp"
-
 	#include "Bomb.hpp"
 
 namespace bomb {
@@ -17,16 +16,20 @@ namespace bomb {
 		class SceneGame : public IGameScene {
 		public:
 			~SceneGame() override = default;
-			bomb::scene::SceneStatus
-			start(IAssetLoader &loader) override;
+
+			bomb::scene::SceneStatus start(
+				IAssetLoader &loader) override;
 			SceneStatus loop(IAssetLoader &loader) override;
 			void save() override;
 			void reset(IAssetLoader &loader) override;
 			void clean() override;
 			std::string nextScene() override;
+
 			bool onEvent(const irr::SEvent &event) override;
+
 		private:
 			void explodeBombs(bomb::IAssetLoader &loader);
+			
 			irr::video::ITexture *_blocksTextures;
 			std::vector<std::unique_ptr<bomb::object::Bomb>> _bombs;
 			bomb::game::GameInfo _gameInfo;

@@ -1,31 +1,32 @@
 //
 // EPITECH PROJECT, 2018
-// arcade
+// cpp_indie_studio
 // File description:
 // Clock.hpp
 //
 
-#ifndef ARCADE_CLOCK_HPP
-	#define ARCADE_CLOCK_HPP
+#ifndef CPP_INDIE_STUDIO_CLOCK_HPP
+	#define CPP_INDIE_STUDIO_CLOCK_HPP
 
 	#include <chrono>
 	#include <iostream>
 
 namespace bomb {
-        namespace utils {
-                class Clock {
-                public:
-                        Clock();
+	namespace utils {
+		class Clock {
+		public:
+			Clock();
 			Clock(long interval);
-                        void reset();
-                        void setTimerInterval(long interval);
-                        long getEllapsedTime() const;
-                        bool isReady() const;
-                private:
-                        std::chrono::time_point<std::chrono::steady_clock> _lastReset;
-                        long _interval;
-                };
-        }
+			void reset();
+			void setTimerInterval(long interval);
+			unsigned long long getElapsedTime() const;
+			bool isReady() const;
+
+		private:
+			std::chrono::time_point<std::chrono::steady_clock> _lastReset;
+			unsigned long long _interval;
+		};
+	}
 }
 
-#endif //ARCADE_CLOCK_HPP
+#endif /* CPP_INDIE_STUDIO_CLOCK_HPP */

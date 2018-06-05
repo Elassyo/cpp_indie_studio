@@ -11,21 +11,25 @@
 	#include "Interface/IObject.hpp"
 
 namespace bomb {
-	class AObject : virtual public bomb::IObject {
+
+	class AObject : virtual public IObject {
 	public:
 		explicit AObject(irr::scene::ISceneNode *);
+
 		irr::core::vector3df getPos() const override;
-		void setPos(const irr::core::vector3df &) override;
 		irr::core::vector3df getRot() const override;
-		void setRot(const irr::core::vector3df &) override;
 		irr::core::vector3df getScale() const override;
-		void setScale(const irr::core::vector3df &) override;
+		
+		void setPos(const irr::core::vector3df &v) override;
+		void setRot(const irr::core::vector3df &v) override;
+		void setScale(const irr::core::vector3df &v) override;
 
 		irr::scene::ISceneNode *getSceneNode() const override;
 
 	private:
 		irr::scene::ISceneNode *_node;
 	};
+
 }
 
 #endif /* CPP_INDIE_STUDIO_AOBJECT_HPP */

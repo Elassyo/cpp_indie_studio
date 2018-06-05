@@ -5,7 +5,7 @@
 // AMapBlock.cpp
 //
 
-#include <src/Interface/IAssetLoader.hpp>
+#include "../../Interface/IAssetLoader.hpp"
 #include "AMapBlock.hpp"
 
 bomb::AMapBlock::AMapBlock(IAssetLoader &loader,

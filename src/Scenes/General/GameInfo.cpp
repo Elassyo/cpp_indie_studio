@@ -13,7 +13,6 @@ void bomb::game::GameInfo::createMap(IAssetLoader &loader,
 	bomb::MapConstructor pattern = MapGenerator(11).generate();
 
 	pattern.dumpMap();
-	_characters.resize(5);
 	_characters[SHYGUY_BLACK] = loader.createAnimatedObject(
 		"assets/models/characters/shyGuy/shyGuyBlack.obj");
 	_characters[SHYGUY_BLUE] = loader.createAnimatedObject(
@@ -26,7 +25,7 @@ void bomb::game::GameInfo::createMap(IAssetLoader &loader,
 		"assets/models/characters/shyGuy/shyGuyWhite.obj");
 	_mapSize = pattern.getSize();
 	_map = std::move(pattern.construct(loader,
-		{0, 0, 0}, {1, 1, 1}, {0, 0, 0}));
+		{ 0, 0, 0 }, { 1, 1, 1 }, { 0, 0, 0 }));
 	_map->setTextures(texture);
 	reset();
 }
