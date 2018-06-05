@@ -9,7 +9,8 @@
 #include "../Exception/Exception.hpp"
 #include "MapGenerator.hpp"
 
-const std::unordered_map<bomb::MapGenerator::Type, bomb::MapConstructor (bomb::MapGenerator::*)()>
+const std::unordered_map<bomb::MapGenerator::Type,
+	bomb::MapConstructor (bomb::MapGenerator::*)()>
 	bomb::MapGenerator::typeGenerator = {
 	{bomb::MapGenerator::RANDOM, &bomb::MapGenerator::generateRandom},
 	{bomb::MapGenerator::BASIC, &bomb::MapGenerator::generateBasic},

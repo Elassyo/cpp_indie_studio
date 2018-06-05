@@ -30,7 +30,8 @@ namespace bomb {
 		MapConstructor generate();
 
 	private:
-		static const std::unordered_map<bomb::MapGenerator::Type, MapConstructor (bomb::MapGenerator::*)()> typeGenerator;
+		static const std::unordered_map<bomb::MapGenerator::Type,
+			MapConstructor (bomb::MapGenerator::*)()> typeGenerator;
 		MapConstructor generateRandom();
 		MapConstructor generateBasic();
 

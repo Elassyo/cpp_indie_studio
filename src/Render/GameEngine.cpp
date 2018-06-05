@@ -113,6 +113,6 @@ irr::scene::ICameraSceneNode *bomb::GameEngine::addCamera(
 	if (!_camera)
 		throw Exception("GameEngine", "Can't create camera");
 	_camera->setPosition(pos);
-	_camera->setRotation(rot);
+	_camera->setTarget(rot);
 	return _camera;
 }

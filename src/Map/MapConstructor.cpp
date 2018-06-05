@@ -42,14 +42,15 @@ std::unique_ptr<bomb::Map> bomb::MapConstructor::construct(
 		size.Y / _mapSize, size.Z};
 	for (auto &block : _mapBlocks) {
 		irr::core::vector3df blockPos =
-			{pos.X + block.first.X * blockSize.X,
-				pos.Y + block.first.Y * blockSize.Y, pos.Z};
+			{pos.X + block.first.X * blockSize.X, pos.Z,
+			 pos.Y + block.first.Y * blockSize.Y};
 		if (blockBuilder.find(block.second) == blockBuilder.end())
 			throw bomb::Exception(
 				"Block Builder", "Invalid Block ID");
 		_blocks.emplace_back(blockBuilder.at(block.second)->clone(
 			loader, blockPos, blockSize, rotation, block.first));
 	}
+	std::cout << _blocks.size() << std::endl;
 	return std::make_unique<bomb::Map>(_blocks);
 }
 
@@ -72,4 +73,9 @@ void bomb::MapConstructor::dumpMap()
 		}
 		std::cout << std::endl;
 	}
+}
+
+int bomb::MapConstructor::getSize()
+{
+	return _mapSize;
 }

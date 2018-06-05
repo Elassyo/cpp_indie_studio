@@ -35,6 +35,7 @@ namespace bomb {
 
 		const irr::core::vector3di &getMapPos() const;
 		size_t getHp() const;
+		void setTextures(irr::video::ITexture *texture);
 
 	protected:
 		irr::core::vector3di _mapPos;
