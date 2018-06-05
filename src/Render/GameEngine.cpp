@@ -41,12 +41,12 @@ void bomb::GameEngine::listenEventScene(
 
 void bomb::GameEngine::refresh()
 {
-	_videoDriver->beginScene(true, true, irr::video::SColor(255,0,0,255));
+	_videoDriver->beginScene(true, true, irr::video::SColor(255,44,62,80));
 	_sceneManager->drawAll();
 	_videoDriver->endScene();
 }
 
-irr::gui::IGUIEnvironment *bomb::GameEngine::loadGui()
+irr::gui::IGUIEnvironment *bomb::GameEngine::getGui()
 {
 	return _device->getGUIEnvironment();
 }
@@ -94,7 +94,8 @@ std::unique_ptr<bomb::StaticObject> bomb::GameEngine::createStaticObject(
 
 std::unique_ptr<bomb::menu::Menu> bomb::GameEngine::createMenu()
 {
-	return std::make_unique<bomb::menu::Menu>(_videoDriver, loadGui());
+	auto ptr = std::make_unique<bomb::menu::Menu>(_videoDriver, getGui());
+	return ptr;
 }
 
 void bomb::GameEngine::deleteObject(std::unique_ptr<bomb::IObject> obj)

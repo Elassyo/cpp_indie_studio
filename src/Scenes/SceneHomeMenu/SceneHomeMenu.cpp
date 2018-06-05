@@ -14,6 +14,8 @@ bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(
 	std::cout << "button" << std::endl;
 	_menu = loader.createMenu();
 	_menu.get()->updateButtons(true);
+	_menu->addButton([](){std::cout << "zzddzdded" << std::endl;},
+			 L"COUCOU", {0.5, 0.5});
 	return BEGIN;
 }
 
@@ -21,6 +23,7 @@ bomb::scene::SceneStatus
 bomb::scene::SceneHomeMenu::loop(
 	__attribute__((unused))bomb::IAssetLoader &loader)
 {
+	_menu.get()->updateButtons(true);
 	return CONTINUE;
 }
 

@@ -14,11 +14,18 @@ bomb::menu::GraphicButton::GraphicButton(irr::gui::IGUIButton *button,
 	button->setScaleImage(true);
 	button->setDrawBorder(false);
 	button->setUseAlphaChannel(true);
+	_latence.setTimerInterval(250);
+	_latence.reset();
 }
 
-bool bomb::menu::GraphicButton::isPressed() const
+bool bomb::menu::GraphicButton::isPressed()
 {
-	return ((irr::gui::IGUIButton *)_element)->isPressed();
+	if (_latence.isReady() &&
+		((irr::gui::IGUIButton *) _element)->isPressed()) {
+		_latence.reset();
+		return true;
+	}
+	return false;
 }
 
 void bomb::menu::GraphicButton::setFont(irr::gui::IGUIFont *font)

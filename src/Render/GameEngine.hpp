@@ -31,7 +31,7 @@ namespace bomb {
 
 		void refresh() override;
 
-		irr::gui::IGUIEnvironment *loadGui() override;
+		irr::gui::IGUIEnvironment *getGui() override;
 		irr::video::ITexture *loadTexture(
 			const std::string &path) override;
 		std::unique_ptr<AudioFile> loadAudioFile(

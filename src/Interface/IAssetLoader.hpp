@@ -19,7 +19,7 @@
 namespace bomb {
 	class IAssetLoader {
 	public:
-		virtual irr::gui::IGUIEnvironment *loadGui() = 0;
+		virtual irr::gui::IGUIEnvironment *getGui() = 0;
 		virtual irr::video::ITexture *loadTexture(
 			const std::string &path) = 0;
 		virtual std::unique_ptr<AudioFile> loadAudioFile(

@@ -9,7 +9,8 @@
 	#define CPP_TEST_STUDIO_GRAPHICBUTTON_HPP
 
 	#include <functional>
-	#include "GraphicElement.hpp"
+#include <src/Scenes/General/Clock.hpp>
+#include "GraphicElement.hpp"
 
 namespace bomb {
 	namespace menu {
@@ -17,7 +18,7 @@ namespace bomb {
 		public:
 			GraphicButton(irr::gui::IGUIButton *button,
 				      irr::core::vector2df pos);
-			bool isPressed() const;
+			bool isPressed();
 			void setFont(irr::gui::IGUIFont *font);
 			void setTexture(irr::video::ITexture *texture,
 					irr::video::ITexture *pressed);
@@ -25,6 +26,7 @@ namespace bomb {
 			const std::function<void()> &getEvent() const;
 		private:
 			std::function <void ()> _event;
+			bomb::utils::Clock _latence;
 		};
 	}
 }
