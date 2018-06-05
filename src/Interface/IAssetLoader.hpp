@@ -33,8 +33,9 @@ namespace bomb {
 			 irr::core::vector3df pos = {0, 0, 0},
 			 irr::core::vector3df rot = {0, 0, 0},
 			 irr::core::vector3df scale = {1, 1, 1}) = 0;
-		virtual void addCamera(const irr::core::vector3df &pos,
-			       const irr::core::vector3df &rot) = 0;
+		virtual irr::scene::ICameraSceneNode *addCamera(
+			const irr::core::vector3df &pos,
+			const irr::core::vector3df &rot) = 0;
 		virtual void deleteObject(std::unique_ptr<IObject>) = 0;
 	};
 }
