@@ -26,11 +26,11 @@ bomb::menu::Menu::Menu(irr::video::IVideoDriver *driver,
 }
 
 void bomb::menu::Menu::addButton(std::function <void ()> event,
-				const std::string text,
+				 const wchar_t *text,
 				irr::core::vector2df pos)
 {
 	irr::gui::IGUIButton * irrButton = createButton(
-		{0, 0}, getButtonSize(),(const wchar_t*)text.c_str());
+		{0, 0}, getButtonSize(), text);
 	GraphicButton button(GraphicButton(irrButton, pos));
 	button.setEvent(event);
 	button.setTexture(_buttonBack, _buttonPressed);
@@ -73,6 +73,7 @@ void bomb::menu::Menu::updateButtons(bool areVisible)
 		button.setVisibility(areVisible);
 		button.update(buttonSize, screenSize);
 	}
+	handleEvent();
 }
 
 irr::core::vector2di bomb::menu::Menu::getButtonSize() const
@@ -80,5 +81,5 @@ irr::core::vector2di bomb::menu::Menu::getButtonSize() const
 	const irr::core::dimension2du &screenSize = _driver->getScreenSize();
 
 	return {(int)(_buttonRatio.X * screenSize.Width),
-		(int)(_buttonRatio.Y *screenSize.Height)};
+		(int)(_buttonRatio.Y * screenSize.Height)};
 }

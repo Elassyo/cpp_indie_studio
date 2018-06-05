@@ -23,7 +23,7 @@ namespace bomb {
 			Menu(irr::video::IVideoDriver *driver,
 			     irr::gui::IGUIEnvironment *gui);
 			void addButton(std::function <void ()> event,
-					std::string text,
+				       	const wchar_t *text,
 					irr::core::vector2df pos);
 			void updateButtons(bool areVisibles);
 			void handleEvent();

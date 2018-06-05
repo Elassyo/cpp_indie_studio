@@ -42,13 +42,14 @@ int main()
 	}
 	smgr->addCameraSceneNode(0, vector3df(0,30,-40), vector3df(0,5,0));
 	bomb::menu::Menu menu(driver, guienv);
-	menu.addButton([](){}, "dedeed", {0.5, 0.5});
+	menu.addButton([](){}, L"GREG", {0.5, 0.5});
 	while(device->run())
 	{
 		driver->beginScene(true, true, SColor(255,100,101,140));
 		smgr->drawAll();
 		guienv->drawAll();
 		driver->endScene();
+		menu.updateButtons(true);
 	}
 	device->drop();
 	return 0;
