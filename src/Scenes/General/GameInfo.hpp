@@ -11,10 +11,10 @@
 	#define NB_PLAYERS() (4)
 
 	#include <vector>
-#include <src/Map/MapGenerator.hpp>
-#include "../../AnimatedObject.hpp"
-	#include "PlayerInfo.hpp"
 	#include "../../Interface/IAssetLoader.hpp"
+	#include <src/Map/MapGenerator.hpp>
+	#include "../../AnimatedObject.hpp"
+	#include "PlayerInfo.hpp"
 	#include "../../Map/Map.hpp"
 
 namespace bomb {
@@ -22,7 +22,8 @@ namespace bomb {
 		class GameInfo {
 		public:
 			GameInfo() = default;
-			void createMap(IAssetLoader &loader, irr::video::ITexture *pTexture);
+			void createMap(IAssetLoader &loader,
+				irr::video::ITexture *pTexture);
 			int getMapSize() const;
 		private:
 			enum CHARACTERS {
