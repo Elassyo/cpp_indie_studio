@@ -70,12 +70,16 @@ set(SRC_FILES
         src/Scenes/SceneGame/Bomb.hpp
         src/Scenes/SceneGame/Powers/BombDown.cpp
         src/Scenes/SceneGame/Powers/BombDown.hpp
+        src/Scenes/SceneGame/Powers/BombFull.cpp
+        src/Scenes/SceneGame/Powers/BombFull.hpp
         src/Scenes/SceneGame/Powers/BombPass.cpp
         src/Scenes/SceneGame/Powers/BombPass.hpp
         src/Scenes/SceneGame/Powers/BombUp.cpp
         src/Scenes/SceneGame/Powers/BombUp.hpp
         src/Scenes/SceneGame/Powers/FireDown.cpp
         src/Scenes/SceneGame/Powers/FireDown.hpp
+        src/Scenes/SceneGame/Powers/FireFull.cpp
+        src/Scenes/SceneGame/Powers/FireFull.hpp
         src/Scenes/SceneGame/Powers/FireUp.cpp
         src/Scenes/SceneGame/Powers/FireUp.hpp
         src/Scenes/SceneGame/Powers/Power.cpp

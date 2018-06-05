@@ -26,6 +26,10 @@
 
 	#include "BombPass.hpp"
 
+	#include "BombFull.hpp"
+
+	#include "FireFull.hpp"
+
 namespace bomb {
 	namespace object {
 		class PowerFactory {
