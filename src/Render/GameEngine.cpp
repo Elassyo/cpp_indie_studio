@@ -17,8 +17,8 @@ bomb::GameEngine::GameEngine(const std::wstring &winName, uint w, uint h,
 		false, false, false, &_evtHandler)),
 	_videoDriver(_device->getVideoDriver()),
 	_sceneManager(_device->getSceneManager()),
-	_audioDev(new AudioDevice()),
-	_camera(nullptr)
+	_camera(nullptr),
+	_audioDev(new AudioDevice())
 {
 	_device->setWindowCaption(winName.c_str());
 }
@@ -65,8 +65,8 @@ std::unique_ptr<bomb::AudioFile> bomb::GameEngine::loadAudioFile(
 std::unique_ptr<bomb::AnimatedObject> bomb::GameEngine::createAnimatedObject(
 	const std::string &path,
 	irr::core::vector3df pos,
-	irr::core::vector3df rot,
-	irr::core::vector3df scale)
+	irr::core::vector3df scale,
+	irr::core::vector3df rot)
 {
 	auto ptr = std::make_unique<bomb::AnimatedObject>(
 		_sceneManager->addAnimatedMeshSceneNode(
@@ -80,8 +80,8 @@ std::unique_ptr<bomb::AnimatedObject> bomb::GameEngine::createAnimatedObject(
 std::unique_ptr<bomb::StaticObject> bomb::GameEngine::createStaticObject(
 	const std::string &path,
 	irr::core::vector3df pos,
-	irr::core::vector3df rot,
-	irr::core::vector3df scale)
+	irr::core::vector3df scale,
+	irr::core::vector3df rot)
 {
 	auto ptr = std::make_unique<bomb::StaticObject>(
 		_sceneManager->addMeshSceneNode(

@@ -17,9 +17,7 @@ bomb::AMapBlock::AMapBlock(IAssetLoader &loader,
 	size_t hp) :
 	_mapPos(mapPos), _hp(hp)
 {
-	_block = loader.createStaticObject(path, pos, size, rotation);
-	_block->setScale(size / BLOCK_OBJ_SIZE);
-	_block->setRot(rotation);
+	_block = loader.createStaticObject(path, pos, size / BLOCK_OBJ_SIZE, rotation);
 }
 
 bomb::AMapBlock::AMapBlock()
