@@ -10,7 +10,7 @@
 bomb::scene::SceneLauncher::SceneLauncher(GameEngine &ge) :
 		_gameEngine(ge)
 {
-	_scenes["game_test"] = std::make_shared<bomb::scene::SceneGame>();
+	_scenes["game_scene"] = std::make_shared<bomb::scene::SceneGame>();
 	_scenes["home_menu"] = std::make_shared<bomb::scene::SceneHomeMenu>();
 }
 

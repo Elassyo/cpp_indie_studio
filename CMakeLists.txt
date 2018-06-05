@@ -106,11 +106,18 @@ add_executable(bomberman
         ${SRC_FILES}
         src/Bomberman.cpp)
 
+add_executable(test_menu
+        ${SRC_SCENE}
+        ${SRC_FILES}
+        tests/MenuPreview.cpp)
+
 add_executable(tests_map_gen
         ${SRC_FILES}
         tests/MapGen.cpp)
 
 target_link_libraries(tests_map_gen Irrlicht openal vorbisfile)
+
+target_link_libraries(test_menu Irrlicht openal vorbisfile)
 
 target_link_libraries(bomberman Irrlicht openal vorbisfile)
 

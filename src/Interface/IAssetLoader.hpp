@@ -10,15 +10,16 @@
 
 	#include <memory>
 	#include <irrlicht/irrlicht.h>
+#include <src/Menu/Menu.hpp>
 
-	#include "../Audio/AudioFile.hpp"
+#include "../Audio/AudioFile.hpp"
 	#include "../AnimatedObject.hpp"
 	#include "../StaticObject.hpp"
 
 namespace bomb {
 	class IAssetLoader {
 	public:
-		virtual irr::gui::IGUIEnvironment *loadGui() = 0;
+		virtual irr::gui::IGUIEnvironment *getGui() = 0;
 		virtual irr::video::ITexture *loadTexture(
 			const std::string &path) = 0;
 		virtual std::unique_ptr<AudioFile> loadAudioFile(
@@ -33,6 +34,7 @@ namespace bomb {
 			 irr::core::vector3df pos = {0, 0, 0},
 			 irr::core::vector3df rot = {0, 0, 0},
 			 irr::core::vector3df scale = {1, 1, 1}) = 0;
+		virtual std::unique_ptr<menu::Menu> createMenu() = 0;
 		virtual irr::scene::ICameraSceneNode *addCamera(
 			const irr::core::vector3df &pos,
 			const irr::core::vector3df &rot) = 0;

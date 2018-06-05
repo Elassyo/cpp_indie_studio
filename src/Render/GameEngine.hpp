@@ -31,7 +31,7 @@ namespace bomb {
 
 		void refresh() override;
 
-		irr::gui::IGUIEnvironment *loadGui() override;
+		irr::gui::IGUIEnvironment *getGui() override;
 		irr::video::ITexture *loadTexture(
 			const std::string &path) override;
 		std::unique_ptr<AudioFile> loadAudioFile(
@@ -46,11 +46,11 @@ namespace bomb {
 			irr::core::vector3df pos,
 			irr::core::vector3df rot,
 			irr::core::vector3df scale) override;
+		std::unique_ptr<menu::Menu> createMenu() override;
 		void deleteObject(std::unique_ptr<IObject> obj) override;
 		irr::scene::ICameraSceneNode *addCamera(
 			const irr::core::vector3df &pos,
 			       const irr::core::vector3df &rot) override;
-
 	private:
 		EventHandler _evtHandler;
 		irr::IrrlichtDevice *_device;
