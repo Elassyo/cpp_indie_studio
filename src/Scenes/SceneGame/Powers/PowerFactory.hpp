@@ -9,26 +9,16 @@
 	#define CPP_INDIE_STUDIO_POWERFACTORY_HPP
 
 	#include "Power.hpp"
-
-	#include "BombUp.hpp"
-
 	#include "BombDown.hpp"
-
-	#include "FireUp.hpp"
-
-	#include "SpeedUp.hpp"
-
-	#include "FireDown.hpp"
-
-	#include "SpeedDown.hpp"
-
-	#include "WallPass.hpp"
-
-	#include "BombPass.hpp"
-
 	#include "BombFull.hpp"
-
+	#include "BombUp.hpp"
+	#include "BombPass.hpp"
+	#include "FireDown.hpp"
 	#include "FireFull.hpp"
+	#include "FireUp.hpp"
+	#include "SpeedDown.hpp"
+	#include "SpeedUp.hpp"
+	#include "WallPass.hpp"
 
 namespace bomb {
 	namespace object {

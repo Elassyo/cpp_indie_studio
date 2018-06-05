@@ -26,7 +26,7 @@ namespace bomb {
 			TYPES_END
 		};
 
-		MapGenerator(unsigned int size,
+		explicit MapGenerator(unsigned int size,
 			unsigned int seed = std::time(nullptr),
 			GeneratorType type = RANDOM);
 		MapConstructor generate();

@@ -40,9 +40,9 @@ bomb::MapConstructor bomb::MapGenerator::generate()
 
 bomb::MapConstructor bomb::MapGenerator::generateRandom()
 {
-	GeneratorType type = (GeneratorType)(
+	auto type = (GeneratorType)(
 		TYPES_BEG + 1 + _rng() % (TYPES_END - TYPES_BEG - 1));
-	return (this->*(Generators.at(_type)))();
+	return (this->*(Generators.at(type)))();
 }
 
 bomb::MapConstructor bomb::MapGenerator::generateBasic()

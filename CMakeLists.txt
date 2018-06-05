@@ -148,6 +148,8 @@ target_link_libraries(bombermario Irrlicht ${LIBOPENAL_NAME} ${LIBVORBISFILE_NAM
 install(TARGETS bombermario DESTINATION /usr/bin/ CONFIGURATIONS Release)
 install(DIRECTORY assets/ DESTINATION /usr/share/bombermario CONFIGURATIONS Release)
 
-if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    add_custom_command(TARGET bombermario POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:bombermario> ${CMAKE_SOURCE_DIR}/bomberman)
+elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     add_custom_command(TARGET bombermario POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:bombermario> ${CMAKE_SOURCE_DIR}/win/bombermario.exe)
 endif()
