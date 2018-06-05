@@ -28,7 +28,23 @@ bomb::MapConstructor::MapConstructor(unsigned int mapSize):
 void bomb::MapConstructor::addBlock(
 	const irr::core::vector3di &pos, Block block)
 {
+	for (auto &e : _mapBlocks) {
+		if (e.first == pos) {
+			e.second = block;
+			return;
+		}
+	}
 	_mapBlocks.emplace_back(std::make_pair(pos, block));
+}
+
+void bomb::MapConstructor::rmBlock(const irr::core::vector3di &pos)
+{
+	for (int i = 0; i < _mapBlocks.size(); i++) {
+		if (_mapBlocks[i].first == pos) {
+			_mapBlocks.erase(_mapBlocks.begin() + i);
+			i--;
+		}
+	}
 }
 
 std::unique_ptr<bomb::Map> bomb::MapConstructor::construct(

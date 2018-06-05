@@ -22,6 +22,8 @@ namespace bomb {
 		explicit MapConstructor(unsigned int mapSize);
 
 		void addBlock(const irr::core::vector3di &, Block map);
+		void rmBlock(const irr::core::vector3di &);
+
 		std::unique_ptr<bomb::Map> construct(
 			IAssetLoader &loader,
 			const irr::core::vector3df &pos,

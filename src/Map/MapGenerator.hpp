@@ -34,7 +34,10 @@ namespace bomb {
 		MapConstructor generateRandom();
 		MapConstructor generateBasic();
 
-		bool isCorner(unsigned int x, unsigned int y);
+		void addBorder(MapConstructor &build);
+		void fillSpawn(MapConstructor &build,
+			unsigned int x, unsigned int y);
+		void fillCornerSpawn(bomb::MapConstructor &build);
 
 		unsigned int _seed;
 		unsigned int _size;
