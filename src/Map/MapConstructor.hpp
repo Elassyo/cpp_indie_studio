@@ -22,13 +22,15 @@ namespace bomb {
 		explicit MapConstructor(unsigned int mapSize);
 
 		void addBlock(const irr::core::vector3di &, Block map);
+		void rmBlock(const irr::core::vector3di &);
+
 		std::unique_ptr<bomb::Map> construct(
 			IAssetLoader &loader,
 			const irr::core::vector3df &pos,
 			const irr::core::vector3df &size,
 			const irr::core::vector3df &rotation);
 		void dumpMap();
-
+		int getSize();
 	private:
 		unsigned int _mapSize;
 		std::vector<std::pair<irr::core::vector3di, Block>> _mapBlocks;
