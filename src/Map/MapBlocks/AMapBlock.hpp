@@ -24,7 +24,7 @@ namespace bomb {
 			const irr::core::vector3df &scale,
 			const irr::core::vector3df &rotation,
 			const irr::core::vector3di &mapPos,
-			const std::string &path,
+			const std::wstring &path,
 			size_t hp);
 		AMapBlock();
 

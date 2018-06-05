@@ -16,7 +16,7 @@ namespace bomb {
 		public:
 			Power(bomb::IAssetLoader &loader,
 				const irr::core::vector3df &pos,
-				std::string path);
+				std::wstring path);
 
 			bool isActivable(game::GameInfo &infos)	override;
 			bool activate(game::GameInfo &infos) override;

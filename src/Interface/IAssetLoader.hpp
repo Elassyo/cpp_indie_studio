@@ -10,7 +10,7 @@
 
 	#include <memory>
 	#include <irrlicht/irrlicht.h>
-	
+
 	#include "../Audio/AudioFile.hpp"
 	#include "../Menu/Menu.hpp"
 	#include "../AnimatedObject.hpp"
@@ -21,18 +21,18 @@ namespace bomb {
 	public:
 		virtual irr::gui::IGUIEnvironment *getGui() = 0;
 		virtual irr::video::ITexture *loadTexture(
-			const std::string &path) = 0;
+			const std::wstring &path) = 0;
 		virtual std::unique_ptr<AudioFile> loadAudioFile(
-			const std::string &path) = 0;
+			const std::wstring &path) = 0;
 		virtual std::unique_ptr<bomb::AnimatedObject>
 			createAnimatedObject(
-				const std::string &path,
+				const std::wstring &path,
 				irr::core::vector3df pos = {0, 0, 0},
 				irr::core::vector3df scale = {0, 0, 0},
 				irr::core::vector3df rot = {1, 1, 1}) = 0;
 		virtual std::unique_ptr<bomb::StaticObject>
 			createStaticObject(
-				const std::string &path,
+				const std::wstring &path,
 				irr::core::vector3df pos = {0, 0, 0},
 				irr::core::vector3df scale = {0, 0, 0},
 				irr::core::vector3df rot = {1, 1, 1}) = 0;

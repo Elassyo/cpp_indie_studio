@@ -12,10 +12,10 @@ bomb::menu::Menu::Menu(irr::video::IVideoDriver *driver,
 	irr::gui::IGUIEnvironment *gui) :
 	_driver(driver), _gui(gui), _size(0),
 	_buttonRatio(irr::core::vector2df(0.125f, 0.1f)),
-	_buttonBack(driver->getTexture("assets/images/buttonBack.png")),
-	_buttonPressed(driver->getTexture("assets/images/buttonPressed.png")),
-	_font(_gui->getFont("assets/fonts/mario16.xml")),
-	_titleFont(_gui->getFont("assets/fonts/marioColor36.xml")),
+	_buttonBack(driver->getTexture(L"images/buttonBack.png")),
+	_buttonPressed(driver->getTexture(L"images/buttonPressed.png")),
+	_font(_gui->getFont(L"fonts/mario16.xml")),
+	_titleFont(_gui->getFont(L"fonts/marioColor36.xml")),
 	_title(createTitle(L"SUPER\nBOMBERMAN\nBROS."))
 {
 	std::cout << "Create Scene" << std::endl;

@@ -9,7 +9,7 @@
 
 bomb::object::BombFull::BombFull(bomb::IAssetLoader &loader,
 	const irr::core::vector3df &pos) :
-	Power(loader, pos, "assets/models/powers/bombs/bombFull.obj")
+	Power(loader, pos, L"models/powers/bombs/bombFull.obj")
 {
 }
 

@@ -9,7 +9,7 @@
 	#define CPP_INDIE_STUDIO_VERSION_HPP
 
 	#include <string>
-	
+
 	#define LINUX_DEV 0
 	#define LINUX_REL 1
 	#define WINDOWS 2
@@ -20,12 +20,12 @@ namespace bomb {
 	public:
 		static Version GetCurrentVersion();
 
-		const std::string &getAssetsPath() const;
+		const std::wstring &getAssetsPath() const;
 
 	private:
-		explicit Version(const std::string &assetsPath);
+		explicit Version(const std::wstring &assetsPath);
 
-		std::string _assetsPath;
+		std::wstring _assetsPath;
 	};
 }
 

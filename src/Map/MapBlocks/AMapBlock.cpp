@@ -13,11 +13,12 @@ bomb::AMapBlock::AMapBlock(IAssetLoader &loader,
 	const irr::core::vector3df &size,
 	const irr::core::vector3df &rotation,
 	const irr::core::vector3di &mapPos,
-	const std::string &path,
+	const std::wstring &path,
 	size_t hp) :
 	_mapPos(mapPos), _hp(hp)
 {
-	_block = loader.createStaticObject(path, pos, size / BLOCK_OBJ_SIZE, rotation);
+	_block = loader.createStaticObject(path, pos,
+		size / BLOCK_OBJ_SIZE, rotation);
 }
 
 bomb::AMapBlock::AMapBlock()

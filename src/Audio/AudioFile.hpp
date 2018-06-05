@@ -18,7 +18,7 @@ namespace bomb {
 	class AudioFile {
 	public:
 		explicit AudioFile(const char *path);
-		explicit AudioFile(const std::string &path);
+		explicit AudioFile(const std::wstring &path);
 
 		std::size_t getBufferSize() const;
 		int16_t *getBuffer() const;

@@ -14,7 +14,7 @@ bomb::MapBlockBreakable::MapBlockBreakable(
 	const irr::core::vector3df &rotation,
 	const irr::core::vector3di &mapPos) :
 	AMapBlock(loader, pos, scale, rotation, mapPos,
-		"assets/models/blocks/brick.obj", 1)
+		L"models/blocks/brick.obj", 1)
 {
 }
 

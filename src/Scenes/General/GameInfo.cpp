@@ -14,15 +14,15 @@ void bomb::game::GameInfo::createMap(IAssetLoader &loader,
 
 	pattern.dumpMap();
 	_characters[SHYGUY_BLACK] = loader.createAnimatedObject(
-		"assets/models/characters/shyGuy/shyGuyBlack.obj");
+		L"models/characters/shyGuy/shyGuyBlack.obj");
 	_characters[SHYGUY_BLUE] = loader.createAnimatedObject(
-		"assets/models/characters/shyGuy/shyGuyBlue.obj");
+		L"models/characters/shyGuy/shyGuyBlue.obj");
 	_characters[SHYGUY_RED] = loader.createAnimatedObject(
-		"assets/models/characters/shyGuy/shyGuyRed.obj");
+		L"models/characters/shyGuy/shyGuyRed.obj");
 	_characters[SHYGUY_WHITE] = loader.createAnimatedObject(
-		"assets/models/characters/shyGuy/shyGuyWhite.obj");
+		L"models/characters/shyGuy/shyGuyWhite.obj");
 	_characters[SKELEREX] = loader.createAnimatedObject(
-		"assets/models/characters/shyGuy/shyGuyWhite.obj");
+		L"models/characters/shyGuy/shyGuyWhite.obj");
 	_mapSize = pattern.getSize();
 	_map = std::move(pattern.construct(loader,
 		{ 0, 0, 0 }, { 1, 1, 1 }, { 0, 0, 0 }));

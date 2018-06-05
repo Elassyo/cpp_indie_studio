@@ -15,33 +15,33 @@
 #if (BOMB_VERSION == LINUX_DEV)
 bomb::Version bomb::Version::GetCurrentVersion()
 {
-	return Version("./assets/");
+	return Version(L"./assets/");
 }
 #elif (BOMB_VERSION == LINUX_REL)
 bomb::Version bomb::Version::GetCurrentVersion()
 {
-	return Version("/usr/share/bombermario/");
+	return Version(L"/usr/share/bombermario/");
 }
 #elif (BOMB_VERSION == WINDOWS)
-	
+
 	#include <ShlObj.h>
 
 bomb::Version bomb::Version::GetCurrentVersion()
 {
-	TCHAR path[MAX_PATH];
-	SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, path);
-	return Version("/usr/share/bombermario/");
+	TCHAR localAppData[MAX_PATH];
+	SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, localAppData);
+	return Version(std::wstring(localAppData + L"\\BomberMario\\");
 }
 #else
 	#error Invalid build version
 #endif
 
-bomb::Version::Version(const std::string &assetsPath) :
+bomb::Version::Version(const std::wstring &assetsPath) :
 	_assetsPath(assetsPath)
 {
 }
 
-const std::string &bomb::Version::getAssetsPath() const
+const std::wstring &bomb::Version::getAssetsPath() const
 {
 	return _assetsPath;
 }

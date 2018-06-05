@@ -5,7 +5,9 @@
 ** AudioFile.cpp
 */
 
+#include <codecvt>
 #include <cstring>
+#include <locale>
 
 #include "../Exception/Exception.hpp"
 #include "AudioFile.hpp"
@@ -25,8 +27,9 @@ bomb::AudioFile::AudioFile(const char *path)
 	ov_clear(&vf);
 }
 
-bomb::AudioFile::AudioFile(const std::string &path) :
-	AudioFile(path.c_str())
+bomb::AudioFile::AudioFile(const std::wstring &path) :
+	AudioFile(std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>>()
+		.to_bytes(path).c_str())
 {
 }
 
