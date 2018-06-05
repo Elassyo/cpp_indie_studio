@@ -80,6 +80,8 @@ set(SRC_FILES
         src/Scenes/SceneGame/Powers/FireUp.hpp
         src/Scenes/SceneGame/Powers/Power.cpp
         src/Scenes/SceneGame/Powers/Power.hpp
+        src/Scenes/SceneGame/Powers/PowerFactory.cpp
+        src/Scenes/SceneGame/Powers/PowerFactory.hpp
         src/Scenes/SceneGame/Powers/SpeedDown.cpp
         src/Scenes/SceneGame/Powers/SpeedDown.hpp
         src/Scenes/SceneGame/Powers/SpeedUp.cpp
