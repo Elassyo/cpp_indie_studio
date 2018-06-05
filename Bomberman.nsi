@@ -14,12 +14,12 @@
 ;General
 
   ;Name and file
-  Name "Indie Studio"
+  Name "Indie Studio - Bomberman"
 
-  OutFile "indiestudio-setup.exe"
+  OutFile "bomberman-setup.exe"
 
   ;Default installation folder
-  InstallDir "$LOCALAPPDATA\Indie Studio"
+  InstallDir "$LOCALAPPDATA\Bomberman"
 
   ;Request application privileges for Windows Vista
   RequestExecutionLevel user
@@ -52,8 +52,6 @@ Section "Core" SecCore
 
   SetOutPath "$INSTDIR"
 
-  ;ADD YOUR OWN FILES HERE...
-
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
@@ -74,8 +72,6 @@ SectionEnd
 ;Uninstaller Section
 
 Section "Uninstall"
-
-  ;ADD YOUR OWN FILES HERE...
 
   Delete "$INSTDIR\Uninstall.exe"
 

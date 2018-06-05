@@ -17,7 +17,8 @@ bomb::GameEngine::GameEngine(const std::wstring &winName, uint w, uint h,
 		false, false, false, &_evtHandler)),
 	_videoDriver(_device->getVideoDriver()),
 	_sceneManager(_device->getSceneManager()),
-	_audioDev(new AudioDevice())
+	_audioDev(new AudioDevice()),
+	_camera(nullptr)
 {
 	_device->setWindowCaption(winName.c_str());
 }
@@ -101,12 +102,16 @@ void bomb::GameEngine::deleteObject(std::unique_ptr<bomb::IObject> obj)
 	_sceneManager->addToDeletionQueue(obj->getSceneNode());
 }
 
-void bomb::GameEngine::addCamera(const irr::core::vector3df &pos,
+irr::scene::ICameraSceneNode *bomb::GameEngine::addCamera(
+	const irr::core::vector3df &pos,
 	const irr::core::vector3df &rot)
 {
+	if (_camera)
+		throw Exception("GameEngine", "Camera already created");
 	_camera = _sceneManager->addCameraSceneNode();
 	if (!_camera)
 		throw Exception("GameEngine", "Can't create camera");
 	_camera->setPosition(pos);
 	_camera->setRotation(rot);
+	return _camera;
 }

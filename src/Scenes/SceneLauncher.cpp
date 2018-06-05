@@ -24,11 +24,13 @@ void bomb::scene::SceneLauncher::launchScene(const std::string &sceneName)
 	if (sts != BEGIN)
 		throw Exception("SceneLauncher", "Cannot launch scene "
 				+ sceneName);
+	_gameEngine.listenEventScene(gs);
 	while (gs->loop(_gameEngine) == CONTINUE) {
 		if (!_gameEngine.isRunning())
 			break;
 		_gameEngine.refresh();
 	}
+	_gameEngine.listenEventScene(nullptr);
 	std::string next = gs->nextScene();
 	if (next.empty())
 		return;

@@ -2,10 +2,16 @@ cmake_minimum_required(VERSION 3.9)
 project(cpp_indie_studio)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -Wextra")
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    add_compile_options("-W" "-Wall" "-Wextra")
+    add_compile_options("$<$<CONFIG:DEBUG>:-DBOMB_VERSION=LINUX_DEV>")
+    add_compile_options("$<$<CONFIG:RELEASE>:-DBOMB_VERSION=LINUX_REL>")
+elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+    add_compile_options("/DBOMB_VERSION=WINDOWS")
+endif()
 
 set(SRC_FILES
         src/Audio/AudioDevice.cpp
@@ -16,17 +22,42 @@ set(SRC_FILES
         src/Exception/Exception.cpp
         src/Exception/Exception.hpp
 
-        src/Interface/IEventScene.hpp
         src/Interface/IAssetLoader.hpp
+        src/Interface/IEventScene.hpp
         src/Interface/IGameScene.hpp
         src/Interface/IObject.hpp
         src/Interface/IRenderable.hpp
         src/Interface/IRenderWindow.hpp
         src/Interface/ISerializable.hpp
         src/Interface/ITransformable.hpp
-        )
 
-set(SRC_SCENE
+        src/Map/Map.cpp
+        src/Map/Map.hpp
+        src/Map/MapBlocks/AMapBlock.cpp
+        src/Map/MapBlocks/AMapBlock.hpp
+        src/Map/MapBlocks/MapBlockBreakable.cpp
+        src/Map/MapBlocks/MapBlockBreakable.hpp
+        src/Map/MapBlocks/MapBlockUnbreakable.cpp
+        src/Map/MapBlocks/MapBlockUnbreakable.hpp
+        src/Map/MapConstructor.cpp
+        src/Map/MapConstructor.hpp
+        src/Map/MapGenerator.cpp
+        src/Map/MapGenerator.hpp
+
+        src/Menu/GraphicButton.cpp
+        src/Menu/GraphicButton.hpp
+        src/Menu/GraphicElement.cpp
+        src/Menu/GraphicElement.hpp
+        src/Menu/GraphicText.cpp
+        src/Menu/GraphicText.hpp
+        src/Menu/Menu.cpp
+        src/Menu/Menu.hpp
+
+        src/Render/EventHandler.cpp
+        src/Render/EventHandler.hpp
+        src/Render/GameEngine.cpp
+        src/Render/GameEngine.hpp
+
         src/Scenes/General/AActivator.cpp
         src/Scenes/General/AActivator.hpp
         src/Scenes/General/Clock.cpp
@@ -37,64 +68,41 @@ set(SRC_SCENE
         src/Scenes/General/PlayerInfo.hpp
         src/Scenes/SceneGame/Bomb.cpp
         src/Scenes/SceneGame/Bomb.hpp
-        src/Scenes/SceneGame/Powers/Power.cpp
-        src/Scenes/SceneGame/Powers/Power.hpp
-        src/Scenes/SceneGame/Powers/SpeedUp.cpp
-        src/Scenes/SceneGame/Powers/SpeedUp.hpp
-        src/Scenes/SceneGame/Powers/SpeedDown.cpp
-        src/Scenes/SceneGame/Powers/SpeedDown.hpp
-        src/Scenes/SceneGame/Powers/FireUp.cpp
-        src/Scenes/SceneGame/Powers/FireUp.hpp
-        src/Scenes/SceneGame/Powers/FireDown.cpp
-        src/Scenes/SceneGame/Powers/FireDown.hpp
-        src/Scenes/SceneGame/Powers/BombUp.cpp
-        src/Scenes/SceneGame/Powers/BombUp.hpp
         src/Scenes/SceneGame/Powers/BombDown.cpp
         src/Scenes/SceneGame/Powers/BombDown.hpp
-        src/Scenes/SceneGame/Powers/WallPass.cpp
-        src/Scenes/SceneGame/Powers/WallPass.hpp
         src/Scenes/SceneGame/Powers/BombPass.cpp
         src/Scenes/SceneGame/Powers/BombPass.hpp
-        src/Scenes/SceneGame/SceneGame.hpp
+        src/Scenes/SceneGame/Powers/BombUp.cpp
+        src/Scenes/SceneGame/Powers/BombUp.hpp
+        src/Scenes/SceneGame/Powers/FireDown.cpp
+        src/Scenes/SceneGame/Powers/FireDown.hpp
+        src/Scenes/SceneGame/Powers/FireUp.cpp
+        src/Scenes/SceneGame/Powers/FireUp.hpp
+        src/Scenes/SceneGame/Powers/Power.cpp
+        src/Scenes/SceneGame/Powers/Power.hpp
+        src/Scenes/SceneGame/Powers/SpeedDown.cpp
+        src/Scenes/SceneGame/Powers/SpeedDown.hpp
+        src/Scenes/SceneGame/Powers/SpeedUp.cpp
+        src/Scenes/SceneGame/Powers/SpeedUp.hpp
+        src/Scenes/SceneGame/Powers/WallPass.cpp
+        src/Scenes/SceneGame/Powers/WallPass.hpp
         src/Scenes/SceneGame/SceneGame.cpp
+        src/Scenes/SceneGame/SceneGame.hpp
         src/Scenes/SceneHomeMenu/SceneHomeMenu.cpp
         src/Scenes/SceneHomeMenu/SceneHomeMenu.hpp
         src/Scenes/SceneLauncher.cpp
         src/Scenes/SceneLauncher.hpp
-        src/Map/Map.cpp
-        src/Map/Map.hpp
-        src/Map/MapConstructor.cpp
-        src/Map/MapConstructor.hpp
-        src/Map/MapGenerator.cpp
-        src/Map/MapGenerator.hpp
-        src/Map/MapBlocks/AMapBlock.cpp
-        src/Map/MapBlocks/AMapBlock.hpp
-        src/Map/MapBlocks/MapBlockBreakable.cpp
-        src/Map/MapBlocks/MapBlockBreakable.hpp
-        src/Map/MapBlocks/MapBlockUnbreakable.cpp
-        src/Map/MapBlocks/MapBlockUnbreakable.hpp
-        src/Menu/GraphicButton.cpp
-        src/Menu/GraphicButton.hpp
-        src/Menu/GraphicElement.cpp
-        src/Menu/GraphicElement.hpp
-        src/Menu/GraphicText.cpp
-        src/Menu/GraphicText.hpp
-        src/Menu/Menu.cpp
-        src/Menu/Menu.hpp
-        src/AObject.cpp
-        src/AObject.hpp
-        src/Render/EventHandler.cpp
-        src/Render/EventHandler.hpp
-        src/Render/GameEngine.cpp
-        src/Render/GameEngine.hpp
+
         src/AnimatedObject.cpp
         src/AnimatedObject.hpp
+        src/AObject.cpp
+        src/AObject.hpp
         src/StaticObject.cpp
         src/StaticObject.hpp
-        )
+        src/Version.cpp
+        src/Version.hpp)
 
 add_executable(bomberman
-        ${SRC_SCENE}
         ${SRC_FILES}
         src/Bomberman.cpp)
 
@@ -105,3 +113,6 @@ add_executable(tests_map_gen
 target_link_libraries(tests_map_gen Irrlicht openal vorbisfile)
 
 target_link_libraries(bomberman Irrlicht openal vorbisfile)
+
+install(TARGETS bomberman DESTINATION /usr/bin/ CONFIGURATIONS Release)
+install(DIRECTORY assets/ DESTINATION /usr/share/bomberman CONFIGURATIONS Release)
