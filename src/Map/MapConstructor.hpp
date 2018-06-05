@@ -30,7 +30,7 @@ namespace bomb {
 			const irr::core::vector3df &size,
 			const irr::core::vector3df &rotation);
 		void dumpMap();
-
+		int getSize();
 	private:
 		unsigned int _mapSize;
 		std::vector<std::pair<irr::core::vector3di, Block>> _mapBlocks;

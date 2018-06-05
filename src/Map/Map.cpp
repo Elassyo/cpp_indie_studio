@@ -21,3 +21,10 @@ bomb::Map::Map(const std::vector<std::shared_ptr<bomb::AMapBlock>> &_blocks)
 	: _blocks(_blocks)
 {
 }
+
+void bomb::Map::setTextures(irr::video::ITexture *texture)
+{
+	for (auto &blocks : _blocks) {
+		blocks->setTextures(texture);
+	}
+}

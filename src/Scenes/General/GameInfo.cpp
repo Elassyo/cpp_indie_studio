@@ -7,9 +7,12 @@
 
 #include "GameInfo.hpp"
 
-bomb::game::GameInfo::GameInfo(bomb::IAssetLoader &loader) :
-	_loader(loader), _mapGenerator(10)
+void bomb::game::GameInfo::createMap(IAssetLoader &loader,
+				irr::video::ITexture *texture)
 {
+	bomb::MapConstructor pattern = MapGenerator(11).generate();
+
+	pattern.dumpMap();
 	_characters.resize(5);
 	_characters[SHYGUY_BLACK] = loader.createAnimatedObject(
 		"assets/models/characters/shyGuy/shyGuyBlack.obj");
@@ -20,17 +23,12 @@ bomb::game::GameInfo::GameInfo(bomb::IAssetLoader &loader) :
 	_characters[SHYGUY_WHITE] = loader.createAnimatedObject(
 		"assets/models/characters/shyGuy/shyGuyWhite.obj");
 	_characters[SKELEREX] = loader.createAnimatedObject(
-		"assets/models/characters/skelerex/skelerex.obj");
-	createMap(loader);
+		"assets/models/characters/shyGuy/shyGuyWhite.obj");
+	_mapSize = pattern.getSize();
+	_map = std::move(pattern.construct(loader,
+		{0, 0, 0}, {1, 1, 1}, {0, 0, 0}));
+	_map->setTextures(texture);
 	reset();
-}
-
-void bomb::game::GameInfo::createMap(IAssetLoader &loader)
-{
-	bomb::MapConstructor pattern = _mapGenerator.generate();
-
-	pattern.dumpMap();
-	_map = std::move(pattern.construct(loader, {0, 0, 0}, {10, 10, 1}, {0, 0, 0}));
 }
 
 void bomb::game::GameInfo::reset()
@@ -39,4 +37,10 @@ void bomb::game::GameInfo::reset()
 	_players[1].setCharacterIndex(SHYGUY_BLUE);
 	_players[2].setCharacterIndex(SHYGUY_RED);
 	_players[3].setCharacterIndex(SHYGUY_WHITE);
+}
+
+
+int bomb::game::GameInfo::getMapSize() const
+{
+	return _mapSize;
 }

@@ -12,16 +12,12 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
 	//Testing loader (Temporary)
 	_blocksTextures = loader.loadTexture
 		("assets/models/blocks/spritesheet.png");
-	loader.createStaticObject("assets/models/blocks/brick.obj", {0, 0, 0},
-				  {0, 0, 0})
-		->setTexture(0, _blocksTextures);
-	loader.createStaticObject("assets/models/blocks/brick.obj", {0, 2, 0},
-				  {0, 0, 0}, {0.1, 0.1, 0.1})->getPos();
-	loader.addCamera(irr::core::vector3df(0, 10, -20),
-			irr::core::vector3df(0, 5, 5));
-	_bombs.emplace_back(std::make_unique<bomb::object::Bomb>
-	        (bomb::object::Bomb(loader, {0, 0, 0}, 3000)));
-	//
+	_gameInfo.createMap(loader, _blocksTextures);
+	loader.addCamera(irr::core::vector3df(((float)_gameInfo.getMapSize())/2,
+					10, ((float)_gameInfo.getMapSize())/2),
+			irr::core::vector3df(_gameInfo.getMapSize()/2, 0,
+					_gameInfo.getMapSize()/2));
+
 	return BEGIN;
 }
 
@@ -35,11 +31,8 @@ bomb::scene::SceneGame::loop(bomb::IAssetLoader &loader)
 void bomb::scene::SceneGame::explodeBombs(
 	__attribute__((unused))bomb::IAssetLoader &loader)
 {
-	//Temporary
-	bomb::game::GameInfo i(loader);
-
 	for (auto &bomb : _bombs)
-		bomb.get()->tryToActivate(i);
+		bomb.get()->tryToActivate(_gameInfo);
 }
 
 void bomb::scene::SceneGame::save()

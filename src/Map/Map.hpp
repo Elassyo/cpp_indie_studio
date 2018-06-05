@@ -22,7 +22,7 @@ namespace bomb {
 
 		void explode(irr::core::vector3di pos, size_t range,
 			size_t dammage);
-
+		void setTextures(irr::video::ITexture *texture);
 	private:
 		std::vector<std::shared_ptr<bomb::AMapBlock>> _blocks;
 	};

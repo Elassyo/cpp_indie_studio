@@ -9,7 +9,8 @@
 #include "../Exception/Exception.hpp"
 #include "MapGenerator.hpp"
 
-const std::unordered_map<bomb::MapGenerator::Type, bomb::MapConstructor (bomb::MapGenerator::*)()>
+const std::unordered_map<bomb::MapGenerator::Type,
+	bomb::MapConstructor (bomb::MapGenerator::*)()>
 	bomb::MapGenerator::typeGenerator = {
 	{bomb::MapGenerator::RANDOM, &bomb::MapGenerator::generateRandom},
 	{bomb::MapGenerator::BASIC, &bomb::MapGenerator::generateBasic},
@@ -19,6 +20,8 @@ bomb::MapGenerator::MapGenerator(unsigned int size, unsigned int seed,
 	bomb::MapGenerator::Type type) :
 	_seed(seed), _size(size), _type(type)
 {
+	if (size < 7)
+		throw bomb::Exception("Genereator", "Invalide Map Size");
 	if (_type == END_VALUE)
 		throw bomb::Exception("Genereator", "Invalide Type");
 }

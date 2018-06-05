@@ -12,6 +12,8 @@
 #include <irrlicht/vector3d.h>
 #include "src/Interface/IAssetLoader.hpp"
 
+#define BLOCK_OBJ_SIZE 2
+
 class unique_ptr;
 namespace bomb {
 	class AMapBlock {
@@ -35,6 +37,7 @@ namespace bomb {
 
 		const irr::core::vector3di &getMapPos() const;
 		size_t getHp() const;
+		void setTextures(irr::video::ITexture *texture);
 
 	protected:
 		irr::core::vector3di _mapPos;
