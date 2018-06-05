@@ -14,7 +14,7 @@
 
 std::map<bomb::VersionID,bomb::Version> bomb::Version::Versions = {
 	{ LINUX_DEV, Version("./assets/") },
-	{ LINUX_REL, Version("/usr/share/bomberman") }
+	{ LINUX_REL, Version("/usr/share/bomberman/") }
 };
 
 const bomb::Version &bomb::Version::GetVersion(VersionID version)
