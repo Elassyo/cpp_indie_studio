@@ -8,9 +8,8 @@
 #include "GraphicText.hpp"
 
 bomb::menu::GraphicText::GraphicText(irr::gui::IGUIStaticText *text,
-				     irr::core::vector2df pos,
-				     MenuPage page) :
-	GraphicElement(text, pos, page)
+				     irr::core::vector2df pos) :
+	GraphicElement(text, pos)
 {
 	text->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
 	text->setTextRestrainedInside(false);

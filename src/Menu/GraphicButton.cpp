@@ -8,9 +8,8 @@
 #include "GraphicButton.hpp"
 
 bomb::menu::GraphicButton::GraphicButton(irr::gui::IGUIButton *button,
-					 irr::core::vector2df pos,
-					 MenuPage page) :
-	GraphicElement(button, pos, page), _event(nullptr)
+					 irr::core::vector2df pos) :
+	GraphicElement(button, pos), _event(nullptr)
 {
 	button->setScaleImage(true);
 	button->setDrawBorder(false);
@@ -34,12 +33,12 @@ void bomb::menu::GraphicButton::setTexture(irr::video::ITexture *texture,
 	((irr::gui::IGUIButton *)_element)->setPressedImage(pressed);
 }
 
-void (bomb::menu::Menu::*bomb::menu::GraphicButton::getEvent() const)()
+const std::function<void()> &bomb::menu::GraphicButton::getEvent() const
 {
 	return _event;
 }
 
-void bomb::menu::GraphicButton::setEvent(void (bomb::menu::Menu::*event)())
+void bomb::menu::GraphicButton::setEvent(std::function <void ()> &event)
 {
 	_event = event;
 }

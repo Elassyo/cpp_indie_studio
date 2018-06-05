@@ -8,33 +8,23 @@
 #ifndef CPP_TEST_STUDIO_GRAPHICBUTTON_HPP
 	#define CPP_TEST_STUDIO_GRAPHICBUTTON_HPP
 
+	#include <functional>
 	#include "GraphicElement.hpp"
 
 namespace bomb {
 	namespace menu {
-		class Menu;
-
-		struct ButtonInfos {
-			wchar_t *text;
-			irr::core::vector2df pos;
-			MenuPage page;
-			void (bomb::menu::Menu::*event)();
-		};
-
 		class GraphicButton : public GraphicElement {
 		public:
 			GraphicButton(irr::gui::IGUIButton *button,
-				      irr::core::vector2df pos,
-				      MenuPage page = UNDEFINED);
+				      irr::core::vector2df pos);
 			bool isPressed() const;
 			void setFont(irr::gui::IGUIFont *font);
 			void setTexture(irr::video::ITexture *texture,
 					irr::video::ITexture *pressed);
-			void (bomb::menu::Menu::*getEvent() const )();
-			void setEvent(void (bomb::menu::Menu::*_event)());
-
+			void setEvent(std::function <void ()> &);
+			const std::function<void()> &getEvent() const;
 		private:
-			void (bomb::menu::Menu::*_event)();
+			std::function <void ()> _event;
 		};
 	}
 }

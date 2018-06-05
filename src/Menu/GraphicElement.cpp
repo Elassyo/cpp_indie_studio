@@ -8,15 +8,9 @@
 #include "GraphicElement.hpp"
 
 bomb::menu::GraphicElement::GraphicElement(irr::gui::IGUIElement *element,
-					   irr::core::vector2df pos,
-					   MenuPage page) :
-	_element(element), _pos(pos), _page(page)
+					   irr::core::vector2df pos) :
+	_element(element), _pos(pos)
 {
-}
-
-bool bomb::menu::GraphicElement::isOnPage(MenuPage page) const
-{
-	return _page == UNDEFINED && page != CLOSE ? true : _page == page;
 }
 
 void bomb::menu::GraphicElement::setVisibility(bool visibility)
@@ -33,14 +27,3 @@ void bomb::menu::GraphicElement::update(irr::core::vector2di size,
 		{(int)(screenSize.X * _pos.X - size.X / 2),
 		 (int)(screenSize.Y * _pos.Y - size.Y / 2)});
 }
-
-void bomb::menu::GraphicElement::setPage(MenuPage page)
-{
-	_page = page;
-}
-
-bomb::menu::MenuPage bomb::menu::GraphicElement::getPage() const
-{
-	return _page;
-}
-

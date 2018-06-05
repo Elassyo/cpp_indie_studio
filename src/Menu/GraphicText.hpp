@@ -15,8 +15,7 @@ namespace bomb {
 		class GraphicText : public GraphicElement {
 		public:
 			GraphicText(irr::gui::IGUIStaticText *text,
-				    irr::core::vector2df pos,
-				    MenuPage page = UNDEFINED);
+				    irr::core::vector2df pos);
 			void setFont(irr::gui::IGUIFont *font);
 		};
 	}

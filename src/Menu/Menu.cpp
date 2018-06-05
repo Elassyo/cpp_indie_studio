@@ -8,8 +8,8 @@
 #include "Menu.hpp"
 
 bomb::menu::Menu::Menu(irr::video::IVideoDriver *driver,
-		 irr::gui::IGUIEnvironment *gui, MenuPage page) :
-	_driver(driver), _gui(gui), _page(page),
+		 irr::gui::IGUIEnvironment *gui) :
+	_driver(driver), _gui(gui), _size(0),
 	_buttonRatio(irr::core::vector2df(.125, .1)),
 	_buttonBack(driver->getTexture("assets/images/buttonBack.png")),
 	_buttonPressed(driver->getTexture("assets/images/buttonPressed.png")),
@@ -17,37 +17,24 @@ bomb::menu::Menu::Menu(irr::video::IVideoDriver *driver,
 	_titleFont(_gui->getFont("assets/fonts/marioColor36.xml")),
 	_title(createTitle(L"SUPER\nBOMBERMAN\nBROS."))
 {
-	const irr::core::vector2di buttonSize = getButtonSize();
-	std::array<ButtonInfos, 6> buttonsInfos = getButtonsInfos();
-
 	_gui->getSkin()->setFont(_font);
 	_gui->getSkin()->setColor(irr::gui::EGDC_BUTTON_TEXT,
 				  irr::video::SColor(255, 255, 255, 255));
-	for (ButtonInfos infos : buttonsInfos) {
-		GraphicButton button(GraphicButton(
-			createButton({0, 0}, buttonSize, infos.text),
-			infos.pos, infos.page));
-		button.setEvent(infos.event);
-		button.setTexture(_buttonBack, _buttonPressed);
-		_buttons.emplace_back(button);
-	}
-	updateButtons();
+	updateButtons(true);
 }
 
-std::array<bomb::menu::ButtonInfos, 6> bomb::menu::Menu::getButtonsInfos() const
+void bomb::menu::Menu::addButton(std::function <void ()> &event,
+				const std::string text,
+				irr::core::vector2df pos)
 {
-	return std::array<ButtonInfos, 6>
-		{{{(wchar_t *)L"PLAY", {0.5, 0.35}, MAIN, nullptr},
-			 {(wchar_t *)L"OPTION", {0.5, 0.55}, MAIN,
-				 &bomb::menu::Menu::goToOption},
-			 {(wchar_t *)L"EXIT", {0.5, 0.75}, MAIN,
-				 &bomb::menu::Menu::closeMenu},
-			 {(wchar_t *)L"Test", {0.5, 0.55}, OPTION, nullptr},
-			 {(wchar_t *)L"Back to main", {0.5, 0.75}, OPTION,
-				 &bomb::menu::Menu::goToMain},
-			 {(wchar_t *)L"MENU", {0.5, 0.9}, CLOSE,
-				 &bomb::menu::Menu::goToMain}}};
-
+	irr::gui::IGUIButton * irrButton = createButton(
+		{0, 0}, getButtonSize(),
+		reinterpret_cast<const wchar_t *>(text.c_str()));
+	GraphicButton button(GraphicButton(irrButton, pos));
+	button.setEvent(event);
+	button.setTexture(_buttonBack, _buttonPressed);
+	_buttons.emplace_back(button);
+	updateButtons(true);
 }
 
 bomb::menu::GraphicText bomb::menu::Menu::createTitle(const wchar_t *title)
@@ -57,31 +44,22 @@ bomb::menu::GraphicText bomb::menu::Menu::createTitle(const wchar_t *title)
 	return text;
 }
 
-irr::gui::IGUIButton *bomb::menu::Menu::createButton(irr::core::vector2di pos,
-					       irr::core::vector2di size,
-					       const wchar_t *text)
+irr::gui::IGUIButton *bomb::menu::Menu::createButton(
+	irr::core::vector2di pos, irr::core::vector2di size,
+	const wchar_t *text)
 {
 	return _gui->addButton({pos.X, pos.Y, pos.X + size.X, pos.Y + size.Y},
 			       nullptr, -1, text);
 }
 
-void bomb::menu::Menu::changePage(MenuPage page)
-{
-	if (page == UNDEFINED)
-		_page = _page == CLOSE ? MAIN : CLOSE;
-	else
-		_page = page;
-	updateButtons();
-}
-
 void bomb::menu::Menu::handleEvent()
 {
-	for (GraphicButton button : _buttons)
+	for (auto &button : _buttons)
 		if (button.isPressed() && button.getEvent())
-			(*this.*button.getEvent())();
+			button.getEvent()();
 }
 
-void bomb::menu::Menu::updateButtons()
+void bomb::menu::Menu::updateButtons(bool areVisible)
 {
 	const irr::core::vector2di buttonSize = getButtonSize();
 	const irr::core::vector2di screenSize =
@@ -89,9 +67,9 @@ void bomb::menu::Menu::updateButtons()
 		 (int)_driver->getScreenSize().Height};
 
 	_title.update({1, 1}, screenSize);
-	_title.setVisibility(_title.isOnPage(_page));
-	for (GraphicButton &button : _buttons) {
-		button.setVisibility(button.isOnPage(_page));
+	_title.setVisibility(areVisible);
+	for (auto &button : _buttons) {
+		button.setVisibility(areVisible);
 		button.update(buttonSize, screenSize);
 	}
 }
@@ -102,19 +80,4 @@ irr::core::vector2di bomb::menu::Menu::getButtonSize() const
 
 	return {(int)(_buttonRatio.X * screenSize.Width),
 		(int)(_buttonRatio.Y *screenSize.Height)};
-}
-
-void bomb::menu::Menu::goToMain()
-{
-	changePage(MAIN);
-}
-
-void bomb::menu::Menu::goToOption()
-{
-	changePage(OPTION);
-}
-
-void bomb::menu::Menu::closeMenu()
-{
-	changePage(CLOSE);
 }
