@@ -11,6 +11,6 @@ cmake-*
 *.gcda
 *.gcno
 
-/bombermario
+/bomberman
 /win/bombermario.exe
 /win/bombermario-setup.exe

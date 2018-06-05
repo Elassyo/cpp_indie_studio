@@ -28,8 +28,7 @@ $(BUILD_DIR_REL):
 	$(MAKE) -C . SRC_DIR=$(abspath .) BUILD_DIR=$@ BUILD_TYPE=Release cmake-gen
 
 $(NAME): | $(BUILD_DIR_DBG)
-	$(CMAKE) --build $(BUILD_DIR_DBG) --target $@
-	cp $(BUILD_DIR_DBG)/$@ $@
+	$(CMAKE) --build $(BUILD_DIR_DBG) --target bombermario
 
 install: | $(BUILD_DIR_REL)
 	$(CMAKE) --build $(BUILD_DIR_REL) --target install
