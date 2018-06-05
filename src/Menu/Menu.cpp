@@ -25,13 +25,12 @@ bomb::menu::Menu::Menu(irr::video::IVideoDriver *driver,
 	updateButtons(true);
 }
 
-void bomb::menu::Menu::addButton(std::function <void ()> &event,
+void bomb::menu::Menu::addButton(std::function <void ()> event,
 				const std::string text,
 				irr::core::vector2df pos)
 {
 	irr::gui::IGUIButton * irrButton = createButton(
-		{0, 0}, getButtonSize(),
-		reinterpret_cast<const wchar_t *>(text.c_str()));
+		{0, 0}, getButtonSize(),(const wchar_t*)text.c_str());
 	GraphicButton button(GraphicButton(irrButton, pos));
 	button.setEvent(event);
 	button.setTexture(_buttonBack, _buttonPressed);
