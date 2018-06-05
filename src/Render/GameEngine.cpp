@@ -6,6 +6,7 @@
 //
 
 #include <memory>
+#include <src/Menu/Menu.hpp>
 
 #include "../Exception/Exception.hpp"
 #include "GameEngine.hpp"
@@ -88,6 +89,11 @@ std::unique_ptr<bomb::StaticObject> bomb::GameEngine::createStaticObject(
 	ptr->setRot(rot);
 	ptr->setScale(scale);
 	return ptr;
+}
+
+std::unique_ptr<bomb::menu::Menu> bomb::GameEngine::createMenu()
+{
+	return std::make_unique<bomb::menu::Menu>(_videoDriver, loadGui());
 }
 
 void bomb::GameEngine::deleteObject(std::unique_ptr<bomb::IObject> obj)

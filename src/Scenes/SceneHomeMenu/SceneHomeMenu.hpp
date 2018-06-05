@@ -8,7 +8,8 @@
 #ifndef CPP_INDIE_STUDIO_SCENEHOMEMENU_HPP
 	#define CPP_INDIE_STUDIO_SCENEHOMEMENU_HPP
 
-	#include "../../Interface/IGameScene.hpp"
+#include <src/Menu/Menu.hpp>
+#include "../../Interface/IGameScene.hpp"
 
 namespace bomb {
 	namespace scene {
@@ -23,6 +24,8 @@ namespace bomb {
 			void clean() override;
 			std::string nextScene() override;
 			bool onEvent(const irr::SEvent &event) override;
+		private:
+			std::unique_ptr<bomb::menu::Menu> _menu;
 		};
 	}
 }

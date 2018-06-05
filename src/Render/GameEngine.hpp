@@ -46,10 +46,10 @@ namespace bomb {
 			irr::core::vector3df pos,
 			irr::core::vector3df rot,
 			irr::core::vector3df scale) override;
+		std::unique_ptr<menu::Menu> createMenu() override;
 		void deleteObject(std::unique_ptr<IObject> obj) override;
 		void addCamera(const irr::core::vector3df &pos,
 			       const irr::core::vector3df &rot) override;
-
 	private:
 		EventHandler _evtHandler;
 		irr::IrrlichtDevice *_device;

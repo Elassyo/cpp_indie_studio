@@ -5,6 +5,7 @@
 // Created by Gregory EPLE
 //
 
+#include <iostream>
 #include "Menu.hpp"
 
 bomb::menu::Menu::Menu(irr::video::IVideoDriver *driver,
@@ -17,6 +18,7 @@ bomb::menu::Menu::Menu(irr::video::IVideoDriver *driver,
 	_titleFont(_gui->getFont("assets/fonts/marioColor36.xml")),
 	_title(createTitle(L"SUPER\nBOMBERMAN\nBROS."))
 {
+	std::cout << "Create Scene" << std::endl;
 	_gui->getSkin()->setFont(_font);
 	_gui->getSkin()->setColor(irr::gui::EGDC_BUTTON_TEXT,
 				  irr::video::SColor(255, 255, 255, 255));

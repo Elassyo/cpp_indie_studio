@@ -5,11 +5,15 @@
 // SceneLauncher.cpp
 //
 
+#include <iostream>
 #include "SceneHomeMenu.hpp"
 
 bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(
-	__attribute__((unused))IAssetLoader &loader)
+	IAssetLoader &loader)
 {
+	std::cout << "button" << std::endl;
+	_menu = loader.createMenu();
+	_menu.get()->updateButtons(true);
 	return BEGIN;
 }
 
