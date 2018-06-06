@@ -6,7 +6,7 @@
 //
 
 #include <memory>
-
+#include <utility>
 #include "../Exception/Exception.hpp"
 #include "../Menu/Menu.hpp"
 #include "GameEngine.hpp"
@@ -19,7 +19,6 @@ bomb::GameEngine::GameEngine(const std::wstring &winName,
 	_videoDriver(_device->getVideoDriver()),
 	_sceneManager(_device->getSceneManager()),
 	_camera(nullptr),
-	_audioDev(new AudioDevice()),
 	_assetsPath(Version::GetCurrentVersion().getAssetsPath())
 {
 	_device->setWindowCaption(winName.c_str());
@@ -38,7 +37,7 @@ bool bomb::GameEngine::isRunning() const
 void bomb::GameEngine::listenEventScene(
 	std::shared_ptr<bomb::scene::IEventScene> scene)
 {
-	_evtHandler.injectScene(scene);
+	_evtHandler.injectScene(std::move(scene));
 }
 
 void bomb::GameEngine::refresh()
@@ -60,10 +59,9 @@ irr::video::ITexture *bomb::GameEngine::loadTexture(const std::string &path)
 	return _videoDriver->getTexture((_assetsPath + path).c_str());
 }
 
-std::unique_ptr<bomb::AudioFile> bomb::GameEngine::loadAudioFile(
-	const std::string &path)
+void bomb::GameEngine::loadAudioFile(const std::string &path)
 {
-	return std::make_unique<AudioFile>(path);
+	_audioMgr.loadAudioFile(_assetsPath + path);
 }
 
 irr::gui::IGUIFont *bomb::GameEngine::loadFont(const std::string &path)
