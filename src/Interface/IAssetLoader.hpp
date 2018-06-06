@@ -12,7 +12,7 @@
 
 	#include <irrlicht/irrlicht.h>
 
-	#include "../Audio/AudioFile.hpp"
+	#include "../Audio/AudioBuffer.hpp"
 
 	#include "../AnimatedObject.hpp"
 
@@ -29,8 +29,7 @@ namespace bomb {
 		virtual irr::gui::IGUIEnvironment *getGui() = 0;
 		virtual irr::video::ITexture *loadTexture(
 			const std::string &path) = 0;
-		virtual std::unique_ptr<AudioFile> loadAudioFile(
-			const std::string &path) = 0;
+		virtual void loadAudioFile(const std::string &path) = 0;
 		virtual irr::gui::IGUIFont *loadFont(
 			const std::string &path) = 0;
 		virtual std::unique_ptr<bomb::AnimatedObject>

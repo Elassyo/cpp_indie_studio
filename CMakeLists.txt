@@ -31,10 +31,10 @@ elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 endif()
 
 set(SRC_FILES
-        src/Audio/AudioDevice.cpp
-        src/Audio/AudioDevice.hpp
-        src/Audio/AudioFile.cpp
-        src/Audio/AudioFile.hpp
+        src/Audio/AudioBuffer.cpp
+        src/Audio/AudioBuffer.hpp
+        src/Audio/AudioManager.cpp
+        src/Audio/AudioManager.hpp
 
         src/Exception/Exception.cpp
         src/Exception/Exception.hpp
