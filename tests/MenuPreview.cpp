@@ -23,7 +23,7 @@ int main()
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
 	guienv->addStaticText(L"Hello World! This is the Irrlicht Software renderer!",
 		rect<s32>(10,10,260,22), true);
-	IAnimatedMesh* mesh = smgr->getMesh("assets/models/blocks/brick.obj");
+	IAnimatedMesh* mesh = smgr->getMesh("models/blocks/brick.obj");
 	if (!mesh)
 	{
 		device->drop();
@@ -35,7 +35,7 @@ int main()
 		node->setMaterialFlag(EMF_LIGHTING, false);
 		node->setMD2Animation(scene::EMAT_STAND);
 		node->setMaterialTexture( 0, driver->getTexture
-			("assets/models/blocks/spritesheet.png") );
+			("models/blocks/spritesheet.png") );
 	}
 	smgr->addCameraSceneNode(0, vector3df(0,30,-40), vector3df(0,5,0));
 	bomb::menu::Menu menu(driver, guienv);
