@@ -19,7 +19,8 @@ bomb::GameEngine::GameEngine(const std::wstring &winName,
 	_videoDriver(_device->getVideoDriver()),
 	_sceneManager(_device->getSceneManager()),
 	_camera(nullptr),
-	_audioDev(new AudioDevice())
+	_audioDev(new AudioDevice()),
+	_path(Version::GetCurrentVersion().getAssetsPath())
 {
 	_device->setWindowCaption(winName.c_str());
 }
@@ -69,9 +70,10 @@ std::unique_ptr<bomb::AnimatedObject> bomb::GameEngine::createAnimatedObject(
 	irr::core::vector3df scale,
 	irr::core::vector3df rot)
 {
+	std::string done = _path + path;
 	auto ptr = std::make_unique<bomb::AnimatedObject>(
 		_sceneManager->addAnimatedMeshSceneNode(
-			_sceneManager->getMesh(path.c_str())));
+			_sceneManager->getMesh(done.c_str())));
 	ptr->setPos(pos);
 	ptr->setRot(rot);
 	ptr->setScale(scale);
@@ -84,9 +86,10 @@ std::unique_ptr<bomb::StaticObject> bomb::GameEngine::createStaticObject(
 	irr::core::vector3df scale,
 	irr::core::vector3df rot)
 {
+	std::string done = _path + path;
 	auto ptr = std::make_unique<bomb::StaticObject>(
 		_sceneManager->addMeshSceneNode(
-			_sceneManager->getMesh(path.c_str())));
+			_sceneManager->getMesh(done.c_str())));
 	ptr->setPos(pos);
 	ptr->setRot(rot);
 	ptr->setScale(scale);
