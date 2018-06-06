@@ -46,3 +46,8 @@ irr::scene::ISceneNode *bomb::AObject::getSceneNode() const
 {
 	return _node;
 }
+
+void bomb::AObject::setVisible(bool visibility)
+{
+	_node->setVisible(visibility);
+}

@@ -22,8 +22,10 @@ void bomb::game::GameInfo::createMap(IAssetLoader &loader,
 	_characters[SHYGUY_WHITE] = loader.createAnimatedObject(
 		"assets/models/characters/shyGuy/shyGuyWhite.obj");
 	_characters[SKELEREX] = loader.createAnimatedObject(
-		"assets/models/characters/shyGuy/shyGuyWhite.obj");
+		"assets/models/characters/skelerex/skelerex.obj");
 	_mapSize = pattern.getSize();
+	_characters[SHYGUY_BLACK]->setPos({-1, 0, -1});
+	_characters.at(SKELEREX)->setVisible(false);
 	_map = std::move(pattern.construct(loader,
 		{ 0, 0, 0 }, { 1, 1, 1 }, { 0, 0, 0 }));
 	_map->setTextures(texture);
