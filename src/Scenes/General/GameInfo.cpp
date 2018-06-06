@@ -8,9 +8,9 @@
 #include "GameInfo.hpp"
 
 void bomb::game::GameInfo::createMap(IAssetLoader &loader,
-	irr::video::ITexture *texture)
+				     irr::video::ITexture *texture)
 {
-	bomb::MapConstructor pattern = MapGenerator(11).generate();
+	bomb::MapConstructor pattern = MapGenerator(15).generate();
 
 	pattern.dumpMap();
 	_characters[SHYGUY_BLACK] = loader.createAnimatedObject(
@@ -26,9 +26,13 @@ void bomb::game::GameInfo::createMap(IAssetLoader &loader,
 	_mapSize = pattern.getSize();
 	_characters[SHYGUY_BLACK]->setPos({-1, 0, -1});
 	_characters.at(SKELEREX)->setVisible(false);
-	_map = std::move(pattern.construct(loader,
-		{ 0, 0, 0 }, { 1, 1, 1 }, { 0, 0, 0 }));
+	_map = std::move(pattern.construct(loader, { 0, 0, 0 },
+					   { 1, 1, 1 }, { 0, 0, 0 }));
 	_map->setTextures(texture);
+	loader.createLightObject({(float)pattern.getSize() / 2,
+				  (float)pattern.getSize() / 2,
+				  (float)pattern.getSize() / 2},
+				 {1, 1, 1}, pattern.getSize());
 	reset();
 }
 
