@@ -30,7 +30,6 @@ int main()
 		smgr->drawAll();
 		guienv->drawAll();
 		driver->endScene();
-		menu.updateButtons(true);
 	}
 	device->drop();
 	return 0;
