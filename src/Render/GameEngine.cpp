@@ -12,8 +12,8 @@
 #include "GameEngine.hpp"
 
 bomb::GameEngine::GameEngine(const std::wstring &winName,
-	unsigned int w, unsigned int h,
-	irr::video::E_DRIVER_TYPE driver_type) :
+			unsigned int w, unsigned int h,
+			irr::video::E_DRIVER_TYPE driver_type) :
 	_device(irr::createDevice(driver_type, irr::core::dimension2d(w, h), 16,
 		false, false, false, &_evtHandler)),
 	_videoDriver(_device->getVideoDriver()),
@@ -99,9 +99,11 @@ std::unique_ptr<bomb::StaticObject> bomb::GameEngine::createStaticObject(
 	return ptr;
 }
 
-std::unique_ptr<bomb::menu::Menu> bomb::GameEngine::createMenu()
+std::unique_ptr<bomb::LightObject> bomb::GameEngine::createLightObject(
+	const irr::core::vector3df &pos, irr::video::SColorf col, float radius)
 {
-	return std::make_unique<bomb::menu::Menu>(*this);
+	return std::make_unique<bomb::LightObject>(
+		_sceneManager->addLightSceneNode(nullptr, pos, col, radius));
 }
 
 void bomb::GameEngine::deleteObject(std::unique_ptr<bomb::IObject> obj)
@@ -109,12 +111,12 @@ void bomb::GameEngine::deleteObject(std::unique_ptr<bomb::IObject> obj)
 	_sceneManager->addToDeletionQueue(obj->getSceneNode());
 }
 
-irr::scene::ICameraSceneNode *bomb::GameEngine::addCamera(
+irr::scene::ICameraSceneNode *bomb::GameEngine::getCamera(
 	const irr::core::vector3df &pos,
 	const irr::core::vector3df &rot)
 {
 	if (_camera)
-		throw Exception("GameEngine", "Camera already created");
+		return _camera;
 	_camera = _sceneManager->addCameraSceneNode();
 	if (!_camera)
 		throw Exception("GameEngine", "Can't create camera");

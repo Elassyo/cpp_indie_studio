@@ -15,6 +15,7 @@
 	#include "../Interface/IRenderWindow.hpp"
 	#include "../AnimatedObject.hpp"
 	#include "../StaticObject.hpp"
+	#include "../LightObject.hpp"
 	#include "../Version.hpp"
 	#include "EventHandler.hpp"
 
@@ -49,9 +50,11 @@ namespace bomb {
 			irr::core::vector3df pos,
 			irr::core::vector3df rot,
 			irr::core::vector3df scale) override;
-		std::unique_ptr<menu::Menu> createMenu() override;
+		std::unique_ptr<bomb::LightObject> createLightObject(
+			const irr::core::vector3df &pos,
+			irr::video::SColorf col, float radius) override;
 		void deleteObject(std::unique_ptr<IObject> obj) override;
-		irr::scene::ICameraSceneNode *addCamera(
+		irr::scene::ICameraSceneNode *getCamera(
 			const irr::core::vector3df &pos,
 			const irr::core::vector3df &rot) override;
 		const irr::core::dimension2d<irr::u32> &getScreenSize()
