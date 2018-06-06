@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** cpp_indie_studio
 ** File description:
-** AudioFile.hpp
+** AudioBuffer.hpp
 */
 
 #ifndef CPP_INDIE_STUDIO_AUDIOFILE_HPP
@@ -15,21 +15,21 @@
 
 namespace bomb {
 
-	class AudioFile {
+	class AudioBuffer {
 	public:
-		explicit AudioFile(const char *path);
-		explicit AudioFile(const std::string &path);
+		explicit AudioBuffer(const char *path);
+		explicit AudioBuffer(const std::string &path);
 
-		std::size_t getBufferSize() const;
-		int16_t *getBuffer() const;
+		~AudioBuffer();
+
+		ALuint getBuffer() const;
 
 	private:
-		void readFile(OggVorbis_File *vf);
-
-		int _channels;
-		ogg_int64_t _samples;
+		void readFile(OggVorbis_File *vf, std::size_t size);
 
 		std::unique_ptr<int16_t[]> _buf;
+
+		ALuint _buffer;
 	};
 
 }
