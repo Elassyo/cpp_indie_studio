@@ -14,7 +14,6 @@
 
 	#include "../Audio/AudioFile.hpp"
 
-//	#include "../Menu/Menu.hpp"
 	#include "../AnimatedObject.hpp"
 
 	#include "../StaticObject.hpp"

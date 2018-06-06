@@ -1,6 +1,6 @@
 # Blender v2.79 (sub 0) OBJ File: 'bob-bomb-item.blend'
 # www.blender.org
-mtllib plusBomb.mtl
+mtllib bombDown.mtl
 o BOMB_CORPO_Untitled.013
 v 0.007980 1.106101 0.369270
 v 0.055618 1.103761 0.369198
