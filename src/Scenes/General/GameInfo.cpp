@@ -8,21 +8,21 @@
 #include "GameInfo.hpp"
 
 void bomb::game::GameInfo::createMap(IAssetLoader &loader,
-				irr::video::ITexture *texture)
+	irr::video::ITexture *texture)
 {
 	bomb::MapConstructor pattern = MapGenerator(11).generate();
 
 	pattern.dumpMap();
 	_characters[SHYGUY_BLACK] = loader.createAnimatedObject(
-		"assets/models/characters/shyGuy/shyGuyBlack.obj");
+		"models/characters/shyGuy/shyGuyBlack.obj");
 	_characters[SHYGUY_BLUE] = loader.createAnimatedObject(
-		"assets/models/characters/shyGuy/shyGuyBlue.obj");
+		"models/characters/shyGuy/shyGuyBlue.obj");
 	_characters[SHYGUY_RED] = loader.createAnimatedObject(
-		"assets/models/characters/shyGuy/shyGuyRed.obj");
+		"models/characters/shyGuy/shyGuyRed.obj");
 	_characters[SHYGUY_WHITE] = loader.createAnimatedObject(
-		"assets/models/characters/shyGuy/shyGuyWhite.obj");
+		"models/characters/shyGuy/shyGuyWhite.obj");
 	_characters[SKELEREX] = loader.createAnimatedObject(
-		"assets/models/characters/skelerex/skelerex.obj");
+		"models/characters/skelerex/skelerex.obj");
 	_mapSize = pattern.getSize();
 	_characters[SHYGUY_BLACK]->setPos({-1, 0, -1});
 	_characters.at(SKELEREX)->setVisible(false);

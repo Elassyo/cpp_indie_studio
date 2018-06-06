@@ -9,7 +9,7 @@
 	#define CPP_INDIE_STUDIO_VERSION_HPP
 
 	#include <string>
-	
+
 	#define LINUX_DEV 0
 	#define LINUX_REL 1
 	#define WINDOWS 2

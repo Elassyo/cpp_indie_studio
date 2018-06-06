@@ -9,7 +9,7 @@
 
 bomb::object::FireFull::FireFull(bomb::IAssetLoader &loader,
 				 const irr::core::vector3df &pos) :
-	Power(loader, pos, "assets/models/powers/fires/fireFull.obj")
+	Power(loader, pos, "models/powers/fires/fireFull.obj")
 {
 }
 

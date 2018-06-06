@@ -19,7 +19,8 @@ bomb::GameEngine::GameEngine(const std::wstring &winName,
 	_videoDriver(_device->getVideoDriver()),
 	_sceneManager(_device->getSceneManager()),
 	_camera(nullptr),
-	_audioDev(new AudioDevice())
+	_audioDev(new AudioDevice()),
+	_assetsPath(Version::GetCurrentVersion().getAssetsPath())
 {
 	_device->setWindowCaption(winName.c_str());
 }
@@ -55,7 +56,8 @@ irr::gui::IGUIEnvironment *bomb::GameEngine::getGui()
 
 irr::video::ITexture *bomb::GameEngine::loadTexture(const std::string &path)
 {
-	return _videoDriver->getTexture(path.c_str());
+
+	return _videoDriver->getTexture((_assetsPath + path).c_str());
 }
 
 std::unique_ptr<bomb::AudioFile> bomb::GameEngine::loadAudioFile(
@@ -72,7 +74,7 @@ std::unique_ptr<bomb::AnimatedObject> bomb::GameEngine::createAnimatedObject(
 {
 	auto ptr = std::make_unique<bomb::AnimatedObject>(
 		_sceneManager->addAnimatedMeshSceneNode(
-			_sceneManager->getMesh(path.c_str())));
+			_sceneManager->getMesh((_assetsPath + path).c_str())));
 	ptr->setPos(pos);
 	ptr->setRot(rot);
 	ptr->setScale(scale);
@@ -86,8 +88,8 @@ std::unique_ptr<bomb::StaticObject> bomb::GameEngine::createStaticObject(
 	irr::core::vector3df rot)
 {
 	auto ptr = std::make_unique<bomb::StaticObject>(
-		_sceneManager->addMeshSceneNode(
-			_sceneManager->getMesh(path.c_str())));
+		_sceneManager->addMeshSceneNode(_sceneManager->getMesh(
+			(_assetsPath + path).c_str())));
 	ptr->setPos(pos);
 	ptr->setRot(rot);
 	ptr->setScale(scale);

@@ -9,7 +9,7 @@
 
 bomb::object::SpeedUp::SpeedUp(bomb::IAssetLoader &loader,
 	const irr::core::vector3df &pos) :
-	Power(loader, pos, "assets/models/powers/speeds/speedUp.obj")
+	Power(loader, pos, "models/powers/speeds/speedUp.obj")
 {
 
 }

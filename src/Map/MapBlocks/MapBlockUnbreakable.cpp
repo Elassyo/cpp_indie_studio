@@ -14,7 +14,7 @@ bomb::MapBlockUnbreakable::MapBlockUnbreakable(
 	const irr::core::vector3df &rotation,
 	const irr::core::vector3di &mapPos):
 	AMapBlock(loader, pos, scale, rotation, mapPos,
-		"assets/models/blocks/solid.obj", 0)
+		"models/blocks/solid.obj", 0)
 {
 }
 

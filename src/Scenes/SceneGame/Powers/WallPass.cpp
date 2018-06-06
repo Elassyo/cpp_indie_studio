@@ -9,7 +9,7 @@
 
 bomb::object::WallPass::WallPass(bomb::IAssetLoader &loader,
 	const irr::core::vector3df &pos) :
-	Power(loader, pos, "assets/models/powers/wallPass/wallPass.obj")
+	Power(loader, pos, "models/powers/wallPass/wallPass.obj")
 {
 }
 

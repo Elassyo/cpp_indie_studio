@@ -23,14 +23,14 @@ bomb::Version bomb::Version::GetCurrentVersion()
 	return Version("/usr/share/bombermario/");
 }
 #elif (BOMB_VERSION == WINDOWS)
-	
+
 	#include <ShlObj.h>
 
 bomb::Version bomb::Version::GetCurrentVersion()
 {
-	TCHAR path[MAX_PATH];
-	SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, path);
-	return Version("/usr/share/bombermario/");
+	TCHAR localAppData[MAX_PATH];
+	SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, localAppData);
+	return Version(std::string(localAppData) + "\\BomberMario\\");
 }
 #else
 	#error Invalid build version

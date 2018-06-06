@@ -15,6 +15,7 @@
 	#include "../Interface/IRenderWindow.hpp"
 	#include "../AnimatedObject.hpp"
 	#include "../StaticObject.hpp"
+	#include "../Version.hpp"
 	#include "EventHandler.hpp"
 
 namespace bomb {
@@ -58,8 +59,7 @@ namespace bomb {
 		irr::scene::ISceneManager *_sceneManager;
 		irr::scene::ICameraSceneNode *_camera;
 		std::unique_ptr<AudioDevice> _audioDev;
-
-		void hideObject(std::string &path);
+		std::string _assetsPath;
 	};
 }
 #endif /* CPP_INDIE_STUDIO_GAMEENGINE_HPP */

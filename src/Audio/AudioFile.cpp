@@ -5,7 +5,9 @@
 ** AudioFile.cpp
 */
 
+#include <codecvt>
 #include <cstring>
+#include <locale>
 
 #include "../Exception/Exception.hpp"
 #include "AudioFile.hpp"

@@ -10,7 +10,7 @@
 
 	#include <memory>
 	#include <irrlicht/irrlicht.h>
-	
+
 	#include "../Audio/AudioFile.hpp"
 	#include "../Menu/Menu.hpp"
 	#include "../AnimatedObject.hpp"

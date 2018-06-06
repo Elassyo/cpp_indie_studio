@@ -15,8 +15,9 @@ int main()
 	irr::video::IVideoDriver* driver = device->getVideoDriver();
 	irr::scene::ISceneManager* smgr = device->getSceneManager();
 	irr::gui::IGUIEnvironment* guienv = device->getGUIEnvironment();
-	guienv->addStaticText(L"Hello World! This is the Irrlicht Software renderer!",
-			      irr::core::rect<irr::s32>(10, 10, 260, 22), true);
+	guienv->addStaticText(L"Hello World! This is the"
+			"Irrlicht Software renderer!",
+			irr::core::rect<irr::s32>(10, 10, 260, 22), true);
 	smgr->addCameraSceneNode(0, irr::core::vector3df(0, 30, -40),
 				 irr::core::vector3df(0, 5, 0));
 	bomb::menu::Menu menu(driver, guienv);
