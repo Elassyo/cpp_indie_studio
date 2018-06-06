@@ -101,22 +101,17 @@ std::unique_ptr<bomb::StaticObject> bomb::GameEngine::createStaticObject(
 	return ptr;
 }
 
-std::unique_ptr<bomb::menu::Menu> bomb::GameEngine::createMenu()
-{
-	return std::make_unique<bomb::menu::Menu>(*this);
-}
-
 void bomb::GameEngine::deleteObject(std::unique_ptr<bomb::IObject> obj)
 {
 	_sceneManager->addToDeletionQueue(obj->getSceneNode());
 }
 
-irr::scene::ICameraSceneNode *bomb::GameEngine::addCamera(
+irr::scene::ICameraSceneNode *bomb::GameEngine::getCamera(
 	const irr::core::vector3df &pos,
 	const irr::core::vector3df &rot)
 {
 	if (_camera)
-		throw Exception("GameEngine", "Camera already created");
+		return _camera;
 	_camera = _sceneManager->addCameraSceneNode();
 	if (!_camera)
 		throw Exception("GameEngine", "Can't create camera");

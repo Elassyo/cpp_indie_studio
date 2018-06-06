@@ -18,19 +18,22 @@ namespace bomb {
 		class GraphicButton : public GraphicElement {
 		public:
 			GraphicButton(irr::gui::IGUIButton *button,
-				irr::core::vector2df pos);
-
-			bool isPressed();
+				irr::core::vector2df pos, int id);
+			bool isPressed(const irr::SEvent &event);
 			const std::function<void()> &getEvent() const;
-
 			void setFont(irr::gui::IGUIFont *font);
 			void setTexture(irr::video::ITexture *texture,
 					irr::video::ITexture *pressed);
 			void setEvent(std::function <void()> &);
+			int getId() const;
+
+			void setText(const wchar_t *text);
 
 		private:
 			std::function <void()> _event;
 			bomb::utils::Clock _latence;
+			const int _id;
+
 		};
 	}
 }

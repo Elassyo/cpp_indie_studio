@@ -131,17 +131,11 @@ add_executable(bombermario WIN32
         ${SRC_RESOURCES}
         src/BomberMario.cpp)
 
-add_executable(test_menu
-        ${SRC_FILES}
-        tests/MenuPreview.cpp)
-
 add_executable(tests_map_gen
         ${SRC_FILES}
         tests/MapGen.cpp)
 
 target_link_libraries(tests_map_gen Irrlicht ${LIBOPENAL_NAME} ${LIBVORBISFILE_NAME} ${LIBEXTRA_NAME})
-
-target_link_libraries(test_menu Irrlicht ${LIBOPENAL_NAME} ${LIBVORBISFILE_NAME} ${LIBEXTRA_NAME})
 
 target_link_libraries(bombermario Irrlicht ${LIBOPENAL_NAME} ${LIBVORBISFILE_NAME} ${LIBEXTRA_NAME})
 
