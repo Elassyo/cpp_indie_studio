@@ -44,6 +44,7 @@ void bomb::GameEngine::refresh()
 {
 	_videoDriver->beginScene(true, true, irr::video::SColor(255,44,62,80));
 	_sceneManager->drawAll();
+	getGui()->drawAll();
 	_videoDriver->endScene();
 }
 
@@ -95,8 +96,7 @@ std::unique_ptr<bomb::StaticObject> bomb::GameEngine::createStaticObject(
 
 std::unique_ptr<bomb::menu::Menu> bomb::GameEngine::createMenu()
 {
-	auto ptr = std::make_unique<bomb::menu::Menu>(_videoDriver, getGui());
-	return ptr;
+	return std::make_unique<bomb::menu::Menu>(_videoDriver, getGui());
 }
 
 void bomb::GameEngine::deleteObject(std::unique_ptr<bomb::IObject> obj)

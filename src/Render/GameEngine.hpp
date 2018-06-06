@@ -58,6 +58,8 @@ namespace bomb {
 		irr::scene::ISceneManager *_sceneManager;
 		irr::scene::ICameraSceneNode *_camera;
 		std::unique_ptr<AudioDevice> _audioDev;
+
+		void hideObject(std::string &path);
 	};
 }
 #endif /* CPP_INDIE_STUDIO_GAMEENGINE_HPP */

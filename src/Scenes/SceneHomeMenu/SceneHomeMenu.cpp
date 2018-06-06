@@ -14,9 +14,14 @@ bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(
 {
 	std::cout << "button" << std::endl;
 	_menu = loader.createMenu();
+	_menu->addButton([this]() { this->_nextScene = "game_scene";},
+			 L"Game", {.5, .35});
+	_menu->addButton([this]() { this->_nextScene = "";},
+			 L"Option", {.5, .5});
+	_menu->addButton([this]() { this->_nextScene = "";},
+			 L"Quit", {.5, .65});
 	_menu.get()->updateButtons(true);
-	_menu->addButton([]() { std::cout << "zzddzdded" << std::endl; },
-		L"COUCOU", { 0.5, 0.5 });
+	loader.addCamera({10,0,10}, {0,0,0});
 	return BEGIN;
 }
 

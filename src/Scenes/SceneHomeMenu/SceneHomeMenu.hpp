@@ -29,6 +29,7 @@ namespace bomb {
 
 		private:
 			std::unique_ptr<bomb::menu::Menu> _menu;
+			std::string _nextScene;
 		};
 	}
 }

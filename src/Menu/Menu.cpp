@@ -67,7 +67,7 @@ void bomb::menu::Menu::updateButtons(bool areVisible)
 	{ (int)_driver->getScreenSize().Width,
 		(int)_driver->getScreenSize().Height };
 
-	_title.update({ 1, 1 }, screenSize);
+	_title.update({1, 1}, screenSize);
 	_title.setVisibility(areVisible);
 	for (auto &button : _buttons) {
 		button.setVisibility(areVisible);
