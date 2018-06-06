@@ -24,7 +24,7 @@ elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     set(LIBOPENAL_NAME OpenAL32)
     set(LIBVORBISFILE_NAME libvorbisfile)
 
-	set(LIBEXTRA_NAME Shell32)
+    set(LIBEXTRA_NAME Shell32)
 
     set(SRC_RESOURCES
         win/bombermario.rc)
@@ -126,7 +126,7 @@ set(SRC_FILES
         src/Version.hpp
         )
 
-add_executable(bombermario
+add_executable(bombermario WIN32
         ${SRC_FILES}
         ${SRC_RESOURCES}
         src/BomberMario.cpp)
@@ -145,11 +145,12 @@ target_link_libraries(test_menu Irrlicht ${LIBOPENAL_NAME} ${LIBVORBISFILE_NAME}
 
 target_link_libraries(bombermario Irrlicht ${LIBOPENAL_NAME} ${LIBVORBISFILE_NAME} ${LIBEXTRA_NAME})
 
-install(TARGETS bombermario DESTINATION /usr/bin/ CONFIGURATIONS Release)
-install(DIRECTORY assets/ DESTINATION /usr/share/bombermario CONFIGURATIONS Release)
-
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     add_custom_command(TARGET bombermario POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:bombermario> ${CMAKE_SOURCE_DIR}/bomberman)
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+	set_target_properties(bombermario PROPERTIES LINK_FLAGS "/ENTRY:mainCRTStartup")
     add_custom_command(TARGET bombermario POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:bombermario> ${CMAKE_SOURCE_DIR}/win/bombermario.exe)
 endif()
+
+install(TARGETS bombermario DESTINATION /usr/bin/ CONFIGURATIONS Release)
+install(DIRECTORY assets/ DESTINATION /usr/share/bombermario CONFIGURATIONS Release)
