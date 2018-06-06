@@ -47,7 +47,7 @@ void bomb::scene::SceneHomeMenu::reset(bomb::IAssetLoader &loader)
 
 void bomb::scene::SceneHomeMenu::clean()
 {
-	_menu.cleanMenu();
+	_menu.clean();
 }
 
 std::string bomb::scene::SceneHomeMenu::nextScene()

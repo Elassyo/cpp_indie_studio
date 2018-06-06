@@ -27,3 +27,8 @@ void bomb::menu::GraphicElement::update(irr::core::vector2di size,
 		{(int)(screenSize.X * _pos.X - size.X / 2),
 		 (int)(screenSize.Y * _pos.Y - size.Y / 2)});
 }
+
+void bomb::menu::GraphicElement::remove()
+{
+	_element->remove();
+}

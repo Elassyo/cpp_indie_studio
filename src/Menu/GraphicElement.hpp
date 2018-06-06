@@ -19,7 +19,7 @@ namespace bomb {
 			void setVisibility(bool visibility);
 			void update(irr::core::vector2di size,
 				irr::core::vector2di screenSize);
-
+			void remove();
 		protected:
 			irr::gui::IGUIElement *_element;
 

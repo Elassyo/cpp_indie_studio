@@ -26,9 +26,7 @@ namespace bomb {
 					irr::video::ITexture *pressed);
 			void setEvent(std::function <void()> &);
 			int getId() const;
-
 			void setText(const wchar_t *text);
-
 		private:
 			std::function <void()> _event;
 			bomb::utils::Clock _latence;

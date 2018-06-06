@@ -111,8 +111,11 @@ void bomb::menu::Menu::addButtonEvent(int buttonId, std::function<void()> event)
 	_buttons.at(static_cast<unsigned long>(idx)).setEvent(event);
 }
 
-void bomb::menu::Menu::cleanMenu()
+void bomb::menu::Menu::clean()
 {
+	for (auto btn : _buttons)
+		btn.remove();
 	_buttons.clear();
+	_title->remove();
 	_title.reset(nullptr);
 }

@@ -33,7 +33,7 @@ namespace bomb {
 			void addButtonEvent(int buttonId, std::function<void()>
 				event);
 			bool handleEvent(const irr::SEvent &event);
-			void cleanMenu();
+			void clean();
 		private:
 			long long getButtonById(int buttonId);
 			void createTitle(const wchar_t *text = L"");
