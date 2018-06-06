@@ -6,34 +6,48 @@
 */
 
 #include "GameInfo.hpp"
+#include "../../Exception/Exception.hpp"
 
-void bomb::game::GameInfo::createMap(IAssetLoader &loader,
-				     irr::video::ITexture *texture)
+void bomb::game::GameInfo::createGame(IAssetLoader &loader,
+	irr::video::ITexture *texture)
 {
-	bomb::MapConstructor pattern = MapGenerator(15).generate();
-
-	pattern.dumpMap();
-	_characters[SHYGUY_BLACK] = loader.createAnimatedObject(
-		"models/characters/shyGuy/shyGuyBlack.obj");
-	_characters[SHYGUY_BLUE] = loader.createAnimatedObject(
-		"models/characters/shyGuy/shyGuyBlue.obj");
-	_characters[SHYGUY_RED] = loader.createAnimatedObject(
-		"models/characters/shyGuy/shyGuyRed.obj");
-	_characters[SHYGUY_WHITE] = loader.createAnimatedObject(
-		"models/characters/shyGuy/shyGuyWhite.obj");
-	_characters[SKELEREX] = loader.createAnimatedObject(
-		"models/characters/skelerex/skelerex.obj");
-	_mapSize = pattern.getSize();
-	_characters[SHYGUY_BLACK]->setPos({-1, 0, -1});
-	_characters.at(SKELEREX)->setVisible(false);
-	_map = std::move(pattern.construct(loader, { 0, 0, 0 },
-					   { 1, 1, 1 }, { 0, 0, 0 }));
+	createMap(loader, MAP_SIZE);
+	createPlayers(loader, "models/characters/shyGuy/shyGuyBlack.obj", SHYGUY_BLACK, {1, 0, 1});
+	createPlayers(loader, "models/characters/shyGuy/shyGuyBlue.obj", SHYGUY_BLUE, {1, 0, MAP_SIZE - 2});
+	createPlayers(loader, "models/characters/shyGuy/shyGuyRed.obj", SHYGUY_RED, {MAP_SIZE - 2, 0, 1});
+	createPlayers(loader, "models/characters/shyGuy/shyGuyWhite.obj", SHYGUY_WHITE, {MAP_SIZE - 2, 0, MAP_SIZE - 2});
+	//createPlayers(loader, "models/characters/skelerex/skelerex.obj", SKELEREX, {0, 0, 0});
 	_map->setTextures(texture);
-	loader.createLightObject({(float)pattern.getSize() / 2,
-				  (float)pattern.getSize() / 2,
-				  (float)pattern.getSize() / 2},
-				 {1, 1, 1}, pattern.getSize());
 	reset();
+}
+
+void bomb::game::GameInfo::createMap(
+	bomb::IAssetLoader &loader, unsigned int size)
+{
+	bomb::MapConstructor pattern = MapGenerator(size).generate();
+	pattern.dumpMap();
+
+	_mapSize = pattern.getSize();
+	_map = std::move(pattern.construct(loader, {0, 0, 0},
+		{1, 1, 1}, {0, 0, 0}));
+	loader.createLightObject({(float)pattern.getSize() / 2,
+			(float)pattern.getSize() / 2,
+			(float)pattern.getSize() / 2},
+		{1, 1, 1}, pattern.getSize());
+}
+
+void bomb::game::GameInfo::createPlayers(
+	bomb::IAssetLoader &loader,
+	const std::string &path,
+	Character index,
+	const irr::core::vector3di &spawn)
+{
+	if (_players.size() >= NB_PLAYERS)
+		throw bomb::Exception("GameCreation", "Too much players");
+	/* A CHANGER ! ECHELLES DE TAILLE */
+	_players.push_back(bomb::game::PlayerInfo(loader, path,
+		{spawn.X, spawn.Y, spawn.Z}, {1, 1, 1}, {0, 0, 0}, spawn));
+	_players[_players.size() - 1].setCharacterIndex(index);
 }
 
 void bomb::game::GameInfo::reset()

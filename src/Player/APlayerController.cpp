@@ -6,3 +6,8 @@
 //
 
 #include "APlayerController.hpp"
+
+bomb::APlayerController::Action bomb::APlayerController::getCurrentAction()
+{
+	return _currentAction;
+}

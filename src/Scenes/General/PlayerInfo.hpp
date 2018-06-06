@@ -6,15 +6,24 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_PLAYERINFO_HPP
-	#define CPP_INDIE_STUDIO_PLAYERINFO_HPP
+#define CPP_INDIE_STUDIO_PLAYERINFO_HPP
 
-	#include <cstdint>
+#include <cstdint>
+#include "../../AnimatedObject.hpp"
+#include "../../Interface/IAssetLoader.hpp"
 
 namespace bomb {
 	namespace game {
 		class PlayerInfo {
 		public:
-			PlayerInfo();
+			PlayerInfo(
+				IAssetLoader &loader,
+				const std::string &path,
+				const irr::core::vector3df &pos,
+				const irr::core::vector3df &scale,
+				const irr::core::vector3df &rotation,
+				const irr::core::vector3di &mapPos
+			);
 
 			uint8_t getNbBombs() const;
 			uint8_t getSpeed() const;
@@ -37,6 +46,8 @@ namespace bomb {
 			bool _ghostMode;
 			bool _alive;
 			uint8_t _characterIndex;
+
+			std::unique_ptr<AnimatedObject> _obj;
 		};
 	}
 }

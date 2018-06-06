@@ -126,7 +126,8 @@ set(SRC_FILES
         src/StaticObject.hpp
         src/Version.cpp
         src/Version.hpp
-        src/Interface/IPlayerController.hpp src/Player/APlayerController.cpp src/Player/APlayerController.hpp)
+        src/Interface/IPlayerController.hpp
+        )
 
 add_executable(bombermario WIN32
         ${SRC_FILES}

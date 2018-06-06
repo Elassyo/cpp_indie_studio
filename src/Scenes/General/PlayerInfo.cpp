@@ -7,10 +7,20 @@
 
 #include "PlayerInfo.hpp"
 
-bomb::game::PlayerInfo::PlayerInfo() :
-	_nbBombs(1), _speed(10), _bombRange(1), _ghostMode(false), _alive(true),
+bomb::game::PlayerInfo::PlayerInfo(bomb::IAssetLoader &loader,
+	const std::string &path,
+	const irr::core::vector3df &pos,
+	const irr::core::vector3df &scale,
+	const irr::core::vector3df &rotation,
+	const irr::core::vector3di &mapPos):
+	_nbBombs(1),
+	_speed(10),
+	_bombRange(1),
+	_ghostMode(false),
+	_alive(true),
 	_characterIndex(0)
 {
+	_obj = loader.createAnimatedObject(path, pos, scale, rotation);
 }
 
 unsigned char bomb::game::PlayerInfo::getNbBombs() const
