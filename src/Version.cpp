@@ -15,12 +15,12 @@
 #if (BOMB_VERSION == LINUX_DEV)
 bomb::Version bomb::Version::GetCurrentVersion()
 {
-	return Version(L"./assets/");
+	return Version("./assets/");
 }
 #elif (BOMB_VERSION == LINUX_REL)
 bomb::Version bomb::Version::GetCurrentVersion()
 {
-	return Version(L"/usr/share/bombermario/");
+	return Version("/usr/share/bombermario/");
 }
 #elif (BOMB_VERSION == WINDOWS)
 
