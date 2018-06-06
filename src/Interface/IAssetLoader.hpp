@@ -9,20 +9,28 @@
 	#define CPP_INDIE_STUDIO_IASSETLOADER_HPP
 
 	#include <memory>
+
 	#include <irrlicht/irrlicht.h>
 
 	#include "../Audio/AudioFile.hpp"
-	#include "../Menu/Menu.hpp"
+
+//	#include "../Menu/Menu.hpp"
 	#include "../AnimatedObject.hpp"
+
 	#include "../StaticObject.hpp"
 
 namespace bomb {
+	namespace menu {
+		class Menu;
+	}
 	class IAssetLoader {
 	public:
 		virtual irr::gui::IGUIEnvironment *getGui() = 0;
 		virtual irr::video::ITexture *loadTexture(
 			const std::string &path) = 0;
 		virtual std::unique_ptr<AudioFile> loadAudioFile(
+			const std::string &path) = 0;
+		virtual irr::gui::IGUIFont *loadFont(
 			const std::string &path) = 0;
 		virtual std::unique_ptr<bomb::AnimatedObject>
 			createAnimatedObject(
@@ -41,6 +49,8 @@ namespace bomb {
 			const irr::core::vector3df &pos,
 			const irr::core::vector3df &rot) = 0;
 		virtual void deleteObject(std::unique_ptr<IObject> obj) = 0;
+		virtual const irr::core::dimension2d<irr::u32> &
+			getScreenSize() = 0;
 	};
 }
 

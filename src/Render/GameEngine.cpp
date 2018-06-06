@@ -66,6 +66,11 @@ std::unique_ptr<bomb::AudioFile> bomb::GameEngine::loadAudioFile(
 	return std::make_unique<AudioFile>(path);
 }
 
+irr::gui::IGUIFont *bomb::GameEngine::loadFont(const std::string &path)
+{
+	return getGui()->getFont((_assetsPath + path).c_str());
+}
+
 std::unique_ptr<bomb::AnimatedObject> bomb::GameEngine::createAnimatedObject(
 	const std::string &path,
 	irr::core::vector3df pos,
@@ -98,7 +103,7 @@ std::unique_ptr<bomb::StaticObject> bomb::GameEngine::createStaticObject(
 
 std::unique_ptr<bomb::menu::Menu> bomb::GameEngine::createMenu()
 {
-	return std::make_unique<bomb::menu::Menu>(_videoDriver, getGui());
+	return std::make_unique<bomb::menu::Menu>(*this);
 }
 
 void bomb::GameEngine::deleteObject(std::unique_ptr<bomb::IObject> obj)
@@ -118,4 +123,9 @@ irr::scene::ICameraSceneNode *bomb::GameEngine::addCamera(
 	_camera->setPosition(pos);
 	_camera->setTarget(rot);
 	return _camera;
+}
+
+const irr::core::dimension2d<irr::u32> &bomb::GameEngine::getScreenSize()
+{
+	return _videoDriver->getScreenSize();
 }

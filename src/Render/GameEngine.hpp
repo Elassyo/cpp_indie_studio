@@ -37,6 +37,8 @@ namespace bomb {
 			const std::string &path) override;
 		std::unique_ptr<AudioFile> loadAudioFile(
 			const std::string &path) override;
+		irr::gui::IGUIFont *loadFont(
+			const std::string &path) override;
 		std::unique_ptr<bomb::AnimatedObject> createAnimatedObject(
 			const std::string &path,
 			irr::core::vector3df pos,
@@ -51,7 +53,10 @@ namespace bomb {
 		void deleteObject(std::unique_ptr<IObject> obj) override;
 		irr::scene::ICameraSceneNode *addCamera(
 			const irr::core::vector3df &pos,
-			       const irr::core::vector3df &rot) override;
+			const irr::core::vector3df &rot) override;
+		const irr::core::dimension2d<irr::u32> &
+			getScreenSize() override;
+
 	private:
 		EventHandler _evtHandler;
 		irr::IrrlichtDevice *_device;

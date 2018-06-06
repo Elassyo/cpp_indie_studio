@@ -5,20 +5,17 @@
 // Created by Gregory EPLE
 //
 
-#include <iostream>
 #include "Menu.hpp"
 
-bomb::menu::Menu::Menu(irr::video::IVideoDriver *driver,
-	irr::gui::IGUIEnvironment *gui) :
-	_driver(driver), _gui(gui), _size(0),
+bomb::menu::Menu::Menu(IAssetLoader &loader) :
+	_loader(loader), _gui(loader.getGui()), _size(0),
 	_buttonRatio(irr::core::vector2df(0.125f, 0.1f)),
-	_buttonBack(driver->getTexture(L"images/buttonBack.png")),
-	_buttonPressed(driver->getTexture(L"images/buttonPressed.png")),
-	_font(_gui->getFont(L"fonts/mario16.xml")),
-	_titleFont(_gui->getFont(L"fonts/marioColor36.xml")),
-	_title(createTitle(L"SUPER\nBOMBERMAN\nBROS."))
+	_buttonBack(loader.loadTexture("images/buttonBack.png")),
+	_buttonPressed(loader.loadTexture("images/buttonPressed.png")),
+	_font(loader.loadFont("fonts/mario16.xml")),
+	_titleFont(loader.loadFont("fonts/marioColor36.xml")),
+	_title(createTitle(L"SUPER\nBOMBERMARIO\nBROS."))
 {
-	std::cout << "Create Scene" << std::endl;
 	_gui->getSkin()->setFont(_font);
 	_gui->getSkin()->setColor(irr::gui::EGDC_BUTTON_TEXT,
 		irr::video::SColor(255, 255, 255, 255));
@@ -64,8 +61,8 @@ void bomb::menu::Menu::updateButtons(bool areVisible)
 {
 	const irr::core::vector2di buttonSize = getButtonSize();
 	const irr::core::vector2di screenSize =
-	{ (int)_driver->getScreenSize().Width,
-		(int)_driver->getScreenSize().Height };
+	{ (int)_loader.getScreenSize().Width,
+		(int)_loader.getScreenSize().Height };
 
 	_title.update({1, 1}, screenSize);
 	_title.setVisibility(areVisible);
@@ -78,7 +75,7 @@ void bomb::menu::Menu::updateButtons(bool areVisible)
 
 irr::core::vector2di bomb::menu::Menu::getButtonSize() const
 {
-	const irr::core::dimension2du &screenSize = _driver->getScreenSize();
+	const irr::core::dimension2du &screenSize = _loader.getScreenSize();
 
 	return { (int)(_buttonRatio.X * screenSize.Width),
 		(int)(_buttonRatio.Y * screenSize.Height) };

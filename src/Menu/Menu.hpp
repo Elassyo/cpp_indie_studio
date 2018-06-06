@@ -11,14 +11,16 @@
 	#include <vector>
 
 	#include "GraphicButton.hpp"
+
 	#include "GraphicText.hpp"
+
+	#include "../Interface/IAssetLoader.hpp"
 
 namespace bomb {
 	namespace menu {
 		class Menu {
 		public:
-			Menu(irr::video::IVideoDriver *driver,
-				irr::gui::IGUIEnvironment *gui);
+			Menu(IAssetLoader &loader);
 			void addButton(std::function <void ()> event,
 				const wchar_t *text, irr::core::vector2df pos);
 			void updateButtons(bool areVisibles);
@@ -32,8 +34,8 @@ namespace bomb {
 				const wchar_t *text = L"");
 
 			irr::core::vector2di getButtonSize() const;
-			
-			irr::video::IVideoDriver *_driver;
+
+			IAssetLoader &_loader;
 			irr::gui::IGUIEnvironment *_gui;
 			const uint8_t _size;
 			irr::core::vector2df _buttonRatio;

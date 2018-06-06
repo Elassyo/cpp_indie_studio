@@ -14,7 +14,7 @@ bomb::object::PowerFactory::PowerFactory() :
 		 {&bomb::object::PowerFactory::createPtr<BombDown>, 10},
 		 {&bomb::object::PowerFactory::createPtr<SpeedDown>, 10},
 		 {&bomb::object::PowerFactory::createPtr<FireDown>, 10},
-		 {&bomb::object::PowerFactory::createPtr<WallPass>, 2},
+		 {&bomb::object::PowerFactory::createPtr<WallPass>, 3},
 		 {&bomb::object::PowerFactory::createPtr<BombPass>, 2},
 		 {&bomb::object::PowerFactory::createPtr<BombFull>, 1},
 		 {&bomb::object::PowerFactory::createPtr<FireFull>, 1}}),
@@ -30,7 +30,7 @@ std::unique_ptr<bomb::object::Power>
 bomb::object::PowerFactory::getRandomPower(bomb::IAssetLoader &loader,
 					   const irr::core::vector3df &pos)
 {
-	int item = (int)(((float)std::rand() / RAND_MAX) * _total);
+	float item = ((float)std::rand() / RAND_MAX) * _total;
 	int actual = 0;
 
 	if (_total == 0)
@@ -40,6 +40,7 @@ bomb::object::PowerFactory::getRandomPower(bomb::IAssetLoader &loader,
 			 const irr::core::vector3df &), int> power : _powers) {
 		if (item >= actual && item < actual + power.second)
 			return (this->*power.first)(loader, pos);
+		actual += power.second;
 	}
 	return (this->*_powers[_powers.size() - 1].first)(loader, pos);
 }
