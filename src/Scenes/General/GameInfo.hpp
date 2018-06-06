@@ -47,12 +47,11 @@ namespace bomb {
 				IAssetLoader &loader,
 				unsigned int size
 			);
-			void createPlayers(
-				IAssetLoader &loader,
+			void createPlayer(bomb::IAssetLoader &loader,
 				const std::string &path,
+				IPlayerController &controller,
 				Character index,
-				const irr::core::vector3di &spawn
-			);
+				const irr::core::vector3di &spawn);
 
 			void reset();
 

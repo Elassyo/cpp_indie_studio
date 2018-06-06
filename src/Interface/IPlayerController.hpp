@@ -8,12 +8,15 @@
 #ifndef CPP_INDIE_STUDIO_IPLAYERCONTROLLER_HPP
 #define CPP_INDIE_STUDIO_IPLAYERCONTROLLER_HPP
 
+#include "../Player/MovementAnalyser.hpp"
+
 namespace bomb {
 	class IPlayerController {
 	public:
-		virtual ~IObject() = default;
+		virtual ~IPlayerController() = default;
 
 		virtual void launch() = 0;
+		virtual const MovementAnalyser &requestMovement() const  = 0;
 	};
 }
 

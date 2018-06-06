@@ -9,21 +9,16 @@
 #define CPP_INDIE_STUDIO_APLAYERCONTROLLER_HPP
 
 #include "../Map/Map.hpp"
+#include "../Interface/IPlayerController.hpp"
 
 namespace bomb {
-	class APlayerController {
+	class APlayerController : virtual public IPlayerController {
 	public:
-		enum Action {
-			TOP,
-			LEFT,
-			RIGHT,
-			BOTTOM,
-			BOMB
-		};
-		Action getCurrentAction();
+		virtual
+		const MovementAnalyser &requestMovement() const override;
 
 	protected:
-		Action _currentAction;
+		MovementAnalyser _movement;
 	};
 }
 

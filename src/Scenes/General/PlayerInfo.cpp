@@ -5,22 +5,38 @@
 // PlayerInfo.cpp
 //
 
+#include <iostream>
 #include "PlayerInfo.hpp"
+#include "../../Interface/IPlayerController.hpp"
 
 bomb::game::PlayerInfo::PlayerInfo(bomb::IAssetLoader &loader,
-	const std::string &path,
-	const irr::core::vector3df &pos,
-	const irr::core::vector3df &scale,
-	const irr::core::vector3df &rotation,
-	const irr::core::vector3di &mapPos):
+		const std::string &path,
+		bomb::IPlayerController &controller,
+		const irr::core::vector3df &pos,
+		const irr::core::vector3df &scale,
+		const irr::core::vector3df &rotation,
+		const irr::core::vector3di &mapPos):
 	_nbBombs(1),
 	_speed(10),
 	_bombRange(1),
 	_ghostMode(false),
 	_alive(true),
-	_characterIndex(0)
+	_characterIndex(0),
+	_controller(controller)
 {
 	_obj = loader.createAnimatedObject(path, pos, scale, rotation);
+}
+
+void bomb::game::PlayerInfo::execute()
+{
+	auto e = _controller.requestMovement();
+
+	std::cout << _characterIndex << " [" << e.top.first << e.bot.first <<e.right.first << e.left.first << e.bomb << "]" << std::endl;
+}
+
+void bomb::game::PlayerInfo::startController()
+{
+	_controller.launch();
 }
 
 unsigned char bomb::game::PlayerInfo::getNbBombs() const

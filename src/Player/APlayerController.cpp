@@ -7,7 +7,7 @@
 
 #include "APlayerController.hpp"
 
-bomb::APlayerController::Action bomb::APlayerController::getCurrentAction()
+const bomb::MovementAnalyser &bomb::APlayerController::requestMovement() const
 {
-	return _currentAction;
+	return _movement;
 }

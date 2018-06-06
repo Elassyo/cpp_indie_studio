@@ -8,22 +8,23 @@
 #ifndef CPP_INDIE_STUDIO_PLAYERINFO_HPP
 #define CPP_INDIE_STUDIO_PLAYERINFO_HPP
 
-#include <cstdint>
 #include "../../AnimatedObject.hpp"
 #include "../../Interface/IAssetLoader.hpp"
+#include "../../Interface/IPlayerController.hpp"
 
 namespace bomb {
 	namespace game {
 		class PlayerInfo {
 		public:
-			PlayerInfo(
-				IAssetLoader &loader,
-				const std::string &path,
-				const irr::core::vector3df &pos,
-				const irr::core::vector3df &scale,
-				const irr::core::vector3df &rotation,
-				const irr::core::vector3di &mapPos
-			);
+			PlayerInfo(bomb::IAssetLoader &loader,
+					const std::string &path,
+					bomb::IPlayerController &controller,
+					const irr::core::vector3df &pos,
+					const irr::core::vector3df &scale,
+					const irr::core::vector3df &rotation,
+					const irr::core::vector3di &mapPos);
+
+			void startController();
 
 			uint8_t getNbBombs() const;
 			uint8_t getSpeed() const;
@@ -39,6 +40,8 @@ namespace bomb {
 			void setAlive(bool _alive);
 			void setCharacterIndex(uint8_t _characterIndex);
 
+			void execute();
+
 		private:
 			uint8_t _nbBombs;
 			uint8_t _speed;
@@ -48,6 +51,7 @@ namespace bomb {
 			uint8_t _characterIndex;
 
 			std::unique_ptr<AnimatedObject> _obj;
+			IPlayerController &_controller;
 		};
 	}
 }
