@@ -11,7 +11,6 @@ bomb::object::SpeedUp::SpeedUp(bomb::IAssetLoader &loader,
 	const irr::core::vector3df &pos) :
 	Power(loader, pos, "models/powers/speeds/speedUp.obj")
 {
-
 }
 
 bool bomb::object::SpeedUp::activate(bomb::game::GameInfo &infos)
