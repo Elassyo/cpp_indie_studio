@@ -11,7 +11,7 @@ bomb::scene::SceneLauncher::SceneLauncher(GameEngine &ge) :
 	_gameEngine(ge)
 {
 	_scenes["game_scene"] = std::make_shared<bomb::scene::SceneGame>();
-	_scenes["home_menu"] = std::make_shared<bomb::scene::SceneHomeMenu>();
+	_scenes["home_scene"] = std::make_shared<bomb::scene::SceneHomeMenu>();
 }
 
 void bomb::scene::SceneLauncher::launchScene(const std::string &name)
@@ -25,10 +25,24 @@ void bomb::scene::SceneLauncher::launchScene(const std::string &name)
 		throw Exception("SceneLauncher",
 			"Failed to launch scene " + name);
 	_gameEngine.listenEventScene(scene);
-	while (scene->loop(_gameEngine) == CONTINUE && _gameEngine.isRunning())
-		_gameEngine.refresh();
+	_loopScene(scene);
+	scene->clean();
 	_gameEngine.listenEventScene(nullptr);
 	std::string next = scene->nextScene();
 	if (!next.empty())
 		launchScene(next);
+}
+
+void bomb::scene::SceneLauncher::_loopScene
+	(std::shared_ptr<bomb::scene::IGameScene> &scene)
+{
+	utils::Clock clock(0);
+	while (scene->loop(_gameEngine) == CONTINUE && _gameEngine.isRunning())
+	{
+		clock.reset();
+		_gameEngine.refresh();
+		if (clock.getElapsedTime() < 16)
+			std::this_thread::sleep_for
+			(std::chrono::microseconds(16 - clock.getElapsedTime()));
+	}
 }

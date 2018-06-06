@@ -64,7 +64,24 @@ Section "Core" SecCore
 
 SectionEnd
 
-Section "OpenAL Driver" SecOAL
+Section "Microsoft Visual C/C++ 2017 Redistributable" SecVCRedist
+
+  SetOutPath "$INSTDIR\redist"
+
+  File "redist\VC_redist.x64.exe"
+
+  ExecWait "$INSTDIR\redist\VC_redist.x64.exe /install /quiet"
+  IfErrors failed
+  Goto done
+
+  failed:
+    Abort "Failed to install Microsoft Visual C/C++ 2017 Redistributable"
+
+  done:
+
+SectionEnd
+
+Section "OpenAL" SecOAL
 
   SetOutPath "$INSTDIR\redist"
 

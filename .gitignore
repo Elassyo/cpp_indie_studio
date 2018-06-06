@@ -14,3 +14,4 @@ cmake-*
 /bomberman
 /win/bombermario.exe
 /win/bombermario-setup.exe
+build/

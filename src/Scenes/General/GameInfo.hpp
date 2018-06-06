@@ -10,12 +10,14 @@
 
 	#include <array>
 	#include <map>
-
+	#include <vector>
+	#include "../../Interface/IAssetLoader.hpp"
+	#include "../../AnimatedObject.hpp"
+	#include "PlayerInfo.hpp"
 	#include "../../AnimatedObject.hpp"
 	#include "../../Interface/IAssetLoader.hpp"
 	#include "../../Map/MapGenerator.hpp"
 	#include "../../Map/Map.hpp"
-	#include "PlayerInfo.hpp"
 
 namespace bomb {
 	namespace game {
@@ -23,7 +25,11 @@ namespace bomb {
 
 		class GameInfo {
 		public:
-
+			GameInfo() = default;
+			void createMap(IAssetLoader &loader,
+				irr::video::ITexture *pTexture);
+			int getMapSize() const;
+		private:
 			enum Character {
 				SHYGUY_WHITE,
 				SHYGUY_BLACK,
@@ -32,12 +38,6 @@ namespace bomb {
 				SKELEREX
 			};
 
-			GameInfo() = default;
-
-			void createMap(IAssetLoader &loader, irr::video::ITexture *pTexture);
-			int getMapSize() const;
-
-		private:
 			void reset();
 
 			std::map<Character, std::unique_ptr<AnimatedObject>>

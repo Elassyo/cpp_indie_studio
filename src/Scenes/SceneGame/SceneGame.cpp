@@ -12,12 +12,10 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
 	//Testing loader (Temporary)
 	_blocksTextures = loader.loadTexture("models/blocks/spritesheet.png");
 	_gameInfo.createMap(loader, _blocksTextures);
-	loader.addCamera(
-		irr::core::vector3df((float)_gameInfo.getMapSize() / 2,
-			10, (float)_gameInfo.getMapSize() / 2),
-		irr::core::vector3df((float)_gameInfo.getMapSize() / 2,
-			0, (float)_gameInfo.getMapSize() / 2));
-
+	auto cam = loader.getCamera();
+	cam->setPosition({20, 10, (float)_gameInfo.getMapSize() / 2});
+	cam->setRotation({(float)_gameInfo.getMapSize() / 2,
+			0, (float)_gameInfo.getMapSize() / 2});
 	return BEGIN;
 }
 
@@ -44,6 +42,7 @@ void bomb::scene::SceneGame::reset(bomb::IAssetLoader &loader)
 
 void bomb::scene::SceneGame::clean()
 {
+	delete _blocksTextures;
 }
 
 std::string bomb::scene::SceneGame::nextScene()

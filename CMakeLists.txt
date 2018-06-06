@@ -24,17 +24,17 @@ elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     set(LIBOPENAL_NAME OpenAL32)
     set(LIBVORBISFILE_NAME libvorbisfile)
 
-	set(LIBEXTRA_NAME Shell32)
+    set(LIBEXTRA_NAME Shell32)
 
     set(SRC_RESOURCES
         win/bombermario.rc)
 endif()
 
 set(SRC_FILES
-        src/Audio/AudioDevice.cpp
-        src/Audio/AudioDevice.hpp
-        src/Audio/AudioFile.cpp
-        src/Audio/AudioFile.hpp
+        src/Audio/AudioBuffer.cpp
+        src/Audio/AudioBuffer.hpp
+        src/Audio/AudioManager.cpp
+        src/Audio/AudioManager.hpp
 
         src/Exception/Exception.cpp
         src/Exception/Exception.hpp
@@ -120,20 +120,18 @@ set(SRC_FILES
         src/AnimatedObject.hpp
         src/AObject.cpp
         src/AObject.hpp
+        src/LightObject.cpp
+        src/LightObject.hpp
         src/StaticObject.cpp
         src/StaticObject.hpp
         src/Version.cpp
         src/Version.hpp
         src/Interface/IPlayerController.hpp src/Player/APlayerController.cpp src/Player/APlayerController.hpp)
 
-add_executable(bombermario
+add_executable(bombermario WIN32
         ${SRC_FILES}
         ${SRC_RESOURCES}
         src/BomberMario.cpp)
-
-add_executable(test_menu
-        ${SRC_FILES}
-        tests/MenuPreview.cpp)
 
 add_executable(tests_map_gen
         ${SRC_FILES}
@@ -141,15 +139,14 @@ add_executable(tests_map_gen
 
 target_link_libraries(tests_map_gen Irrlicht ${LIBOPENAL_NAME} ${LIBVORBISFILE_NAME} ${LIBEXTRA_NAME})
 
-target_link_libraries(test_menu Irrlicht ${LIBOPENAL_NAME} ${LIBVORBISFILE_NAME} ${LIBEXTRA_NAME})
-
 target_link_libraries(bombermario Irrlicht ${LIBOPENAL_NAME} ${LIBVORBISFILE_NAME} ${LIBEXTRA_NAME})
-
-install(TARGETS bombermario DESTINATION /usr/bin/ CONFIGURATIONS Release)
-install(DIRECTORY assets/ DESTINATION /usr/share/bombermario CONFIGURATIONS Release)
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     add_custom_command(TARGET bombermario POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:bombermario> ${CMAKE_SOURCE_DIR}/bomberman)
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+	set_target_properties(bombermario PROPERTIES LINK_FLAGS "/ENTRY:mainCRTStartup")
     add_custom_command(TARGET bombermario POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:bombermario> ${CMAKE_SOURCE_DIR}/win/bombermario.exe)
 endif()
+
+install(TARGETS bombermario DESTINATION /usr/bin/ CONFIGURATIONS Release)
+install(DIRECTORY assets/ DESTINATION /usr/share/bombermario CONFIGURATIONS Release)

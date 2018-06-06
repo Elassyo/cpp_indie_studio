@@ -6,20 +6,19 @@
 //
 
 #include <memory>
-
+#include <utility>
 #include "../Exception/Exception.hpp"
 #include "../Menu/Menu.hpp"
 #include "GameEngine.hpp"
 
 bomb::GameEngine::GameEngine(const std::wstring &winName,
-	unsigned int w, unsigned int h,
-	irr::video::E_DRIVER_TYPE driver_type) :
+			unsigned int w, unsigned int h,
+			irr::video::E_DRIVER_TYPE driver_type) :
 	_device(irr::createDevice(driver_type, irr::core::dimension2d(w, h), 16,
 		false, false, false, &_evtHandler)),
 	_videoDriver(_device->getVideoDriver()),
 	_sceneManager(_device->getSceneManager()),
 	_camera(nullptr),
-	_audioDev(new AudioDevice()),
 	_assetsPath(Version::GetCurrentVersion().getAssetsPath())
 {
 	_device->setWindowCaption(winName.c_str());
@@ -38,13 +37,14 @@ bool bomb::GameEngine::isRunning() const
 void bomb::GameEngine::listenEventScene(
 	std::shared_ptr<bomb::scene::IEventScene> scene)
 {
-	_evtHandler.injectScene(scene);
+	_evtHandler.injectScene(std::move(scene));
 }
 
 void bomb::GameEngine::refresh()
 {
 	_videoDriver->beginScene(true, true, irr::video::SColor(255,44,62,80));
 	_sceneManager->drawAll();
+	getGui()->drawAll();
 	_videoDriver->endScene();
 }
 
@@ -59,10 +59,14 @@ irr::video::ITexture *bomb::GameEngine::loadTexture(const std::string &path)
 	return _videoDriver->getTexture((_assetsPath + path).c_str());
 }
 
-std::unique_ptr<bomb::AudioFile> bomb::GameEngine::loadAudioFile(
-	const std::string &path)
+void bomb::GameEngine::loadAudioFile(const std::string &path)
 {
-	return std::make_unique<AudioFile>(path);
+	_audioMgr.loadAudioFile(_assetsPath + path);
+}
+
+irr::gui::IGUIFont *bomb::GameEngine::loadFont(const std::string &path)
+{
+	return getGui()->getFont((_assetsPath + path).c_str());
 }
 
 std::unique_ptr<bomb::AnimatedObject> bomb::GameEngine::createAnimatedObject(
@@ -95,10 +99,11 @@ std::unique_ptr<bomb::StaticObject> bomb::GameEngine::createStaticObject(
 	return ptr;
 }
 
-std::unique_ptr<bomb::menu::Menu> bomb::GameEngine::createMenu()
+std::unique_ptr<bomb::LightObject> bomb::GameEngine::createLightObject(
+	const irr::core::vector3df &pos, irr::video::SColorf col, float radius)
 {
-	auto ptr = std::make_unique<bomb::menu::Menu>(_videoDriver, getGui());
-	return ptr;
+	return std::make_unique<bomb::LightObject>(
+		_sceneManager->addLightSceneNode(nullptr, pos, col, radius));
 }
 
 void bomb::GameEngine::deleteObject(std::unique_ptr<bomb::IObject> obj)
@@ -106,16 +111,21 @@ void bomb::GameEngine::deleteObject(std::unique_ptr<bomb::IObject> obj)
 	_sceneManager->addToDeletionQueue(obj->getSceneNode());
 }
 
-irr::scene::ICameraSceneNode *bomb::GameEngine::addCamera(
+irr::scene::ICameraSceneNode *bomb::GameEngine::getCamera(
 	const irr::core::vector3df &pos,
 	const irr::core::vector3df &rot)
 {
 	if (_camera)
-		throw Exception("GameEngine", "Camera already created");
+		return _camera;
 	_camera = _sceneManager->addCameraSceneNode();
 	if (!_camera)
 		throw Exception("GameEngine", "Can't create camera");
 	_camera->setPosition(pos);
 	_camera->setTarget(rot);
 	return _camera;
+}
+
+const irr::core::dimension2d<irr::u32> &bomb::GameEngine::getScreenSize()
+{
+	return _videoDriver->getScreenSize();
 }

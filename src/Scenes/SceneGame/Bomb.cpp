@@ -25,6 +25,6 @@ bool bomb::object::Bomb::activate(bomb::game::GameInfo &infos)
 	return true;
 }
 
-void bomb::object::Bomb::setProperties(bomb::game::GameInfo &infos, uint8_t idx)
+void bomb::object::Bomb::setProperties(bomb::game::GameInfo &infos, char idx)
 {
 }

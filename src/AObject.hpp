@@ -23,6 +23,7 @@ namespace bomb {
 		void setPos(const irr::core::vector3df &v) override;
 		void setRot(const irr::core::vector3df &v) override;
 		void setScale(const irr::core::vector3df &v) override;
+		void setVisible(bool visibility);
 
 		irr::scene::ISceneNode *getSceneNode() const override;
 

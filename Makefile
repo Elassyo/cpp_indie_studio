@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-NAME		=	bomberman
+NAME		=	bombermario
 
 BUILD_DIR_DBG	=	cmake-build-debug
 BUILD_DIR_REL	=	cmake-build-release

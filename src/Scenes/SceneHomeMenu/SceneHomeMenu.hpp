@@ -28,7 +28,9 @@ namespace bomb {
 			bool onEvent(const irr::SEvent &event) override;
 
 		private:
-			std::unique_ptr<bomb::menu::Menu> _menu;
+			bomb::menu::Menu _menu;
+			bool running;
+			std::string _nextScene;
 		};
 	}
 }

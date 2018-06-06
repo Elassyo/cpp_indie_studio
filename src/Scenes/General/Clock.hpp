@@ -24,7 +24,7 @@ namespace bomb {
 
 		private:
 			std::chrono::time_point<std::chrono::steady_clock> _lastReset;
-			long _interval;
+			unsigned long long _interval;
 		};
 	}
 }
