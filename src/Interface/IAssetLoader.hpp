@@ -18,6 +18,8 @@
 
 	#include "../StaticObject.hpp"
 
+	#include "../LightObject.hpp"
+
 namespace bomb {
 	namespace menu {
 		class Menu;
@@ -43,6 +45,10 @@ namespace bomb {
 				irr::core::vector3df pos = {0, 0, 0},
 				irr::core::vector3df scale = {1, 1, 1},
 				irr::core::vector3df rot = {0, 0, 0}) = 0;
+		virtual std::unique_ptr<bomb::LightObject> createLightObject(
+			const irr::core::vector3df &pos = {0, 0, 0},
+			irr::video::SColorf col = {1.0f, 1.0f, 1.0f},
+			float radius = 100.0f) = 0;
 		virtual std::unique_ptr<menu::Menu> createMenu() = 0;
 		virtual irr::scene::ICameraSceneNode *addCamera(
 			const irr::core::vector3df &pos,

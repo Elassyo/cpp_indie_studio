@@ -120,6 +120,8 @@ set(SRC_FILES
         src/AnimatedObject.hpp
         src/AObject.cpp
         src/AObject.hpp
+        src/LightObject.cpp
+        src/LightObject.hpp
         src/StaticObject.cpp
         src/StaticObject.hpp
         src/Version.cpp

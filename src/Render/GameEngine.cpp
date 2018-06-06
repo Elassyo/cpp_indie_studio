@@ -12,8 +12,8 @@
 #include "GameEngine.hpp"
 
 bomb::GameEngine::GameEngine(const std::wstring &winName,
-	unsigned int w, unsigned int h,
-	irr::video::E_DRIVER_TYPE driver_type) :
+			unsigned int w, unsigned int h,
+			irr::video::E_DRIVER_TYPE driver_type) :
 	_device(irr::createDevice(driver_type, irr::core::dimension2d(w, h), 16,
 		false, false, false, &_evtHandler)),
 	_videoDriver(_device->getVideoDriver()),
@@ -99,6 +99,13 @@ std::unique_ptr<bomb::StaticObject> bomb::GameEngine::createStaticObject(
 	ptr->setRot(rot);
 	ptr->setScale(scale);
 	return ptr;
+}
+
+std::unique_ptr<bomb::LightObject> bomb::GameEngine::createLightObject(
+	const irr::core::vector3df &pos, irr::video::SColorf col, float radius)
+{
+	return std::make_unique<bomb::LightObject>(
+		_sceneManager->addLightSceneNode(nullptr, pos, col, radius));
 }
 
 std::unique_ptr<bomb::menu::Menu> bomb::GameEngine::createMenu()
