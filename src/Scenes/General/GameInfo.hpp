@@ -6,18 +6,20 @@
 */
 
 #ifndef CPP_INDIE_STUDIO_GAMEINFO_HPP
-	#define CPP_INDIE_STUDIO_GAMEINFO_HPP
+#define CPP_INDIE_STUDIO_GAMEINFO_HPP
 
-	#include <array>
-	#include <map>
-	#include <vector>
-	#include "../../Interface/IAssetLoader.hpp"
-	#include "../../AnimatedObject.hpp"
-	#include "PlayerInfo.hpp"
-	#include "../../AnimatedObject.hpp"
-	#include "../../Interface/IAssetLoader.hpp"
-	#include "../../Map/MapGenerator.hpp"
-	#include "../../Map/Map.hpp"
+#include <array>
+#include <map>
+#include <vector>
+#include "../../Interface/IAssetLoader.hpp"
+#include "../../AnimatedObject.hpp"
+#include "PlayerInfo.hpp"
+#include "../../AnimatedObject.hpp"
+#include "../../Interface/IAssetLoader.hpp"
+#include "../../Map/MapGenerator.hpp"
+#include "../../Map/Map.hpp"
+
+#define MAP_SIZE 15
 
 namespace bomb {
 	namespace game {
@@ -26,9 +28,15 @@ namespace bomb {
 		class GameInfo {
 		public:
 			GameInfo() = default;
-			void createMap(IAssetLoader &loader,
-				irr::video::ITexture *pTexture);
+
+			void createGame(
+				IAssetLoader &loader,
+				irr::video::ITexture *pTexture
+			);
 			int getMapSize() const;
+
+			void executePlayers();
+
 		private:
 			enum Character {
 				SHYGUY_WHITE,
@@ -38,12 +46,20 @@ namespace bomb {
 				SKELEREX
 			};
 
+			void createMap(
+				IAssetLoader &loader,
+				unsigned int size
+			);
+			void createPlayer(bomb::IAssetLoader &loader,
+				const std::string &path,
+				std::unique_ptr<IPlayerController> controller,
+				Character index,
+				const irr::core::vector3di &spawn
+			);
+
 			void reset();
 
-			std::map<Character, std::unique_ptr<AnimatedObject>>
-				_characters;
-			std::array<PlayerInfo, NB_PLAYERS> _players;
-
+			std::vector<PlayerInfo> _players;
 			std::unique_ptr<bomb::Map> _map;
 			int _mapSize;
 		};

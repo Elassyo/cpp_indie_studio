@@ -28,3 +28,19 @@ std::string bomb::AnimatedObject::toString()
 {
 	return "";
 }
+
+void bomb::AnimatedObject::move(const irr::core::vector3df &v)
+{
+	_node->setPosition(_node->getPosition() + v);
+}
+
+void bomb::AnimatedObject::scale(const irr::core::vector3df &v)
+{
+	_node->setScale(_node->getScale() + v);
+
+}
+
+void bomb::AnimatedObject::rotate(const irr::core::vector3df &v)
+{
+	_node->setRotation(_node->getRotation() + v);
+}
