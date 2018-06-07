@@ -28,6 +28,7 @@ namespace bomb {
 			int getId() const;
 			void setText(const wchar_t *text);
 		private:
+			irr::gui::IGUIButton * _element;
 			std::function <void()> _event;
 			bomb::utils::Clock _latence;
 			const int _id;

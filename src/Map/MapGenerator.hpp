@@ -15,7 +15,7 @@
 	#include "MapConstructor.hpp"
 
 namespace bomb {
-	constexpr int GEN_BASIC_PROB = 60;
+	constexpr int GEN_BASIC_PROB = 75;
 
 	class MapGenerator {
 	public:
