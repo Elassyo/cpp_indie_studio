@@ -7,8 +7,8 @@
 
 #include "AObject.hpp"
 
-bomb::AObject::AObject(irr::scene::ISceneNode *inode) :
-	_node(inode)
+bomb::AObject::AObject(irr::scene::ISceneNode *inode, IAudioPlayer &ap) :
+	_node(inode), _audioPlayer(ap)
 {
 }
 
@@ -50,4 +50,9 @@ irr::scene::ISceneNode *bomb::AObject::getSceneNode() const
 void bomb::AObject::setVisible(bool visibility)
 {
 	_node->setVisible(visibility);
+}
+
+void bomb::AObject::playSound(const std::string &soundName)
+{
+	_audioPlayer.playSound(soundName, *this);
 }

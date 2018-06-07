@@ -13,7 +13,8 @@
 namespace bomb {
 	class StaticObject : public AObject {
 	public:
-		explicit StaticObject(irr::scene::IMeshSceneNode *node);
+		explicit StaticObject(irr::scene::IMeshSceneNode *node,
+				      IAudioPlayer &);
 
 		void setTexture(uint32_t layer,
 			irr::video::ITexture *texture) override;

@@ -8,8 +8,9 @@
 #include "Exception/Exception.hpp"
 #include "StaticObject.hpp"
 
-bomb::StaticObject::StaticObject(irr::scene::IMeshSceneNode *node):
-	AObject(node), _node(node)
+bomb::StaticObject::StaticObject(irr::scene::IMeshSceneNode *node,
+				 IAudioPlayer &ap):
+	AObject(node, ap), _node(node)
 {
 	if (!node)
 		throw Exception("StaticObject",
