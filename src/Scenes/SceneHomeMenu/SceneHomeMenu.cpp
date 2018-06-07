@@ -43,6 +43,7 @@ void bomb::scene::SceneHomeMenu::save()
 
 void bomb::scene::SceneHomeMenu::reset(bomb::IAssetLoader &loader)
 {
+	(void) loader;
 }
 
 void bomb::scene::SceneHomeMenu::clean()

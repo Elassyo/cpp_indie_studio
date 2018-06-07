@@ -53,6 +53,9 @@ namespace bomb {
 			bool _ghostMode;
 			bool _alive;
 			uint8_t _characterIndex;
+			IPlayerController::Actions _currentAction;
+			IPlayerController::Actions _nextAction;
+			irr::core::vector3df _target;
 
 			std::unique_ptr<AnimatedObject> _obj;
 			std::unique_ptr<IPlayerController> _controller;
