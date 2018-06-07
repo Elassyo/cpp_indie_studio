@@ -16,16 +16,16 @@ void bomb::game::GameInfo::createGame(IAssetLoader &loader,
 
 	/* TEMPORALY */
 	createPlayer(loader, "models/characters/shyGuy/shyGuyBlack.obj",
-		std::make_unique<bomb::player::AIController>(), SHYGUY_BLACK,
+		std::make_unique<bomb::player::AIController>(_map), SHYGUY_BLACK,
 		{1, 0, 1});
 	createPlayer(loader, "models/characters/shyGuy/shyGuyBlue.obj",
-		std::make_unique<bomb::player::AIController>(), SHYGUY_BLUE,
+		std::make_unique<bomb::player::AIController>(_map), SHYGUY_BLUE,
 		{1, 0, MAP_SIZE - 2});
 	createPlayer(loader, "models/characters/shyGuy/shyGuyRed.obj",
-		std::make_unique<bomb::player::AIController>(), SHYGUY_RED,
+		std::make_unique<bomb::player::AIController>(_map), SHYGUY_RED,
 		{MAP_SIZE - 2, 0, 1});
 	createPlayer(loader, "models/characters/shyGuy/shyGuyWhite.obj",
-		std::make_unique<bomb::player::AIController>(), SHYGUY_WHITE,
+		std::make_unique<bomb::player::AIController>(_map), SHYGUY_WHITE,
 		{MAP_SIZE - 2, 0, MAP_SIZE - 2});
 	//createPlayer(loader, "models/characters/skelerex/skelerex.obj", SKELEREX, {0, 0, 0});
 	_map->setTextures(texture);

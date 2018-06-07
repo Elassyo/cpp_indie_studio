@@ -32,6 +32,8 @@ namespace bomb {
 			size_t range, size_t damage);
 		void setTextures(irr::video::ITexture *texture);
 
+		bool blockAt(const irr::core::vector2di &coord);
+
 		int getSize() const;
 		void setSize(int size);
 	private:

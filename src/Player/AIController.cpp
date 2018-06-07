@@ -8,8 +8,8 @@
 #include "AIController.hpp"
 #include "../Exception/Exception.hpp"
 
-bomb::player::AIController::AIController():
-	APlayerController()
+bomb::player::AIController::AIController(const std::shared_ptr<bomb::Map> &map):
+	APlayerController(), _map(map)
 {
 	_haveQuest = false;
 }
@@ -112,6 +112,5 @@ bool bomb::player::AIController::isSafe(const irr::core::vector2di &pos)
 
 bool bomb::player::AIController::isWalkable(const irr::core::vector2di &pos)
 {
-	/* TODO check with map */
-	return (pos.X >= 0 && pos.Y >= 0 && pos.X < 15 && pos.Y < 15);
+	return (!_map->blockAt(pos));
 }

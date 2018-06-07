@@ -52,10 +52,10 @@ bomb::MapConstructor bomb::MapGenerator::generateBasic()
 	for (unsigned int x = 0; x < _size; x++) {
 		for (unsigned int y = 0; y < _size; y++) {
 			if (x % 2 == 0 && y % 2 == 0)
-				map.addBlock({ (int)x, (int)y, 0 },
+				map.addBlock({ (int)x, (int)y},
 					bomb::Map::UNBREAKABLE);
 			else if (_rng() % 100 <= GEN_BASIC_PROB)
-				map.addBlock({ (int)x, (int)y, 0 },
+				map.addBlock({ (int)x, (int)y},
 					bomb::Map::BREAKABLE);
 		}
 	}
@@ -65,15 +65,15 @@ bomb::MapConstructor bomb::MapGenerator::generateBasic()
 void bomb::MapGenerator::addBorder(MapConstructor &build)
 {
 	for (unsigned int x = 0; x < _size; x++) {
-		build.addBlock({ (int)x, 0, 0 },
+		build.addBlock({(int)x, 0},
 			bomb::Map::UNBREAKABLE);
-		build.addBlock({ (int)x, (int)_size - 1, 0 },
+		build.addBlock({(int)x, (int)_size - 1},
 			bomb::Map::UNBREAKABLE);
 	}
 	for (unsigned int y = 0; y < _size; y++) {
-		build.addBlock({ 0, (int)y, 0 },
+		build.addBlock({0, (int)y},
 			bomb::Map::UNBREAKABLE);
-		build.addBlock({ (int)_size - 1, (int)y, 0 },
+		build.addBlock({(int)_size - 1, (int)y},
 			bomb::Map::UNBREAKABLE);
 	}
 }
@@ -81,11 +81,11 @@ void bomb::MapGenerator::addBorder(MapConstructor &build)
 void bomb::MapGenerator::fillSpawn(MapConstructor &build,
 	unsigned int x, unsigned int y)
 {
-	build.rmBlock({(int)x - 1, (int)y, 0});
-	build.rmBlock({(int)x + 1, (int)y, 0});
-	build.rmBlock({(int)x, (int)y - 1, 0});
-	build.rmBlock({(int)x, (int)y + 1, 0});
-	build.rmBlock({(int)x, (int)y, 0});
+	build.rmBlock({(int)x - 1, (int)y});
+	build.rmBlock({(int)x + 1, (int)y});
+	build.rmBlock({(int)x, (int)y - 1});
+	build.rmBlock({(int)x, (int)y + 1});
+	build.rmBlock({(int)x, (int)y});
 }
 
 void

@@ -33,7 +33,7 @@ bomb::game::Player::Player(bomb::IAssetLoader &loader,
 
 void bomb::game::Player::execute()
 {
-	/* dans un thread normalement */
+	/* TODO: Position dans la Map */
 	_controller->execute({_obj->getPos().X, _obj->getPos().Z});
 
 	auto e = _controller->requestMovement();

@@ -22,13 +22,13 @@ bomb::MapConstructor::MapConstructor(unsigned int mapSize) :
 {
 }
 
-void bomb::MapConstructor::addBlock(const irr::core::vector3di &pos,
+void bomb::MapConstructor::addBlock(const irr::core::vector2di &pos,
 					Map::BlockType type)
 {
 	_mapBlocks[pos] = type;
 }
 
-void bomb::MapConstructor::rmBlock(const irr::core::vector3di &pos)
+void bomb::MapConstructor::rmBlock(const irr::core::vector2di &pos)
 {
 	auto it = _mapBlocks.find(pos);
 	if (it != _mapBlocks.end())
@@ -69,7 +69,7 @@ void bomb::MapConstructor::dumpMap()
 		for (unsigned int y = 0; y < _mapSize; y++) {
 			isPrint = false;
 			for (auto &e : _mapBlocks) {
-				if (e.first == irr::core::vector3di(x, y, 0)) {
+				if (e.first == irr::core::vector2di(x, y)) {
 					std::cout << e.second;
 					isPrint = true;
 					break;

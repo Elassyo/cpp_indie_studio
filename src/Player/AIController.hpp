@@ -17,7 +17,7 @@ namespace bomb {
 	namespace player {
 		class AIController : public APlayerController {
 		public:
-			AIController();
+			AIController(const std::shared_ptr<bomb::Map> &);
 			void execute(const irr::core::vector2di &pos) override;
 
 		private:
@@ -37,6 +37,8 @@ namespace bomb {
 
 			irr::core::vector2di _quest;
 			bool _haveQuest;
+
+			const std::shared_ptr<bomb::Map> &_map;
 
 			std::vector<irr::core::vector2di> _access;
 		};

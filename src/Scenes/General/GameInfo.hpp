@@ -60,7 +60,7 @@ namespace bomb {
 			void reset();
 
 			std::vector<Player> _players;
-			std::unique_ptr<bomb::Map> _map;
+			std::shared_ptr<bomb::Map> _map;
 			int _mapSize;
 		};
 	}
