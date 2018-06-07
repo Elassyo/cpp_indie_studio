@@ -8,13 +8,14 @@
 #include "APlayerController.hpp"
 
 bomb::APlayerController::APlayerController():
-	_end(false)
+	_end(false), _action(UNDEFINED)
 {
 }
 
-const bomb::MovementAnalyser &bomb::APlayerController::requestMovement()
+bomb::IPlayerController::Actions
+bomb::APlayerController::requestMovement()
 {
-	return _movement;
+	return _action;
 }
 
 void bomb::APlayerController::close()

@@ -19,7 +19,9 @@ namespace bomb {
 	public:
 		enum BlockType {
 			UNBREAKABLE,
-			BREAKABLE
+			BOMB,
+			BREAKABLE,
+			EMPTY
 		};
 
 		explicit MapConstructor(unsigned int mapSize);
