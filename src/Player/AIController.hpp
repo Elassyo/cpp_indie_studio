@@ -17,14 +17,30 @@ namespace bomb {
 	namespace player {
 		class AIController : public APlayerController {
 		public:
-			AIController();
-			void launch() override;
-
-			virtual void execute() override;
+			AIController(const std::shared_ptr<bomb::Map> &);
+			void execute(const irr::core::vector2di &pos) override;
 
 		private:
-			void moveRandom();
-			utils::Clock _clock;
+			Actions astar(const irr::core::vector2di &from, const irr::core::vector2di &to);
+			bomb::IPlayerController::Actions execAstar(std::vector<irr::core::vector2di> path,
+				const irr::core::vector2di &last, const irr::core::vector2di &dest);
+
+			void accessBlock(const irr::core::vector2di &from);
+			void checkBorder(const irr::core::vector2di &from);
+
+			bool isAccessible(const irr::core::vector2di &to);
+
+			void initQuest();
+
+			bool isSafe(const irr::core::vector2di &pos);
+			bool isWalkable(const irr::core::vector2di &pos);
+
+			irr::core::vector2di _quest;
+			bool _haveQuest;
+
+			const std::shared_ptr<bomb::Map> &_map;
+
+			std::vector<irr::core::vector2di> _access;
 		};
 	}
 }

@@ -19,7 +19,7 @@ namespace bomb {
 			const irr::core::vector3df &pos,
 			const irr::core::vector3df &scale,
 			const irr::core::vector3df &rotation,
-			const irr::core::vector3di &mapPos
+			const irr::core::vector2di &mapPos
 		);
 		MapBlockUnbreakable();
 
@@ -30,7 +30,7 @@ namespace bomb {
 			const irr::core::vector3df &pos,
 			const irr::core::vector3df &scale,
 			const irr::core::vector3df &rotation,
-			const irr::core::vector3di &mapPos) const override;
+			const irr::core::vector2di &mapPos) const override;
 	};
 }
 

@@ -17,12 +17,11 @@ namespace bomb {
 			MV_DOWN = 180,
 			MV_LEFT = 270,
 			UNDEFINED,
-			PUT_BOMB
+			PUT_BOMB,
+			NONE
 		};
 
-		virtual void launch() = 0;
-		virtual void close() = 0;
-		virtual void execute() = 0;
+		virtual void execute(const irr::core::vector2di &pos) = 0;
 		virtual Actions requestMovement() = 0;
 	};
 }

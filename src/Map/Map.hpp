@@ -6,14 +6,14 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_MAP_HPP
-	#define CPP_INDIE_STUDIO_MAP_HPP
+#define CPP_INDIE_STUDIO_MAP_HPP
 
-	#include <memory>
-	#include <vector>
+#include <memory>
+#include <vector>
 
-	#include "../Interface/IRenderable.hpp"
-	#include "../Interface/ISerializable.hpp"
-	#include "../Map/MapBlocks/AMapBlock.hpp"
+#include "../Interface/IRenderable.hpp"
+#include "../Interface/ISerializable.hpp"
+#include "../Map/MapBlocks/AMapBlock.hpp"
 
 namespace bomb {
 	class Map {
@@ -32,10 +32,13 @@ namespace bomb {
 			size_t range, size_t damage);
 		void setTextures(irr::video::ITexture *texture);
 
+		bool blockAt(const irr::core::vector2di &coord);
+
 		int getSize() const;
 		void setSize(int size);
 		void addBomb(size_t x, size_t y);
 		BlockType &operator[](std::size_t idx);
+		BlockType &operator[](irr::core::vector3di &pos);
 	private:
 		std::vector<std::shared_ptr<bomb::AMapBlock>> _blocks;
 		std::vector<BlockType> _cells;

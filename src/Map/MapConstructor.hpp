@@ -19,9 +19,9 @@ namespace bomb {
 	public:
 		explicit MapConstructor(unsigned int mapSize);
 
-		void addBlock(const irr::core::vector3di &, Map::BlockType
+		void addBlock(const irr::core::vector2di &, Map::BlockType
 		type);
-		void rmBlock(const irr::core::vector3di &);
+		void rmBlock(const irr::core::vector2di &);
 
 		std::unique_ptr<bomb::Map> construct(
 			IAssetLoader &loader,
@@ -32,7 +32,7 @@ namespace bomb {
 		int getSize();
 	private:
 		unsigned int _mapSize;
-		std::map<irr::core::vector3di, Map::BlockType> _mapBlocks;
+		std::map<irr::core::vector2di, Map::BlockType> _mapBlocks;
 
 		static const std::unordered_map<bomb::Map::BlockType,
 			std::shared_ptr<bomb::AMapBlock>> Blocks;

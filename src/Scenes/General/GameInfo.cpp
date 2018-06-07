@@ -16,16 +16,16 @@ void bomb::game::GameInfo::createGame(IAssetLoader &loader,
 
 	/* TEMPORALY */
 	createPlayer(loader, "models/characters/shyGuy/shyGuyBlack.obj",
-		std::make_unique<bomb::player::AIController>(), SHYGUY_BLACK,
+		std::make_unique<bomb::player::AIController>(_map), SHYGUY_BLACK,
 		{1, 0, 1});
 	createPlayer(loader, "models/characters/shyGuy/shyGuyBlue.obj",
-		std::make_unique<bomb::player::AIController>(), SHYGUY_BLUE,
+		std::make_unique<bomb::player::AIController>(_map), SHYGUY_BLUE,
 		{1, 0, MAP_SIZE - 2});
 	createPlayer(loader, "models/characters/shyGuy/shyGuyRed.obj",
-		std::make_unique<bomb::player::AIController>(), SHYGUY_RED,
+		std::make_unique<bomb::player::AIController>(_map), SHYGUY_RED,
 		{MAP_SIZE - 2, 0, 1});
 	createPlayer(loader, "models/characters/shyGuy/shyGuyWhite.obj",
-		std::make_unique<bomb::player::AIController>(), SHYGUY_WHITE,
+		std::make_unique<bomb::player::AIController>(_map), SHYGUY_WHITE,
 		{MAP_SIZE - 2, 0, MAP_SIZE - 2});
 	//createPlayer(loader, "models/characters/skelerex/skelerex.obj", SKELEREX, {0, 0, 0});
 	_map->setTextures(texture);
@@ -59,15 +59,10 @@ void bomb::game::GameInfo::createPlayer(bomb::IAssetLoader &loader,
 	_players.push_back(bomb::game::Player(loader, path, controller,
 		{(float)spawn.X, (float)spawn.Y, (float)spawn.Z},
 		{.5, .5, .5}, {0, 0, 0}));
-	_players[_players.size() - 1].setCharacterIndex(index);
 }
 
 void bomb::game::GameInfo::reset()
 {
-	_players[0].setCharacterIndex(SHYGUY_BLACK);
-	_players[1].setCharacterIndex(SHYGUY_BLUE);
-	_players[2].setCharacterIndex(SHYGUY_RED);
-	_players[3].setCharacterIndex(SHYGUY_WHITE);
 }
 
 
@@ -79,6 +74,13 @@ int bomb::game::GameInfo::getMapSize() const
 void bomb::game::GameInfo::executePlayers()
 {
 	for (auto &p : _players) {
-		p.execute();
+		p.execute(*_map);
 	}
+}
+
+bool bomb::game::GameInfo::handleEvent(const irr::SEvent &event)
+{
+	if (event.KeyInput.Key == irr::KEY_KEY_Z)
+		_players[0].handleEvent(*_map, event);
+	return true;
 }

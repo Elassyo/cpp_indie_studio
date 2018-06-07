@@ -12,50 +12,44 @@
 #include "../../AnimatedObject.hpp"
 #include "../../Interface/IAssetLoader.hpp"
 #include "../../Interface/IPlayerController.hpp"
+#include "../../Player/PlayerActionner.hpp"
 
 namespace bomb {
 	namespace game {
 		class Player {
 		public:
 			Player(bomb::IAssetLoader &loader,
-					const std::string &path,
-					std::unique_ptr<bomb::IPlayerController> &controller,
-					const irr::core::vector3df &pos,
-					const irr::core::vector3df &scale,
-					const irr::core::vector3df &rotation);
+				const std::string &path,
+				std::unique_ptr<bomb::IPlayerController> &ctrl,
+				const irr::core::vector3df &pos,
+				const irr::core::vector3df &scale,
+			       	const irr::core::vector3df &rotation);
 
-			void startController();
-			void closeController();
+			bool handleEvent(Map &map, const irr::SEvent &event);
+			void execute(Map &map);
 
 			uint8_t getNbBombs() const;
 			float getSpeed() const;
 			uint8_t getBombRange() const;
 			bool isGhostMode() const;
 			bool isAlive() const;
-			uint8_t getCharacterIndex() const;
+			bool isAI() const;
 
 			void setNbBombs(uint8_t _nbBombs);
 			void setSpeed(float _speed);
 			void setBombRange(uint8_t _bombRange);
 			void setGhostMode(bool _ghostMode);
 			void setAlive(bool _alive);
-			void setCharacterIndex(uint8_t _characterIndex);
-
-			void execute();
+			void setAI(bool AI);
 
 		private:
-			const
-			std::unordered_map<bomb::IPlayerController::Actions,
-				irr::core::vector3df> _moves;
+			PlayerActionner _actionner;
 			uint8_t _nbBombs;
 			float _speed;
 			uint8_t _bombRange;
 			bool _ghostMode;
 			bool _alive;
-			uint8_t _characterIndex;
-			IPlayerController::Actions _currentAction;
-			IPlayerController::Actions _nextAction;
-			irr::core::vector3df _target;
+			bool _AI;
 
 			std::unique_ptr<AnimatedObject> _obj;
 			std::unique_ptr<IPlayerController> _controller;

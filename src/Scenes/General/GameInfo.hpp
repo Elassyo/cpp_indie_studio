@@ -37,6 +37,8 @@ namespace bomb {
 
 			void executePlayers();
 
+			bool handleEvent(const irr::SEvent &event);
+
 		private:
 			enum Character {
 				SHYGUY_WHITE,
@@ -60,7 +62,7 @@ namespace bomb {
 			void reset();
 
 			std::vector<Player> _players;
-			std::unique_ptr<bomb::Map> _map;
+			std::shared_ptr<bomb::Map> _map;
 			int _mapSize;
 		};
 	}
