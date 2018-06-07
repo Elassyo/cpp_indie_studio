@@ -16,7 +16,6 @@ namespace bomb {
 	public:
 		APlayerController();
 		Actions requestMovement() override;
-		void close() override;
 
 	protected:
 		bool _end;

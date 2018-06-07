@@ -18,7 +18,3 @@ bomb::APlayerController::requestMovement()
 	return _action;
 }
 
-void bomb::APlayerController::close()
-{
-	_end = true;
-}

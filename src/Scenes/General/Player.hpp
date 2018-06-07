@@ -24,9 +24,6 @@ namespace bomb {
 					const irr::core::vector3df &scale,
 					const irr::core::vector3df &rotation);
 
-			void startController();
-			void closeController();
-
 			uint8_t getNbBombs() const;
 			float getSpeed() const;
 			uint8_t getBombRange() const;

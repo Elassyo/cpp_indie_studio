@@ -34,23 +34,13 @@ bomb::game::Player::Player(bomb::IAssetLoader &loader,
 void bomb::game::Player::execute()
 {
 	/* dans un thread normalement */
-	_controller->execute();
+	_controller->execute({_obj->getPos().X, _obj->getPos().Z});
 
 	auto e = _controller->requestMovement();
 
 	/* Faire des method pour les collisions mais la flemme la */
 	if (e != IPlayerController::PUT_BOMB)
 		_obj->move(_moves.at(e));
-}
-
-void bomb::game::Player::startController()
-{
-	_controller->launch();
-}
-
-void bomb::game::Player::closeController()
-{
-	_controller->close();
 }
 
 unsigned char bomb::game::Player::getNbBombs() const

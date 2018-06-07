@@ -6,14 +6,14 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_MAP_HPP
-	#define CPP_INDIE_STUDIO_MAP_HPP
+#define CPP_INDIE_STUDIO_MAP_HPP
 
-	#include <memory>
-	#include <vector>
+#include <memory>
+#include <vector>
 
-	#include "../Interface/IRenderable.hpp"
-	#include "../Interface/ISerializable.hpp"
-	#include "../Map/MapBlocks/AMapBlock.hpp"
+#include "../Interface/IRenderable.hpp"
+#include "../Interface/ISerializable.hpp"
+#include "../Map/MapBlocks/AMapBlock.hpp"
 
 namespace bomb {
 	class Map {
