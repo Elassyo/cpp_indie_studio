@@ -73,8 +73,6 @@ set(SRC_FILES
         src/Menu/Menu.cpp
         src/Menu/Menu.hpp
 
-        src/Player/MovementAnalyser.cpp
-        src/Player/MovementAnalyser.hpp
         src/Player/APlayerController.cpp
         src/Player/APlayerController.hpp
         src/Player/AIController.cpp
@@ -91,10 +89,10 @@ set(SRC_FILES
         src/Scenes/General/Clock.hpp
         src/Scenes/General/GameInfo.cpp
         src/Scenes/General/GameInfo.hpp
-        src/Scenes/General/PlayerInfo.cpp
-        src/Scenes/General/PlayerInfo.hpp
         src/Scenes/General/PersistentInfo.cpp
         src/Scenes/General/PersistentInfo.hpp
+        src/Scenes/General/Player.cpp
+        src/Scenes/General/Player.hpp
 
         src/Scenes/SceneGame/Bomb.cpp
         src/Scenes/SceneGame/Bomb.hpp

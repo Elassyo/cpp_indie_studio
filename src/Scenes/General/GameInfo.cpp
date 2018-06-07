@@ -48,16 +48,17 @@ void bomb::game::GameInfo::createMap(
 }
 
 void bomb::game::GameInfo::createPlayer(bomb::IAssetLoader &loader,
-	const std::string &path, std::unique_ptr<bomb::IPlayerController> controller,
+	const std::string &path,
+	std::unique_ptr<bomb::IPlayerController> controller,
 	Character index, const irr::core::vector3di &spawn)
 {
 	if (_players.size() >= NB_PLAYERS)
 		throw bomb::Exception("GameCreation", "Too much players");
 
 	/* A CHANGER ! ECHELLES DE TAILLE */
-	_players.push_back(bomb::game::PlayerInfo(loader, path, controller,
+	_players.push_back(bomb::game::Player(loader, path, controller,
 		{spawn.X, spawn.Y, spawn.Z},
-		{1, 1, 1}, {0, 0, 0}, spawn));
+		{1, 1, 1}, {0, 0, 0}));
 	_players[_players.size() - 1].setCharacterIndex(index);
 }
 

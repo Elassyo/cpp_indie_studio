@@ -13,7 +13,7 @@
 #include <vector>
 #include "../../Interface/IAssetLoader.hpp"
 #include "../../AnimatedObject.hpp"
-#include "PlayerInfo.hpp"
+#include "Player.hpp"
 #include "../../AnimatedObject.hpp"
 #include "../../Interface/IAssetLoader.hpp"
 #include "../../Map/MapGenerator.hpp"
@@ -59,7 +59,7 @@ namespace bomb {
 
 			void reset();
 
-			std::vector<PlayerInfo> _players;
+			std::vector<Player> _players;
 			std::unique_ptr<bomb::Map> _map;
 			int _mapSize;
 		};

@@ -10,7 +10,6 @@
 bomb::player::AIController::AIController():
 	APlayerController(), _clock(AI_INTERVAL)
 {
-	_movement.reset();
 }
 
 void bomb::player::AIController::launch()
@@ -31,23 +30,6 @@ void bomb::player::AIController::execute()
 
 void bomb::player::AIController::moveRandom()
 {
-	auto i = rand() % 5;
-
-	_movement.reset();
-	switch (i) {
-	case 0:
-		_movement.top = {true, 1};
-		break;
-	case 1:
-		_movement.bot = {true, 1};
-		break;
-	case 2:
-		_movement.left = {true, 1};
-		break;
-	case 3:
-		_movement.right = {true, 1};
-		break;
-	default:
-		_movement.bomb = true;
-	}
+	auto acts = std::vector({MV_UP, MV_DOWN, MV_LEFT, MV_RIGHT, PUT_BOMB});
+	_action = acts.at(rand() % acts.size());
 }
