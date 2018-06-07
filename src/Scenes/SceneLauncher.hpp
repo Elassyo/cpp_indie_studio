@@ -20,6 +20,8 @@
 	#include "../Scenes/General/Clock.hpp"
 	#include "SceneGame/SceneGame.hpp"
 	#include "SceneHomeMenu/SceneHomeMenu.hpp"
+	#include "SceneOptionMenu/SceneOptionMenu.hpp"
+
 
 
 namespace bomb {

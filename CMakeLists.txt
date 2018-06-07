@@ -119,6 +119,8 @@ set(SRC_FILES
         src/Scenes/SceneGame/SceneGame.hpp
         src/Scenes/SceneHomeMenu/SceneHomeMenu.cpp
         src/Scenes/SceneHomeMenu/SceneHomeMenu.hpp
+        src/Scenes/SceneOptionMenu/SceneOptionMenu.cpp
+        src/Scenes/SceneOptionMenu/SceneOptionMenu.hpp
         src/Scenes/SceneLauncher.cpp
         src/Scenes/SceneLauncher.hpp
 
