@@ -21,11 +21,14 @@ bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(
 	});
 	_menu.addButton(loader, {.5, .5}, 2);
 	_menu.addButtonText(2, L"Options");
-	_menu.addButtonEvent(2, [](){});
+	_menu.addButtonEvent(2, [this](){
+		_nextScene = "option_scene";
+	});
 	_menu.addButton(loader, {.5, .65}, 3);
 	_menu.addButtonText(3, L"Quit");
-	_menu.addButtonEvent(3, [](){});
-	_menu.updateButtons(loader, true);
+	_menu.addButtonEvent(3, [this](){
+		_nextScene = "";
+	});	_menu.updateButtons(loader, true);
 	loader.getCamera({10,0,10}, {0,0,0});
 	return BEGIN;
 }
