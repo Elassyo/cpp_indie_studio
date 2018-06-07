@@ -18,14 +18,27 @@
 namespace bomb {
 	class Map {
 	public:
-		Map(const std::vector<std::shared_ptr<AMapBlock>> &_blocks);
+		enum BlockType {
+			UNBREAKABLE,
+			BOMB,
+			BREAKABLE,
+			EMPTY
+		};
+
+		Map(const std::vector<std::shared_ptr<AMapBlock>> &_blocks,
+		    std::vector<BlockType> &cells);
 
 		void explode(irr::core::vector3di pos,
 			size_t range, size_t damage);
 		void setTextures(irr::video::ITexture *texture);
 
+		int getSize() const;
+		void setSize(int size);
 	private:
 		std::vector<std::shared_ptr<bomb::AMapBlock>> _blocks;
+		std::vector<std::unique_ptr<bomb::AnimatedObject>> _bombs;
+		std::vector<BlockType> _cells;
+		int _size;
 	};
 }
 

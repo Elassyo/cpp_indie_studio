@@ -53,10 +53,10 @@ bomb::MapConstructor bomb::MapGenerator::generateBasic()
 		for (unsigned int y = 0; y < _size; y++) {
 			if (x % 2 == 0 && y % 2 == 0)
 				map.addBlock({ (int)x, (int)y, 0 },
-					bomb::MapConstructor::UNBREAKABLE);
+					bomb::Map::UNBREAKABLE);
 			else if (_rng() % 100 <= GEN_BASIC_PROB)
 				map.addBlock({ (int)x, (int)y, 0 },
-					bomb::MapConstructor::BREAKABLE);
+					bomb::Map::BREAKABLE);
 		}
 	}
 	return map;
@@ -66,15 +66,15 @@ void bomb::MapGenerator::addBorder(MapConstructor &build)
 {
 	for (unsigned int x = 0; x < _size; x++) {
 		build.addBlock({ (int)x, 0, 0 },
-			bomb::MapConstructor::UNBREAKABLE);
+			bomb::Map::UNBREAKABLE);
 		build.addBlock({ (int)x, (int)_size - 1, 0 },
-			bomb::MapConstructor::UNBREAKABLE);
+			bomb::Map::UNBREAKABLE);
 	}
 	for (unsigned int y = 0; y < _size; y++) {
 		build.addBlock({ 0, (int)y, 0 },
-			bomb::MapConstructor::UNBREAKABLE);
+			bomb::Map::UNBREAKABLE);
 		build.addBlock({ (int)_size - 1, (int)y, 0 },
-			bomb::MapConstructor::UNBREAKABLE);
+			bomb::Map::UNBREAKABLE);
 	}
 }
 
