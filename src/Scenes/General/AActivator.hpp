@@ -7,9 +7,6 @@
 
 #ifndef CPP_INDIE_STUDIO_IACTIVATOR_HPP
 	#define CPP_INDIE_STUDIO_IACTIVATOR_HPP
-
-	#include "../../Map/Map.hpp"
-
 	#include "GameInfo.hpp"
 
 namespace bomb {

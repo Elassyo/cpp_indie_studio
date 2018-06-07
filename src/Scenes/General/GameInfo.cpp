@@ -41,7 +41,6 @@ void bomb::game::GameInfo::createMap(
 	_mapSize = pattern.getSize();
 	_map = std::move(pattern.construct(loader, {0, 0, 0},
 		{1, 1, 1}, {0, 0, 0}));
-//	_map.setSize(pattern.getSize());
 	loader.createLightObject({(float)pattern.getSize() / 2,
 			(float)pattern.getSize() / 2,
 			(float)pattern.getSize() / 2},

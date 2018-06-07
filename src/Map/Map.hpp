@@ -34,9 +34,10 @@ namespace bomb {
 
 		int getSize() const;
 		void setSize(int size);
+		void addBomb(size_t x, size_t y);
+		BlockType &operator[](std::size_t idx);
 	private:
 		std::vector<std::shared_ptr<bomb::AMapBlock>> _blocks;
-		std::vector<std::unique_ptr<bomb::AnimatedObject>> _bombs;
 		std::vector<BlockType> _cells;
 		int _size;
 	};

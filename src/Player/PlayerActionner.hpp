@@ -19,6 +19,10 @@ namespace bomb {
 			IPlayerController::Actions action);
 		void setSpeedRatio(float speedRatio);
 	private:
+		void addBomb(Map &map, std::unique_ptr<AnimatedObject> &player);
+		void move(Map &map, std::unique_ptr<AnimatedObject> &player,
+			IPlayerController::Actions action);
+
 		float _speedRatio;
 		IPlayerController::Actions _currentAction;
 		IPlayerController::Actions _nextAction;

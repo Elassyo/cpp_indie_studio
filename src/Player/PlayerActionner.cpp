@@ -7,13 +7,25 @@
 
 #include "PlayerActionner.hpp"
 
-void bomb::PlayerActionner::actionnate(bomb::Map &map,
-				std::unique_ptr <bomb::AnimatedObject> &obj,
-				bomb::IPlayerController::Actions action)
+void bomb::PlayerActionner::addBomb(bomb::Map &map,
+	std::unique_ptr <bomb::AnimatedObject> &player)
 {
-	(void) map;
-	(void) obj;
-	(void) action;
+}
+
+void bomb::PlayerActionner::move(bomb::Map &map,
+	std::unique_ptr <bomb::AnimatedObject> &player,
+	bomb::IPlayerController::Actions action)
+{
+}
+
+void bomb::PlayerActionner::actionnate(bomb::Map &map,
+	std::unique_ptr <bomb::AnimatedObject> &player,
+	bomb::IPlayerController::Actions action)
+{
+	if (action == IPlayerController::PUT_BOMB)
+		return addBomb(map, player);
+	else if (action != IPlayerController::UNDEFINED)
+		return move(map, player, action);
 }
 
 void bomb::PlayerActionner::setSpeedRatio(float speedRatio)
