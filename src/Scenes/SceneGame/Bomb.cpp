@@ -17,14 +17,18 @@ bomb::object::Bomb::Bomb(bomb::IAssetLoader &loader,
 bool bomb::object::Bomb::isActivable(bomb::game::GameInfo &infos)
 {
 	return _timer.isReady();
+	(void) infos;
 }
 
 bool bomb::object::Bomb::activate(bomb::game::GameInfo &infos)
 {
 	_loader.deleteObject(std::move(_model));
 	return true;
+	(void) infos;
 }
 
 void bomb::object::Bomb::setProperties(bomb::game::GameInfo &infos, char idx)
 {
+	(void) infos;
+	(void) idx;
 }

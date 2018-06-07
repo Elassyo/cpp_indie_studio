@@ -77,6 +77,8 @@ set(SRC_FILES
         src/Player/APlayerController.hpp
         src/Player/AIController.cpp
         src/Player/AIController.hpp
+        src/Player/PlayerActionner.cpp
+        src/Player/PlayerActionner.hpp
 
         src/Render/EventHandler.cpp
         src/Render/EventHandler.hpp

@@ -19,8 +19,8 @@ namespace bomb {
 		void close() override;
 
 	protected:
-		Actions _action;
 		bool _end;
+		Actions _action;
 	};
 }
 

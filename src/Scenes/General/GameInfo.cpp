@@ -57,7 +57,7 @@ void bomb::game::GameInfo::createPlayer(bomb::IAssetLoader &loader,
 
 	/* A CHANGER ! ECHELLES DE TAILLE */
 	_players.push_back(bomb::game::Player(loader, path, controller,
-		{spawn.X, spawn.Y, spawn.Z},
+		{(float)spawn.X, (float)spawn.Y, (float)spawn.Z},
 		{1, 1, 1}, {0, 0, 0}));
 	_players[_players.size() - 1].setCharacterIndex(index);
 }
