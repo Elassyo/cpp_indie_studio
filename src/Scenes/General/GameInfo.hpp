@@ -34,6 +34,9 @@ namespace bomb {
 				irr::video::ITexture *pTexture
 			);
 			int getMapSize() const;
+
+			void executePlayers();
+
 		private:
 			enum Character {
 				SHYGUY_WHITE,
@@ -49,9 +52,10 @@ namespace bomb {
 			);
 			void createPlayer(bomb::IAssetLoader &loader,
 				const std::string &path,
-				IPlayerController &controller,
+				std::unique_ptr<IPlayerController> controller,
 				Character index,
-				const irr::core::vector3di &spawn);
+				const irr::core::vector3di &spawn
+			);
 
 			void reset();
 

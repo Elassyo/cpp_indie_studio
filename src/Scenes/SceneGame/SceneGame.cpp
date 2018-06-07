@@ -23,6 +23,7 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::loop(
 	bomb::IAssetLoader &loader)
 {
 	explodeBombs(loader);
+	_gameInfo.executePlayers();
 	return CONTINUE;
 }
 

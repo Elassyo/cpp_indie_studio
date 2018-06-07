@@ -10,33 +10,53 @@
 #include "../../Interface/IPlayerController.hpp"
 
 bomb::game::PlayerInfo::PlayerInfo(bomb::IAssetLoader &loader,
-		const std::string &path,
-		bomb::IPlayerController &controller,
-		const irr::core::vector3df &pos,
-		const irr::core::vector3df &scale,
-		const irr::core::vector3df &rotation,
-		const irr::core::vector3di &mapPos):
+	const std::string &path,
+	std::unique_ptr<bomb::IPlayerController> &controller,
+	const irr::core::vector3df &pos,
+	const irr::core::vector3df &scale,
+	const irr::core::vector3df &rotation,
+	const irr::core::vector3di &mapPos):
 	_nbBombs(1),
 	_speed(10),
 	_bombRange(1),
 	_ghostMode(false),
 	_alive(true),
 	_characterIndex(0),
-	_controller(controller)
+	_controller(std::move(controller))
 {
 	_obj = loader.createAnimatedObject(path, pos, scale, rotation);
 }
 
 void bomb::game::PlayerInfo::execute()
 {
-	auto e = _controller.requestMovement();
+	/* dans un thread normalement */
+	_controller->execute();
 
-	std::cout << _characterIndex << " [" << e.top.first << e.bot.first <<e.right.first << e.left.first << e.bomb << "]" << std::endl;
+	auto &e = _controller->requestMovement();
+
+	/* Faire des method pour les collisions mais la flemme la */
+	if (e.top.first) {
+		_obj->move({e.top.second, 0, 0});
+	}
+	if (e.bot.first) {
+		_obj->move({-e.bot.second, 0, 0});
+	}
+	if (e.left.first) {
+		_obj->move({0, 0, e.left.second});
+	}
+	if (e.right.first) {
+		_obj->move({0, 0, -e.right.second});
+	}
 }
 
 void bomb::game::PlayerInfo::startController()
 {
-	_controller.launch();
+	_controller->launch();
+}
+
+void bomb::game::PlayerInfo::closeController()
+{
+	_controller->close();
 }
 
 unsigned char bomb::game::PlayerInfo::getNbBombs() const

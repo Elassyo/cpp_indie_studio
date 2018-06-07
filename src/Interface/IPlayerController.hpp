@@ -16,7 +16,9 @@ namespace bomb {
 		virtual ~IPlayerController() = default;
 
 		virtual void launch() = 0;
-		virtual const MovementAnalyser &requestMovement() const  = 0;
+		virtual void close() = 0;
+		virtual void execute() = 0;
+		virtual const MovementAnalyser &requestMovement() = 0;
 	};
 }
 

@@ -18,13 +18,14 @@ namespace bomb {
 		public:
 			PlayerInfo(bomb::IAssetLoader &loader,
 					const std::string &path,
-					bomb::IPlayerController &controller,
+					std::unique_ptr<bomb::IPlayerController> &controller,
 					const irr::core::vector3df &pos,
 					const irr::core::vector3df &scale,
 					const irr::core::vector3df &rotation,
 					const irr::core::vector3di &mapPos);
 
 			void startController();
+			void closeController();
 
 			uint8_t getNbBombs() const;
 			uint8_t getSpeed() const;
@@ -51,7 +52,7 @@ namespace bomb {
 			uint8_t _characterIndex;
 
 			std::unique_ptr<AnimatedObject> _obj;
-			IPlayerController &_controller;
+			std::unique_ptr<IPlayerController> _controller;
 		};
 	}
 }

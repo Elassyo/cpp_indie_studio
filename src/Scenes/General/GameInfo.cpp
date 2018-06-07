@@ -15,21 +15,17 @@ void bomb::game::GameInfo::createGame(IAssetLoader &loader,
 	createMap(loader, MAP_SIZE);
 
 	/* TEMPORALY */
-	auto shyGuyBlack = bomb::player::AIController();
 	createPlayer(loader, "models/characters/shyGuy/shyGuyBlack.obj",
-		shyGuyBlack, SHYGUY_BLACK,
+		std::make_unique<bomb::player::AIController>(), SHYGUY_BLACK,
 		{1, 0, 1});
-	auto shyGuyBlue = bomb::player::AIController();
 	createPlayer(loader, "models/characters/shyGuy/shyGuyBlue.obj",
-		shyGuyBlue, SHYGUY_BLUE,
+		std::make_unique<bomb::player::AIController>(), SHYGUY_BLUE,
 		{1, 0, MAP_SIZE - 2});
-	auto shyGuyRed = bomb::player::AIController();
 	createPlayer(loader, "models/characters/shyGuy/shyGuyRed.obj",
-		shyGuyRed, SHYGUY_RED,
+		std::make_unique<bomb::player::AIController>(), SHYGUY_RED,
 		{MAP_SIZE - 2, 0, 1});
-	auto shyGuyWhite = bomb::player::AIController();
 	createPlayer(loader, "models/characters/shyGuy/shyGuyWhite.obj",
-		shyGuyWhite, SHYGUY_WHITE,
+		std::make_unique<bomb::player::AIController>(), SHYGUY_WHITE,
 		{MAP_SIZE - 2, 0, MAP_SIZE - 2});
 	//createPlayer(loader, "models/characters/skelerex/skelerex.obj", SKELEREX, {0, 0, 0});
 	_map->setTextures(texture);
@@ -52,11 +48,12 @@ void bomb::game::GameInfo::createMap(
 }
 
 void bomb::game::GameInfo::createPlayer(bomb::IAssetLoader &loader,
-	const std::string &path, IPlayerController &controller,
+	const std::string &path, std::unique_ptr<bomb::IPlayerController> controller,
 	Character index, const irr::core::vector3di &spawn)
 {
 	if (_players.size() >= NB_PLAYERS)
 		throw bomb::Exception("GameCreation", "Too much players");
+
 	/* A CHANGER ! ECHELLES DE TAILLE */
 	_players.push_back(bomb::game::PlayerInfo(loader, path, controller,
 		{spawn.X, spawn.Y, spawn.Z},
@@ -76,4 +73,11 @@ void bomb::game::GameInfo::reset()
 int bomb::game::GameInfo::getMapSize() const
 {
 	return _mapSize;
+}
+
+void bomb::game::GameInfo::executePlayers()
+{
+	for (auto &p : _players) {
+		p.execute();
+	}
 }

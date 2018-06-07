@@ -7,7 +7,17 @@
 
 #include "APlayerController.hpp"
 
-const bomb::MovementAnalyser &bomb::APlayerController::requestMovement() const
+bomb::APlayerController::APlayerController():
+	_end(false)
+{
+}
+
+const bomb::MovementAnalyser &bomb::APlayerController::requestMovement()
 {
 	return _movement;
+}
+
+void bomb::APlayerController::close()
+{
+	_end = true;
 }

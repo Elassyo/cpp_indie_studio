@@ -14,11 +14,13 @@
 namespace bomb {
 	class APlayerController : virtual public IPlayerController {
 	public:
-		virtual
-		const MovementAnalyser &requestMovement() const override;
+		APlayerController();
+		const MovementAnalyser &requestMovement() override;
+		void close() override;
 
 	protected:
 		MovementAnalyser _movement;
+		bool _end;
 	};
 }
 

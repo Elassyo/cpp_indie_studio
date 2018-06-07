@@ -8,19 +8,25 @@
 #include "AIController.hpp"
 
 bomb::player::AIController::AIController():
-	_clock(AI_INTERVAL)
+	APlayerController(), _clock(AI_INTERVAL)
 {
+	_movement.reset();
 }
 
 void bomb::player::AIController::launch()
 {
 	_clock.reset();
-	while (1 /* CONDITION D'ARRET ICI */) {
+	while (!_end) {
 		if (_clock.isReady()) {
-			moveRandom();
+			execute();
 			_clock.reset();
 		}
 	}
+}
+
+void bomb::player::AIController::execute()
+{
+	moveRandom();
 }
 
 void bomb::player::AIController::moveRandom()

@@ -20,6 +20,8 @@ namespace bomb {
 			AIController();
 			void launch() override;
 
+			virtual void execute() override;
+
 		private:
 			void moveRandom();
 			utils::Clock _clock;
