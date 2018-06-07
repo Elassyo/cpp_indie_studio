@@ -17,6 +17,9 @@ namespace bomb {
 			GraphicText(irr::gui::IGUIStaticText *text,
 				irr::core::vector2df pos);
 			void setFont(irr::gui::IGUIFont *font);
+
+		private:
+			irr::gui::IGUIStaticText * _element;
 		};
 	}
 }

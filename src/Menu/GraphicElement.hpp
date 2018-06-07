@@ -20,10 +20,9 @@ namespace bomb {
 			void update(irr::core::vector2di size,
 				irr::core::vector2di screenSize);
 			void remove();
-		protected:
-			irr::gui::IGUIElement *_element;
 
 		private:
+			irr::gui::IGUIElement *_element;
 			irr::core::vector2df _pos;
 		};
 	}
