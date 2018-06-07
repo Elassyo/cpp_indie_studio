@@ -14,10 +14,12 @@
 	#include "../Interface/IAssetLoader.hpp"
 	#include "../Interface/IRenderWindow.hpp"
 	#include "../AnimatedObject.hpp"
+	#include "../CameraObject.hpp"
 	#include "../StaticObject.hpp"
 	#include "../LightObject.hpp"
 	#include "../Version.hpp"
 	#include "EventHandler.hpp"
+
 
 namespace bomb {
 	class GameEngine :
@@ -54,7 +56,7 @@ namespace bomb {
 			const irr::core::vector3df &pos,
 			irr::video::SColorf col, float radius) override;
 		void deleteObject(std::unique_ptr<IObject> obj) override;
-		irr::scene::ICameraSceneNode *getCamera(
+		std::unique_ptr<CameraObject> getCamera(
 			const irr::core::vector3df &pos,
 			const irr::core::vector3df &rot) override;
 		const irr::core::dimension2d<irr::u32> &getScreenSize()

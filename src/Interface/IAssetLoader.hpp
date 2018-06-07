@@ -16,6 +16,8 @@
 
 	#include "../AnimatedObject.hpp"
 
+	#include "../CameraObject.hpp"
+
 	#include "../StaticObject.hpp"
 
 	#include "../LightObject.hpp"
@@ -44,7 +46,7 @@ namespace bomb {
 				irr::core::vector3df pos = {0, 0, 0},
 				irr::core::vector3df scale = {1, 1, 1},
 				irr::core::vector3df rot = {0, 0, 0}) = 0;
-		virtual irr::scene::ICameraSceneNode *getCamera(
+		virtual std::unique_ptr<CameraObject> getCamera(
 			const irr::core::vector3df &pos = {0, 0, 0},
 			const irr::core::vector3df &rot = {0, 0, 0}) = 0;
 		virtual std::unique_ptr<bomb::LightObject> createLightObject(
