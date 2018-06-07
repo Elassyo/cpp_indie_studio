@@ -13,7 +13,8 @@
 namespace bomb {
 	class LightObject : public AObject {
 	public:
-		explicit LightObject(irr::scene::ILightSceneNode *node);
+		explicit LightObject(irr::scene::ILightSceneNode *node,
+				     IAudioPlayer &);
 		void setTexture(uint32_t layer,
 				irr::video::ITexture *texture) override;
 		std::string toString() override;

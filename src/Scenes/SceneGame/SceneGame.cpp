@@ -13,8 +13,8 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
 	_blocksTextures = loader.loadTexture("models/blocks/spritesheet.png");
 	_gameInfo.createGame(loader, _blocksTextures);
 	auto cam = loader.getCamera();
-	cam->setPosition({20, 10, (float)_gameInfo.getMapSize() / 2});
-	cam->setRotation({(float)_gameInfo.getMapSize() / 2,
+	cam->setPos({20, 10, (float)_gameInfo.getMapSize() / 2});
+	cam->setRot({(float)_gameInfo.getMapSize() / 2,
 			0, (float)_gameInfo.getMapSize() / 2});
 	return BEGIN;
 }
@@ -31,6 +31,7 @@ void bomb::scene::SceneGame::explodeBombs(bomb::IAssetLoader &loader)
 {
 	for (auto &bomb : _bombs)
 		bomb.get()->tryToActivate(_gameInfo);
+	(void) loader;
 }
 
 void bomb::scene::SceneGame::save()
@@ -39,6 +40,7 @@ void bomb::scene::SceneGame::save()
 
 void bomb::scene::SceneGame::reset(bomb::IAssetLoader &loader)
 {
+	(void) loader;
 }
 
 void bomb::scene::SceneGame::clean()
@@ -54,4 +56,5 @@ std::string bomb::scene::SceneGame::nextScene()
 bool bomb::scene::SceneGame::onEvent(const irr::SEvent &event)
 {
 	return true;
+	(void) event;
 }

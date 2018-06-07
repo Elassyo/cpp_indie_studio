@@ -8,8 +8,9 @@
 #include "AnimatedObject.hpp"
 #include "Exception/Exception.hpp"
 
-bomb::AnimatedObject::AnimatedObject(irr::scene::IAnimatedMeshSceneNode *node):
-		AObject(node), _node(node)
+bomb::AnimatedObject::AnimatedObject(irr::scene::IAnimatedMeshSceneNode *node,
+IAudioPlayer &ap):
+		AObject(node, ap), _node(node)
 {
 	if (!node)
 		throw Exception("AnimatedObject",

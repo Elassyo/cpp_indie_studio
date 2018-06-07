@@ -48,6 +48,8 @@ set(SRC_FILES
         src/Interface/ISerializable.hpp
         src/Interface/ITransformable.hpp
         src/Interface/IPlayerController.hpp
+        src/Interface/IAudioPlayer.hpp
+        src/Interface/IAudioListener.hpp
 
         src/Map/Map.cpp
         src/Map/Map.hpp
@@ -75,6 +77,8 @@ set(SRC_FILES
         src/Player/APlayerController.hpp
         src/Player/AIController.cpp
         src/Player/AIController.hpp
+        src/Player/PlayerActionner.cpp
+        src/Player/PlayerActionner.hpp
 
         src/Render/EventHandler.cpp
         src/Render/EventHandler.hpp
@@ -87,8 +91,11 @@ set(SRC_FILES
         src/Scenes/General/Clock.hpp
         src/Scenes/General/GameInfo.cpp
         src/Scenes/General/GameInfo.hpp
+        src/Scenes/General/PersistentInfo.cpp
+        src/Scenes/General/PersistentInfo.hpp
         src/Scenes/General/Player.cpp
         src/Scenes/General/Player.hpp
+
         src/Scenes/SceneGame/Bomb.cpp
         src/Scenes/SceneGame/Bomb.hpp
         src/Scenes/SceneGame/Powers/BombDown.cpp
@@ -134,7 +141,9 @@ set(SRC_FILES
         src/StaticObject.hpp
         src/Version.cpp
         src/Version.hpp
-        )
+        src/CameraObject.cpp
+        src/CameraObject.hpp
+)
 
         add_executable(bombermario WIN32
         ${SRC_FILES}
