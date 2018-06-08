@@ -34,10 +34,10 @@ namespace bomb {
 				irr::video::ITexture *pTexture
 			);
 			int getMapSize() const;
+
 			void executePlayers();
+
 			bool handleEvent(const irr::SEvent &event);
-			std::vector<Player> & getPlayers();
-			std::shared_ptr<Map> & getMap();
 
 		private:
 			enum Character {

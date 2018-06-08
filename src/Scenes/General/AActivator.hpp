@@ -14,15 +14,10 @@ namespace bomb {
 		class AActivator {
 		public:
 			AActivator();
-			bool tryToActivate(bomb::Map &map,
-					   std::vector<Player> &player);
+			bool tryToActivate(Game &infos);
 		protected:
-			virtual bool
-			isActivable(bomb::Map &map, std::vector<Player> &player)
-				= 0;
-			virtual bool
-			activate(bomb::Map &map, std::vector<Player> &player)
-				= 0;
+			virtual bool isActivable(Game &infos) = 0;
+			virtual bool activate(Game &infos) = 0;
 		private:
 			bool _activated;
 		};

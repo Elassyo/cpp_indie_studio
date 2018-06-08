@@ -20,10 +20,9 @@ namespace bomb {
 				const irr::core::vector3df &pos, long time);
 
 		protected:
-			bool isActivable(bomb::Map &map,
-					 std::vector<game::Player> &player) override;
-			bool activate(bomb::Map &map,
-				      std::vector<game::Player> &player) override;
+			bool isActivable(game::Game &infos)
+				override;
+			bool activate(game::Game &infos) override;
 			void setProperties(game::Game &infos, char idx);
 
 		private:

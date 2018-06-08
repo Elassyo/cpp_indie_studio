@@ -13,8 +13,7 @@ bomb::object::BombPass::BombPass(bomb::IAssetLoader &loader,
 {
 }
 
-bool bomb::object::BombPass::activate(bomb::Map &map,
-				      std::vector<game::Player> &player)
+bool bomb::object::BombPass::activate(bomb::game::Game &infos)
 {
-	return Power::activate(map, player);
+	return Power::activate(infos);
 }

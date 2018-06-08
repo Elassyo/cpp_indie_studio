@@ -18,11 +18,8 @@ namespace bomb {
 				const irr::core::vector3df &pos,
 				std::string path);
 
-			bool
-			isActivable(bomb::Map &map,
-				    std::vector<game::Player> &player) override;
-			bool activate(bomb::Map &map,
-				      std::vector<game::Player> &player) override;
+			bool isActivable(game::Game &infos)	override;
+			bool activate(game::Game &infos) override;
 
 		private:
 			bomb::IAssetLoader &_loader;

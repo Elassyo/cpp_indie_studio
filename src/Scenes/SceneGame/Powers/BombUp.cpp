@@ -13,8 +13,7 @@ bomb::object::BombUp::BombUp(bomb::IAssetLoader &loader,
 {
 }
 
-bool bomb::object::BombUp::activate(bomb::Map &map,
-				    std::vector<game::Player> &player)
+bool bomb::object::BombUp::activate(bomb::game::Game &infos)
 {
-	return Power::activate(map, player);
+	return Power::activate(infos);
 }

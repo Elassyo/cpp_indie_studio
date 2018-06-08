@@ -13,8 +13,7 @@ bomb::object::FireDown::FireDown(bomb::IAssetLoader &loader,
 {
 }
 
-bool bomb::object::FireDown::activate(bomb::Map &map,
-				      std::vector<game::Player> &player)
+bool bomb::object::FireDown::activate(bomb::game::Game &infos)
 {
-	return Power::activate(map, player);
+	return Power::activate(infos);
 }

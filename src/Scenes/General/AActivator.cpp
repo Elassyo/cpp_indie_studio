@@ -9,10 +9,9 @@
 
 bomb::game::AActivator::AActivator() : _activated(false) {}
 
-bool bomb::game::AActivator::tryToActivate(bomb::Map &map,
-					   std::vector<Player> &player)
+bool bomb::game::AActivator::tryToActivate(bomb::game::Game &infos)
 {
-	if (!_activated && isActivable(map, player))
-		_activated = activate(map, player);
+	if (!_activated && isActivable(infos))
+		_activated = activate(infos);
 	return _activated;
 }

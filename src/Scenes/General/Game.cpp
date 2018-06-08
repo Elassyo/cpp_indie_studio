@@ -84,13 +84,3 @@ bool bomb::game::Game::handleEvent(const irr::SEvent &event)
 	_players[0].handleEvent(*_map, event);
 	return true;
 }
-
-std::vector<bomb::game::Player> &bomb::game::Game::getPlayers()
-{
-	return _players;
-}
-
-std::shared_ptr<bomb::Map> &bomb::game::Game::getMap()
-{
-	return _map;
-}
