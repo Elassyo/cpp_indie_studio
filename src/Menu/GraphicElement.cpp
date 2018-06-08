@@ -8,8 +8,8 @@
 #include "GraphicElement.hpp"
 
 bomb::menu::GraphicElement::GraphicElement(irr::gui::IGUIElement *element,
-	irr::core::vector2df pos) :
-	_element(element), _pos(pos)
+	irr::core::vector2df pos, int id) :
+	_id(id), _element(element), _pos(pos)
 {
 }
 
@@ -26,6 +26,21 @@ void bomb::menu::GraphicElement::update(irr::core::vector2di size,
 	_element->setRelativePosition(
 		{(int)(screenSize.X * _pos.X - size.X / 2),
 		 (int)(screenSize.Y * _pos.Y - size.Y / 2)});
+}
+
+void bomb::menu::GraphicElement::setPos(irr::core::vector2df pos)
+{
+	_pos = pos;
+}
+
+void bomb::menu::GraphicElement::setText(const wchar_t *text)
+{
+	_element->setText(text);
+}
+
+int bomb::menu::GraphicElement::getId() const
+{
+	return _id;
 }
 
 void bomb::menu::GraphicElement::remove()
