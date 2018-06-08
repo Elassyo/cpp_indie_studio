@@ -8,27 +8,30 @@
 #include "Bomb.hpp"
 
 bomb::object::Bomb::Bomb(bomb::IAssetLoader &loader,
-	const irr::core::vector3df &pos, const long time) :
-	_loader(loader), _timer(time),
-	_model(loader.createAnimatedObject("models/bob-bomb.x", pos))
+			 bomb::game::Player &player) :
+	_loader(loader), _timer(2000),
+	_model(loader.createAnimatedObject("models/bob-bomb.x",
+		player.getExactPos())),
+	_playerIdx(0)
 {
+
 }
 
-bool bomb::object::Bomb::isActivable(bomb::game::Game &infos)
-{
-	return _timer.isReady();
-	(void) infos;
-}
-
-bool bomb::object::Bomb::activate(bomb::game::Game &infos)
+bool bomb::object::Bomb::activate(bomb::Map &map, bomb::game::Player &player)
 {
 	_loader.deleteObject(std::move(_model));
 	return true;
-	(void) infos;
+	(void) map;
+	(void) player;
 }
 
-void bomb::object::Bomb::setProperties(bomb::game::Game &infos, char idx)
+int bomb::object::Bomb::isActivable(bomb::Map &map,
+	std::vector<std::pair<bomb::game::Player,
+		bomb::PlayerActionner>> &player)
 {
-	(void) infos;
-	(void) idx;
+	if (_timer.isReady())
+		return _playerIdx;
+	return -1;
+	(void) map;
+	(void) player;
 }

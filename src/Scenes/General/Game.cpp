@@ -71,11 +71,15 @@ int bomb::game::Game::getMapSize() const
 	return _mapSize;
 }
 
-void bomb::game::Game::executePlayers()
+void bomb::game::Game::execute(bomb::IAssetLoader &loader)
 {
 	for (auto &p : _players) {
 		p.first.execute(*_map);
 		p.second.actionnate(*_map, p.first);
+		if (p.first.isBombReady()) {
+			_bombs.emplace_back(std::make_unique<object::Bomb>
+			(loader, p.first));
+		}
 	}
 }
 
@@ -91,4 +95,15 @@ bool bomb::game::Game::handleEvent(const irr::SEvent &event)
 			_players[0].second.removeAction(action);
 	}
 	return true;
+}
+
+std::vector<std::pair<bomb::game::Player, bomb::PlayerActionner>> &
+bomb::game::Game::getPlayers()
+{
+	return _players;
+}
+
+std::shared_ptr<bomb::Map> &bomb::game::Game::getMap()
+{
+	return _map;
 }

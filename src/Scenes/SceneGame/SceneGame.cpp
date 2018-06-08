@@ -5,17 +5,18 @@
 // SceneLauncher.cpp
 //
 
+#include <zconf.h>
 #include "SceneGame.hpp"
 
 bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
 {
-	//Testing loader (Temporary)
 	_blocksTextures = loader.loadTexture("models/blocks/spritesheet.png");
-	_gameInfo.createGame(loader, _blocksTextures);
+	_game.createGame(loader, _blocksTextures);
 	auto cam = loader.getCamera();
-	cam->setPos({(float)_gameInfo.getMapSize() / 2, 30,
-		     (float)_gameInfo.getMapSize()});
-	cam->setRot({0, 200, 50});
+	float mid = (float)(_game.getMapSize() - 1) / 2;
+	cam->setPos({mid, (float)_game.getMapSize() * 0.8f,
+		(float)_game.getMapSize() * 0.8f});
+	cam->setTarget({mid, 0, mid + 1});
 	return BEGIN;
 }
 
@@ -23,14 +24,15 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::loop(
 	bomb::IAssetLoader &loader)
 {
 	explodeBombs(loader);
-	_gameInfo.executePlayers();
+	_game.execute(loader);
 	return CONTINUE;
 }
 
 void bomb::scene::SceneGame::explodeBombs(bomb::IAssetLoader &loader)
 {
 	for (auto &bomb : _bombs)
-		bomb.get()->tryToActivate(_gameInfo);
+		bomb.get()->tryToActivate(*_game.getMap(),
+		_game.getPlayers());
 	(void) loader;
 }
 
@@ -56,6 +58,6 @@ std::string bomb::scene::SceneGame::nextScene()
 bool bomb::scene::SceneGame::onEvent(const irr::SEvent &event)
 {
 	if (event.EventType == irr::EET_KEY_INPUT_EVENT)
-		return _gameInfo.handleEvent(event);
+		return _game.handleEvent(event);
 	return true;
 }

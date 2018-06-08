@@ -5,9 +5,7 @@
 // Player.cpp
 //
 
-#include <iostream>
 #include "Player.hpp"
-#include "../../Interface/IPlayerController.hpp"
 
 bomb::game::Player::Player(bomb::IAssetLoader &loader,
 	const std::string &path,
@@ -15,20 +13,22 @@ bomb::game::Player::Player(bomb::IAssetLoader &loader,
 	const irr::core::vector3df &pos,
 	const irr::core::vector3df &scale,
 	const irr::core::vector3df &rotation) :
+	_maxNbBombs(1),
 	_nbBombs(1),
 	_speed(0.1f),
 	_bombRange(1),
 	_ghostMode(false),
 	_alive(true),
 	_AI(false),
+	_bombReady(false),
 	_keys({{irr::KEY_UP, {IPlayerController::MV_UP,
-			(wchar_t *)L"Up"}},
+		(wchar_t *)L"Up"}},
 		{irr::KEY_DOWN, {IPlayerController::MV_DOWN,
-			(wchar_t *)L"Down"}},
+		(wchar_t *)L"Down"}},
 		{irr::KEY_LEFT, {IPlayerController::MV_LEFT,
-			(wchar_t *)L"Left"}},
+		(wchar_t *)L"Left"}},
 		{irr::KEY_RIGHT, {IPlayerController::MV_RIGHT,
-			(wchar_t *) L"Right"}}}),
+		(wchar_t *) L"Right"}}}),
 	_controller(std::move(controller))
 {
 	_model = loader.createAnimatedObject(path, pos, scale, rotation);
@@ -115,4 +115,22 @@ void bomb::game::Player::setAI(bool AI)
 std::unique_ptr<bomb::AnimatedObject> &bomb::game::Player::getModel()
 {
 	return _model;
+}
+
+void bomb::game::Player::setBombReady(bool value)
+{
+	_bombReady = value;
+}
+
+bool bomb::game::Player::isBombReady()
+{
+	return _bombReady;
+}
+
+irr::core::vector3df bomb::game::Player::getExactPos()
+{
+	irr::core::vector3di pos(static_cast<irr::s32>(_model->getPos().X),
+			static_cast<irr::s32>(_model->getPos().Y),
+			static_cast<irr::s32>(_model->getPos().Z));
+	return {pos.X, pos.Y, pos.Z};
 }

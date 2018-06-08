@@ -16,19 +16,21 @@ namespace bomb {
 	namespace object {
 		class Bomb : public bomb::game::AActivator {
 		public:
-			Bomb(IAssetLoader &loader,
-				const irr::core::vector3df &pos, long time);
+			Bomb(IAssetLoader &loader, bomb::game::Player &player);
 
 		protected:
-			bool isActivable(game::Game &infos)
-				override;
-			bool activate(game::Game &infos) override;
-			void setProperties(game::Game &infos, char idx);
+			int isActivable(bomb::Map &map,
+				std::vector<std::pair<game::Player,
+				PlayerActionner>> &vector) override;
+
+			bool activate(bomb::Map &map,
+				bomb::game::Player &player) override;
 
 		private:
 			bomb::IAssetLoader &_loader;
 			bomb::utils::Clock _timer;
 			std::unique_ptr<AnimatedObject> _model;
+			int _playerIdx;
 		};
 	}
 }

@@ -10,6 +10,7 @@
 
 	#include "../../Interface/IGameScene.hpp"
 	#include "Bomb.hpp"
+#include "../General/Game.hpp"
 
 namespace bomb {
 	namespace scene {
@@ -32,7 +33,7 @@ namespace bomb {
 			
 			irr::video::ITexture *_blocksTextures;
 			std::vector<std::unique_ptr<bomb::object::Bomb>> _bombs;
-			bomb::game::Game _gameInfo;
+			bomb::game::Game _game;
 		};
 	}
 }

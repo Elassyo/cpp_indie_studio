@@ -13,7 +13,8 @@ bomb::object::BombFull::BombFull(bomb::IAssetLoader &loader,
 {
 }
 
-bool bomb::object::BombFull::activate(bomb::game::Game &infos)
+bool bomb::object::BombFull::activate(bomb::Map &map,
+		bomb::game::Player &player)
 {
-	return Power::activate(infos);
+	return Power::activate(map, player);
 }
