@@ -13,7 +13,7 @@ bomb::object::BombPass::BombPass(bomb::IAssetLoader &loader,
 {
 }
 
-bool bomb::object::BombPass::activate(bomb::game::GameInfo &infos)
+bool bomb::object::BombPass::activate(bomb::game::Game &infos)
 {
 	return Power::activate(infos);
 }

@@ -16,6 +16,9 @@ bomb::Map::Map(const std::vector<std::shared_ptr<bomb::AMapBlock>> &_blocks,
 
 void bomb::Map::explode(irr::core::vector3di pos, size_t range, size_t damage)
 {
+	(void) pos;
+	(void) range;
+	(void) damage;
 	for (auto &e : _blocks) {
 		/* TODO: Verifier la position */
 		if (e->explode(damage)) {
@@ -61,9 +64,14 @@ bool bomb::Map::blockAt(const irr::core::vector2di &coord)
 	return _cells[coord.X + coord.Y * _size] != BlockType::EMPTY;
 }
 
-std::ostream &bomb::operator<<(std::ostream &os, const bomb::Map &map) {
+const std::vector<bomb::Map::BlockType> &bomb::Map::getCells() const
+{
+	return _cells;
+}
+
+std::ostream &operator<<(std::ostream &os, const bomb::Map &map) {
 	int  i = 0;
-	for (auto cell : map._cells) {
+	for (auto cell : map.getCells()) {
 		os << " " << cell;
 		++i;
 		if (i % map.getSize() == 0)

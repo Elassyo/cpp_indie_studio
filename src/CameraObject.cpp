@@ -1,6 +1,3 @@
-#include <cstdint>
-#include <irrlicht/ITexture.h>
-
 //
 // EPITECH PROJECT, 2018
 // cpp_indie_studio
@@ -8,6 +5,8 @@
 // CameraObject.cpp
 //
 
+#include <cstdint>
+#include <irrlicht/ITexture.h>
 #include "CameraObject.hpp"
 
 bomb::CameraObject::CameraObject(irr::scene::ICameraSceneNode *inode,

@@ -9,7 +9,7 @@
 
 bomb::game::AActivator::AActivator() : _activated(false) {}
 
-bool bomb::game::AActivator::tryToActivate(bomb::game::GameInfo &infos)
+bool bomb::game::AActivator::tryToActivate(bomb::game::Game &infos)
 {
 	if (!_activated && isActivable(infos))
 		_activated = activate(infos);

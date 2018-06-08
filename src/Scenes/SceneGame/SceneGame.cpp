@@ -13,10 +13,9 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
 	_blocksTextures = loader.loadTexture("models/blocks/spritesheet.png");
 	_gameInfo.createGame(loader, _blocksTextures);
 	auto cam = loader.getCamera();
-	cam->setPos({(float)_gameInfo.getMapSize() / 2, 30, (float)_gameInfo
-		.getMapSize() / 2});
-	cam->setRot({(float)_gameInfo.getMapSize() / 2,
-			0, (float)_gameInfo.getMapSize() / 2});
+	cam->setPos({(float)_gameInfo.getMapSize() / 2, 30,
+		     (float)_gameInfo.getMapSize()});
+	cam->setRot({0, 200, 50});
 	return BEGIN;
 }
 
@@ -58,4 +57,5 @@ bool bomb::scene::SceneGame::onEvent(const irr::SEvent &event)
 {
 	if (event.EventType == irr::EET_KEY_INPUT_EVENT)
 		return _gameInfo.handleEvent(event);
+	return true;
 }

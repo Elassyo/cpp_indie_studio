@@ -12,12 +12,12 @@ bomb::PlayerActionner::PlayerActionner(bool permanent) :
 	_moves{{IPlayerController::UNDEFINED, {0, 0, 0}},
 		{IPlayerController::MV_UP, {0, 0, -1}},
 		{IPlayerController::MV_DOWN, {0, 0, 1}},
-		{IPlayerController::MV_RIGHT, {1, 0, 0}},
-		{IPlayerController::MV_LEFT, {-1, 0, 0}}},
+		{IPlayerController::MV_RIGHT, {-1, 0, 0}},
+		{IPlayerController::MV_LEFT, {1, 0, 0}}},
 	_currentAction(IPlayerController::UNDEFINED),
 	_nextAction(IPlayerController::UNDEFINED),
 	_target({-1, -1, -1}),
-	_speedRatio(0.1),
+	_speedRatio(0.05),
 	_repeatActionMode(permanent),
 	_repeat(permanent),
 	_latence(500)
@@ -51,12 +51,11 @@ void bomb::PlayerActionner::actionnate(bomb::Map &map,
 {
 	if (_currentAction == IPlayerController::UNDEFINED || _target.X == -1) {
 		updateAction();
-		changeTargetTile(map, player);
+		auto pos = player->getPos();
+		changeTargetTile(map, vecfCast(pos));
 	}
-	if (_currentAction == IPlayerController::UNDEFINED) {
-		return;
-	}
-	move(map, player);
+	if (_currentAction != IPlayerController::UNDEFINED)
+		move(map, player);
 }
 
 void bomb::PlayerActionner::move(bomb::Map &map,
@@ -68,7 +67,7 @@ void bomb::PlayerActionner::move(bomb::Map &map,
 		player->setPos(veciCast(_target));
 		if (!_repeat)
 			updateAction();
-		return changeTargetTile(map, player);
+		return changeTargetTile(map, _target);
 	}
 	player->move(dir);
 }
@@ -80,15 +79,16 @@ void bomb::PlayerActionner::updateAction()
 }
 
 void bomb::PlayerActionner::changeTargetTile(bomb::Map &map,
-	std::unique_ptr <bomb::AnimatedObject> &player)
+	irr::core::vector3di playerPos)
 {
 	if (_currentAction != _nextAction &&
 		_nextAction != IPlayerController::UNDEFINED)
 		updateAction();
-	if (_currentAction == IPlayerController::UNDEFINED)
+	if (_currentAction == IPlayerController::UNDEFINED) {
+		_target = {-1, -1, -1};
 		return;
-	auto playerPos = player->getPos();
-	_target = vecfCast(playerPos) + vecfCast(_moves[_currentAction]);
+	}
+	_target = playerPos + vecfCast(_moves[_currentAction]);
 	if (map[_target] != Map::EMPTY) {
 		_target = {-1, -1, -1};
 		_currentAction = IPlayerController::UNDEFINED;
@@ -101,7 +101,7 @@ bool bomb::PlayerActionner::isTargetReached
 
 	return (sqrt(pow((float)_target.X - (float)pos.X, 2)
 		+ (pow((float)_target.Z - (float)pos.Z, 2)))
-		< _speedRatio);
+		<= _speedRatio);
 }
 
 void bomb::PlayerActionner::setSpeedRatio(float speedRatio)
@@ -126,5 +126,9 @@ irr::core::vector3df bomb::PlayerActionner::veciCast(irr::core::vector3di &vec)
 void
 bomb::PlayerActionner::removeAction(bomb::IPlayerController::Actions actions)
 {
-	_repeat = false;
+	if (actions == _currentAction) {
+		_repeat = false;
+		if (_repeatActionMode && _currentAction == _nextAction)
+			_nextAction = IPlayerController::UNDEFINED;
+	}
 }

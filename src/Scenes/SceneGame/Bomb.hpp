@@ -20,10 +20,10 @@ namespace bomb {
 				const irr::core::vector3df &pos, long time);
 
 		protected:
-			bool isActivable(game::GameInfo &infos)
+			bool isActivable(game::Game &infos)
 				override;
-			bool activate(game::GameInfo &infos) override;
-			void setProperties(game::GameInfo &infos, char idx);
+			bool activate(game::Game &infos) override;
+			void setProperties(game::Game &infos, char idx);
 
 		private:
 			bomb::IAssetLoader &_loader;

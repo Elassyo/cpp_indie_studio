@@ -89,8 +89,8 @@ set(SRC_FILES
         src/Scenes/General/AActivator.hpp
         src/Scenes/General/Clock.cpp
         src/Scenes/General/Clock.hpp
-        src/Scenes/General/GameInfo.cpp
-        src/Scenes/General/GameInfo.hpp
+        src/Scenes/General/Game.cpp
+        src/Scenes/General/Game.hpp
         src/Scenes/General/PersistentInfo.cpp
         src/Scenes/General/PersistentInfo.hpp
         src/Scenes/General/Player.cpp

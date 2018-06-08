@@ -13,7 +13,7 @@ bomb::object::WallPass::WallPass(bomb::IAssetLoader &loader,
 {
 }
 
-bool bomb::object::WallPass::activate(bomb::game::GameInfo &infos)
+bool bomb::object::WallPass::activate(bomb::game::Game &infos)
 {
 	return Power::activate(infos);
 }

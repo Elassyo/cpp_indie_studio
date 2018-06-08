@@ -107,6 +107,8 @@ bomb::IPlayerController::Actions bomb::player::AIController::astar(
 bool bomb::player::AIController::isSafe(const irr::core::vector2di &pos)
 {
 	/* TODO check with bomb */
+	(void) pos;
+	(void) pos;
 	return true;
 }
 

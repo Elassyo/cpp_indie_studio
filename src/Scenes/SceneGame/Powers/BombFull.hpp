@@ -16,7 +16,7 @@ namespace bomb {
 		public:
 			BombFull(bomb::IAssetLoader &loader,
 				const irr::core::vector3df &pos);
-			bool activate(game::GameInfo &infos) override;
+			bool activate(game::Game &infos) override;
 		};
 	}
 }

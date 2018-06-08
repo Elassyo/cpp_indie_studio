@@ -36,5 +36,6 @@ std::unique_ptr<bomb::AMapBlock> bomb::MapBlockUnbreakable::clone(
 
 bool bomb::MapBlockUnbreakable::explode(size_t damage)
 {
+	(void) damage;
 	return false;
 }

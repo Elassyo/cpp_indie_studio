@@ -13,7 +13,7 @@ bomb::object::SpeedDown::SpeedDown(bomb::IAssetLoader &loader,
 {
 }
 
-bool bomb::object::SpeedDown::activate(bomb::game::GameInfo &infos)
+bool bomb::object::SpeedDown::activate(bomb::game::Game &infos)
 {
 	return Power::activate(infos);
 }

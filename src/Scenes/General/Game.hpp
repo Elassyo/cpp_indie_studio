@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** cpp_indie_studio
 ** File description:
-** GameInfo.hpp
+** Game.hpp
 */
 
 #ifndef CPP_INDIE_STUDIO_GAMEINFO_HPP
@@ -25,9 +25,9 @@ namespace bomb {
 	namespace game {
 		constexpr int NB_PLAYERS = 4;
 
-		class GameInfo {
+		class Game {
 		public:
-			GameInfo() = default;
+			Game() = default;
 
 			void createGame(
 				IAssetLoader &loader,
@@ -55,7 +55,6 @@ namespace bomb {
 			void createPlayer(bomb::IAssetLoader &loader,
 				const std::string &path,
 				std::unique_ptr<IPlayerController> controller,
-				Character index,
 				const irr::core::vector3di &spawn
 			);
 

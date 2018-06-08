@@ -13,7 +13,7 @@ bomb::object::BombDown::BombDown(bomb::IAssetLoader &loader,
 {
 }
 
-bool bomb::object::BombDown::activate(bomb::game::GameInfo &infos)
+bool bomb::object::BombDown::activate(bomb::game::Game &infos)
 {
 	return Power::activate(infos);
 }

@@ -22,11 +22,15 @@ bomb::game::Player::Player(bomb::IAssetLoader &loader,
 	_ghostMode(false),
 	_alive(true),
 	_AI(false),
-	_controller(std::move(controller)),
-	_keys({{irr::KEY_UP, {IPlayerController::MV_UP, L"Up"}},
-		{irr::KEY_DOWN, {IPlayerController::MV_DOWN, L"Down"}},
-		{irr::KEY_LEFT, {IPlayerController::MV_LEFT, L"Left"}},
-		{irr::KEY_RIGHT, {IPlayerController::MV_RIGHT, L"Right"}}})
+	_keys({{irr::KEY_UP, {IPlayerController::MV_UP,
+			(wchar_t *)L"Up"}},
+		{irr::KEY_DOWN, {IPlayerController::MV_DOWN,
+			(wchar_t *)L"Down"}},
+		{irr::KEY_LEFT, {IPlayerController::MV_LEFT,
+			(wchar_t *)L"Left"}},
+		{irr::KEY_RIGHT, {IPlayerController::MV_RIGHT,
+			(wchar_t *) L"Right"}}}),
+	_controller(std::move(controller))
 {
 	_obj = loader.createAnimatedObject(path, pos, scale, rotation);
 }

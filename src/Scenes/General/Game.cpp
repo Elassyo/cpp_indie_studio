@@ -2,37 +2,37 @@
 ** EPITECH PROJECT, 2018
 ** cpp_indie_studio
 ** File description:
-** GameInfo.cpp
+** Game.cpp
 */
 
-#include "GameInfo.hpp"
+#include "Game.hpp"
 #include "../../Exception/Exception.hpp"
 #include "../../Player/AIController.hpp"
 
-void bomb::game::GameInfo::createGame(IAssetLoader &loader,
+void bomb::game::Game::createGame(IAssetLoader &loader,
 	irr::video::ITexture *texture)
 {
 	createMap(loader, MAP_SIZE);
 
 	/* TEMPORALY */
 	createPlayer(loader, "models/characters/shyGuy/shyGuyBlack.obj",
-		std::make_unique<bomb::player::AIController>(_map), SHYGUY_BLACK,
+		std::make_unique<bomb::player::AIController>(_map),
 		{1, 0, 1});
 	createPlayer(loader, "models/characters/shyGuy/shyGuyBlue.obj",
-		std::make_unique<bomb::player::AIController>(_map), SHYGUY_BLUE,
+		std::make_unique<bomb::player::AIController>(_map),
 		{1, 0, MAP_SIZE - 2});
 	createPlayer(loader, "models/characters/shyGuy/shyGuyRed.obj",
-		std::make_unique<bomb::player::AIController>(_map), SHYGUY_RED,
+		std::make_unique<bomb::player::AIController>(_map),
 		{MAP_SIZE - 2, 0, 1});
 	createPlayer(loader, "models/characters/shyGuy/shyGuyWhite.obj",
-		std::make_unique<bomb::player::AIController>(_map), SHYGUY_WHITE,
+		std::make_unique<bomb::player::AIController>(_map),
 		{MAP_SIZE - 2, 0, MAP_SIZE - 2});
 	//createPlayer(loader, "models/characters/skelerex/skelerex.obj", SKELEREX, {0, 0, 0});
 	_map->setTextures(texture);
 	reset();
 }
 
-void bomb::game::GameInfo::createMap(
+void bomb::game::Game::createMap(
 	bomb::IAssetLoader &loader, unsigned int size)
 {
 	bomb::MapConstructor pattern = MapGenerator(size).generate();
@@ -47,10 +47,10 @@ void bomb::game::GameInfo::createMap(
 		{1, 1, 1}, pattern.getSize());
 }
 
-void bomb::game::GameInfo::createPlayer(bomb::IAssetLoader &loader,
+void bomb::game::Game::createPlayer(bomb::IAssetLoader &loader,
 	const std::string &path,
 	std::unique_ptr<bomb::IPlayerController> controller,
-	Character index, const irr::core::vector3di &spawn)
+	const irr::core::vector3di &spawn)
 {
 	if (_players.size() >= NB_PLAYERS)
 		throw bomb::Exception("GameCreation", "Too much players");
@@ -61,24 +61,24 @@ void bomb::game::GameInfo::createPlayer(bomb::IAssetLoader &loader,
 		{.5, .5, .5}, {0, 0, 0}));
 }
 
-void bomb::game::GameInfo::reset()
+void bomb::game::Game::reset()
 {
 }
 
 
-int bomb::game::GameInfo::getMapSize() const
+int bomb::game::Game::getMapSize() const
 {
 	return _mapSize;
 }
 
-void bomb::game::GameInfo::executePlayers()
+void bomb::game::Game::executePlayers()
 {
 	for (auto &p : _players) {
 		p.execute(*_map);
 	}
 }
 
-bool bomb::game::GameInfo::handleEvent(const irr::SEvent &event)
+bool bomb::game::Game::handleEvent(const irr::SEvent &event)
 {
 	//Check if keyEvent is in player keyset and call his handleEvent method
 	_players[0].handleEvent(*_map, event);

@@ -44,6 +44,8 @@ namespace bomb {
 		friend std::ostream &
 		operator<<(std::ostream &os, const Map &map);
 
+		const std::vector<BlockType> &getCells() const;
+
 	private:
 		std::vector<std::shared_ptr<bomb::AMapBlock>> _blocks;
 		std::vector<BlockType> _cells;

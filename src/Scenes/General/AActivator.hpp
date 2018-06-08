@@ -7,17 +7,17 @@
 
 #ifndef CPP_INDIE_STUDIO_IACTIVATOR_HPP
 	#define CPP_INDIE_STUDIO_IACTIVATOR_HPP
-	#include "GameInfo.hpp"
+	#include "Game.hpp"
 
 namespace bomb {
 	namespace game {
 		class AActivator {
 		public:
 			AActivator();
-			bool tryToActivate(GameInfo &infos);
+			bool tryToActivate(Game &infos);
 		protected:
-			virtual bool isActivable(GameInfo &infos) = 0;
-			virtual bool activate(GameInfo &infos) = 0;
+			virtual bool isActivable(Game &infos) = 0;
+			virtual bool activate(Game &infos) = 0;
 		private:
 			bool _activated;
 		};
