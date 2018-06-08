@@ -5,8 +5,6 @@
 // SceneLauncher.cpp
 //
 
-#include <iostream>
-
 #include "SceneHomeMenu.hpp"
 
 bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(
@@ -14,6 +12,8 @@ bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(
 {
 	running = true;
 	_menu.createMenu(loader);
+	_menu.addImage(loader.loadTexture("images/menuBack.png"), {.5, .5}, 5);
+	_menu.setElementSize(5, {1, 1});
 	_menu.addText((wchar_t *)L"SUPER\nBOMBERMARIO\nBROS.", {.5, .15}, 0);
 	_menu.setElementFont(0, menu::TITLE);
 	_menu.addButton(L"Play", {.5, .35}, 1);

@@ -12,6 +12,8 @@ bomb::scene::SceneStatus bomb::scene::SceneOptionMenu::start(
 {
 	running = true;
 	_menu.createMenu(loader);
+	_menu.addImage(loader.loadTexture("images/menuBack.png"), {.5, .5}, 5);
+	_menu.setElementSize(5, {1, 1});
 	_menu.addText((wchar_t *)L"SUPER\nBOMBERMARIO\nBROS.", {.5, .15}, 0);
 	_menu.setElementFont(0, menu::TITLE);
 	_menu.addButton(L"Volume Up", {.5, .35}, 1);
