@@ -26,7 +26,6 @@ namespace bomb {
 			virtual void setTexture(
 				irr::video::ITexture *texture) = 0;
 			int getId() const;
-			void remove();
 
 		protected:
 			const int _id;

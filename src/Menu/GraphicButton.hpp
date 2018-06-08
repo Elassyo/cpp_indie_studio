@@ -28,7 +28,7 @@ namespace bomb {
 			void setPressedTexture(irr::video::ITexture *pressed);
 			void setEvent(std::function <void()> &);
 		private:
-			irr::gui::IGUIButton * _element;
+			irr::gui::IGUIButton *_element;
 			std::function <void()> _event;
 			bomb::utils::Clock _latence;
 		};

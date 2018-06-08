@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "PlayerActionner.hpp"
+#include "../Scenes/General/Player.hpp"
 
 bomb::PlayerActionner::PlayerActionner(bool permanent) :
 	_moves{{IPlayerController::UNDEFINED, {0, 0, 0}},
@@ -25,14 +26,14 @@ bomb::PlayerActionner::PlayerActionner(bool permanent) :
 }
 
 void bomb::PlayerActionner::addBomb(bomb::Map &map,
-	std::unique_ptr <bomb::AnimatedObject> &player)
+	bomb::game::Player &player)
 {
 	(void) player;
 	(void) map;
 }
 
 void bomb::PlayerActionner::sendAction(bomb::Map &map,
-	std::unique_ptr <bomb::AnimatedObject> &player,
+	bomb::game::Player &player,
 	bomb::IPlayerController::Actions action)
 {
 	if (action == IPlayerController::PUT_BOMB)
@@ -47,15 +48,15 @@ void bomb::PlayerActionner::sendAction(bomb::Map &map,
 }
 
 void bomb::PlayerActionner::actionnate(bomb::Map &map,
-	std::unique_ptr <bomb::AnimatedObject> &player)
+	bomb::game::Player &player)
 {
 	if (_currentAction == IPlayerController::UNDEFINED || _target.X == -1) {
 		updateAction();
-		auto pos = player->getPos();
+		auto pos = player.getModel()->getPos();
 		changeTargetTile(map, vecfCast(pos));
 	}
 	if (_currentAction != IPlayerController::UNDEFINED)
-		move(map, player);
+		move(map, player.getModel());
 }
 
 void bomb::PlayerActionner::move(bomb::Map &map,

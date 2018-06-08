@@ -124,7 +124,7 @@ std::unique_ptr<bomb::CameraObject> bomb::GameEngine::getCamera(
 	if (!_camera)
 		throw Exception("GameEngine", "Can't create camera");
 	_camera->setPosition(pos);
-	_camera->setTarget(rot);
+	_camera->setRotation(rot);
 	return std::make_unique<CameraObject>(_camera, _audioMgr);
 }
 

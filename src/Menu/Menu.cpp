@@ -199,8 +199,7 @@ void bomb::menu::Menu::setElementTexture(int elementId,
 
 void bomb::menu::Menu::clean()
 {
-	for (auto &title : _elements)
-		title.release();
 	_elements.clear();
 	_buttons.clear();
+	_gui->clear();
 }

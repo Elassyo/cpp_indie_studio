@@ -12,23 +12,22 @@
 #include "../Map/Map.hpp"
 #include "../Interface/IPlayerController.hpp"
 #include "../Scenes/General/Clock.hpp"
+#include "../Scenes/General/Player.hpp"
 
 namespace bomb {
 	class PlayerActionner {
 	public:
 		PlayerActionner(bool enableRepeat);
 
-		void sendAction(bomb::Map &map,
-			std::unique_ptr<bomb::AnimatedObject> &obj,
+		void actionnate(Map &map, bomb::game::Player &player);
+		void
+		sendAction(Map &map, game::Player &player,
 			IPlayerController::Actions action);
-		void actionnate(bomb::Map &map,
-			std::unique_ptr<bomb::AnimatedObject> &obj);
 		void setSpeedRatio(float speedRatio);
 
 		void removeAction(IPlayerController::Actions actions);
 
 	private:
-		void addBomb(Map &map, std::unique_ptr<AnimatedObject> &player);
 		std::unordered_map<bomb::IPlayerController::Actions,
 			irr::core::vector3df> _moves;
 		IPlayerController::Actions _currentAction;
@@ -42,12 +41,10 @@ namespace bomb {
 		void move(Map &map, std::unique_ptr<AnimatedObject> &player);
 		irr::core::vector3di vecfCast(irr::core::vector3df &vec);
 		bool isTargetReached(irr::core::vector3d<irr::f32> &vector3d);
-
 		irr::core::vector3df veciCast(irr::core::vector3di &vec);
-
 		void updateAction();
-
 		void changeTargetTile(Map &map, irr::core::vector3di pos);
+		void addBomb(Map &map, game::Player &player);
 	};
 }
 #endif /* CPP_INDIE_STUDIO_PLAYERACTIONNER_HPP */

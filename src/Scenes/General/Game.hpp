@@ -18,6 +18,7 @@
 #include "../../Interface/IAssetLoader.hpp"
 #include "../../Map/MapGenerator.hpp"
 #include "../../Map/Map.hpp"
+#include "../../Player/PlayerActionner.hpp"
 
 #define MAP_SIZE 15
 
@@ -34,11 +35,8 @@ namespace bomb {
 				irr::video::ITexture *pTexture
 			);
 			int getMapSize() const;
-
 			void executePlayers();
-
 			bool handleEvent(const irr::SEvent &event);
-
 		private:
 			enum Character {
 				SHYGUY_WHITE,
@@ -60,7 +58,8 @@ namespace bomb {
 
 			void reset();
 
-			std::vector<Player> _players;
+			std::vector<std::pair<Player, PlayerActionner>>
+				_players;
 			std::shared_ptr<bomb::Map> _map;
 			int _mapSize;
 		};

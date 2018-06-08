@@ -54,8 +54,3 @@ int bomb::menu::GraphicElement::getId() const
 {
 	return _id;
 }
-
-void bomb::menu::GraphicElement::remove()
-{
-	_element->remove();
-}

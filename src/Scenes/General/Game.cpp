@@ -56,9 +56,9 @@ void bomb::game::Game::createPlayer(bomb::IAssetLoader &loader,
 		throw bomb::Exception("GameCreation", "Too much players");
 
 	/* A CHANGER ! ECHELLES DE TAILLE */
-	_players.push_back(bomb::game::Player(loader, path, controller,
+	_players.push_back({bomb::game::Player(loader, path, controller,
 		{(float)spawn.X, (float)spawn.Y, (float)spawn.Z},
-		{.5, .5, .5}, {0, 0, 0}));
+		{.5, .5, .5}, {0, 0, 0}), {true}});
 }
 
 void bomb::game::Game::reset()
@@ -74,13 +74,21 @@ int bomb::game::Game::getMapSize() const
 void bomb::game::Game::executePlayers()
 {
 	for (auto &p : _players) {
-		p.execute(*_map);
+		p.first.execute(*_map);
+		p.second.actionnate(*_map, p.first);
 	}
 }
 
 bool bomb::game::Game::handleEvent(const irr::SEvent &event)
 {
 	//Check if keyEvent is in player keyset and call his handleEvent method
-	_players[0].handleEvent(*_map, event);
+	auto action = _players[0].first.getActionFromEvent(*_map, event);
+	if (action != IPlayerController::UNDEFINED) {
+		if (event.KeyInput.PressedDown)
+			_players[0].second.sendAction(
+				*_map, _players[0].first, action);
+		else
+			_players[0].second.removeAction(action);
+	}
 	return true;
 }

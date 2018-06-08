@@ -15,7 +15,6 @@ bomb::game::Player::Player(bomb::IAssetLoader &loader,
 	const irr::core::vector3df &pos,
 	const irr::core::vector3df &scale,
 	const irr::core::vector3df &rotation) :
-	_actionner(true),
 	_nbBombs(1),
 	_speed(0.1f),
 	_bombRange(1),
@@ -32,30 +31,25 @@ bomb::game::Player::Player(bomb::IAssetLoader &loader,
 			(wchar_t *) L"Right"}}}),
 	_controller(std::move(controller))
 {
-	_obj = loader.createAnimatedObject(path, pos, scale, rotation);
+	_model = loader.createAnimatedObject(path, pos, scale, rotation);
 }
 
 void bomb::game::Player::execute(bomb::Map &map)
 {
-	if (isAI()) {
+/*	if (isAI()) {
 		_controller->execute({static_cast<irr::s32>(_obj->getPos().X),
 				static_cast<irr::s32>(_obj->getPos().Z)});
 		auto action = _controller->requestMovement();
 		_actionner.sendAction(map, _obj, action);
-	}
-	_actionner.actionnate(map, _obj);
+	}*/
 }
 
-bool bomb::game::Player::handleEvent(bomb::Map &map, const irr::SEvent &event)
+bomb::IPlayerController::Actions
+bomb::game::Player::getActionFromEvent(bomb::Map &map, const irr::SEvent &event)
 {
 	if (_keys.find(event.KeyInput.Key) == _keys.end())
-		return true;
-	if (event.KeyInput.PressedDown)
-		_actionner.sendAction(map, _obj,
-			_keys.at(event.KeyInput.Key).first);
-	else
-		_actionner.removeAction(_keys.at(event.KeyInput.Key).first);
-	return true;
+		return IPlayerController::UNDEFINED;
+	return _keys.at(event.KeyInput.Key).first;
 }
 
 unsigned char bomb::game::Player::getNbBombs() const
@@ -116,4 +110,9 @@ bool bomb::game::Player::isAI() const
 void bomb::game::Player::setAI(bool AI)
 {
 	Player::_AI = AI;
+}
+
+std::unique_ptr<bomb::AnimatedObject> &bomb::game::Player::getModel()
+{
+	return _model;
 }
