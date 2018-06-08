@@ -33,7 +33,7 @@ namespace bomb {
 			void launchScene(const std::string &);
 
 		private:
-			void _loopScene(std::shared_ptr<IGameScene> &);
+			bool _loopScene(std::shared_ptr<IGameScene> &);
 			GameEngine & _gameEngine;
 			std::map<std::string, std::shared_ptr<IGameScene>>
 				_scenes;

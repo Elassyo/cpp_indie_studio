@@ -5,6 +5,7 @@
 // EventHandler.cpp
 //
 
+#include <iostream>
 #include "EventHandler.hpp"
 
 void bomb::EventHandler::injectScene

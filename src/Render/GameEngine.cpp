@@ -26,6 +26,8 @@ bomb::GameEngine::GameEngine(const std::wstring &winName,
 
 bomb::GameEngine::~GameEngine()
 {
+	_device->closeDevice();
+	_device->run();
 	_device->drop();
 }
 
@@ -55,7 +57,7 @@ irr::gui::IGUIEnvironment *bomb::GameEngine::getGui()
 
 irr::video::ITexture *bomb::GameEngine::loadTexture(const std::string &path)
 {
-
+	if (_videoDriver)
 	return _videoDriver->getTexture((_assetsPath + path).c_str());
 }
 
@@ -83,6 +85,7 @@ std::unique_ptr<bomb::AnimatedObject> bomb::GameEngine::createAnimatedObject(
 	ptr->setRot(rot);
 	ptr->setScale(scale);
 	return ptr;
+
 }
 
 std::unique_ptr<bomb::StaticObject> bomb::GameEngine::createStaticObject(
