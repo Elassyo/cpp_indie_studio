@@ -39,3 +39,9 @@ void bomb::CameraObject::setRot(const irr::core::vector3df &v)
 	_inode->setRotation(v);
 	_audioListener.updateListener(_inode);
 }
+
+void bomb::CameraObject::setTarget(const irr::core::vector3df &v)
+{
+	_inode->setTarget(v);
+	_audioListener.updateListener(_inode);
+}

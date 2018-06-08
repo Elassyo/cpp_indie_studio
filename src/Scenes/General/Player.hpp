@@ -5,8 +5,8 @@
 // Player.hpp
 //
 
-#ifndef CPP_INDIE_STUDIO_PLAYERINFO_HPP
-#define CPP_INDIE_STUDIO_PLAYERINFO_HPP
+#ifndef CPP_INDIE_STUDIO_PLAYER_HPP
+#define CPP_INDIE_STUDIO_PLAYER_HPP
 
 #include <unordered_map>
 #include "../../AnimatedObject.hpp"
@@ -35,6 +35,8 @@ namespace bomb {
 			bool isGhostMode() const;
 			bool isAlive() const;
 			bool isAI() const;
+			void setBombReady(bool);
+			irr::core::vector3df getExactPos();
 
 			void setNbBombs(uint8_t _nbBombs);
 			void setSpeed(float _speed);
@@ -42,16 +44,19 @@ namespace bomb {
 			void setGhostMode(bool _ghostMode);
 			void setAlive(bool _alive);
 			void setAI(bool AI);
+			bool isBombReady();
 
 			std::unique_ptr<AnimatedObject> &getModel();
 
 		private:
+			uint8_t _maxNbBombs;
 			uint8_t _nbBombs;
 			float _speed;
 			uint8_t _bombRange;
 			bool _ghostMode;
 			bool _alive;
 			bool _AI;
+			bool _bombReady;
 			std::unordered_map<irr::EKEY_CODE,
 				std::pair<bomb::IPlayerController::Actions,
 					wchar_t *>> _keys;
@@ -61,4 +66,4 @@ namespace bomb {
 		};
 	}
 }
-#endif /* CPP_INDIE_STUDIO_PLAYERINFO_HPP */
+#endif /* CPP_INDIE_STUDIO_PLAYER_HPP */

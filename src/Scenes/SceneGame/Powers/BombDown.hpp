@@ -15,8 +15,9 @@ namespace bomb {
 		class BombDown : public bomb::object::Power {
 		public:
 			BombDown(bomb::IAssetLoader &loader,
-				const irr::core::vector3df &pos);
-			bool activate(game::Game &infos) override;
+				 const irr::core::vector3df &pos);
+			bool activate(bomb::Map &map,
+				      bomb::game::Player &player) override;
 		};
 	}
 }

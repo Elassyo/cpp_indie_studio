@@ -13,14 +13,16 @@ bomb::object::Power::Power(bomb::IAssetLoader &loader,
 {
 }
 
-bool bomb::object::Power::isActivable(bomb::game::Game &infos)
-{
-	return false;
-}
-
-bool bomb::object::Power::activate(bomb::game::Game &infos)
+bool bomb::object::Power::activate(bomb::Map &map, bomb::game::Player &player)
 {
 	if (_model)
 		_loader.deleteObject(std::move(_model));
 	return true;
+}
+
+int bomb::object::Power::isActivable(bomb::Map &map,
+	std::vector<std::pair<bomb::game::Player,
+	bomb::PlayerActionner>> &vector)
+{
+	return false;
 }

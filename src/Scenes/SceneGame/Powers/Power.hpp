@@ -15,11 +15,14 @@ namespace bomb {
 		class Power : public game::AActivator {
 		public:
 			Power(bomb::IAssetLoader &loader,
-				const irr::core::vector3df &pos,
-				std::string path);
-
-			bool isActivable(game::Game &infos) override;
-			bool activate(game::Game &infos) override;
+			      const irr::core::vector3df &pos,
+			      std::string path);
+			int isActivable(bomb::Map &map,
+					std::vector<std::pair<game::Player,
+						PlayerActionner>>
+					&vector) override;
+			bool activate(bomb::Map &map,
+				      bomb::game::Player &player) override;
 
 		private:
 			bomb::IAssetLoader &_loader;

@@ -22,7 +22,7 @@ bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(
 	});
 	_menu.addButton(L"Options", {.5, .5}, 2);
 	_menu.setButtonEvent(2, [this](){
-		_nextScene = "option_scene";
+		_nextScene = "game_scene";
 	});
 	_menu.addButton(L"Quit", {.5, .65}, 3);
 	_menu.setButtonEvent(3, [this](){
