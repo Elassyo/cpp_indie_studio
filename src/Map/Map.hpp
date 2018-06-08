@@ -10,6 +10,7 @@
 
 #include <memory>
 #include <vector>
+#include <ostream>
 
 #include "../Interface/IRenderable.hpp"
 #include "../Interface/ISerializable.hpp"
@@ -39,6 +40,10 @@ namespace bomb {
 		void addBomb(size_t x, size_t y);
 		BlockType &operator[](std::size_t idx);
 		BlockType &operator[](irr::core::vector3di &pos);
+
+		friend std::ostream &
+		operator<<(std::ostream &os, const Map &map);
+
 	private:
 		std::vector<std::shared_ptr<bomb::AMapBlock>> _blocks;
 		std::vector<BlockType> _cells;

@@ -15,13 +15,18 @@ bomb::game::Player::Player(bomb::IAssetLoader &loader,
 	const irr::core::vector3df &pos,
 	const irr::core::vector3df &scale,
 	const irr::core::vector3df &rotation) :
+	_actionner(true),
 	_nbBombs(1),
 	_speed(0.1f),
 	_bombRange(1),
 	_ghostMode(false),
 	_alive(true),
 	_AI(false),
-	_controller(std::move(controller))
+	_controller(std::move(controller)),
+	_keys({{irr::KEY_UP, {IPlayerController::MV_UP, L"Up"}},
+		{irr::KEY_DOWN, {IPlayerController::MV_DOWN, L"Down"}},
+		{irr::KEY_LEFT, {IPlayerController::MV_LEFT, L"Left"}},
+		{irr::KEY_RIGHT, {IPlayerController::MV_RIGHT, L"Right"}}})
 {
 	_obj = loader.createAnimatedObject(path, pos, scale, rotation);
 }
@@ -30,7 +35,7 @@ void bomb::game::Player::execute(bomb::Map &map)
 {
 	if (isAI()) {
 		_controller->execute({static_cast<irr::s32>(_obj->getPos().X),
-				      static_cast<irr::s32>(_obj->getPos().Z)});
+				static_cast<irr::s32>(_obj->getPos().Z)});
 		auto action = _controller->requestMovement();
 		_actionner.sendAction(map, _obj, action);
 	}
@@ -39,8 +44,13 @@ void bomb::game::Player::execute(bomb::Map &map)
 
 bool bomb::game::Player::handleEvent(bomb::Map &map, const irr::SEvent &event)
 {
-	(void) map;
-	(void) event;
+	if (_keys.find(event.KeyInput.Key) == _keys.end())
+		return true;
+	if (event.KeyInput.PressedDown)
+		_actionner.sendAction(map, _obj,
+			_keys.at(event.KeyInput.Key).first);
+	else
+		_actionner.removeAction(_keys.at(event.KeyInput.Key).first);
 	return true;
 }
 

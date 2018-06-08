@@ -80,7 +80,7 @@ void bomb::game::GameInfo::executePlayers()
 
 bool bomb::game::GameInfo::handleEvent(const irr::SEvent &event)
 {
-	if (event.KeyInput.Key == irr::KEY_KEY_Z)
-		_players[0].handleEvent(*_map, event);
+	//Check if keyEvent is in player keyset and call his handleEvent method
+	_players[0].handleEvent(*_map, event);
 	return true;
 }

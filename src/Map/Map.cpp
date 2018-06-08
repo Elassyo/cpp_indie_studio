@@ -10,7 +10,7 @@
 bomb::Map::Map(const std::vector<std::shared_ptr<bomb::AMapBlock>> &_blocks,
 	std::vector<Map::BlockType> &cells) :
 	_blocks(_blocks), _cells(cells),
-	_size(static_cast<int>(cells.size() / cells.size()))
+	_size(static_cast<int>(sqrt(cells.size())))
 {
 }
 
@@ -46,7 +46,7 @@ bomb::Map::BlockType &bomb::Map::operator[](std::size_t idx)
 
 bomb::Map::BlockType &bomb::Map::operator[](irr::core::vector3di &pos)
 {
-	return _cells[pos.X + pos.Y * _size];
+	return _cells[pos.X + pos.Z * _size];
 }
 
 void bomb::Map::addBomb(std::size_t x, std::size_t y)
@@ -59,4 +59,15 @@ void bomb::Map::addBomb(std::size_t x, std::size_t y)
 bool bomb::Map::blockAt(const irr::core::vector2di &coord)
 {
 	return _cells[coord.X + coord.Y * _size] != BlockType::EMPTY;
+}
+
+std::ostream &bomb::operator<<(std::ostream &os, const bomb::Map &map) {
+	int  i = 0;
+	for (auto cell : map._cells) {
+		os << " " << cell;
+		++i;
+		if (i % map.getSize() == 0)
+			os << "\n";
+	}
+	return os;
 }

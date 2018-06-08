@@ -50,6 +50,9 @@ namespace bomb {
 			bool _ghostMode;
 			bool _alive;
 			bool _AI;
+			std::unordered_map<irr::EKEY_CODE,
+				std::pair<bomb::IPlayerController::Actions,
+					wchar_t *>> _keys;
 
 			std::unique_ptr<AnimatedObject> _obj;
 			std::unique_ptr<IPlayerController> _controller;

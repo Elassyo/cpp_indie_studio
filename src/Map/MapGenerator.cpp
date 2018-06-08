@@ -54,9 +54,9 @@ bomb::MapConstructor bomb::MapGenerator::generateBasic()
 			if (x % 2 == 0 && y % 2 == 0)
 				map.addBlock({ (int)x, (int)y},
 					bomb::Map::UNBREAKABLE);
-			else if (_rng() % 100 <= GEN_BASIC_PROB)
+	/*		else if (_rng() % 100 <= GEN_BASIC_PROB)
 				map.addBlock({ (int)x, (int)y},
-					bomb::Map::BREAKABLE);
+					bomb::Map::BREAKABLE);*/
 		}
 	}
 	return map;
