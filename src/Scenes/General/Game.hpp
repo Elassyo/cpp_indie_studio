@@ -21,6 +21,7 @@
 	#include "../../Map/Map.hpp"
 	#include "../../Player/PlayerActionner.hpp"
 	#include "../../Xml/XmlWriter.hpp"
+	#include "../SceneGame/Bomb.hpp"
 
 
 #define MAP_SIZE 16
@@ -40,9 +41,9 @@ namespace bomb {
 			int getMapSize() const;
 			void execute(IAssetLoader &loader);
 			bool handleEvent(const irr::SEvent &event);
+			std::shared_ptr<Map> &getMap();
 
-		private:
-			enum Character {
+		enum Character {
 				SHYGUY_WHITE,
 				SHYGUY_BLACK,
 				SHYGUY_RED,
@@ -52,7 +53,6 @@ namespace bomb {
 
 			std::vector<std::pair<Player, PlayerActionner>>
 				&getPlayers();
-			std::shared_ptr<Map> &getMap();
 
 		private:
 			void createMap(

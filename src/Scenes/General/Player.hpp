@@ -36,7 +36,7 @@ namespace bomb {
 			bool isAlive() const;
 			bool isAI() const;
 			void setBombReady(bool);
-			irr::core::vector3df getExactPos();
+			irr::core::vector3df getExactPos() const;
 
 			void setNbBombs(uint8_t _nbBombs);
 			void setSpeed(float _speed);

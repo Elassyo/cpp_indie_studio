@@ -14,17 +14,19 @@
 
 	#include "../Interface/IObject.hpp"
 	#include "../Map/Map.hpp"
+	#include "../Scenes/General/Player.hpp"
 
 namespace bomb {
 	namespace xml {
 		class XmlWriter {
 		public:
-			XmlWriter(const irr::core::stringw &fileName);
+			explicit XmlWriter(const irr::core::stringw &fileName);
 			~XmlWriter() = default;
 
 			bool iObjectToSection(std::unique_ptr<IObject> &);
 			bool mapBlockToSection(Map::BlockType, int, int);
 			bool mapToSection(std::shared_ptr<Map> &);
+			bool playerToSection(const game::Player &);
 
 		private:
 			std::wstring _strToWstr(const std::string &) const;
