@@ -16,6 +16,8 @@
 namespace bomb {
 	class PlayerInfo {
 	public:
+		PlayerInfo();
+
 		bool isAI() const;
 		void setIsAI(bool isAI);
 		const std::unordered_map<irr::EKEY_CODE,
@@ -28,10 +30,10 @@ namespace bomb {
 		void setModelPath(wchar_t *modelPath);
 	private:
 		bool _isAI;
+		wchar_t *_modelPath;
 		std::unordered_map<irr::EKEY_CODE,
 			std::pair<bomb::IPlayerController::Actions,
 				wchar_t *>> _keys;
-		wchar_t *_modelPath;
 	};
 }
 

@@ -8,7 +8,7 @@
 #include "SceneCharacterMenu.hpp"
 
 bomb::scene::SceneCharacterMenu::SceneCharacterMenu(
-	bomb::PersistentInfo &_infos) : AScene(_infos) {}
+	bomb::PersistentInfo &infos) : AScene(infos) {}
 
 bomb::scene::SceneStatus bomb::scene::SceneCharacterMenu::start(
 	IAssetLoader &loader)
@@ -21,52 +21,49 @@ bomb::scene::SceneStatus bomb::scene::SceneCharacterMenu::start(
 	_menu.setElementFont(0, menu::TITLE);
 	addGameButtons();
 	addPlayerButtons();
+	initModelPaths();
 	_menu.updateButtons(loader, true);
 	return BEGIN;
+}
+
+void bomb::scene::SceneCharacterMenu::initModelPaths()
+{
+	auto playerInfos = _infos.getPlayerInfos();
+	playerInfos[0].setModelPath((wchar_t *)L"models/characters/shyGuy/shyGuyWhite.mtl");
+	playerInfos[1].setModelPath((wchar_t *)L"models/characters/shyGuy/shyGuyBlack.mtl");
+	playerInfos[2].setModelPath((wchar_t *)L"models/characters/shyGuy/shyGuyBlue.mtl");
+	playerInfos[3].setModelPath((wchar_t *)L"models/characters/shyGuy/shyGuyRed.mtl");
 }
 
 void bomb::scene::SceneCharacterMenu::addPlayerButtons()
 {
 	_menu.addButton(L"1 : AI", {.20, .33}, 1);
 	_menu.setButtonEvent(1, [this](){
-		PlayerInfo player = _info.getPlayerInfo()[0];
-		_menu.setElementText(1, player.isAI() ?
-					L"1 : Player" : L"1 : AI");
-		player.setModelPath(player.isAI() ?
-				    "models/characters/skelerex/skelerex.mtl" :
-				    "models/characters/shyGuy/shyGuyWhite.mtl");
-		player.setIsAi(!player.isAI());
+		changePlayerType(1, (wchar_t *)L"models/characters/shyGuy/shyGuyWhite.mtl");
 	});
 	_menu.addButton(L"2 : AI", {.40, .33}, 2);
 	_menu.setButtonEvent(2, [this](){
-		PlayerInfo player = _info.getPlayerInfo()[1];
-		_menu.setElementText(2, player.isAI() ?
-					L"2 : Player" : L"2 : AI");
-		player.setModelPath(player.isAI() ?
-				    "models/characters/skelerex/skelerex.mtl" :
-				    "models/characters/shyGuy/shyGuyBlack.mtl");
-		player.setIsAi(!player.isAI());
+		changePlayerType(2, (wchar_t *)L"models/characters/shyGuy/shyGuyBlack.mtl");
 	});
 	_menu.addButton(L"3 : AI", {.60, .33}, 3);
 	_menu.setButtonEvent(3, [this](){
-		PlayerInfo player = _info.getPlayerInfo()[2];
-		_menu.setElementText(3, player.isAI() ?
-					L"3 : Player" : L"3 : AI");
-		player.setModelPath(player.isAI() ?
-				    "models/characters/skelerex/skelerex.mtl" :
-				    "models/characters/shyGuy/shyGuyBlue.mtl");
-		player.setIsAi(!player.isAI());
+		changePlayerType(3, (wchar_t *)L"models/characters/shyGuy/shyGuyBlue.mtl");
 	});
 	_menu.addButton(L"4 : AI", {.80, .33}, 4);
 	_menu.setButtonEvent(4, [this](){
-		PlayerInfo player = _info.getPlayerInfo()[3];
-		_menu.setElementText(4, player.isAI() ?
-					L"4 : Player" : L"4 : AI");
-		player.setModelPath(player.isAI() ?
-				    "models/characters/skelerex/skelerex.mtl" :
-				    "models/characters/shyGuy/shyGuyRed.mtl");
-		player.setIsAi(!player.isAI());
+		changePlayerType(4, (wchar_t *)L"models/characters/shyGuy/shyGuyRed.mtl");
 	});
+}
+
+void bomb::scene::SceneCharacterMenu::changePlayerType(int idx, wchar_t *model)
+{
+	PlayerInfo player = _infos.getPlayerInfos(idx - 1);
+	_menu.setElementText(idx, std::wstring(
+		std::to_wstring(idx ) + L" : "
+		+ (player.isAI() ? L"Player" : L"AI")).c_str());
+	player.setModelPath(player.isAI() ? (wchar_t *)L"models/characters/skelerex/skelerex.mtl" : model);
+	player.setIsAI(!player.isAI());
+	_infos.setPlayerInfos(idx - 1, player);
 }
 
 void bomb::scene::SceneCharacterMenu::addGameButtons()
@@ -83,7 +80,7 @@ void bomb::scene::SceneCharacterMenu::addGameButtons()
 	});
 	_menu.addButton(L"Back", {.75, .75}, 8);
 	_menu.setButtonEvent(8, [this](){
-		_nextScene = "menu_scene";
+		_nextScene = "home_scene";
 		_running = false;
 	});
 }
