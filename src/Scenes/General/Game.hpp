@@ -6,20 +6,22 @@
 */
 
 #ifndef CPP_INDIE_STUDIO_GAMEINFO_HPP
-#define CPP_INDIE_STUDIO_GAMEINFO_HPP
+	#define CPP_INDIE_STUDIO_GAMEINFO_HPP
 
-#include <array>
-#include <map>
-#include <vector>
-#include "../../Interface/IAssetLoader.hpp"
-#include "../../AnimatedObject.hpp"
-#include "../../AnimatedObject.hpp"
-#include "../../Interface/IAssetLoader.hpp"
-#include "../../Map/MapGenerator.hpp"
-#include "../../Map/Map.hpp"
-#include "../../Player/PlayerActionner.hpp"
-#include "../SceneGame/Bomb.hpp"
-#include "Player.hpp"
+	#include <array>
+	#include <map>
+	#include <vector>
+
+	#include "../../Interface/IAssetLoader.hpp"
+	#include "../../AnimatedObject.hpp"
+	#include "Player.hpp"
+	#include "../../AnimatedObject.hpp"
+	#include "../../Interface/IAssetLoader.hpp"
+	#include "../../Map/MapGenerator.hpp"
+	#include "../../Map/Map.hpp"
+	#include "../../Player/PlayerActionner.hpp"
+	#include "../../Xml/XmlWriter.hpp"
+
 
 #define MAP_SIZE 16
 
@@ -38,6 +40,15 @@ namespace bomb {
 			int getMapSize() const;
 			void execute(IAssetLoader &loader);
 			bool handleEvent(const irr::SEvent &event);
+
+		private:
+			enum Character {
+				SHYGUY_WHITE,
+				SHYGUY_BLACK,
+				SHYGUY_RED,
+				SHYGUY_BLUE,
+				SKELEREX
+			};
 
 			std::vector<std::pair<Player, PlayerActionner>>
 				&getPlayers();

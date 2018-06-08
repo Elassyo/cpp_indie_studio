@@ -1,0 +1,39 @@
+//
+// EPITECH PROJECT, 2018
+// cpp_indie_studio
+// File description:
+// XmlWriter.hpp
+//
+
+#ifndef CPP_INDIE_STUDIO_XMLWRITER_HPP
+	#define CPP_INDIE_STUDIO_XMLWRITER_HPP
+
+	#include <iostream>
+	#include <memory>
+	#include <unordered_map>
+
+	#include "../Interface/IObject.hpp"
+	#include "../Map/Map.hpp"
+
+namespace bomb {
+	namespace xml {
+		class XmlWriter {
+		public:
+			XmlWriter(const irr::core::stringw &fileName);
+			~XmlWriter() = default;
+
+			bool iObjectToSection(std::unique_ptr<IObject> &);
+			bool mapBlockToSection(Map::BlockType, int, int);
+			bool mapToSection(std::shared_ptr<Map> &);
+
+		private:
+			std::wstring _strToWstr(const std::string &) const;
+
+			irr::io::IXMLWriter *_xmlWriter;
+			const std::unordered_map<Map::BlockType, std::wstring>
+				_blockTypeStr;
+			};
+		}
+	}
+
+#endif /* CPP_INDIE_STUDIO_XMLWRITER_HPP */

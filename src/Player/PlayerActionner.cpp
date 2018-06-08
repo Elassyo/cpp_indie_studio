@@ -58,7 +58,7 @@ void bomb::PlayerActionner::actionnate(bomb::Map &map,
 	if (_currentAction == IPlayerController::UNDEFINED || _target.X == -1) {
 		updateAction();
 		auto pos = player.getModel()->getPos();
-		changeTargetTile(map, vecfCast(pos));
+		changeTargetTile(map, vecfCast(pos), player.getModel());
 	}
 	if (_currentAction != IPlayerController::UNDEFINED)
 		move(map, player.getModel());
@@ -73,7 +73,8 @@ void bomb::PlayerActionner::move(bomb::Map &map,
 		player->setPos(veciCast(_target));
 		if (!_repeat)
 			updateAction();
-		return changeTargetTile(map, _target);
+		changeTargetTile(map, _target, player);
+		return;
 	}
 	player->move(dir);
 }
@@ -85,8 +86,10 @@ void bomb::PlayerActionner::updateAction()
 }
 
 void bomb::PlayerActionner::changeTargetTile(bomb::Map &map,
-	irr::core::vector3di playerPos)
+	irr::core::vector3di playerPos,
+	std::unique_ptr <bomb::AnimatedObject> &player)
 {
+	auto saveAct = _currentAction;
 	if (_currentAction != _nextAction &&
 		_nextAction != IPlayerController::UNDEFINED)
 		updateAction();
@@ -98,6 +101,10 @@ void bomb::PlayerActionner::changeTargetTile(bomb::Map &map,
 	if (map[_target] != Map::EMPTY) {
 		_target = {-1, -1, -1};
 		_currentAction = IPlayerController::UNDEFINED;
+	}
+	if (_currentAction != IPlayerController::UNDEFINED &&
+		_currentAction != IPlayerController::PUT_BOMB) {
+		player->setRot({0, (float) _currentAction, 0});
 	}
 }
 

@@ -43,8 +43,9 @@ namespace bomb {
 		bool isTargetReached(irr::core::vector3d<irr::f32> &vector3d);
 		irr::core::vector3df veciCast(irr::core::vector3di &vec);
 		void updateAction();
-		void changeTargetTile(Map &map, irr::core::vector3di pos);
 		void addBomb(Map &map, game::Player &player);
+		void changeTargetTile(Map &map, irr::core::vector3di playerPos,
+			      std::unique_ptr<AnimatedObject> &player);
 	};
 }
 #endif /* CPP_INDIE_STUDIO_PLAYERACTIONNER_HPP */
