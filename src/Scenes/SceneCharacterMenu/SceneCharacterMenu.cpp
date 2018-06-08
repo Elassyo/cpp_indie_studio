@@ -26,19 +26,43 @@ void bomb::scene::SceneCharacterMenu::addPlayerButtons()
 {
 	_menu.addButton(L"1 : AI", {.20, .33}, 1);
 	_menu.setButtonEvent(1, [this](){
-		_menu.setElementText(1, L"1 : Player");
+		PlayerInfo player = _info.getPlayerInfo()[0];
+		_menu.setElementText(1, player.isAI() ?
+					L"1 : Player" : L"1 : AI");
+		player.setModelPath(player.isAI() ?
+				    "models/characters/skelerex/skelerex.mtl" :
+				    "models/characters/shyGuy/shyGuyWhite.mtl");
+		player.setIsAi(!player.isAI());
 	});
 	_menu.addButton(L"2 : AI", {.40, .33}, 2);
 	_menu.setButtonEvent(2, [this](){
-		_menu.setElementText(2, L"2 : Player");
+		PlayerInfo player = _info.getPlayerInfo()[1];
+		_menu.setElementText(2, player.isAI() ?
+					L"2 : Player" : L"2 : AI");
+		player.setModelPath(player.isAI() ?
+				    "models/characters/skelerex/skelerex.mtl" :
+				    "models/characters/shyGuy/shyGuyBlack.mtl");
+		player.setIsAi(!player.isAI());
 	});
 	_menu.addButton(L"3 : AI", {.60, .33}, 3);
 	_menu.setButtonEvent(3, [this](){
-		_menu.setElementText(3, L"3 : Player");
+		PlayerInfo player = _info.getPlayerInfo()[2];
+		_menu.setElementText(3, player.isAI() ?
+					L"3 : Player" : L"3 : AI");
+		player.setModelPath(player.isAI() ?
+				    "models/characters/skelerex/skelerex.mtl" :
+				    "models/characters/shyGuy/shyGuyBlue.mtl");
+		player.setIsAi(!player.isAI());
 	});
 	_menu.addButton(L"4 : AI", {.80, .33}, 4);
 	_menu.setButtonEvent(4, [this](){
-		_menu.setElementText(4, L"4 : Player");
+		PlayerInfo player = _info.getPlayerInfo()[3];
+		_menu.setElementText(4, player.isAI() ?
+					L"4 : Player" : L"4 : AI");
+		player.setModelPath(player.isAI() ?
+				    "models/characters/skelerex/skelerex.mtl" :
+				    "models/characters/shyGuy/shyGuyRed.mtl");
+		player.setIsAi(!player.isAI());
 	});
 }
 

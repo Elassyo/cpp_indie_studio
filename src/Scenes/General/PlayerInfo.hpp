@@ -16,7 +16,7 @@
 namespace bomb {
 	class PlayerInfo {
 	public:
-		bool isIsAI() const;
+		bool isAI() const;
 		void setIsAI(bool isAI);
 		const std::unordered_map<irr::EKEY_CODE,
 			std::pair<IPlayerController::Actions, wchar_t *>> &

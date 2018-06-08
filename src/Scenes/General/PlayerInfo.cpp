@@ -7,7 +7,7 @@
 
 #include "PlayerInfo.hpp"
 
-bool bomb::PlayerInfo::isIsAI() const
+bool bomb::PlayerInfo::isAI() const
 {
 	return _isAI;
 }
