@@ -14,6 +14,8 @@
 
 	#include "GraphicText.hpp"
 
+	#include "GraphicImage.hpp"
+
 	#include "../Interface/IAssetLoader.hpp"
 
 namespace bomb {
@@ -29,19 +31,23 @@ namespace bomb {
 			void createMenu(IAssetLoader &loader);
 			void updateButtons(IAssetLoader &loader,
 						bool areVisible);
-			void addButton(IAssetLoader &loader,
+			void addButton(const wchar_t *text,
 				       irr::core::vector2df pos, int id);
-			void addText(wchar_t *text,
+			void addText(const wchar_t *text,
+				     irr::core::vector2df pos, int id);
+			void addImage(irr::video::ITexture *texture,
 				     irr::core::vector2df pos, int id);
 			void setButtonTextures(int buttonId,
 					       irr::video::ITexture *texture,
 					       irr::video::ITexture *pressed);
 			void setButtonPressedTexture(int buttonId,
-						irr::video::ITexture *pressed);
-			void setButtonEvent(int buttonId, std::function<void()>
-			event);
+						     irr::video::ITexture *);
+			void setButtonEvent(int buttonId,
+					    std::function<void()> event);
 			void setElementPos(int elementId,
 					   irr::core::vector2df pos);
+			void setElementSize(int elementId,
+					    irr::core::vector2df size);
 			void setElementText(int elementId, const wchar_t *text);
 			void setElementFont(int elementId, MenuFonts font);
 			void setElementTexture(int elementId,
@@ -51,12 +57,11 @@ namespace bomb {
 		private:
 			long long getButtonById(int buttonId);
 			long long getElementById(int elementId);
-			irr::gui::IGUIButton *createButton(
-				irr::core::vector2di pos,
-				irr::core::vector2di size,
-				int id);
+			irr::gui::IGUIButton *createButton(int id);
 			irr::gui::IGUIStaticText *createText(
 				const wchar_t *title, int id);
+			irr::gui::IGUIImage *createImage(
+				irr::video::ITexture *texture, int id);
 			irr::gui::IGUIEnvironment *_gui;
 			irr::core::vector2df _buttonRatio;
 			irr::video::ITexture *_buttonBack;

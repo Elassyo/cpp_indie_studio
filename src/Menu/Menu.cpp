@@ -24,23 +24,34 @@ void bomb::menu::Menu::createMenu(IAssetLoader &loader)
 				  irr::video::SColor(255, 255, 255, 255));
 }
 
-void bomb::menu::Menu::addButton(IAssetLoader &loader,
+void bomb::menu::Menu::addButton(const wchar_t *text,
 				 irr::core::vector2df pos, int id)
 {
-	irr::gui::IGUIButton *irrButton = createButton({ 0, 0 }, {1, 1}, id);
+	irr::gui::IGUIButton *irrButton = createButton(id);
 	std::unique_ptr<GraphicButton> button =
 		std::make_unique<GraphicButton>(irrButton, pos, id);
+	button->setText(text);
 	button->setSize(_buttonRatio);
 	button->setTextures(_buttonBack, _buttonPressed);
 	_buttons.emplace_back(std::move(button));
 }
 
-void bomb::menu::Menu::addText(wchar_t *text, irr::core::vector2df pos, int id)
+void bomb::menu::Menu::addText(const wchar_t *text,
+			       irr::core::vector2df pos, int id)
 {
 	irr::gui::IGUIStaticText *irrText = createText(text, id);
 	std::unique_ptr<GraphicText> gText =
 		std::make_unique<GraphicText>(irrText, pos, id);
 	_elements.emplace_back(std::move(gText));
+}
+
+void bomb::menu::Menu::addImage(irr::video::ITexture *texture,
+				irr::core::vector2df pos, int id)
+{
+	irr::gui::IGUIImage *irrImg = createImage(texture, id);
+	std::unique_ptr<GraphicImage> img =
+		std::make_unique<GraphicImage>(irrImg, pos, id);
+	_elements.emplace_back(std::move(img));
 }
 
 irr::gui::IGUIStaticText *bomb::menu::Menu::createText(
@@ -50,12 +61,15 @@ irr::gui::IGUIStaticText *bomb::menu::Menu::createText(
 				   false, true, nullptr, id);
 }
 
-irr::gui::IGUIButton *bomb::menu::Menu::createButton(
-	irr::core::vector2di pos, irr::core::vector2di size,
-	int id)
+irr::gui::IGUIImage *bomb::menu::Menu::createImage(
+	irr::video::ITexture *texture, int id)
 {
-	return _gui->addButton({ pos.X, pos.Y, pos.X + size.X, pos.Y + size.Y },
-			       nullptr, id);
+	return _gui->addImage(texture, {0, 0}, true, nullptr, id);
+}
+
+irr::gui::IGUIButton *bomb::menu::Menu::createButton(int id)
+{
+	return _gui->addButton({ 0, 0, 1, 1 }, nullptr, id);
 }
 
 void bomb::menu::Menu::updateButtons(IAssetLoader &loader, bool areVisible)
@@ -148,6 +162,20 @@ void bomb::menu::Menu::setElementPos(int elementId, irr::core::vector2df pos)
 	}
 	else
 		_elements.at(static_cast<unsigned long>(idx))->setPos(pos);
+}
+
+void bomb::menu::Menu::setElementSize(int elementId, irr::core::vector2df size)
+{
+	long long idx = getElementById(elementId);
+
+	if (idx == -1) {
+		idx = getButtonById(elementId);
+		if (idx != -1)
+			_buttons.at(
+				static_cast<unsigned long>(idx))->setSize(size);
+	}
+	else
+		_elements.at(static_cast<unsigned long>(idx))->setSize(size);
 }
 
 void bomb::menu::Menu::setElementText(int elementId, const wchar_t *text)
