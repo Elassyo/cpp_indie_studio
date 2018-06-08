@@ -13,15 +13,12 @@ bomb::scene::SceneStatus bomb::scene::SceneOptionMenu::start(
 	running = true;
 	_menu.createMenu(loader);
 	_menu.addText((wchar_t *)L"SUPER\nBOMBERMARIO\nBROS.", {.5, .15}, 0);
-	_menu.setTextFont(0, menu::TITLE);
-	_menu.addButton(loader, {.5, .35}, 1);
-	_menu.setButtonText(1, L"Volume Up");
+	_menu.setElementFont(0, menu::TITLE);
+	_menu.addButton(L"Volume Up", {.5, .35}, 1);
 	_menu.setButtonEvent(1, [](){});
-	_menu.addButton(loader, {.5, .5}, 2);
-	_menu.setButtonText(2, L"Volume Down");
+	_menu.addButton(L"Volume Down", {.5, .5}, 2);
 	_menu.setButtonEvent(2, [](){});
-	_menu.addButton(loader, {.5, .65}, 3);
-	_menu.setButtonText(3, L"Back");
+	_menu.addButton(L"Back", {.5, .65}, 3);
 	_menu.setButtonEvent(3, [this](){
 		_nextScene = "home_scene";
 	});

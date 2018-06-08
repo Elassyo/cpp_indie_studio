@@ -70,6 +70,8 @@ set(SRC_FILES
         src/Menu/GraphicElement.hpp
         src/Menu/GraphicText.cpp
         src/Menu/GraphicText.hpp
+        src/Menu/GraphicImage.cpp
+        src/Menu/GraphicImage.hpp
         src/Menu/Menu.cpp
         src/Menu/Menu.hpp
 

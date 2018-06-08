@@ -19,3 +19,8 @@ void bomb::menu::GraphicText::setFont(irr::gui::IGUIFont *font)
 {
 	_element->setOverrideFont(font);
 }
+
+void bomb::menu::GraphicText::setTexture(irr::video::ITexture *texture)
+{
+	texture = texture;
+}

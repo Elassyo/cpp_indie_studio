@@ -61,4 +61,3 @@ void bomb::menu::GraphicButton::setEvent(std::function <void ()> &event)
 {
 	_event = event;
 }
-
