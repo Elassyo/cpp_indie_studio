@@ -107,3 +107,4 @@ std::shared_ptr<bomb::Map> &bomb::game::Game::getMap()
 {
 	return _map;
 }
+

@@ -17,7 +17,7 @@
 
 class unique_ptr;
 namespace bomb {
-	class AMapBlock {
+	class AMapBlock : public virtual ISerializable {
 	public:
 		AMapBlock(IAssetLoader &loader,
 			const irr::core::vector3df &pos,

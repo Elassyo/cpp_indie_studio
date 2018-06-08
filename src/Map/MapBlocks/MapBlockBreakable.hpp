@@ -31,6 +31,8 @@ namespace bomb {
 			const irr::core::vector3df &scale,
 			const irr::core::vector3df &rotation,
 			const irr::core::vector2di &mapPos) const override;
+
+		std::string toString() override;
 	};
 }
 

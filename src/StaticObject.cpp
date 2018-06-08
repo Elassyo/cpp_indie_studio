@@ -26,5 +26,5 @@ void bomb::StaticObject::setTexture(uint32_t layer,
 
 std::string bomb::StaticObject::toString()
 {
-	return "";
+	return "StaticObject";
 }

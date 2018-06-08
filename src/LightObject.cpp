@@ -25,5 +25,5 @@ void bomb::LightObject::setTexture(uint32_t layer,
 
 std::string bomb::LightObject::toString()
 {
-	return "";
+	return "LightObject";
 }

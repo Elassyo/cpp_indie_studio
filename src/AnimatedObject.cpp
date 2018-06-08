@@ -27,7 +27,7 @@ void bomb::AnimatedObject::setTexture(uint32_t layer,
 
 std::string bomb::AnimatedObject::toString()
 {
-	return "";
+	return "AnimatedObject";
 }
 
 void bomb::AnimatedObject::move(const irr::core::vector3df &v)
