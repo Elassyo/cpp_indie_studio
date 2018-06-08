@@ -15,11 +15,17 @@ namespace bomb {
 		class GraphicElement {
 		public:
 			GraphicElement(irr::gui::IGUIElement *element,
-				irr::core::vector2df pos);
+				irr::core::vector2df pos, int id);
 			void setVisibility(bool visibility);
 			void update(irr::core::vector2di size,
 				irr::core::vector2di screenSize);
+			void setPos(irr::core::vector2df pos);
+			void setText(const wchar_t *text);
+			int getId() const;
 			void remove();
+
+		protected:
+			const int _id;
 
 		private:
 			irr::gui::IGUIElement *_element;

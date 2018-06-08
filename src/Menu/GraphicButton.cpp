@@ -9,7 +9,7 @@
 
 bomb::menu::GraphicButton::GraphicButton(irr::gui::IGUIButton *button,
 	irr::core::vector2df pos, int id) :
-	GraphicElement(button, pos), _element(button), _event(nullptr), _id(id)
+	GraphicElement(button, pos, id), _element(button), _event(nullptr)
 {
 	button->setScaleImage(true);
 	button->setDrawBorder(false);
@@ -35,10 +35,20 @@ void bomb::menu::GraphicButton::setFont(irr::gui::IGUIFont *font)
 	_element->setOverrideFont(font);
 }
 
-void bomb::menu::GraphicButton::setTexture(irr::video::ITexture *texture,
-					   irr::video::ITexture *pressed)
+void bomb::menu::GraphicButton::setTextures(irr::video::ITexture *texture,
+					    irr::video::ITexture *pressed)
+{
+	setTexture(texture);
+	setPressedTexture(pressed);
+}
+
+void bomb::menu::GraphicButton::setTexture(irr::video::ITexture *texture)
 {
 	_element->setImage(texture);
+}
+
+void bomb::menu::GraphicButton::setPressedTexture(irr::video::ITexture *pressed)
+{
 	_element->setPressedImage(pressed);
 }
 
@@ -52,13 +62,3 @@ void bomb::menu::GraphicButton::setEvent(std::function <void ()> &event)
 	_event = event;
 }
 
-int bomb::menu::GraphicButton::getId() const
-{
-	return _id;
-}
-
-
-void bomb::menu::GraphicButton::setText(const wchar_t *text)
-{
-	_element->setText(text);
-}

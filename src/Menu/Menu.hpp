@@ -18,6 +18,10 @@
 
 namespace bomb {
 	namespace menu {
+		enum MenuFonts {
+			BASIC,
+			TITLE
+		};
 		class Menu {
 		public:
 			Menu();
@@ -28,27 +32,43 @@ namespace bomb {
 			void updateButtons(IAssetLoader &loader,
 						bool areVisible);
 			void addButton(IAssetLoader &loader,
-				irr::core::vector2df pos, int id);
-			void addButtonText(int buttonId, const wchar_t *text);
-			void addButtonEvent(int buttonId, std::function<void()>
-				event);
+				       irr::core::vector2df pos, int id);
+			void addText(wchar_t *text,
+				     irr::core::vector2df pos, int id);
+			void setButtonPos(int buttonId,
+					  irr::core::vector2df pos);
+			void setButtonText(int buttonId, const wchar_t *text);
+			void setButtonFont(int buttonId, MenuFonts font);
+			void setButtonTextures(int buttonId,
+					       irr::video::ITexture *texture,
+					       irr::video::ITexture *pressed);
+			void setButtonTexture(int buttonId,
+					      irr::video::ITexture *texture);
+			void setButtonPressedTexture(int buttonId,
+						irr::video::ITexture *pressed);
+			void setButtonEvent(int buttonId, std::function<void()>
+			event);
+			void setTextPos(int textId, irr::core::vector2df pos);
+			void setTextText(int textId, const wchar_t *text);
+			void setTextFont(int textId, MenuFonts font);
 			bool handleEvent(const irr::SEvent &event);
 			void clean();
 		private:
 			long long getButtonById(int buttonId);
-			void createTitle(const wchar_t *text = L"");
+			long long getTextById(int textId);
 			irr::gui::IGUIButton *createButton(
 				irr::core::vector2di pos,
 				irr::core::vector2di size,
 				int id);
+			irr::gui::IGUIStaticText *createText(
+				const wchar_t *title, int id);
 			irr::gui::IGUIEnvironment *_gui;
-			std::unique_ptr<GraphicText> _title;
 			irr::core::vector2df _buttonRatio;
 			irr::video::ITexture *_buttonBack;
 			irr::video::ITexture *_buttonPressed;
-			irr::gui::IGUIFont *_font;
-			irr::gui::IGUIFont *_titleFont;
+			std::map<MenuFonts, irr::gui::IGUIFont *> _fonts;
 			std::vector<GraphicButton> _buttons;
+			std::vector<GraphicText> _texts;
 			irr::core::vector2df pos;
 		};
 	}
