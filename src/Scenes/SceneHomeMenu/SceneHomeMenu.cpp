@@ -10,7 +10,7 @@
 bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(
 	IAssetLoader &loader)
 {
-	running = true;
+	_running = true;
 	_menu.createMenu(loader);
 	_menu.addImage(loader.loadTexture("images/menuBack.png"), {.5, .5}, 5);
 	_menu.setElementSize(5, {1, 1});
@@ -18,7 +18,7 @@ bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(
 	_menu.setElementFont(0, menu::TITLE);
 	_menu.addButton(L"Play", {.5, .35}, 1);
 	_menu.setButtonEvent(1, [this](){
-		_nextScene = "game_scene";
+		_nextScene = "character_scene";
 	});
 	_menu.addButton(L"Options", {.5, .5}, 2);
 	_menu.setButtonEvent(2, [this](){
@@ -29,7 +29,6 @@ bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(
 		_nextScene = "";
 	});
 	_menu.updateButtons(loader, true);
-	loader.getCamera({10,0,10}, {0,0,0});
 	return BEGIN;
 }
 
@@ -37,7 +36,7 @@ bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::loop(
 	bomb::IAssetLoader &loader)
 {
 	_menu.updateButtons(loader, true);
-	return running ? CONTINUE : END;
+	return _running ? CONTINUE : END;
 }
 
 void bomb::scene::SceneHomeMenu::save()
@@ -64,6 +63,6 @@ bool bomb::scene::SceneHomeMenu::onEvent(const irr::SEvent &event)
 	if (event.EventType == irr::EET_MOUSE_INPUT_EVENT)
 		return false;
 	if (_menu.handleEvent(event))
-		running = false;
+		_running = false;
 	return true;
 }

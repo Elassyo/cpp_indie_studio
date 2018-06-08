@@ -18,7 +18,7 @@ namespace bomb {
 				const irr::core::vector3df &pos,
 				std::string path);
 
-			bool isActivable(game::Game &infos)	override;
+			bool isActivable(game::Game &infos) override;
 			bool activate(game::Game &infos) override;
 
 		private:

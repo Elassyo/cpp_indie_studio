@@ -29,7 +29,7 @@ namespace bomb {
 
 		private:
 			bomb::menu::Menu _menu;
-			bool running;
+			bool _running;
 			std::string _nextScene;
 		};
 	}

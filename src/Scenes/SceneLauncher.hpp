@@ -21,7 +21,7 @@
 	#include "SceneGame/SceneGame.hpp"
 	#include "SceneHomeMenu/SceneHomeMenu.hpp"
 	#include "SceneOptionMenu/SceneOptionMenu.hpp"
-
+	#include "SceneCharacterMenu/SceneCharacterMenu.hpp"
 
 
 namespace bomb {
