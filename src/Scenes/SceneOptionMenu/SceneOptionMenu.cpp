@@ -13,7 +13,7 @@ bomb::scene::SceneOptionMenu::SceneOptionMenu(bomb::PersistentInfo &_infos)
 bomb::scene::SceneStatus bomb::scene::SceneOptionMenu::start(
 	IAssetLoader &loader)
 {
-	running = true;
+	_running = true;
 	_menu.createMenu(loader);
 	_menu.addImage(loader.loadTexture("images/menuBack.png"), {.5, .5}, 5);
 	_menu.setElementSize(5, {1, 1});
@@ -28,7 +28,7 @@ bomb::scene::SceneStatus bomb::scene::SceneOptionMenu::start(
 		_nextScene = "home_scene";
 	});
 	_menu.updateButtons(loader, true);
-	loader.getCamera({10,0,10}, {0,0,0});
+//	loader.getCamera({10,0,10}, {0,0,0});
 	return BEGIN;
 }
 
@@ -36,7 +36,7 @@ bomb::scene::SceneStatus bomb::scene::SceneOptionMenu::loop(
 	bomb::IAssetLoader &loader)
 {
 	_menu.updateButtons(loader, true);
-	return running ? CONTINUE : END;
+	return _running ? CONTINUE : END;
 }
 
 void bomb::scene::SceneOptionMenu::save()
@@ -62,6 +62,6 @@ bool bomb::scene::SceneOptionMenu::onEvent(const irr::SEvent &event)
 	if (event.EventType == irr::EET_MOUSE_INPUT_EVENT)
 		return false;
 	if (_menu.handleEvent(event))
-		running = false;
+		_running = false;
 	return true;
 }

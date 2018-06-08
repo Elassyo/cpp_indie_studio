@@ -5,19 +5,21 @@
 ** SceneGame.hpp
 */
 
-#ifndef CPP_INDIE_STUDIO_SCENEOPTIONMENU_HPP
-	#define CPP_INDIE_STUDIO_SCENEOPTIONMENU_HPP
+#ifndef CPP_INDIE_STUDIO_SCENECHARACTERMENU_HPP
+	#define CPP_INDIE_STUDIO_SCENECHARACTERMENU_HPP
+
+	#include "../../Interface/IGameScene.hpp"
 
 	#include "../../Menu/Menu.hpp"
-	#include "../General/AScene.hpp"
+#include "../General/AScene.hpp"
 
 namespace bomb {
 	namespace scene {
-		class SceneOptionMenu : public AScene {
+		class SceneCharacterMenu : public AScene {
 		public:
-			SceneOptionMenu(PersistentInfo &_infos);
+			SceneCharacterMenu(PersistentInfo &_infos);
 
-			~SceneOptionMenu() override = default;
+			~SceneCharacterMenu() override = default;
 
 			bomb::scene::SceneStatus start(
 				IAssetLoader &loader) override;
@@ -30,6 +32,8 @@ namespace bomb {
 			bool onEvent(const irr::SEvent &event) override;
 
 		private:
+			void addPlayerButtons();
+			void addGameButtons();
 			bomb::menu::Menu _menu;
 			bool _running;
 			std::string _nextScene;
@@ -37,4 +41,4 @@ namespace bomb {
 	}
 }
 
-#endif /* CPP_INDIE_STUDIO_SCENEOPTIONMENU_HPP */
+#endif /* CPP_INDIE_STUDIO_SCENECHARACTERMENU_HPP */

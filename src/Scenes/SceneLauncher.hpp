@@ -22,6 +22,7 @@
 	#include "SceneHomeMenu/SceneHomeMenu.hpp"
 	#include "SceneOptionMenu/SceneOptionMenu.hpp"
 	#include "General/PersistentInfo.hpp"
+	#include "SceneCharacterMenu/SceneCharacterMenu.hpp"
 
 namespace bomb {
 	namespace scene {

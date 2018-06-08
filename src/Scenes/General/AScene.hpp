@@ -16,13 +16,6 @@ namespace bomb {
 		class AScene : public IGameScene {
 		public:
 			AScene(PersistentInfo &_infos);
-
-			SceneStatus start(IAssetLoader &loader) override;
-			SceneStatus loop(IAssetLoader &loader) override;
-			void save() override;
-			void reset(IAssetLoader &loader) override;
-			void clean() override;
-			std::string nextScene() override;
 		protected:
 			bomb::PersistentInfo &_infos;
 		};

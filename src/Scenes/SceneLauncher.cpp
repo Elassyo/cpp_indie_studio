@@ -16,6 +16,8 @@ bomb::scene::SceneLauncher::SceneLauncher(GameEngine &ge) :
 		std::make_shared<bomb::scene::SceneHomeMenu>(_info);
 	_scenes["option_scene"] =
 		std::make_shared<bomb::scene::SceneOptionMenu>(_info);
+	_scenes["character_scene"] =
+		std::make_shared<bomb::scene::SceneCharacterMenu>(_info);
 }
 
 void bomb::scene::SceneLauncher::launchScene(const std::string &name)
