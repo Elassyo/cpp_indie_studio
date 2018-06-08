@@ -22,7 +22,7 @@ namespace bomb {
 		std::string toString() override;
 		void setPos(const irr::core::vector3df &v) override;
 		void setRot(const irr::core::vector3df &v) override;
-
+		void setTarget(const irr::core::vector3df &v);
 	private:
 		irr::scene::ICameraSceneNode *_inode;
 		IAudioListener &_audioListener;

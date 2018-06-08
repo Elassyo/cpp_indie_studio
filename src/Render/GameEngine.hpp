@@ -61,7 +61,6 @@ namespace bomb {
 			const irr::core::vector3df &rot) override;
 		const irr::core::dimension2d<irr::u32> &getScreenSize()
 			override;
-
 	private:
 		EventHandler _evtHandler;
 		irr::IrrlichtDevice *_device;

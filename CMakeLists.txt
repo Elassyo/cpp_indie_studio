@@ -95,8 +95,12 @@ set(SRC_FILES
         src/Scenes/General/Game.hpp
         src/Scenes/General/PersistentInfo.cpp
         src/Scenes/General/PersistentInfo.hpp
+        src/Scenes/General/PlayerInfo.cpp
+        src/Scenes/General/PlayerInfo.hpp
         src/Scenes/General/Player.cpp
         src/Scenes/General/Player.hpp
+        src/Scenes/General/AScene.cpp
+        src/Scenes/General/AScene.hpp
 
         src/Scenes/SceneGame/Bomb.cpp
         src/Scenes/SceneGame/Bomb.hpp
@@ -130,6 +134,8 @@ set(SRC_FILES
         src/Scenes/SceneHomeMenu/SceneHomeMenu.hpp
         src/Scenes/SceneOptionMenu/SceneOptionMenu.cpp
         src/Scenes/SceneOptionMenu/SceneOptionMenu.hpp
+        src/Scenes/SceneCharacterMenu/SceneCharacterMenu.cpp
+        src/Scenes/SceneCharacterMenu/SceneCharacterMenu.hpp
         src/Scenes/SceneLauncher.cpp
         src/Scenes/SceneLauncher.hpp
 

@@ -22,7 +22,8 @@
 	#include "../../Player/PlayerActionner.hpp"
 	#include "../../Xml/XmlWriter.hpp"
 
-#define MAP_SIZE 15
+
+#define MAP_SIZE 16
 
 namespace bomb {
 	namespace game {
@@ -37,9 +38,9 @@ namespace bomb {
 				irr::video::ITexture *pTexture
 			);
 			int getMapSize() const;
-			void executePlayers();
+			void execute(IAssetLoader &loader);
 			bool handleEvent(const irr::SEvent &event);
-			bool mapToXml(xml::XmlWriter &);
+			
 		private:
 			enum Character {
 				SHYGUY_WHITE,
@@ -49,6 +50,11 @@ namespace bomb {
 				SKELEREX
 			};
 
+			std::vector<std::pair<Player, PlayerActionner>>
+				&getPlayers();
+			std::shared_ptr<Map> &getMap();
+
+		private:
 			void createMap(
 				IAssetLoader &loader,
 				unsigned int size
@@ -64,6 +70,7 @@ namespace bomb {
 			std::vector<std::pair<Player, PlayerActionner>>
 				_players;
 			std::shared_ptr<bomb::Map> _map;
+			std::vector<std::unique_ptr<bomb::object::Bomb>> _bombs;
 			int _mapSize;
 		};
 	}

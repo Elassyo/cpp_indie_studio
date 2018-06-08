@@ -20,8 +20,8 @@
 	#include "SceneGame/SceneGame.hpp"
 	#include "SceneHomeMenu/SceneHomeMenu.hpp"
 	#include "SceneOptionMenu/SceneOptionMenu.hpp"
-
-
+	#include "General/PersistentInfo.hpp"
+	#include "SceneCharacterMenu/SceneCharacterMenu.hpp"
 
 namespace bomb {
 	namespace scene {
@@ -36,6 +36,7 @@ namespace bomb {
 			GameEngine & _gameEngine;
 			std::map<std::string, std::shared_ptr<IGameScene>>
 				_scenes;
+			PersistentInfo _info;
 		};
 	}
 }

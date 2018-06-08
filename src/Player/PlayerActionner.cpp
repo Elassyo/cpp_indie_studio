@@ -28,8 +28,13 @@ bomb::PlayerActionner::PlayerActionner(bool permanent) :
 void bomb::PlayerActionner::addBomb(bomb::Map &map,
 	bomb::game::Player &player)
 {
-	(void) player;
-	(void) map;
+	auto tmp = player.getModel()->getPos();
+	auto pos = vecfCast(tmp);
+	if (player.getNbBombs() >= 1 && map[pos] == Map::EMPTY) {
+		player.setNbBombs
+			(static_cast<uint8_t>(player.getNbBombs() - 1));
+		player.setBombReady(true);
+	}
 }
 
 void bomb::PlayerActionner::sendAction(bomb::Map &map,

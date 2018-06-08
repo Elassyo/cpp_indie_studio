@@ -6,14 +6,16 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_PERSISTENTINFO_HPP
-#define CPP_INDIE_STUDIO_PERSISTENTINFO_HPP
+	#define CPP_INDIE_STUDIO_PERSISTENTINFO_HPP
 
-#include <string>
+	#include <string>
+	#include <vector>
+	#include "PlayerInfo.hpp"
 
 namespace bomb {
 	class PersistentInfo {
 	public:
-		PersistentInfo(int, bool, const std::string &);
+		PersistentInfo(int = 1, bool = true, const std::string & = "");
 
 		const std::string &getFileName() const;
 		int getPlayerNbr() const;
@@ -26,6 +28,7 @@ namespace bomb {
 		int _playerNbr;
 		bool _generateMap;
 		std::string _fileMap;
+		std::vector<PlayerInfo> _playerInfos;
 	};
 }
 
