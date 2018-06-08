@@ -57,7 +57,6 @@ irr::gui::IGUIEnvironment *bomb::GameEngine::getGui()
 
 irr::video::ITexture *bomb::GameEngine::loadTexture(const std::string &path)
 {
-	if (_videoDriver)
 	return _videoDriver->getTexture((_assetsPath + path).c_str());
 }
 
