@@ -25,7 +25,7 @@ void bomb::CameraObject::setTexture
 
 std::string bomb::CameraObject::toString()
 {
-	return "";
+	return "CameraObject";
 }
 
 void bomb::CameraObject::setPos(const irr::core::vector3df &v)

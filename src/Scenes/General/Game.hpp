@@ -6,19 +6,21 @@
 */
 
 #ifndef CPP_INDIE_STUDIO_GAMEINFO_HPP
-#define CPP_INDIE_STUDIO_GAMEINFO_HPP
+	#define CPP_INDIE_STUDIO_GAMEINFO_HPP
 
-#include <array>
-#include <map>
-#include <vector>
-#include "../../Interface/IAssetLoader.hpp"
-#include "../../AnimatedObject.hpp"
-#include "Player.hpp"
-#include "../../AnimatedObject.hpp"
-#include "../../Interface/IAssetLoader.hpp"
-#include "../../Map/MapGenerator.hpp"
-#include "../../Map/Map.hpp"
-#include "../../Player/PlayerActionner.hpp"
+	#include <array>
+	#include <map>
+	#include <vector>
+
+	#include "../../Interface/IAssetLoader.hpp"
+	#include "../../AnimatedObject.hpp"
+	#include "Player.hpp"
+	#include "../../AnimatedObject.hpp"
+	#include "../../Interface/IAssetLoader.hpp"
+	#include "../../Map/MapGenerator.hpp"
+	#include "../../Map/Map.hpp"
+	#include "../../Player/PlayerActionner.hpp"
+	#include "../../Xml/XmlWriter.hpp"
 
 #define MAP_SIZE 15
 
@@ -37,6 +39,7 @@ namespace bomb {
 			int getMapSize() const;
 			void executePlayers();
 			bool handleEvent(const irr::SEvent &event);
+			bool mapToXml(xml::XmlWriter &);
 		private:
 			enum Character {
 				SHYGUY_WHITE,

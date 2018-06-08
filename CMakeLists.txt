@@ -145,7 +145,9 @@ set(SRC_FILES
         src/Version.hpp
         src/CameraObject.cpp
         src/CameraObject.hpp
-)
+
+        src/Xml/XmlWriter.cpp
+        src/Xml/XmlWriter.hpp)
 
         add_executable(bombermario WIN32
         ${SRC_FILES}

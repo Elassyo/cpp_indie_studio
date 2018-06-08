@@ -39,3 +39,8 @@ bool bomb::MapBlockUnbreakable::explode(size_t damage)
 	(void) damage;
 	return false;
 }
+
+std::string bomb::MapBlockUnbreakable::toString()
+{
+	return "MapBlockUnbreakable";
+}
