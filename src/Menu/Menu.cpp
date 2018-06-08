@@ -207,10 +207,7 @@ void bomb::menu::Menu::setTextFont(int textId, bomb::menu::MenuFonts font)
 
 void bomb::menu::Menu::clean()
 {
-	for (auto btn : _buttons)
-		btn.remove();
 	_buttons.clear();
-	for (auto title : _texts)
-		title.remove();
 	_texts.clear();
+	_gui->clear();
 }
