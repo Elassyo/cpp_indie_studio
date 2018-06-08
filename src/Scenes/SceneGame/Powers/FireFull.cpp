@@ -13,7 +13,8 @@ bomb::object::FireFull::FireFull(bomb::IAssetLoader &loader,
 {
 }
 
-bool bomb::object::FireFull::activate(bomb::game::Game &infos)
+bool bomb::object::FireFull::activate(bomb::Map &map,
+				      std::vector<game::Player> &player)
 {
-	return Power::activate(infos);
+	return Power::activate(map, player);
 }

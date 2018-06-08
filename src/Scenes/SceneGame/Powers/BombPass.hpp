@@ -16,7 +16,8 @@ namespace bomb {
 		public:
 			BombPass(bomb::IAssetLoader &loader,
 				const irr::core::vector3df &pos);
-			bool activate(game::Game &infos) override;
+			bool activate(bomb::Map &map,
+				      std::vector<game::Player> &player) override;
 		};
 	}
 }

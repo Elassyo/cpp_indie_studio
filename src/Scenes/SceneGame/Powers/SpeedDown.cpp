@@ -13,7 +13,8 @@ bomb::object::SpeedDown::SpeedDown(bomb::IAssetLoader &loader,
 {
 }
 
-bool bomb::object::SpeedDown::activate(bomb::game::Game &infos)
+bool bomb::object::SpeedDown::activate(bomb::Map &map,
+				       std::vector<game::Player> &player)
 {
-	return Power::activate(infos);
+	return Power::activate(map, player);
 }

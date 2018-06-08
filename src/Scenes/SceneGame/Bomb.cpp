@@ -14,17 +14,21 @@ bomb::object::Bomb::Bomb(bomb::IAssetLoader &loader,
 {
 }
 
-bool bomb::object::Bomb::isActivable(bomb::game::Game &infos)
+bool bomb::object::Bomb::isActivable(bomb::Map &map,
+				     std::vector<game::Player> &player)
 {
 	return _timer.isReady();
-	(void) infos;
+	(void) map;
+	(void) player;
 }
 
-bool bomb::object::Bomb::activate(bomb::game::Game &infos)
+bool bomb::object::Bomb::activate(bomb::Map &map,
+				  std::vector<game::Player> &player)
 {
 	_loader.deleteObject(std::move(_model));
 	return true;
-	(void) infos;
+	(void) map;
+	(void) player;
 }
 
 void bomb::object::Bomb::setProperties(bomb::game::Game &infos, char idx)

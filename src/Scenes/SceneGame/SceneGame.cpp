@@ -30,7 +30,8 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::loop(
 void bomb::scene::SceneGame::explodeBombs(bomb::IAssetLoader &loader)
 {
 	for (auto &bomb : _bombs)
-		bomb.get()->tryToActivate(_gameInfo);
+		bomb.get()->tryToActivate(*_gameInfo.getMap(),
+					  _gameInfo.getPlayers());
 	(void) loader;
 }
 
