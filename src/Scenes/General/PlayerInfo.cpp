@@ -1,20 +1,23 @@
 //
 // EPITECH PROJECT, 2018
-// cpp_indie_studio
+// cpp_indie_studios
 // File description:
 // PlayerInfo.cpp
 //
 
 #include "PlayerInfo.hpp"
 
-bool bomb::PlayerInfo::isIsAI() const
+bomb::PlayerInfo::PlayerInfo() : _isAI(true), _modelPath(nullptr)
+{}
+
+bool bomb::PlayerInfo::isAI() const
 {
 	return _isAI;
 }
 
 void bomb::PlayerInfo::setIsAI(bool isAI)
 {
-	PlayerInfo::_isAI = isAI;
+	_isAI = isAI;
 }
 
 const std::unordered_map <irr::EKEY_CODE,
@@ -27,7 +30,7 @@ const std::unordered_map <irr::EKEY_CODE,
 void bomb::PlayerInfo::setKeys(
 	const std::unordered_map<irr::EKEY_CODE,
 	std::pair<bomb::IPlayerController::Actions,wchar_t *>> &keys) {
-	PlayerInfo::_keys = keys;
+	_keys = keys;
 }
 
 wchar_t *bomb::PlayerInfo::getModelPath() const

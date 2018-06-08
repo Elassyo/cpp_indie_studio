@@ -17,7 +17,7 @@ namespace bomb {
 	namespace scene {
 		class SceneCharacterMenu : public AScene {
 		public:
-			SceneCharacterMenu(PersistentInfo &_infos);
+			SceneCharacterMenu(PersistentInfo &infos);
 
 			~SceneCharacterMenu() override = default;
 
@@ -34,6 +34,8 @@ namespace bomb {
 		private:
 			void addPlayerButtons();
 			void addGameButtons();
+			void initModelPaths();
+			void changePlayerType(int idx, wchar_t *model);
 			bomb::menu::Menu _menu;
 			bool _running;
 			std::string _nextScene;
