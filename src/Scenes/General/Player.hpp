@@ -12,7 +12,7 @@
 #include "../../AnimatedObject.hpp"
 #include "../../Interface/IAssetLoader.hpp"
 #include "../../Interface/IPlayerController.hpp"
-#include "../../Player/PlayerActionner.hpp"
+#include "../../Map/Map.hpp"
 
 namespace bomb {
 	namespace game {
@@ -25,7 +25,8 @@ namespace bomb {
 				const irr::core::vector3df &scale,
 			       	const irr::core::vector3df &rotation);
 
-			bool handleEvent(Map &map, const irr::SEvent &event);
+			IPlayerController::Actions
+			getActionFromEvent(Map &map, const irr::SEvent &event);
 			void execute(Map &map);
 
 			uint8_t getNbBombs() const;
@@ -42,8 +43,9 @@ namespace bomb {
 			void setAlive(bool _alive);
 			void setAI(bool AI);
 
+			std::unique_ptr<AnimatedObject> &getModel();
+
 		private:
-			PlayerActionner _actionner;
 			uint8_t _nbBombs;
 			float _speed;
 			uint8_t _bombRange;
@@ -54,7 +56,7 @@ namespace bomb {
 				std::pair<bomb::IPlayerController::Actions,
 					wchar_t *>> _keys;
 
-			std::unique_ptr<AnimatedObject> _obj;
+			std::unique_ptr<AnimatedObject> _model;
 			std::unique_ptr<IPlayerController> _controller;
 		};
 	}
