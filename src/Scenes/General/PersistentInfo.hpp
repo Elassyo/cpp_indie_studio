@@ -15,7 +15,7 @@
 namespace bomb {
 	class PersistentInfo {
 	public:
-		PersistentInfo(int, bool, const std::string &);
+		PersistentInfo(int = 1, bool = true, const std::string & = "");
 
 		const std::string &getFileName() const;
 		int getPlayerNbr() const;

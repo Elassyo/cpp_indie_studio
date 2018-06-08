@@ -10,10 +10,12 @@
 bomb::scene::SceneLauncher::SceneLauncher(GameEngine &ge) :
 	_gameEngine(ge)
 {
-	_scenes["game_scene"] = std::make_shared<bomb::scene::SceneGame>();
-	_scenes["home_scene"] = std::make_shared<bomb::scene::SceneHomeMenu>();
+	_scenes["game_scene"] =
+		std::make_shared<bomb::scene::SceneGame>(_info);
+	_scenes["home_scene"] =
+		std::make_shared<bomb::scene::SceneHomeMenu>(_info);
 	_scenes["option_scene"] =
-		std::make_shared<bomb::scene::SceneOptionMenu>();
+		std::make_shared<bomb::scene::SceneOptionMenu>(_info);
 }
 
 void bomb::scene::SceneLauncher::launchScene(const std::string &name)

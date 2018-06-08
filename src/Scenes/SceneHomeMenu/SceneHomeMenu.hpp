@@ -8,14 +8,17 @@
 #ifndef CPP_INDIE_STUDIO_SCENEHOMEMENU_HPP
 	#define CPP_INDIE_STUDIO_SCENEHOMEMENU_HPP
 
-	#include "../../Interface/IGameScene.hpp"
 	#include "../../Menu/Menu.hpp"
+	#include "../General/AScene.hpp"
 
 namespace bomb {
 	namespace scene {
-		class SceneHomeMenu : public IGameScene {
+		class SceneHomeMenu : public AScene {
 		public:
+			SceneHomeMenu(PersistentInfo &_infos);
+
 			~SceneHomeMenu() override = default;
+
 
 			bomb::scene::SceneStatus start(
 				IAssetLoader &loader) override;
