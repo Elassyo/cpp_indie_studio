@@ -36,6 +36,7 @@ bomb::game::Player::Player(bomb::IAssetLoader &loader,
 
 void bomb::game::Player::execute(bomb::Map &map)
 {
+	(void) map;
 /*	if (isAI()) {
 		_controller->execute({static_cast<irr::s32>(_obj->getPos().X),
 				static_cast<irr::s32>(_obj->getPos().Z)});
@@ -50,6 +51,7 @@ bomb::game::Player::getActionFromEvent(bomb::Map &map, const irr::SEvent &event)
 	if (_keys.find(event.KeyInput.Key) == _keys.end())
 		return IPlayerController::UNDEFINED;
 	return _keys.at(event.KeyInput.Key).first;
+	(void) map;
 }
 
 unsigned char bomb::game::Player::getNbBombs() const
@@ -132,5 +134,7 @@ irr::core::vector3df bomb::game::Player::getExactPos()
 	irr::core::vector3di pos(static_cast<irr::s32>(_model->getPos().X),
 			static_cast<irr::s32>(_model->getPos().Y),
 			static_cast<irr::s32>(_model->getPos().Z));
-	return {pos.X, pos.Y, pos.Z};
+	return {static_cast<irr::f32>(pos.X),
+		static_cast<irr::f32>(pos.Y),
+		static_cast<irr::f32>(pos.Z)};
 }

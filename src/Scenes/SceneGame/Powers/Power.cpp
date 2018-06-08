@@ -18,6 +18,8 @@ bool bomb::object::Power::activate(bomb::Map &map, bomb::game::Player &player)
 	if (_model)
 		_loader.deleteObject(std::move(_model));
 	return true;
+	(void) map;
+	(void) player;
 }
 
 int bomb::object::Power::isActivable(bomb::Map &map,
@@ -25,4 +27,6 @@ int bomb::object::Power::isActivable(bomb::Map &map,
 	bomb::PlayerActionner>> &vector)
 {
 	return false;
+	(void) map;
+	(void) vector;
 }

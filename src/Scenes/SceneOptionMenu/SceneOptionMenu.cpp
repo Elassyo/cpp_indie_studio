@@ -45,6 +45,7 @@ void bomb::scene::SceneOptionMenu::save()
 
 void bomb::scene::SceneOptionMenu::reset(bomb::IAssetLoader &loader)
 {
+	(void) loader;
 }
 
 void bomb::scene::SceneOptionMenu::clean()
