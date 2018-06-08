@@ -5,8 +5,8 @@
 // Player.hpp
 //
 
-#ifndef CPP_INDIE_STUDIO_PLAYERINFO_HPP
-#define CPP_INDIE_STUDIO_PLAYERINFO_HPP
+#ifndef CPP_INDIE_STUDIO_PLAYER_HPP
+#define CPP_INDIE_STUDIO_PLAYER_HPP
 
 #include <unordered_map>
 #include "../../AnimatedObject.hpp"
@@ -66,4 +66,4 @@ namespace bomb {
 		};
 	}
 }
-#endif /* CPP_INDIE_STUDIO_PLAYERINFO_HPP */
+#endif /* CPP_INDIE_STUDIO_PLAYER_HPP */
