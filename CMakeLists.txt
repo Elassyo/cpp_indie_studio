@@ -99,6 +99,8 @@ set(SRC_FILES
         src/Scenes/General/PlayerInfo.hpp
         src/Scenes/General/Player.cpp
         src/Scenes/General/Player.hpp
+        src/Scenes/General/AScene.cpp
+        src/Scenes/General/AScene.hpp
 
         src/Scenes/SceneGame/Bomb.cpp
         src/Scenes/SceneGame/Bomb.hpp

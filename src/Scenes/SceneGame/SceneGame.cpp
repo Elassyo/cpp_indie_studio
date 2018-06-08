@@ -5,8 +5,10 @@
 // SceneLauncher.cpp
 //
 
-#include <zconf.h>
 #include "SceneGame.hpp"
+
+bomb::scene::SceneGame::SceneGame(bomb::PersistentInfo &_infos) :
+	AScene(_infos) {}
 
 bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
 {

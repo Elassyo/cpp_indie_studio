@@ -6,15 +6,17 @@
 */
 
 #ifndef CPP_INDIE_STUDIO_SCENEOPTIONMENU_HPP
-#define CPP_INDIE_STUDIO_SCENEOPTIONMENU_HPP
+	#define CPP_INDIE_STUDIO_SCENEOPTIONMENU_HPP
 
-#include "../../Interface/IGameScene.hpp"
-#include "../../Menu/Menu.hpp"
+	#include "../../Menu/Menu.hpp"
+	#include "../General/AScene.hpp"
 
 namespace bomb {
 	namespace scene {
-		class SceneOptionMenu : public IGameScene {
+		class SceneOptionMenu : public AScene {
 		public:
+			SceneOptionMenu(PersistentInfo &_infos);
+
 			~SceneOptionMenu() override = default;
 
 			bomb::scene::SceneStatus start(

@@ -8,14 +8,16 @@
 #ifndef CPP_INDIE_STUDIO_SCENEGAME_HPP
 	#define CPP_INDIE_STUDIO_SCENEGAME_HPP
 
-	#include "../../Interface/IGameScene.hpp"
 	#include "Bomb.hpp"
-#include "../General/Game.hpp"
+	#include "../General/Game.hpp"
+	#include "../General/AScene.hpp"
 
 namespace bomb {
 	namespace scene {
-		class SceneGame : public IGameScene {
+		class SceneGame : public AScene {
 		public:
+			SceneGame(PersistentInfo &_infos);
+
 			~SceneGame() override = default;
 
 			bomb::scene::SceneStatus start(

@@ -11,11 +11,14 @@
 	#include "../../Interface/IGameScene.hpp"
 
 	#include "../../Menu/Menu.hpp"
+#include "../General/AScene.hpp"
 
 namespace bomb {
 	namespace scene {
-		class SceneCharacterMenu : public IGameScene {
+		class SceneCharacterMenu : public AScene {
 		public:
+			SceneCharacterMenu(PersistentInfo &_infos);
+
 			~SceneCharacterMenu() override = default;
 
 			bomb::scene::SceneStatus start(

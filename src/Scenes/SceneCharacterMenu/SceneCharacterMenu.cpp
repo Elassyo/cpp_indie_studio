@@ -7,6 +7,9 @@
 
 #include "SceneCharacterMenu.hpp"
 
+bomb::scene::SceneCharacterMenu::SceneCharacterMenu(
+	bomb::PersistentInfo &_infos) : AScene(_infos) {}
+
 bomb::scene::SceneStatus bomb::scene::SceneCharacterMenu::start(
 	IAssetLoader &loader)
 {
