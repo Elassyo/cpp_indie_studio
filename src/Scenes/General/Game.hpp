@@ -40,7 +40,7 @@ namespace bomb {
 			int getMapSize() const;
 			void execute(IAssetLoader &loader);
 			bool handleEvent(const irr::SEvent &event);
-			
+
 		private:
 			enum Character {
 				SHYGUY_WHITE,

@@ -48,9 +48,12 @@ std::wstring bomb::xml::XmlWriter::_strToWstr(const std::string &str) const
 bool bomb::xml::XmlWriter::mapToSection(std::shared_ptr<bomb::Map> &map)
 {
 	_xmlWriter->writeElement(L"Map");
+	_xmlWriter->writeLineBreak();
 	int size = map->getSize();
 	for (int i = 0; i < size * size; i++) {
 		mapBlockToSection((*map)[i], i % size, i / size);
 	}
+	_xmlWriter->writeClosingTag(L"Map");
+	_xmlWriter->writeLineBreak();
 		return true;
 }
