@@ -12,10 +12,10 @@ namespace bomb {
 	class IPlayerController {
 	public:
 		enum Actions {
-			MV_UP = 0,
-			MV_RIGHT = 90,
-			MV_DOWN = 180,
-			MV_LEFT = 270,
+			MV_UP = 180,
+			MV_RIGHT = 270,
+			MV_DOWN = 0,
+			MV_LEFT = 90,
 			UNDEFINED,
 			PUT_BOMB,
 			NONE
