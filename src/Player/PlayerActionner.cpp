@@ -89,7 +89,6 @@ void bomb::PlayerActionner::changeTargetTile(bomb::Map &map,
 	irr::core::vector3di playerPos,
 	std::unique_ptr <bomb::AnimatedObject> &player)
 {
-	auto saveAct = _currentAction;
 	if (_currentAction != _nextAction &&
 		_nextAction != IPlayerController::UNDEFINED)
 		updateAction();

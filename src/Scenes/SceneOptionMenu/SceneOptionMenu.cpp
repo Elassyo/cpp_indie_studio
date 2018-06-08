@@ -28,7 +28,6 @@ bomb::scene::SceneStatus bomb::scene::SceneOptionMenu::start(
 		_nextScene = "home_scene";
 	});
 	_menu.updateButtons(loader, true);
-//	loader.getCamera({10,0,10}, {0,0,0});
 	return BEGIN;
 }
 
