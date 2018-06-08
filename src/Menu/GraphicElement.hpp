@@ -5,8 +5,8 @@
 // Created by Gregory EPLE
 //
 
-#ifndef CPP_TEST_STUDIO_GraphicElement_HPP
-	#define CPP_TEST_STUDIO_GraphicElement_HPP
+#ifndef CPP_TEST_STUDIO_GRAPHICELEMENT_HPP
+	#define CPP_TEST_STUDIO_GRAPHICELEMENT_HPP
 
 	#include <irrlicht/irrlicht.h>
 
@@ -17,10 +17,14 @@ namespace bomb {
 			GraphicElement(irr::gui::IGUIElement *element,
 				irr::core::vector2df pos, int id);
 			void setVisibility(bool visibility);
-			void update(irr::core::vector2di size,
-				irr::core::vector2di screenSize);
+			void update(const irr::core::vector2di &screenSize);
 			void setPos(irr::core::vector2df pos);
+			void setSize(irr::core::vector2df pos);
 			void setText(const wchar_t *text);
+			void setToolTipText(const wchar_t *text);
+			virtual void setFont(irr::gui::IGUIFont *font) = 0;
+			virtual void setTexture(
+				irr::video::ITexture *texture) = 0;
 			int getId() const;
 			void remove();
 
@@ -30,8 +34,9 @@ namespace bomb {
 		private:
 			irr::gui::IGUIElement *_element;
 			irr::core::vector2df _pos;
+			irr::core::vector2df _size;
 		};
 	}
 }
 
-#endif //CPP_TEST_STUDIO_GraphicElement_HPP
+#endif //CPP_TEST_STUDIO_GRAPHICELEMENT_HPP

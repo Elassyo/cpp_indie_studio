@@ -27,35 +27,30 @@ namespace bomb {
 			Menu();
 
 			void createMenu(IAssetLoader &loader);
-			irr::core::vector2di
-				getButtonSize(IAssetLoader &loader) const;
 			void updateButtons(IAssetLoader &loader,
 						bool areVisible);
 			void addButton(IAssetLoader &loader,
 				       irr::core::vector2df pos, int id);
 			void addText(wchar_t *text,
 				     irr::core::vector2df pos, int id);
-			void setButtonPos(int buttonId,
-					  irr::core::vector2df pos);
-			void setButtonText(int buttonId, const wchar_t *text);
-			void setButtonFont(int buttonId, MenuFonts font);
 			void setButtonTextures(int buttonId,
 					       irr::video::ITexture *texture,
 					       irr::video::ITexture *pressed);
-			void setButtonTexture(int buttonId,
-					      irr::video::ITexture *texture);
 			void setButtonPressedTexture(int buttonId,
 						irr::video::ITexture *pressed);
 			void setButtonEvent(int buttonId, std::function<void()>
 			event);
-			void setTextPos(int textId, irr::core::vector2df pos);
-			void setTextText(int textId, const wchar_t *text);
-			void setTextFont(int textId, MenuFonts font);
+			void setElementPos(int elementId,
+					   irr::core::vector2df pos);
+			void setElementText(int elementId, const wchar_t *text);
+			void setElementFont(int elementId, MenuFonts font);
+			void setElementTexture(int elementId,
+					       irr::video::ITexture *texture);
 			bool handleEvent(const irr::SEvent &event);
 			void clean();
 		private:
 			long long getButtonById(int buttonId);
-			long long getTextById(int textId);
+			long long getElementById(int elementId);
 			irr::gui::IGUIButton *createButton(
 				irr::core::vector2di pos,
 				irr::core::vector2di size,
@@ -67,8 +62,8 @@ namespace bomb {
 			irr::video::ITexture *_buttonBack;
 			irr::video::ITexture *_buttonPressed;
 			std::map<MenuFonts, irr::gui::IGUIFont *> _fonts;
-			std::vector<GraphicButton> _buttons;
-			std::vector<GraphicText> _texts;
+			std::vector<std::unique_ptr<GraphicButton>> _buttons;
+			std::vector<std::unique_ptr<GraphicElement>> _elements;
 			irr::core::vector2df pos;
 		};
 	}

@@ -27,18 +27,20 @@ void bomb::menu::Menu::createMenu(IAssetLoader &loader)
 void bomb::menu::Menu::addButton(IAssetLoader &loader,
 				 irr::core::vector2df pos, int id)
 {
-	irr::gui::IGUIButton * irrButton = createButton({ 0, 0 },
-							getButtonSize(loader), id);
-	GraphicButton button(GraphicButton(irrButton, pos, id));
-	button.setTextures(_buttonBack, _buttonPressed);
-	_buttons.emplace_back(button);
+	irr::gui::IGUIButton *irrButton = createButton({ 0, 0 }, {1, 1}, id);
+	std::unique_ptr<GraphicButton> button =
+		std::make_unique<GraphicButton>(irrButton, pos, id);
+	button->setSize(_buttonRatio);
+	button->setTextures(_buttonBack, _buttonPressed);
+	_buttons.emplace_back(std::move(button));
 }
 
 void bomb::menu::Menu::addText(wchar_t *text, irr::core::vector2df pos, int id)
 {
 	irr::gui::IGUIStaticText *irrText = createText(text, id);
-	GraphicText gText(GraphicText(irrText, pos, id));
-	_texts.emplace_back(gText);
+	std::unique_ptr<GraphicText> gText =
+		std::make_unique<GraphicText>(irrText, pos, id);
+	_elements.emplace_back(std::move(gText));
 }
 
 irr::gui::IGUIStaticText *bomb::menu::Menu::createText(
@@ -58,84 +60,49 @@ irr::gui::IGUIButton *bomb::menu::Menu::createButton(
 
 void bomb::menu::Menu::updateButtons(IAssetLoader &loader, bool areVisible)
 {
-	const irr::core::vector2di buttonSize = getButtonSize(loader);
 	const irr::core::vector2di screenSize = {
 		(int)loader.getScreenSize().Width,
-		(int)loader.getScreenSize().Height};
-	for (auto &text : _texts) {
-		text.update({1, 1}, screenSize);
-		text.setVisibility(areVisible);
-	}
+		(int)loader.getScreenSize().Height };
 	for (auto &button : _buttons) {
-		button.setVisibility(areVisible);
-		button.update(buttonSize, screenSize);
+		button->update(screenSize);
+		button->setVisibility(areVisible);
+	}
+	for (auto &element : _elements) {
+		element->update(screenSize);
+		element->setVisibility(areVisible);
 	}
 }
 
 bool bomb::menu::Menu::handleEvent(const irr::SEvent &event) {
 	for (auto &button : _buttons) {
-		if (button.isPressed(event) && button.getEvent()) {
-			button.getEvent()();
+		if (button->isPressed(event) && button->getEvent()) {
+			button->getEvent()();
 			return true;
 		}
 	}
 	return false;
 }
 
-irr::core::vector2di bomb::menu::Menu::getButtonSize(IAssetLoader &loader) const
-{
-	const irr::core::dimension2du &screenSize = loader.getScreenSize();
-	return { (int)(_buttonRatio.X * screenSize.Width),
-		 (int)(_buttonRatio.Y * screenSize.Height) };
-}
-
 long long bomb::menu::Menu::getButtonById(int buttonId)
 {
 	auto it = std::find_if(_buttons.begin(),_buttons.end(), [buttonId]
-		(const GraphicButton &button) {
-		return button.getId() == buttonId;
+		(const std::unique_ptr<GraphicButton> &button) {
+		return button->getId() == buttonId;
 	});
 	if (it == _buttons.end())
 		return -1;
 	return it - _buttons.begin();
 }
 
-long long bomb::menu::Menu::getTextById(int textId)
+long long bomb::menu::Menu::getElementById(int elementId)
 {
-	auto it = std::find_if(_texts.begin(),_texts.end(), [textId]
-		(const GraphicText &text) {
-		return text.getId() == textId;
+	auto it = std::find_if(_elements.begin(),_elements.end(), [elementId]
+		(const std::unique_ptr<GraphicElement> &element) {
+		return element->getId() == elementId;
 	});
-	if (it == _texts.end())
+	if (it == _elements.end())
 		return -1;
-	return it - _texts.begin();
-}
-
-void bomb::menu::Menu::setButtonPos(int buttonId, irr::core::vector2df pos)
-{
-	long long idx = getButtonById(buttonId);
-
-	if (idx == -1)
-		return;
-	_buttons.at(static_cast<unsigned long>(idx)).setPos(pos);
-}
-
-void bomb::menu::Menu::setButtonText(int buttonId, const wchar_t *text)
-{
-	long long idx = getButtonById(buttonId);
-
-	if (idx == -1)
-		return;
-	_buttons.at(static_cast<unsigned long>(idx)).setText(text);
-}
-
-void bomb::menu::Menu::setButtonFont(int buttonId, bomb::menu::MenuFonts font)
-{
-	long long idx = getButtonById(buttonId);
-
-	if (idx == -1)
-		return;
-	_buttons.at(static_cast<unsigned long>(idx)).setFont(_fonts[font]);
+	return it - _elements.begin();
 }
 
 void bomb::menu::Menu::setButtonTextures(int buttonId,
@@ -146,19 +113,10 @@ void bomb::menu::Menu::setButtonTextures(int buttonId,
 
 	if (idx == -1)
 		return;
-	_buttons.at(static_cast<unsigned long>(idx)).setTexture(texture);
-	_buttons.at(static_cast<unsigned long>(idx)).setPressedTexture(pressed);
+	_buttons.at(static_cast<unsigned long>(idx))->setTexture(texture);
+	_buttons.at(static_cast<unsigned long>(idx))->setPressedTexture(pressed);
 }
 
-void bomb::menu::Menu::setButtonTexture(int buttonId,
-					irr::video::ITexture *texture)
-{
-	long long idx = getButtonById(buttonId);
-
-	if (idx == -1)
-		return;
-	_buttons.at(static_cast<unsigned long>(idx)).setTexture(texture);
-}
 void bomb::menu::Menu::setButtonPressedTexture(int buttonId,
 					       irr::video::ITexture *pressed)
 {
@@ -166,7 +124,7 @@ void bomb::menu::Menu::setButtonPressedTexture(int buttonId,
 
 	if (idx == -1)
 		return;
-	_buttons.at(static_cast<unsigned long>(idx)).setPressedTexture(pressed);
+	_buttons.at(static_cast<unsigned long>(idx))->setPressedTexture(pressed);
 }
 
 void bomb::menu::Menu::setButtonEvent(int buttonId, std::function<void()> event)
@@ -175,42 +133,74 @@ void bomb::menu::Menu::setButtonEvent(int buttonId, std::function<void()> event)
 
 	if (idx == -1)
 		return;
-	_buttons.at(static_cast<unsigned long>(idx)).setEvent(event);
+	_buttons.at(static_cast<unsigned long>(idx))->setEvent(event);
 }
 
-void bomb::menu::Menu::setTextPos(int textId, irr::core::vector2df pos)
+void bomb::menu::Menu::setElementPos(int elementId, irr::core::vector2df pos)
 {
-	long long idx = getTextById(textId);
+	long long idx = getElementById(elementId);
 
-	if (idx == -1)
-		return;
-	_texts.at(static_cast<unsigned long>(idx)).setPos(pos);
+	if (idx == -1) {
+		idx = getButtonById(elementId);
+		if (idx != -1)
+			_buttons.at(
+				static_cast<unsigned long>(idx))->setPos(pos);
+	}
+	else
+		_elements.at(static_cast<unsigned long>(idx))->setPos(pos);
 }
 
-void bomb::menu::Menu::setTextText(int textId, const wchar_t *text)
+void bomb::menu::Menu::setElementText(int elementId, const wchar_t *text)
 {
-	long long idx = getTextById(textId);
+	long long idx = getElementById(elementId);
 
-	if (idx == -1)
-		return;
-	_texts.at(static_cast<unsigned long>(idx)).setText(text);
+	if (idx == -1) {
+		idx = getButtonById(elementId);
+		if (idx != -1)
+			_buttons.at(
+				static_cast<unsigned long>(idx))->setText(text);
+	}
+	else
+		_elements.at(static_cast<unsigned long>(idx))->setText(text);
 }
 
-void bomb::menu::Menu::setTextFont(int textId, bomb::menu::MenuFonts font)
+void bomb::menu::Menu::setElementFont(int elementId, bomb::menu::MenuFonts font)
 {
-	long long idx = getTextById(textId);
+	long long idx = getElementById(elementId);
 
-	if (idx == -1)
-		return;
-	_texts.at(static_cast<unsigned long>(idx)).setFont(_fonts[font]);
+	if (idx == -1) {
+		idx = getButtonById(elementId);
+		if (idx != -1)
+			_buttons.at(
+				static_cast<unsigned long>(idx))->setFont(
+				_fonts[font]);
+	}
+	else
+		_elements.at(
+			static_cast<unsigned long>(idx))->setFont(_fonts[font]);
+}
+
+void bomb::menu::Menu::setElementTexture(int elementId,
+					 irr::video::ITexture *texture)
+{
+	long long idx = getElementById(elementId);
+
+	if (idx == -1) {
+		idx = getButtonById(elementId);
+		if (idx != -1)
+			_buttons.at(
+				static_cast<unsigned long>(idx))->setTexture(
+				texture);
+	}
+	else
+		_elements.at(static_cast<unsigned long>(idx))->setTexture(
+			texture);
 }
 
 void bomb::menu::Menu::clean()
 {
-	for (auto btn : _buttons)
-		btn.remove();
+	for (auto &title : _elements)
+		title.release();
+	_elements.clear();
 	_buttons.clear();
-	for (auto title : _texts)
-		title.remove();
-	_texts.clear();
 }
