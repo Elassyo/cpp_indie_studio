@@ -21,8 +21,8 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetManager &loader)
 	cam->setPos({mid, (float)_game.getMapSize() * 0.8f,
 		(float)_game.getMapSize() * 0.8f});
 	cam->setTarget({mid, 0, mid + 1});
-	loader.loadAudioFile("music/mario64-bobomb-battlefield.ogg");
-	loader.playMusic("music/mario64-bobomb-battlefield.ogg");
+//	loader.loadAudioFile("music/mario64-bobomb-battlefield.ogg");
+//	loader.playMusic("music/mario64-bobomb-battlefield.ogg");
 	return BEGIN;
 }
 
@@ -55,9 +55,8 @@ void bomb::scene::SceneGame::clean(IAssetManager &loader)
 {
 	_game.getMap()->clean(loader);
 	auto &p = _game.getPlayers();
-	for (unsigned int i = 0; i < _game.getPlayers().size(); ++i) {
+	for (unsigned int i = 0; i < _game.getPlayers().size(); ++i)
 		p[i].first.setAlive(false, loader);
-	}
 	p.clear();
 	_running = true;
 }
