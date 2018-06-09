@@ -61,9 +61,10 @@ void bomb::scene::SceneOptionMenu::reset(bomb::IAssetLoader &loader)
 	(void) loader;
 }
 
-void bomb::scene::SceneOptionMenu::clean()
+void bomb::scene::SceneOptionMenu::clean(IAssetLoader &loader)
 {
 	_menu.clean();
+	(void) loader;
 }
 
 std::string bomb::scene::SceneOptionMenu::nextScene()

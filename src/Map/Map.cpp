@@ -86,3 +86,9 @@ void bomb::Map::updateFromCells(bomb::IAssetLoader &loader)
 			b++;
 	}
 }
+
+void bomb::Map::clean(bomb::IAssetLoader &loader)
+{
+	fill(_cells.begin(), _cells.end(), Map::EMPTY);
+	updateFromCells(loader);
+}

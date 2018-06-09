@@ -20,10 +20,12 @@ bomb::object::Bomb::Bomb(bomb::IAssetLoader &loader,
 
 bool bomb::object::Bomb::deleteBlock(bomb::Map &map, irr::core::vector3df pos)
 {
-	if (map[pos] != Map::BREAKABLE)
-		return map[pos] != Map::EMPTY;
-	map[pos] = Map::EMPTY;
-	_blast.emplace_back((float)pos.X, (float)pos.Z);
+	if (map[pos] == Map::BREAKABLE)
+		map[pos] = Map::EMPTY;
+	if (map[pos] == Map::UNBREAKABLE || map[pos] == Map::BOMB)
+		return false;
+	_blast.emplace_back(static_cast<irr::s32>(pos.X),
+			static_cast<irr::s32>(pos.Z));
 	return true;
 }
 
@@ -31,6 +33,7 @@ bool bomb::object::Bomb::activate(bomb::Map &map, bomb::game::Player &player)
 {
 	auto pos = _model->getPos();
 	map[pos] = Map::EMPTY;
+	deleteBlock(map, pos);
 	_loader.deleteObject(std::move(_model));
 	player.setNbBombs(static_cast<uint8_t>(player.getNbBombs() + 1));
 	for (auto i = 1; i <= player.getBombRange(); ++i) {

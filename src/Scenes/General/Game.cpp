@@ -22,8 +22,8 @@ void bomb::game::Game::createGame(IAssetLoader &loader,
 			     std::make_unique<bomb::player::AIController>(_map),
 			     {i % 2 ? 1 : MAP_SIZE - 2, 0,
 			      i > 1 ? MAP_SIZE - 2 : 1});
-	_map->setTextures(texture);
 	reset();
+	(void) texture;
 }
 
 void bomb::game::Game::createMap(
@@ -108,9 +108,13 @@ void bomb::game::Game::killPlayersInBlast(
 		if (!p.first.isAlive())
 			continue;
 		for (auto b : blast) {
-			if ((int)p.first.getExactPos().X == b.X &&
-				(int)p.first.getExactPos().Z == b.Y)
+			irr::core::vector2di pos(
+				static_cast<irr::s32>(p.first.getExactPos().X),
+				static_cast<irr::s32>(p.first.getExactPos().Z));
+			if (pos == b) {
 				p.first.setAlive(false, loader);
+				break;
+			}
 		}
 	}
 }
