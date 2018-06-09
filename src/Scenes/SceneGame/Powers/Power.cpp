@@ -9,7 +9,8 @@
 
 bomb::object::Power::Power(bomb::IAssetLoader &loader,
 	const irr::core::vector3df &pos, std::string path) :
-	_loader(loader), _model(loader.createStaticObject(path, pos))
+	_loader(loader),
+	_model(loader.createStaticObject(path, pos, {.5, .5, .5}))
 {
 }
 
