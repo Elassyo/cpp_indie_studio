@@ -7,7 +7,7 @@
 
 #include "FireUp.hpp"
 
-bomb::object::FireUp::FireUp(bomb::IAssetLoader &loader,
+bomb::object::FireUp::FireUp(bomb::IAssetManager &loader,
 	const irr::core::vector3df &pos) :
 	Power(loader, pos, "models/powers/fires/fireUp.obj")
 {

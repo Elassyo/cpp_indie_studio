@@ -14,8 +14,10 @@ namespace bomb {
 	namespace object {
 		class FireFull : public Power {
 		public:
-			FireFull(bomb::IAssetLoader &loader,
+			FireFull(bomb::IAssetManager &loader,
 				 const irr::core::vector3df &pos);
+
+		private:
 			bool activate(bomb::Map &map,
 				      bomb::game::Player &player) override;
 		};

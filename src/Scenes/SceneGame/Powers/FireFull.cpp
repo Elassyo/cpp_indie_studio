@@ -7,7 +7,7 @@
 
 #include "FireFull.hpp"
 
-bomb::object::FireFull::FireFull(bomb::IAssetLoader &loader,
+bomb::object::FireFull::FireFull(bomb::IAssetManager &loader,
 				 const irr::core::vector3df &pos) :
 	Power(loader, pos, "models/powers/fires/fireFull.obj")
 {

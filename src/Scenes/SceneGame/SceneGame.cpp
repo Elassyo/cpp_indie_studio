@@ -12,7 +12,7 @@ bomb::scene::SceneGame::SceneGame(bomb::PersistentInfo &_infos) :
 {
 }
 
-bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
+bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetManager &loader)
 {
 	_blocksTextures = loader.loadTexture("models/blocks/spritesheet.png");
 	_game.createGame(loader, _blocksTextures);
@@ -27,14 +27,14 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
 }
 
 bomb::scene::SceneStatus bomb::scene::SceneGame::loop(
-	bomb::IAssetLoader &loader)
+	bomb::IAssetManager &loader)
 {
 	explodeBombs(loader);
 	_game.execute(loader);
 	return _running ? CONTINUE : END;
 }
 
-void bomb::scene::SceneGame::explodeBombs(bomb::IAssetLoader &loader)
+void bomb::scene::SceneGame::explodeBombs(bomb::IAssetManager &loader)
 {
 	for (auto &bomb : _bombs)
 		bomb.get()->tryToActivate(*_game.getMap(),
@@ -46,19 +46,25 @@ void bomb::scene::SceneGame::save()
 {
 }
 
-void bomb::scene::SceneGame::reset(bomb::IAssetLoader &loader)
+void bomb::scene::SceneGame::reset(bomb::IAssetManager &loader)
 {
 	(void) loader;
 }
 
-void bomb::scene::SceneGame::clean(IAssetLoader &loader)
+void bomb::scene::SceneGame::clean(IAssetManager &loader)
 {
 	_game.getMap()->clean(loader);
+	auto &p = _game.getPlayers();
+	for (unsigned int i = 0; i < _game.getPlayers().size(); ++i) {
+		p[i].first.setAlive(false, loader);
+	}
+	p.clear();
+	_running = true;
 }
 
 std::string bomb::scene::SceneGame::nextScene()
 {
-	return "";
+	return "home_scene";
 }
 
 bool bomb::scene::SceneGame::onEvent(const irr::SEvent &event)
@@ -68,5 +74,6 @@ bool bomb::scene::SceneGame::onEvent(const irr::SEvent &event)
 		if (event.KeyInput.Key == irr::KEY_ESCAPE)
 			_running = false;
 	}
+
 	return true;
 }

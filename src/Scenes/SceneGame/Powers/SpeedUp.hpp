@@ -14,8 +14,10 @@ namespace bomb {
 	namespace object {
 		class SpeedUp : public Power {
 		public:
-			SpeedUp(bomb::IAssetLoader &loader,
+			SpeedUp(bomb::IAssetManager &loader,
 				const irr::core::vector3df &pos);
+
+		private:
 			bool activate(bomb::Map &map,
 				      bomb::game::Player &player) override;
 		};

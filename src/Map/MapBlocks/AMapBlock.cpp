@@ -5,10 +5,10 @@
 // AMapBlock.cpp
 //
 
-#include "../../Interface/IAssetLoader.hpp"
+#include "../../Interface/IAssetManager.hpp"
 #include "AMapBlock.hpp"
 
-bomb::AMapBlock::AMapBlock(IAssetLoader &loader,
+bomb::AMapBlock::AMapBlock(IAssetManager &loader,
 	const irr::core::vector3df &pos,
 	const irr::core::vector3df &size,
 	const irr::core::vector3df &rotation,

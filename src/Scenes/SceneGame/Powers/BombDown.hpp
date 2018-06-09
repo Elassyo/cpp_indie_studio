@@ -14,8 +14,10 @@ namespace bomb {
 	namespace object {
 		class BombDown : public bomb::object::Power {
 		public:
-			BombDown(bomb::IAssetLoader &loader,
+			BombDown(bomb::IAssetManager &loader,
 				 const irr::core::vector3df &pos);
+
+		private:
 			bool activate(bomb::Map &map,
 				      bomb::game::Player &player) override;
 		};

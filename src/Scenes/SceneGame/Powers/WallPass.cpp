@@ -7,7 +7,7 @@
 
 #include "WallPass.hpp"
 
-bomb::object::WallPass::WallPass(bomb::IAssetLoader &loader,
+bomb::object::WallPass::WallPass(bomb::IAssetManager &loader,
 	const irr::core::vector3df &pos) :
 	Power(loader, pos, "models/powers/wallPass/wallPass.obj")
 {

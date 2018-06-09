@@ -7,7 +7,7 @@
 
 #include "Power.hpp"
 
-bomb::object::Power::Power(bomb::IAssetLoader &loader,
+bomb::object::Power::Power(bomb::IAssetManager &loader,
 	const irr::core::vector3df &pos, std::string path) :
 	_loader(loader),
 	_model(loader.createStaticObject(path, pos, {.5, .5, .5}))
@@ -28,10 +28,12 @@ int bomb::object::Power::isActivable(bomb::Map &map,
 	bomb::PlayerActionner>> &vector)
 {
 	auto pos = _model->getPos();
-	for (unsigned int i = 0; i <= vector.size(); ++i) {
+	for (unsigned int i = 0; i < vector.size(); ++i) {
+		if (!vector[i].first.isAlive())
+			continue;
 		auto playerPos = vector[i].first.getExactPos();
 		if ((int)playerPos.X == (int)pos.X
-		    && (int)playerPos.Y == (int)pos.Y)
+		    && (int)playerPos.Z == (int)pos.Z)
 			return i;
 	}
 	return -1;

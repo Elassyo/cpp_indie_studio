@@ -11,7 +11,7 @@
 	#include <memory>
 	#include <irrlicht/irrlicht.h>
 	#include "../Audio/AudioManager.hpp"
-	#include "../Interface/IAssetLoader.hpp"
+	#include "../Interface/IAssetManager.hpp"
 	#include "../Interface/IRenderWindow.hpp"
 	#include "../AnimatedObject.hpp"
 	#include "../CameraObject.hpp"
@@ -23,7 +23,7 @@
 
 namespace bomb {
 	class GameEngine :
-		virtual public IAssetLoader, virtual public IRenderWindow {
+		virtual public IAssetManager, virtual public IRenderWindow {
 	public:
 		GameEngine(const std::wstring &winName,
 			unsigned int x, unsigned int h,
@@ -67,6 +67,12 @@ namespace bomb {
 			const irr::core::vector3df &rot) override;
 		const irr::core::dimension2d<irr::u32> &getScreenSize()
 			override;
+
+		void unloadMusic(const std::string &path) override;
+		void playMusic(const std::string &path) override;
+		void pauseAll() override;
+		void stopAll() override;
+
 	private:
 		EventHandler _evtHandler;
 		irr::IrrlichtDevice *_device;

@@ -12,11 +12,11 @@
 	#include <map>
 	#include <vector>
 
-	#include "../../Interface/IAssetLoader.hpp"
+	#include "../../Interface/IAssetManager.hpp"
 	#include "../../AnimatedObject.hpp"
 	#include "Player.hpp"
 	#include "../../AnimatedObject.hpp"
-	#include "../../Interface/IAssetLoader.hpp"
+	#include "../../Interface/IAssetManager.hpp"
 	#include "../../Map/MapGenerator.hpp"
 	#include "../../Map/Map.hpp"
 	#include "../../Player/PlayerActionner.hpp"
@@ -25,6 +25,8 @@
 	#include "PersistentInfo.hpp"
 	#include "../../Exception/Exception.hpp"
 	#include "../../Player/AIController.hpp"
+#include "../SceneGame/Powers/Power.hpp"
+#include "../SceneGame/Powers/PowerFactory.hpp"
 
 
 #define MAP_SIZE 15
@@ -38,11 +40,11 @@ namespace bomb {
 			Game(PersistentInfo &_infos);
 
 			void createGame(
-				IAssetLoader &loader,
+				IAssetManager &loader,
 				irr::video::ITexture *pTexture
 			);
 			int getMapSize() const;
-			void execute(IAssetLoader &loader);
+			void execute(IAssetManager &loader);
 			bool handleEvent(const irr::SEvent &event);
 			std::shared_ptr<Map> &getMap();
 
@@ -51,16 +53,23 @@ namespace bomb {
 
 		private:
 			void createMap(
-				IAssetLoader &loader,
+				IAssetManager &loader,
 				unsigned int size
 			);
-			void createPlayer(bomb::IAssetLoader &loader,
-				const std::string &path,
-				std::unique_ptr<IPlayerController> controller,
-				const irr::core::vector3di &spawn
-			);
-
+			void createPlayer(IAssetLoader &loader,
+					  const std::string &path,
+					  std::unique_ptr<IPlayerController> controller,
+					  const irr::core::vector3di &spawn);
+			void killPlayersInBlast(
+				std::vector<std::pair<irr::core::vector2di,
+					Map::BlockType>> &blast,
+					IAssetManager &loader);
+			void executePlayers(IAssetManager &loader);
+			void executeBombs(IAssetManager &loader);
 			void reset();
+			void
+			spawnPowers(std::vector<std::pair<irr::core::vector2di,
+				Map::BlockType>> &blast, IAssetManager &loader);
 
 			PersistentInfo &_infos;
 			bomb::game::CharacterLoader _charLoader;
@@ -68,13 +77,11 @@ namespace bomb {
 				_players;
 			std::shared_ptr<bomb::Map> _map;
 			std::vector<bomb::object::Bomb *> _bombs;
+			std::vector<std::unique_ptr<bomb::object::Power>>
+				_powers;
 			int _mapSize;
-
-			void killPlayersInBlast(
-				std::vector<irr::core::vector2di> &vector,
-				bomb::IAssetLoader &loader);
-			void executePlayers(IAssetLoader &loader);
-			void executeBombs(IAssetLoader &loader);
+			bomb::object::PowerFactory _factory;
+			void executePowers(IAssetLoader &loader);
 		};
 	}
 }

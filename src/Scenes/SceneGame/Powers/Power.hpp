@@ -14,18 +14,20 @@ namespace bomb {
 	namespace object {
 		class Power : public game::AActivator {
 		public:
-			Power(bomb::IAssetLoader &loader,
+			Power(bomb::IAssetManager &loader,
 			      const irr::core::vector3df &pos,
 			      std::string path);
-			int isActivable(bomb::Map &map,
-					std::vector<std::pair<game::Player,
-						PlayerActionner>>
-					&vector) override;
+
+		protected:
 			bool activate(bomb::Map &map,
 				      bomb::game::Player &player) override;
 
 		private:
-			bomb::IAssetLoader &_loader;
+			int isActivable(bomb::Map &map,
+					std::vector<std::pair<game::Player,
+						PlayerActionner>>
+					&vector) override;
+			bomb::IAssetManager &_loader;
 			std::unique_ptr<StaticObject> _model;
 		};
 	}

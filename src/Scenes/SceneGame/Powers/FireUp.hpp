@@ -14,8 +14,10 @@ namespace bomb {
 	namespace object {
 		class FireUp : public Power {
 		public:
-			FireUp(bomb::IAssetLoader &loader,
+			FireUp(bomb::IAssetManager &loader,
 			       const irr::core::vector3df &pos);
+
+		private:
 			bool activate(bomb::Map &map,
 				      bomb::game::Player &player) override;
 		};

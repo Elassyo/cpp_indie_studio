@@ -39,7 +39,7 @@ set(SRC_FILES
         src/Exception/Exception.cpp
         src/Exception/Exception.hpp
 
-        src/Interface/IAssetLoader.hpp
+        src/Interface/IAssetManager.hpp
         src/Interface/IEventScene.hpp
         src/Interface/IGameScene.hpp
         src/Interface/IObject.hpp
@@ -158,7 +158,7 @@ set(SRC_FILES
 
         src/Xml/XmlWriter.cpp
         src/Xml/XmlWriter.hpp
-        )
+        src/Interface/IAssetLoader.hpp)
 
         add_executable(bombermario WIN32
         ${SRC_FILES}

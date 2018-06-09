@@ -8,7 +8,7 @@
 #include "MapBlockBreakable.hpp"
 
 bomb::MapBlockBreakable::MapBlockBreakable(
-	bomb::IAssetLoader &loader,
+	bomb::IAssetManager &loader,
 	const irr::core::vector3df &pos,
 	const irr::core::vector3df &scale,
 	const irr::core::vector3df &rotation,
@@ -24,7 +24,7 @@ bomb::MapBlockBreakable::MapBlockBreakable():
 }
 
 std::unique_ptr<bomb::AMapBlock> bomb::MapBlockBreakable::clone(
-	bomb::IAssetLoader &loader,
+	bomb::IAssetManager &loader,
 	const irr::core::vector3df &pos,
 	const irr::core::vector3df &scale,
 	const irr::core::vector3df &rotation,
@@ -34,7 +34,7 @@ std::unique_ptr<bomb::AMapBlock> bomb::MapBlockBreakable::clone(
 		(loader, pos, scale, rotation, mapPos);
 }
 
-bool bomb::MapBlockBreakable::explode(size_t damage, bomb::IAssetLoader &loader)
+bool bomb::MapBlockBreakable::explode(size_t damage, bomb::IAssetManager &loader)
 {
 	_hp -= damage;
 	loader.deleteObject(std::move(_block));

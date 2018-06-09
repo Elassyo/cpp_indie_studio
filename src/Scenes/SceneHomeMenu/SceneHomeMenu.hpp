@@ -21,11 +21,11 @@ namespace bomb {
 
 
 			bomb::scene::SceneStatus start(
-				IAssetLoader &loader) override;
-			SceneStatus loop(IAssetLoader &loader) override;
+				IAssetManager &loader) override;
+			SceneStatus loop(IAssetManager &loader) override;
 			void save() override;
-			void reset(IAssetLoader &loader) override;
-			void clean(IAssetLoader &loader) override;
+			void reset(IAssetManager &loader) override;
+			void clean(IAssetManager &loader) override;
 			std::string nextScene() override;
 
 			bool onEvent(const irr::SEvent &event) override;

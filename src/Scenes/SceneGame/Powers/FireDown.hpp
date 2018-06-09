@@ -14,8 +14,10 @@ namespace bomb {
 	namespace object {
 		class FireDown : public Power {
 		public:
-			FireDown(bomb::IAssetLoader &loader,
+			FireDown(bomb::IAssetManager &loader,
 				 const irr::core::vector3df &pos);
+
+		private:
 			bool activate(bomb::Map &map,
 				      bomb::game::Player &player) override;
 		};

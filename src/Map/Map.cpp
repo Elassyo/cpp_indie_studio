@@ -74,7 +74,7 @@ std::ostream &operator<<(std::ostream &os, const bomb::Map &map) {
 	return os;
 }
 
-void bomb::Map::updateFromCells(bomb::IAssetLoader &loader)
+void bomb::Map::updateFromCells(bomb::IAssetManager &loader)
 {
 	auto b = _blocks.begin();
 	while (b != _blocks.end()) {
@@ -87,7 +87,7 @@ void bomb::Map::updateFromCells(bomb::IAssetLoader &loader)
 	}
 }
 
-void bomb::Map::clean(bomb::IAssetLoader &loader)
+void bomb::Map::clean(bomb::IAssetManager &loader)
 {
 	fill(_cells.begin(), _cells.end(), Map::EMPTY);
 	updateFromCells(loader);

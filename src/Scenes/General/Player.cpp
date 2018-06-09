@@ -7,13 +7,13 @@
 
 #include "Player.hpp"
 
-bomb::game::Player::Player(bomb::IAssetLoader &loader,
-	const std::string &path,
-	std::unique_ptr<bomb::IPlayerController> &controller,
-	const irr::core::vector3df &pos,
-	const irr::core::vector3df &scale,
-	const irr::core::vector3df &rotation,
-	bomb::PlayerInfo &info) :
+bomb::game::Player::Player(IAssetLoader &loader,
+			   const std::string &path,
+			   std::unique_ptr<bomb::IPlayerController> &controller,
+			   const irr::core::vector3df &pos,
+			   const irr::core::vector3df &scale,
+			   const irr::core::vector3df &rotation,
+			   bomb::PlayerInfo &info) :
 	_maxNbBombs(1),
 	_nbBombs(1),
 	_speed(0.1f),
@@ -101,9 +101,10 @@ void bomb::game::Player::setGhostBombMode(bool _ghostBombMode)
 	Player::_ghostBombMode = _ghostBombMode;
 }
 
-void bomb::game::Player::setAlive(bool _alive, IAssetLoader &loader)
+void bomb::game::Player::setAlive(bool _alive, IAssetManager &loader)
 {
-	loader.deleteObject(std::move(_model));
+	if (_model != nullptr)
+		loader.deleteObject(std::move(_model));
 	Player::_alive = _alive;
 }
 
