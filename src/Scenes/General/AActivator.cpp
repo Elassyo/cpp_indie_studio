@@ -16,7 +16,8 @@ bool bomb::game::AActivator::tryToActivate(bomb::Map &map,
 		auto idx = isActivable(map, players);
 		if (idx < 0)
 			return _activated;
-		_activated = activate(map, players[idx].first);
+		_activated = activate(map, players.at(
+			static_cast<unsigned long>(idx)).first);
 	}
 	return _activated;
 }

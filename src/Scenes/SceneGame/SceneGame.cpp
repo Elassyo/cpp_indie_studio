@@ -21,8 +21,8 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
 	cam->setPos({mid, (float)_game.getMapSize() * 0.8f,
 		(float)_game.getMapSize() * 0.8f});
 	cam->setTarget({mid, 0, mid + 1});
-	loader.loadAudioFile("music/mario64-bobomb-battlefield.ogg");
-	loader.playMusic("music/mario64-bobomb-battlefield.ogg");
+//	loader.loadAudioFile("music/mario64-bobomb-battlefield.ogg");
+//	loader.playMusic("music/mario64-bobomb-battlefield.ogg");
 	return BEGIN;
 }
 
@@ -54,11 +54,17 @@ void bomb::scene::SceneGame::reset(bomb::IAssetLoader &loader)
 void bomb::scene::SceneGame::clean(IAssetLoader &loader)
 {
 	_game.getMap()->clean(loader);
+	auto &p = _game.getPlayers();
+	for (unsigned int i = 0; i < _game.getPlayers().size(); ++i) {
+		p[i].first.setAlive(false, loader);
+	}
+	p.clear();
+	_running = true;
 }
 
 std::string bomb::scene::SceneGame::nextScene()
 {
-	return "";
+	return "home_scene";
 }
 
 bool bomb::scene::SceneGame::onEvent(const irr::SEvent &event)
@@ -68,5 +74,6 @@ bool bomb::scene::SceneGame::onEvent(const irr::SEvent &event)
 		if (event.KeyInput.Key == irr::KEY_ESCAPE)
 			_running = false;
 	}
+
 	return true;
 }

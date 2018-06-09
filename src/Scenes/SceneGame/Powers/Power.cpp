@@ -28,10 +28,12 @@ int bomb::object::Power::isActivable(bomb::Map &map,
 	bomb::PlayerActionner>> &vector)
 {
 	auto pos = _model->getPos();
-	for (unsigned int i = 0; i <= vector.size(); ++i) {
+	for (unsigned int i = 0; i < vector.size(); ++i) {
+		if (!vector[i].first.isAlive())
+			continue;
 		auto playerPos = vector[i].first.getExactPos();
 		if ((int)playerPos.X == (int)pos.X
-		    && (int)playerPos.Y == (int)pos.Y)
+		    && (int)playerPos.Z == (int)pos.Z)
 			return i;
 	}
 	return -1;

@@ -23,14 +23,17 @@ namespace bomb {
 			void setLoader(IAssetLoader &_loader);
 			void setModel(std::unique_ptr<AnimatedObject> &_model);
 			void
-			setBlast(const std::vector<irr::core::vector2di> &b);
+			setBlast(const std::vector<
+				std::pair<irr::core::vector2di,
+					bomb::Map::BlockType>> &b);
 			void setTimer(const utils::Clock &_timer);
 			void setPlayerIdx(int _playerIdx);
 
 			IAssetLoader &getLoader() const;
 			const std::unique_ptr<AnimatedObject> &getModel() const;
 			const
-			std::vector<irr::core::vector2di> &getBlast() const;
+			std::vector<std::pair<irr::core::vector2di,
+				bomb::Map::BlockType>> &getBlast() const;
 			const utils::Clock &getTimer() const;
 			int getPlayerIdx() const;
 
@@ -43,7 +46,8 @@ namespace bomb {
 				bomb::game::Player &player) override;
 			bomb::IAssetLoader &_loader;
 			std::unique_ptr<AnimatedObject> _model;
-			std::vector<irr::core::vector2di> _blast;
+			std::vector<std::pair<irr::core::vector2di,
+				bomb::Map::BlockType>> _blast;
 			bomb::utils::Clock _timer;
 			int _playerIdx;
 
