@@ -20,12 +20,12 @@ namespace bomb {
 			bool tryToActivate(bomb::Map &map,
 				std::vector<std::pair<Player, PlayerActionner>>
 				&players);
-		protected:
+
+		private:
 			virtual int isActivable(bomb::Map &map, std::vector
 				<std::pair<Player, PlayerActionner>> &) = 0;
 			virtual bool activate(bomb::Map &map,
-				bomb::game::Player &player) = 0;
-		private:
+					      bomb::game::Player &player) = 0;
 			bool _activated;
 		};
 	}

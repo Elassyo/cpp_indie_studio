@@ -34,14 +34,13 @@ namespace bomb {
 			const utils::Clock &getTimer() const;
 			int getPlayerIdx() const;
 
-		protected:
+		private:
 			int isActivable(bomb::Map &map,
 				std::vector<std::pair<game::Player,
 				PlayerActionner>> &vector) override;
 
 			bool activate(bomb::Map &map,
 				bomb::game::Player &player) override;
-		private:
 			bomb::IAssetLoader &_loader;
 			std::unique_ptr<AnimatedObject> _model;
 			std::vector<irr::core::vector2di> _blast;

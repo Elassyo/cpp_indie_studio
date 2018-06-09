@@ -14,8 +14,8 @@ bomb::object::PowerFactory::PowerFactory() :
 		 {&bomb::object::PowerFactory::createPtr<BombDown>, 10},
 		 {&bomb::object::PowerFactory::createPtr<SpeedDown>, 10},
 		 {&bomb::object::PowerFactory::createPtr<FireDown>, 10},
-		 {&bomb::object::PowerFactory::createPtr<WallPass>, 3},
-		 {&bomb::object::PowerFactory::createPtr<BombPass>, 2},
+		 {&bomb::object::PowerFactory::createPtr<WallPass>, 5},
+		 {&bomb::object::PowerFactory::createPtr<BombPass>, 3},
 		 {&bomb::object::PowerFactory::createPtr<BombFull>, 1},
 		 {&bomb::object::PowerFactory::createPtr<FireFull>, 1}}),
 	_total(0)

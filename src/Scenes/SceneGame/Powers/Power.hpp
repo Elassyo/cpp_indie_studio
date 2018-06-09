@@ -17,14 +17,16 @@ namespace bomb {
 			Power(bomb::IAssetLoader &loader,
 			      const irr::core::vector3df &pos,
 			      std::string path);
-			int isActivable(bomb::Map &map,
-					std::vector<std::pair<game::Player,
-						PlayerActionner>>
-					&vector) override;
+
+		protected:
 			bool activate(bomb::Map &map,
 				      bomb::game::Player &player) override;
 
 		private:
+			int isActivable(bomb::Map &map,
+					std::vector<std::pair<game::Player,
+						PlayerActionner>>
+					&vector) override;
 			bomb::IAssetLoader &_loader;
 			std::unique_ptr<StaticObject> _model;
 		};

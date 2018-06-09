@@ -14,6 +14,7 @@ bomb::scene::SceneStatus bomb::scene::SceneCharacterMenu::start(
 	IAssetLoader &loader)
 {
 	_running = true;
+	initModelPaths();
 	_menu.createMenu(loader);
 	_menu.addImage(loader.loadTexture("images/menuBack.png"), {.5, .5}, 5);
 	_menu.setElementSize(5, {1, 1});
@@ -22,36 +23,42 @@ bomb::scene::SceneStatus bomb::scene::SceneCharacterMenu::start(
 	addGameButtons();
 	addPlayerButtons();
 	addCharacterButtons();
-	initModelPaths();
 	_menu.updateButtons(loader, true);
 	return BEGIN;
 }
 
 void bomb::scene::SceneCharacterMenu::initModelPaths()
 {
-	auto playerInfos = _infos.getPlayerInfos();
-	playerInfos[0].setCharacter(bomb::game::SHYGUY_WHITE);
-	playerInfos[1].setCharacter(bomb::game::SHYGUY_BLACK);
-	playerInfos[2].setCharacter(bomb::game::SHYGUY_BLUE);
-	playerInfos[3].setCharacter(bomb::game::SHYGUY_RED);
-	_infos.setPlayerInfos(playerInfos);
+	auto players = _infos.getPlayerInfos();
+	players[0].setCharacter(bomb::game::SHYGUY_WHITE);
+	if (players[1].getCharacter() == game::SHYGUY_WHITE)
+		players[1].setCharacter(bomb::game::SHYGUY_BLACK);
+	if (players[2].getCharacter() == game::SHYGUY_WHITE)
+		players[2].setCharacter(bomb::game::SHYGUY_BLUE);
+	if (players[3].getCharacter() == game::SHYGUY_WHITE)
+		players[3].setCharacter(bomb::game::SHYGUY_RED);
+	_infos.setPlayerInfos(players);
 }
 
 void bomb::scene::SceneCharacterMenu::addPlayerButtons()
 {
-	_menu.addButton(L"1 : AI", {.20, .33}, 1);
+	_menu.addButton(_infos.getPlayerInfos(0).isAI() ?
+			L"1 : AI" : L"1: PLAYER", {.20, .33}, 1);
 	_menu.setButtonEvent(1, [this](){
 		changePlayerType(1, bomb::game::SHYGUY_WHITE);
 	});
-	_menu.addButton(L"2 : AI", {.40, .33}, 2);
+	_menu.addButton(_infos.getPlayerInfos(1).isAI() ?
+			L"2 : AI" : L"2: PLAYER", {.40, .33}, 2);
 	_menu.setButtonEvent(2, [this](){
 		changePlayerType(2, bomb::game::SHYGUY_BLACK);
 	});
-	_menu.addButton(L"3 : AI", {.60, .33}, 3);
+	_menu.addButton(_infos.getPlayerInfos(2).isAI() ?
+			L"3 : AI" : L"3: PLAYER", {.60, .33}, 3);
 	_menu.setButtonEvent(3, [this](){
 		changePlayerType(3, bomb::game::SHYGUY_BLUE);
 	});
-	_menu.addButton(L"4 : AI", {.80, .33}, 4);
+	_menu.addButton(_infos.getPlayerInfos(3).isAI() ?
+			L"4 : AI" : L"4: PLAYER", {.80, .33}, 4);
 	_menu.setButtonEvent(4, [this](){
 		changePlayerType(4, bomb::game::SHYGUY_RED);
 	});
@@ -59,23 +66,22 @@ void bomb::scene::SceneCharacterMenu::addPlayerButtons()
 
 void bomb::scene::SceneCharacterMenu::addCharacterButtons()
 {
-	_menu.addButton(L"Shy Guy", {.20, .5}, 11);
-	_menu.setButtonPushable(11, false);
+	for (int i = 0; i < 4; ++i) {
+		_menu.addButton(_charLoader.getCharacterName(
+			_infos.getPlayerInfos(i).getCharacter()),
+				{.20f * (i + 1), .5}, 11);
+		_menu.setButtonPushable(
+			10 + i + 1, !_infos.getPlayerInfos(i).isAI());
+	}
 	_menu.setButtonEvent(11, [this](){
 		changeCharacter(1);
 	});
-	_menu.addButton(L"Shy Guy", {.40, .5}, 12);
-	_menu.setButtonPushable(12, false);
 	_menu.setButtonEvent(12, [this](){
 		changeCharacter(2);
 	});
-	_menu.addButton(L"Shy Guy", {.60, .5}, 13);
-	_menu.setButtonPushable(13, false);
 	_menu.setButtonEvent(13, [this](){
 		changeCharacter(3);
 	});
-	_menu.addButton(L"Shy Guy", {.80, .5}, 14);
-	_menu.setButtonPushable(14, false);
 	_menu.setButtonEvent(14, [this](){
 		changeCharacter(4);
 	});
