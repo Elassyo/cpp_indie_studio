@@ -16,7 +16,7 @@ bomb::game::Player::Player(IAssetLoader &loader,
 			   bomb::PlayerInfo &info) :
 	_maxNbBombs(1),
 	_nbBombs(1),
-	_speed(0.1f),
+	_speed(0.05f),
 	_bombRange(1),
 	_ghostMode(false),
 	_ghostBombMode(false),

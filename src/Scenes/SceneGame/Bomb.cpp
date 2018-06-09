@@ -83,6 +83,6 @@ irr::core::position2di bomb::object::Bomb::getPos()
 
 void bomb::object::Bomb::fuse()
 {
-	_timer.setTimerInterval(250);
+	_timer.setTimerInterval(100);
 	_timer.reset();
 }
