@@ -9,17 +9,21 @@
 
 bomb::object::Power::Power(bomb::IAssetManager &loader,
 	const irr::core::vector3df &pos, std::string path) :
-	_loader(loader),
-	_model(loader.createStaticObject(path, pos, {.5, .5, .5})),
-	_killed(false)
+	_model(loader.createStaticObject(path, pos, {.5, .5, .5}))
 {
 }
 
-bool bomb::object::Power::activate(bomb::Map &map, bomb::game::Player &player)
+bool bomb::object::Power::activate(bomb::Map &map, bomb::game::Player &player,
+				   IAssetManager &loader)
 {
-	destroy(_loader);
+	addPower(player);
+	destroy(loader);
 	return true;
 	(void) map;
+}
+
+void bomb::object::Power::addPower(bomb::game::Player &player)
+{
 	(void) player;
 }
 
@@ -52,10 +56,4 @@ void bomb::object::Power::destroy(bomb::IAssetManager &manager)
 {
 	if (_model != nullptr)
 		manager.deleteObject(std::move(_model));
-	_killed = true;
-}
-
-bool bomb::object::Power::isKilled()
-{
-	return _killed;
 }

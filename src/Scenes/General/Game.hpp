@@ -56,16 +56,24 @@ namespace bomb {
 				IAssetManager &loader,
 				unsigned int size
 			);
-			void createPlayer(IAssetLoader &loader,
+			void createPlayer(
+				IAssetLoader &loader,
 				const std::string &path,
 				std::unique_ptr<IPlayerController> controller,
 				const irr::core::vector3di &spawn);
 			void killPlayersInBlast(
 				irr::core::vector2di blast,
-					IAssetManager &loader);
+				IAssetManager &loader);
+			void killPowersInBlast(
+				irr::core::vector2di vector,
+				IAssetManager &manager);
+			void blastObjects(
+				std::vector<std::pair<irr::core::vector2di,
+					Map::BlockType>> vector,
+				IAssetManager &manager);
 			void executePlayers(IAssetManager &loader);
 			void executeBombs(IAssetManager &loader);
-			void executePowers();
+			void executePowers(IAssetManager &loader);
 			void reset();
 			void
 			spawnPowers(std::vector<std::pair<irr::core::vector2di,
@@ -81,14 +89,6 @@ namespace bomb {
 				_powers;
 			int _mapSize;
 			bomb::object::PowerFactory _factory;
-
-			void killPowersInBlast(
-		irr::core::vector2di vector,
-		IAssetManager &manager);
-
-			void blastObjects(
-		std::vector<std::pair<irr::core::vector2di, Map::BlockType>> vector,
-		IAssetManager &manager);
 		};
 	}
 }

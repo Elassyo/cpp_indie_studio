@@ -67,14 +67,14 @@ void bomb::game::Game::execute(bomb::IAssetManager &loader)
 {
 	executePlayers(loader);
 	executeBombs(loader);
-	executePowers();
+	executePowers(loader);
 }
 
-void bomb::game::Game::executePowers()
+void bomb::game::Game::executePowers(bomb::IAssetManager &loader)
 {
 	auto p = _powers.begin();
 	while (p != _powers.end()) {
-		if ((*p)->tryToActivate(*_map, _players)) {
+		if ((*p)->tryToActivate(*_map, _players, loader)) {
 			p = _powers.erase(p);
 		} else
 			p++;
@@ -101,7 +101,7 @@ void bomb::game::Game::executeBombs(bomb::IAssetManager &loader)
 {
 	auto bomb = _bombs.begin();
 	while (bomb != _bombs.end()) {
-		if ((*bomb)->tryToActivate(*_map, _players)) {
+		if ((*bomb)->tryToActivate(*_map, _players, loader)) {
 			auto blast = (*bomb)->getBlast();
 			_map->updateFromCells(loader);
 			blastObjects(blast, loader);

@@ -25,9 +25,9 @@ namespace bomb {
 			int isActivable(bomb::Map &map,
 				std::vector<std::pair<game::Player,
 				PlayerActionner>> &vector) override;
-
 			bool activate(bomb::Map &map,
-				bomb::game::Player &player) override;
+				      bomb::game::Player &player,
+				      IAssetManager &loader) override;
 			bomb::IAssetManager &_loader;
 			std::unique_ptr<AnimatedObject> _model;
 			std::vector<std::pair<irr::core::vector2di,
