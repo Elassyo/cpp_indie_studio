@@ -91,8 +91,9 @@ void bomb::game::Player::setGhostMode(bool _ghostMode)
 	Player::_ghostMode = _ghostMode;
 }
 
-void bomb::game::Player::setAlive(bool _alive)
+void bomb::game::Player::setAlive(bool _alive, IAssetLoader &loader)
 {
+	loader.deleteObject(std::move(_model));
 	Player::_alive = _alive;
 }
 

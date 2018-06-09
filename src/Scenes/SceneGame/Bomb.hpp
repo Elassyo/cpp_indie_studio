@@ -18,6 +18,21 @@ namespace bomb {
 		public:
 			Bomb(IAssetLoader &loader, bomb::game::Player
 			&player, int playerIdx);
+			Bomb(const Bomb &);
+
+			void setLoader(IAssetLoader &_loader);
+			void setModel(std::unique_ptr<AnimatedObject> &_model);
+			void
+			setBlast(const std::vector<irr::core::vector2di> &b);
+			void setTimer(const utils::Clock &_timer);
+			void setPlayerIdx(int _playerIdx);
+
+			IAssetLoader &getLoader() const;
+			const std::unique_ptr<AnimatedObject> &getModel() const;
+			const
+			std::vector<irr::core::vector2di> &getBlast() const;
+			const utils::Clock &getTimer() const;
+			int getPlayerIdx() const;
 
 		protected:
 			int isActivable(bomb::Map &map,
@@ -26,11 +41,11 @@ namespace bomb {
 
 			bool activate(bomb::Map &map,
 				bomb::game::Player &player) override;
-
 		private:
 			bomb::IAssetLoader &_loader;
-			bomb::utils::Clock _timer;
 			std::unique_ptr<AnimatedObject> _model;
+			std::vector<irr::core::vector2di> _blast;
+			bomb::utils::Clock _timer;
 			int _playerIdx;
 
 			bool deleteBlock(Map &map, irr::core::vector3df pos);

@@ -44,7 +44,7 @@ namespace bomb {
 			void setSpeed(float _speed);
 			void setBombRange(uint8_t _bombRange);
 			void setGhostMode(bool _ghostMode);
-			void setAlive(bool _alive);
+			void setAlive(bool _alive, IAssetLoader &loader);
 			void setAI(bool AI);
 			bool isBombReady();
 
