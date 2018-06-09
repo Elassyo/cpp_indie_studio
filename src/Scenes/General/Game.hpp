@@ -25,11 +25,8 @@
 	#include "PersistentInfo.hpp"
 	#include "../../Exception/Exception.hpp"
 	#include "../../Player/AIController.hpp"
-#include "../SceneGame/Powers/Power.hpp"
-#include "../SceneGame/Powers/PowerFactory.hpp"
-
-
-#define MAP_SIZE 15
+	#include "../SceneGame/Powers/Power.hpp"
+	#include "../SceneGame/Powers/PowerFactory.hpp"
 
 namespace bomb {
 	namespace game {

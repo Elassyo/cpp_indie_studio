@@ -34,6 +34,7 @@ void bomb::PlayerActionner::addBomb(bomb::Map &map,
 		player.setNbBombs
 			(static_cast<uint8_t>(player.getNbBombs() - 1));
 		player.setBombReady(true);
+		map[pos] = Map::BOMB;
 	}
 }
 
@@ -58,25 +59,25 @@ void bomb::PlayerActionner::actionnate(bomb::Map &map,
 	if (_currentAction == IPlayerController::UNDEFINED || _target.X == -1) {
 		updateAction();
 		auto pos = player.getModel()->getPos();
-		changeTargetTile(map, vecfCast(pos), player.getModel());
+		changeTargetTile(map, vecfCast(pos), player);
 	}
 	if (_currentAction != IPlayerController::UNDEFINED)
-		move(map, player.getModel());
+		move(map, player);
 }
 
 void bomb::PlayerActionner::move(bomb::Map &map,
-	std::unique_ptr <bomb::AnimatedObject> &player)
+	game::Player &player)
 {
 	auto dir = _moves.at(_currentAction) * _speedRatio;
-	auto dest = player->getPos() + dir;
+	auto dest = player.getModel()->getPos() + dir;
 	if (isTargetReached(dest)) {
-		player->setPos(veciCast(_target));
+		player.getModel()->setPos(veciCast(_target));
 		if (!_repeat)
 			updateAction();
 		changeTargetTile(map, _target, player);
 		return;
 	}
-	player->move(dir);
+	player.getModel()->move(dir);
 }
 
 void bomb::PlayerActionner::updateAction()
@@ -87,7 +88,7 @@ void bomb::PlayerActionner::updateAction()
 
 void bomb::PlayerActionner::changeTargetTile(bomb::Map &map,
 	irr::core::vector3di playerPos,
-	std::unique_ptr <bomb::AnimatedObject> &player)
+	game::Player &player)
 {
 	if (_currentAction != _nextAction &&
 		_nextAction != IPlayerController::UNDEFINED)
@@ -97,13 +98,15 @@ void bomb::PlayerActionner::changeTargetTile(bomb::Map &map,
 		return;
 	}
 	_target = playerPos + vecfCast(_moves[_currentAction]);
-	if (map[_target] != Map::EMPTY) {
+	if (map[_target] != Map::EMPTY &&
+		(!player.isGhostMode() || map[_target] != Map::BREAKABLE) &&
+		(!player.isGhostBombMode() || map[_target] != Map::BOMB)) {
 		_target = {-1, -1, -1};
 		_currentAction = IPlayerController::UNDEFINED;
 	}
 	if (_currentAction != IPlayerController::UNDEFINED &&
 		_currentAction != IPlayerController::PUT_BOMB) {
-		player->setRot({0, (float) _currentAction, 0});
+		player.getModel()->setRot({0, (float) _currentAction, 0});
 	}
 }
 

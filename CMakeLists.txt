@@ -40,6 +40,7 @@ set(SRC_FILES
         src/Exception/Exception.hpp
 
         src/Interface/IAssetManager.hpp
+        src/Interface/IAssetLoader.hpp
         src/Interface/IEventScene.hpp
         src/Interface/IGameScene.hpp
         src/Interface/IObject.hpp
@@ -155,10 +156,14 @@ set(SRC_FILES
         src/CameraObject.hpp
         src/PlaneObject.cpp
         src/PlaneObject.hpp
+        src/BillboardObject.cpp
+        src/BillboardObject.hpp
 
         src/Xml/XmlWriter.cpp
         src/Xml/XmlWriter.hpp
-        src/Interface/IAssetLoader.hpp)
+        src/Xml/XmlReader.cpp
+        src/Xml/XmlReader.hpp
+        )
 
         add_executable(bombermario WIN32
         ${SRC_FILES}

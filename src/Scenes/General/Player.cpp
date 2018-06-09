@@ -19,6 +19,7 @@ bomb::game::Player::Player(IAssetLoader &loader,
 	_speed(0.1f),
 	_bombRange(1),
 	_ghostMode(false),
+	_ghostBombMode(false),
 	_alive(true),
 	_AI(false),
 	_bombReady(false),
@@ -27,17 +28,6 @@ bomb::game::Player::Player(IAssetLoader &loader,
 {
 	info.getActionFromKey(irr::KEY_UP);
 	_model = loader.createAnimatedObject(path, pos, scale, rotation);
-}
-
-void bomb::game::Player::execute(bomb::Map &map)
-{
-	(void) map;
-/*	if (isAI()) {
-		_controller->execute({static_cast<irr::s32>(_obj->getPos().X),
-				static_cast<irr::s32>(_obj->getPos().Z)});
-		auto action = _controller->requestMovement();
-		_actionner.sendAction(map, _obj, action);
-	}*/
 }
 
 bomb::IPlayerController::Actions

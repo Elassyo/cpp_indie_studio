@@ -38,14 +38,14 @@ namespace bomb {
 		bool _repeat;
 		bomb::utils::Clock _latence;
 
-		void move(Map &map, std::unique_ptr<AnimatedObject> &player);
+		void move(Map &map, game::Player &player);
 		irr::core::vector3di vecfCast(irr::core::vector3df &vec);
 		bool isTargetReached(irr::core::vector3d<irr::f32> &vector3d);
 		irr::core::vector3df veciCast(irr::core::vector3di &vec);
 		void updateAction();
 		void addBomb(Map &map, game::Player &player);
 		void changeTargetTile(Map &map, irr::core::vector3di playerPos,
-			      std::unique_ptr<AnimatedObject> &player);
+			      game::Player &player);
 	};
 }
 #endif /* CPP_INDIE_STUDIO_PLAYERACTIONNER_HPP */

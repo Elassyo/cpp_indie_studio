@@ -38,11 +38,31 @@ void bomb::scene::SceneOptionMenu::setPlusMinusButtons()
 	_menu.addButton(L"-", {.4, .35}, 10);
 	_menu.addButton(L"+", {.6, .35}, 11);
 	_menu.addButton(L"-", {.4, .5}, 12);
+	_menu.setButtonEvent(12, [this](){
+		changeMapSize(-2);
+	});
 	_menu.addButton(L"+", {.6, .5}, 13);
+	_menu.setButtonEvent(13, [this](){
+		changeMapSize(2);
+	});
 	for (int id = 10; id <= 13; ++id) {
 		_menu.setElementFont(id, menu::MenuFonts::TITLE);
 		_menu.setElementSize(id, {.05, .1});
 	}
+	changeMapSize(0);
+}
+
+void bomb::scene::SceneOptionMenu::changeMapSize(int change)
+{
+ 	int mapSize = _infos.getMapSize() + change;
+
+	if (mapSize < 7)
+		mapSize = 7;
+	if (mapSize > 51)
+		mapSize = 51;
+	_infos.setMapSize(mapSize);
+	_menu.setElementText(2, std::wstring(
+		L"Map Size\n       " + std::to_wstring(mapSize)).c_str());
 }
 
 bomb::scene::SceneStatus bomb::scene::SceneOptionMenu::loop(
