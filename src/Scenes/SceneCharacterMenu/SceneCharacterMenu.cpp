@@ -87,7 +87,7 @@ void bomb::scene::SceneCharacterMenu::changePlayerType(int idx, wchar_t *model)
 	_menu.setElementText(idx, std::wstring(
 		std::to_wstring(idx ) + L" : "
 		+ (player.isAI() ? L"Player" : L"AI")).c_str());
-	player.setModelPath(player.isAI() ? (wchar_t *)L"models/characters/skelerex/skelerex.mtl" : model);
+	player.setModelPath(player.isAI() ? (wchar_t *)L"models/characters/dryBones/dryBones.mtl" : model);
 	_menu.setButtonPushable(10 + idx, player.isAI());
 	player.setIsAI(!player.isAI());
 	_infos.setPlayerInfos(idx - 1, player);

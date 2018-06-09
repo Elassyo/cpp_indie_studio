@@ -51,7 +51,7 @@ namespace bomb {
 				SHYGUY_BLACK,
 				SHYGUY_RED,
 				SHYGUY_BLUE,
-				SKELEREX
+				DRYBONES
 			};
 
 			std::vector<std::pair<Player, PlayerActionner>>
