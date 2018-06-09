@@ -8,11 +8,12 @@
 #ifndef CPP_INDIE_STUDIO_XMLWRITER_HPP
 	#define CPP_INDIE_STUDIO_XMLWRITER_HPP
 
+	#include <fstream>
 	#include <iostream>
 	#include <memory>
 	#include <unordered_map>
 
-	#include "../Interface/IObject.hpp"
+#include "../Interface/IObject.hpp"
 	#include "../Map/Map.hpp"
 	#include "../Scenes/General/Player.hpp"
 
@@ -20,7 +21,7 @@ namespace bomb {
 	namespace xml {
 		class XmlWriter {
 		public:
-			explicit XmlWriter(const irr::core::stringw &fileName);
+			explicit XmlWriter(const std::string &fileName);
 			~XmlWriter();
 
 			bool iObjectToSection(std::unique_ptr<IObject> &);
@@ -29,11 +30,9 @@ namespace bomb {
 			bool playerToSection(const game::Player &);
 
 		private:
-			std::wstring _strToWstr(const std::string &) const;
+			std::ofstream _fstream;
 
-			irr::IrrlichtDevice *_nullDevice;
-			irr::io::IXMLWriter *_xmlWriter;
-			const std::unordered_map<Map::BlockType, std::wstring>
+			const std::unordered_map<Map::BlockType, std::string>
 				_blockTypeStr;
 			};
 		}
