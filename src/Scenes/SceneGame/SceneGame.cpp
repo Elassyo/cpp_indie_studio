@@ -8,7 +8,8 @@
 #include "SceneGame.hpp"
 
 bomb::scene::SceneGame::SceneGame(bomb::PersistentInfo &_infos) :
-	AScene(_infos) {}
+	AScene(_infos), _game(_infos), _running(true)
+{}
 
 bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
 {
@@ -27,7 +28,7 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::loop(
 {
 	explodeBombs(loader);
 	_game.execute(loader);
-	return CONTINUE;
+	return _running ? CONTINUE : END;
 }
 
 void bomb::scene::SceneGame::explodeBombs(bomb::IAssetLoader &loader)
@@ -59,7 +60,10 @@ std::string bomb::scene::SceneGame::nextScene()
 
 bool bomb::scene::SceneGame::onEvent(const irr::SEvent &event)
 {
-	if (event.EventType == irr::EET_KEY_INPUT_EVENT)
-		return _game.handleEvent(event);
+	if (event.EventType == irr::EET_KEY_INPUT_EVENT) {
+		_game.handleEvent(event);
+		if (event.KeyInput.Key == irr::KEY_ESCAPE)
+			_running = false;
+	}
 	return true;
 }

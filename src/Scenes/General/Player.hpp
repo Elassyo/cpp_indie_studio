@@ -13,6 +13,7 @@
 #include "../../Interface/IAssetLoader.hpp"
 #include "../../Interface/IPlayerController.hpp"
 #include "../../Map/Map.hpp"
+#include "PlayerInfo.hpp"
 
 namespace bomb {
 	namespace game {
@@ -23,10 +24,11 @@ namespace bomb {
 				std::unique_ptr<bomb::IPlayerController> &ctrl,
 				const irr::core::vector3df &pos,
 				const irr::core::vector3df &scale,
-			       	const irr::core::vector3df &rotation);
+			       	const irr::core::vector3df &rotation,
+				bomb::PlayerInfo &info);
 
 			IPlayerController::Actions
-			getActionFromEvent(Map &map, const irr::SEvent &event);
+			getActionFromEvent(const irr::SEvent &event);
 			void execute(Map &map);
 
 			uint8_t getNbBombs() const;
@@ -47,7 +49,6 @@ namespace bomb {
 			bool isBombReady();
 
 			std::unique_ptr<AnimatedObject> &getModel();
-
 		private:
 			uint8_t _maxNbBombs;
 			uint8_t _nbBombs;
@@ -57,12 +58,10 @@ namespace bomb {
 			bool _alive;
 			bool _AI;
 			bool _bombReady;
-			std::unordered_map<irr::EKEY_CODE,
-				std::pair<bomb::IPlayerController::Actions,
-					wchar_t *>> _keys;
 
 			std::unique_ptr<AnimatedObject> _model;
 			std::unique_ptr<IPlayerController> _controller;
+			bomb::PlayerInfo _genericInfos;
 		};
 	}
 }

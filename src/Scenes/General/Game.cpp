@@ -6,8 +6,10 @@
 */
 
 #include "Game.hpp"
-#include "../../Exception/Exception.hpp"
-#include "../../Player/AIController.hpp"
+
+bomb::game::Game::Game(bomb::PersistentInfo &infos) : _infos(infos)
+{
+}
 
 void bomb::game::Game::createGame(IAssetLoader &loader,
 	irr::video::ITexture *texture)
@@ -27,7 +29,6 @@ void bomb::game::Game::createGame(IAssetLoader &loader,
 	createPlayer(loader, "models/characters/shyGuy/shyGuyWhite.obj",
 		std::make_unique<bomb::player::AIController>(_map),
 		{MAP_SIZE - 2, 0, MAP_SIZE - 2});
-	//createPlayer(loader, "models/characters/skelerex/skelerex.obj", SKELEREX, {0, 0, 0});
 	_map->setTextures(texture);
 	reset();
 }
@@ -58,7 +59,8 @@ void bomb::game::Game::createPlayer(bomb::IAssetLoader &loader,
 	/* A CHANGER ! ECHELLES DE TAILLE */
 	_players.push_back({bomb::game::Player(loader, path, controller,
 		{(float)spawn.X, (float)spawn.Y, (float)spawn.Z},
-		{.5, .5, .5}, {0, 0, 0}), {true}});
+		{.5, .5, .5}, {0, 0, 0},
+		_infos.getPlayerInfos()[_players.size()]), {true}});
 }
 
 void bomb::game::Game::reset()
@@ -86,13 +88,16 @@ void bomb::game::Game::execute(bomb::IAssetLoader &loader)
 bool bomb::game::Game::handleEvent(const irr::SEvent &event)
 {
 	//Check if keyEvent is in player keyset and call his handleEvent method
-	auto action = _players[0].first.getActionFromEvent(*_map, event);
-	if (action != IPlayerController::UNDEFINED) {
-		if (event.KeyInput.PressedDown)
-			_players[0].second.sendAction(
-				*_map, _players[0].first, action);
-		else
-			_players[0].second.removeAction(action);
+	for (auto &p : _players) {
+		if (p.first.isAI())
+			continue;
+		auto action = p.first.getActionFromEvent(event);
+		if (action != IPlayerController::UNDEFINED) {
+			if (event.KeyInput.PressedDown)
+				p.second.sendAction(*_map, p.first, action);
+			else
+				p.second.removeAction(action);
+		}
 	}
 	return true;
 }

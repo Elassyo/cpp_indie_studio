@@ -32,10 +32,11 @@ namespace bomb {
 
 		private:
 			void explodeBombs(bomb::IAssetLoader &loader);
-			
+
 			irr::video::ITexture *_blocksTextures;
 			std::vector<std::unique_ptr<bomb::object::Bomb>> _bombs;
 			bomb::game::Game _game;
+			bool _running;
 		};
 	}
 }

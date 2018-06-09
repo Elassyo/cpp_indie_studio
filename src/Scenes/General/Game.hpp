@@ -22,6 +22,9 @@
 	#include "../../Player/PlayerActionner.hpp"
 	#include "../../Xml/XmlWriter.hpp"
 	#include "../SceneGame/Bomb.hpp"
+	#include "PersistentInfo.hpp"
+	#include "../../Exception/Exception.hpp"
+	#include "../../Player/AIController.hpp"
 
 
 #define MAP_SIZE 16
@@ -32,7 +35,7 @@ namespace bomb {
 
 		class Game {
 		public:
-			Game() = default;
+			Game(PersistentInfo &_infos);
 
 			void createGame(
 				IAssetLoader &loader,
@@ -67,6 +70,7 @@ namespace bomb {
 
 			void reset();
 
+			PersistentInfo &_infos;
 			std::vector<std::pair<Player, PlayerActionner>>
 				_players;
 			std::shared_ptr<bomb::Map> _map;
