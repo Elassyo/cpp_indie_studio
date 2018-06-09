@@ -129,7 +129,7 @@ bool bomb::game::Player::isBombReady()
 	return _bombReady;
 }
 
-irr::core::vector3df bomb::game::Player::getExactPos()
+irr::core::vector3df bomb::game::Player::getExactPos() const
 {
 	irr::core::vector3di pos(static_cast<irr::s32>(_model->getPos().X),
 			static_cast<irr::s32>(_model->getPos().Y),

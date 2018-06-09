@@ -50,10 +50,22 @@ bool bomb::xml::XmlWriter::mapToSection(std::shared_ptr<bomb::Map> &map)
 	_xmlWriter->writeElement(L"Map");
 	_xmlWriter->writeLineBreak();
 	int size = map->getSize();
-	for (int i = 0; i < size * size; i++) {
+	for (int i = 0; i < size * size; i++)
 		mapBlockToSection((*map)[i], i % size, i / size);
-	}
 	_xmlWriter->writeClosingTag(L"Map");
 	_xmlWriter->writeLineBreak();
-		return true;
+	return true;
+}
+
+bool bomb::xml::XmlWriter::playerToSection(const game::Player &player)
+{
+	auto pos = player.getExactPos();
+
+	_xmlWriter->writeElement(L"PlayerInfo", true,
+	L"isIA", std::to_wstring(player.isAI()).c_str(),
+	L"isAlive", std::to_wstring(player.isAlive()).c_str(),
+	L"x", std::to_wstring(pos.X).c_str(),
+	L"y", std::to_wstring(pos.Y).c_str());
+	_xmlWriter->writeLineBreak();
+	return true;
 }
