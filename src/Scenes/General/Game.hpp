@@ -27,7 +27,7 @@
 	#include "../../Player/AIController.hpp"
 
 
-#define MAP_SIZE 16
+#define MAP_SIZE 15
 
 namespace bomb {
 	namespace game {
@@ -51,7 +51,7 @@ namespace bomb {
 				SHYGUY_BLACK,
 				SHYGUY_RED,
 				SHYGUY_BLUE,
-				SKELEREX
+				DRYBONES
 			};
 
 			std::vector<std::pair<Player, PlayerActionner>>

@@ -44,6 +44,7 @@ namespace bomb {
 						     irr::video::ITexture *);
 			void setButtonEvent(int buttonId,
 					    std::function<void()> event);
+			void setButtonPushable(int buttonId, bool isPushable);
 			void setElementPos(int elementId,
 					   irr::core::vector2df pos);
 			void setElementSize(int elementId,

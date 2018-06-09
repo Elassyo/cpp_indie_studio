@@ -30,6 +30,7 @@ namespace bomb {
 			bool onEvent(const irr::SEvent &event) override;
 
 		private:
+			void setPlusMinusButtons();
 			bomb::menu::Menu _menu;
 			bool _running;
 			std::string _nextScene;
