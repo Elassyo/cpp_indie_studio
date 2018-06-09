@@ -34,7 +34,7 @@ void bomb::AudioManager::loadAudioFile(const std::string &path)
 {
 	if (_audioBuffers.find(path) != _audioBuffers.end())
 		return;
-	_audioBuffers[path] = (new AudioBuffer(path));
+	_audioBuffers[path] = new AudioBuffer(path);
 }
 
 void bomb::AudioManager::unloadAudioFile(const std::string &path)

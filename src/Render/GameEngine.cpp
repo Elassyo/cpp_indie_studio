@@ -151,14 +151,14 @@ bomb::GameEngine::createPlaneObject(const std::string &name,
 	return ptr;
 }
 
-void bomb::GameEngine::unloadMusic(const std::string &path)
+void bomb::GameEngine::unloadAudioFile(const std::string &path)
 {
 	_audioMgr.unloadAudioFile(path);
 }
 
 void bomb::GameEngine::playMusic(const std::string &path)
 {
-	_audioMgr.loadAudioFile(path);
+	_audioMgr.playMusic(path);
 }
 
 void bomb::GameEngine::stopAll()
