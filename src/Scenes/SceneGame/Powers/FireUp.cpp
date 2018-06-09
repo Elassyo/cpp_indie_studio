@@ -13,9 +13,8 @@ bomb::object::FireUp::FireUp(bomb::IAssetManager &loader,
 {
 }
 
-bool bomb::object::FireUp::activate(bomb::Map &map, bomb::game::Player &player)
+void bomb::object::FireUp::addPower(bomb::game::Player &player)
 {
 	if (player.getBombRange() < 99)
 		player.setBombRange(player.getBombRange() + 1);
-	return Power::activate(map, player);
 }

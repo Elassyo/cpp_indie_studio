@@ -18,16 +18,15 @@ namespace bomb {
 			      const irr::core::vector3df &pos,
 			      std::string path);
 
-		protected:
-			bool activate(bomb::Map &map,
-				      bomb::game::Player &player) override;
-
 		private:
+			bool activate(bomb::Map &map,
+				      bomb::game::Player &player,
+				      IAssetManager &loader) override;
+			virtual void addPower(bomb::game::Player &player);
 			int isActivable(bomb::Map &map,
 					std::vector<std::pair<game::Player,
 						PlayerActionner>>
 					&vector) override;
-			bomb::IAssetManager &_loader;
 			std::unique_ptr<StaticObject> _model;
 		};
 	}

@@ -18,8 +18,7 @@ namespace bomb {
 				 const irr::core::vector3df &pos);
 
 		private:
-			bool activate(bomb::Map &map,
-				      bomb::game::Player &player) override;
+			void addPower(bomb::game::Player &player) override;
 		};
 	}
 }

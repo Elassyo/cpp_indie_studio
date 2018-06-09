@@ -81,7 +81,7 @@ namespace bomb {
 				_powers;
 			int _mapSize;
 			bomb::object::PowerFactory _factory;
-			void executePowers(IAssetLoader &loader);
+			void executePowers(IAssetManager &loader);
 		};
 	}
 }

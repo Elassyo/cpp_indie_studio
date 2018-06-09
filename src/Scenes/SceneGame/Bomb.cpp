@@ -30,7 +30,8 @@ bool bomb::object::Bomb::deleteBlock(bomb::Map &map, irr::core::vector3df pos)
 	return true;
 }
 
-bool bomb::object::Bomb::activate(bomb::Map &map, bomb::game::Player &player)
+bool bomb::object::Bomb::activate(bomb::Map &map, bomb::game::Player &player,
+				  IAssetManager &loader)
 {
 	auto pos = _model->getPos();
 	map[pos] = Map::EMPTY;
@@ -48,6 +49,7 @@ bool bomb::object::Bomb::activate(bomb::Map &map, bomb::game::Player &player)
 			deleteBlock(map, {pos.X, pos.Y, pos.Z - 1});
 	}
 	return true;
+	(void) loader;
 }
 
 int bomb::object::Bomb::isActivable(bomb::Map &map,
