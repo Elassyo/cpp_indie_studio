@@ -66,26 +66,59 @@ int bomb::game::Game::getMapSize() const
 
 void bomb::game::Game::execute(bomb::IAssetLoader &loader)
 {
+	executePlayers(loader);
+	executeBombs(loader);
+}
+
+void bomb::game::Game::executePlayers(bomb::IAssetLoader &loader)
+{
 	for (auto i = 0; i < NB_PLAYERS; ++i) {
+		if (!_players[i].first.isAlive())
+			continue;
 		_players[i].first.execute(*_map);
 		_players[i].second.actionnate(*_map, _players[i].first);
 		if (_players[i].first.isBombReady()) {
-			_bombs.emplace_back(loader, _players[i].first, i);
+			_bombs.emplace_back(new bomb::object::Bomb
+				(loader, _players[i].first, i));
 			_players[i].first.setBombReady(false);
 		}
 	}
-	for (auto &b : _bombs) {
-		if (b.tryToActivate(*_map, _players)) {
+
+}
+
+void bomb::game::Game::executeBombs(bomb::IAssetLoader &loader)
+{
+	auto bomb = _bombs.begin();
+	while (bomb != _bombs.end()) {
+		if ((*bomb)->tryToActivate(*_map, _players)) {
+			auto blast = (*bomb)->getBlast();
 			_map->updateFromCells(loader);
+			killPlayersInBlast(blast, loader);
+			bomb = _bombs.erase(bomb);
+		} else
+			bomb++;
+	}
+}
+
+void bomb::game::Game::killPlayersInBlast(
+	std::vector<irr::core::vector2di> &blast,
+	bomb::IAssetLoader &loader)
+{
+	for (auto &p : _players) {
+		if (!p.first.isAlive())
+			continue;
+		for (auto b : blast) {
+			if ((int)p.first.getExactPos().X == b.X &&
+				(int)p.first.getExactPos().Z == b.Y)
+				p.first.setAlive(false, loader);
 		}
 	}
 }
 
 bool bomb::game::Game::handleEvent(const irr::SEvent &event)
 {
-	//Check if keyEvent is in player keyset and call his handleEvent method
 	for (auto &p : _players) {
-		if (p.first.isAI())
+		if (p.first.isAI() || !p.first.isAlive())
 			continue;
 		auto action = p.first.getActionFromEvent(event);
 		if (action != IPlayerController::UNDEFINED) {

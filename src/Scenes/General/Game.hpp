@@ -67,8 +67,14 @@ namespace bomb {
 			std::vector<std::pair<Player, PlayerActionner>>
 				_players;
 			std::shared_ptr<bomb::Map> _map;
-			std::vector<bomb::object::Bomb> _bombs;
+			std::vector<bomb::object::Bomb *> _bombs;
 			int _mapSize;
+
+			void killPlayersInBlast(
+				std::vector<irr::core::vector2di> &vector,
+				bomb::IAssetLoader &loader);
+			void executePlayers(IAssetLoader &loader);
+			void executeBombs(IAssetLoader &loader);
 		};
 	}
 }
