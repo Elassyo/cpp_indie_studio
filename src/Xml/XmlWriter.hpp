@@ -21,7 +21,7 @@ namespace bomb {
 		class XmlWriter {
 		public:
 			explicit XmlWriter(const irr::core::stringw &fileName);
-			~XmlWriter() = default;
+			~XmlWriter();
 
 			bool iObjectToSection(std::unique_ptr<IObject> &);
 			bool mapBlockToSection(Map::BlockType, int, int);

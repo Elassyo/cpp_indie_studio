@@ -21,6 +21,11 @@ bomb::xml::XmlWriter::XmlWriter(const irr::core::stringw &fileName) :
 	_xmlWriter = nullDevice->getFileSystem()->createXMLWriter(fileName);
 }
 
+bomb::xml::XmlWriter::~XmlWriter()
+{
+	_xmlWriter->drop();
+}
+
 bool bomb::xml::XmlWriter::iObjectToSection(std::unique_ptr<IObject> &object)
 {
 	object->getPos();
