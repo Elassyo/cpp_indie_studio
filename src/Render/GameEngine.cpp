@@ -5,10 +5,6 @@
 // GameEngine.cpp
 //
 
-#include <memory>
-#include <utility>
-#include "../Exception/Exception.hpp"
-#include "../Menu/Menu.hpp"
 #include "GameEngine.hpp"
 
 bomb::GameEngine::GameEngine(const std::wstring &winName,
@@ -170,4 +166,18 @@ void bomb::GameEngine::stopAll()
 void bomb::GameEngine::pauseAll()
 {
 	_audioMgr.pauseAll();
+}
+
+std::unique_ptr<bomb::BillboardObject>
+bomb::GameEngine::createBillboardObject(irr::core::vector3df pos,
+					irr::core::vector3df rot,
+					irr::core::vector3df scale)
+{
+	auto ptr = std::make_unique<bomb::BillboardObject>(
+		_sceneManager->addBillboardSceneNode(),
+		_audioMgr);
+	ptr->setPos(pos);
+	ptr->setRot(rot);
+	ptr->setScale(scale);
+	return ptr;
 }
