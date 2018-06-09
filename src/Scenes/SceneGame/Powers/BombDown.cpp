@@ -7,7 +7,7 @@
 
 #include "BombDown.hpp"
 
-bomb::object::BombDown::BombDown(bomb::IAssetLoader &loader,
+bomb::object::BombDown::BombDown(bomb::IAssetManager &loader,
 	const irr::core::vector3df &pos) :
 	Power(loader, pos, "models/powers/bombs/bombDown.obj")
 {

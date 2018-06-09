@@ -29,9 +29,9 @@ namespace bomb {
 		Map(const std::vector<std::shared_ptr<AMapBlock>> &_blocks,
 		    std::vector<BlockType> &cells);
 
-		void clean(IAssetLoader &loader);
+		void clean(IAssetManager &loader);
 		bool blockAt(const irr::core::vector2di &coord);
-		void updateFromCells(IAssetLoader &loader);
+		void updateFromCells(IAssetManager &loader);
 
 		void setTextures(irr::video::ITexture *texture);
 		void setSize(int size);

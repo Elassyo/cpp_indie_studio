@@ -150,3 +150,23 @@ bomb::GameEngine::createPlaneObject(const std::string &name,
 	ptr->setScale(scale);
 	return ptr;
 }
+
+void bomb::GameEngine::unloadMusic(const std::string &path)
+{
+	_audioMgr.unloadAudioFile(path);
+}
+
+void bomb::GameEngine::playMusic(const std::string &path)
+{
+	_audioMgr.loadAudioFile(path);
+}
+
+void bomb::GameEngine::stopAll()
+{
+	_audioMgr.stopAll();
+}
+
+void bomb::GameEngine::pauseAll()
+{
+	_audioMgr.pauseAll();
+}

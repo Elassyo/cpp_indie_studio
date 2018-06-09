@@ -7,7 +7,7 @@
 
 #include "Player.hpp"
 
-bomb::game::Player::Player(bomb::IAssetLoader &loader,
+bomb::game::Player::Player(bomb::IAssetManager &loader,
 	const std::string &path,
 	std::unique_ptr<bomb::IPlayerController> &controller,
 	const irr::core::vector3df &pos,
@@ -101,7 +101,7 @@ void bomb::game::Player::setGhostBombMode(bool _ghostBombMode)
 	Player::_ghostBombMode = _ghostBombMode;
 }
 
-void bomb::game::Player::setAlive(bool _alive, IAssetLoader &loader)
+void bomb::game::Player::setAlive(bool _alive, IAssetManager &loader)
 {
 	loader.deleteObject(std::move(_model));
 	Player::_alive = _alive;

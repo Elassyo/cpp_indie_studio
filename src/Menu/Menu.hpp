@@ -16,7 +16,7 @@
 
 	#include "GraphicImage.hpp"
 
-	#include "../Interface/IAssetLoader.hpp"
+	#include "../Interface/IAssetManager.hpp"
 
 namespace bomb {
 	namespace menu {
@@ -28,8 +28,8 @@ namespace bomb {
 		public:
 			Menu();
 
-			void createMenu(IAssetLoader &loader);
-			void updateButtons(IAssetLoader &loader,
+			void createMenu(IAssetManager &loader);
+			void updateButtons(IAssetManager &loader,
 						bool areVisible);
 			void addButton(const wchar_t *text,
 				       irr::core::vector2df pos, int id);

@@ -10,7 +10,7 @@
 
 #include <unordered_map>
 #include "../../AnimatedObject.hpp"
-#include "../../Interface/IAssetLoader.hpp"
+#include "../../Interface/IAssetManager.hpp"
 #include "../../Interface/IPlayerController.hpp"
 #include "../../Map/Map.hpp"
 #include "PlayerInfo.hpp"
@@ -19,7 +19,7 @@ namespace bomb {
 	namespace game {
 		class Player {
 		public:
-			Player(bomb::IAssetLoader &loader,
+			Player(bomb::IAssetManager &loader,
 				const std::string &path,
 				std::unique_ptr<bomb::IPlayerController> &ctrl,
 				const irr::core::vector3df &pos,
@@ -46,7 +46,7 @@ namespace bomb {
 			void setBombRange(uint8_t _bombRange);
 			void setGhostMode(bool _ghostMode);
 			void setGhostBombMode(bool _ghostBombMode);
-			void setAlive(bool _alive, IAssetLoader &loader);
+			void setAlive(bool _alive, IAssetManager &loader);
 			void setAI(bool AI);
 			bool isBombReady();
 

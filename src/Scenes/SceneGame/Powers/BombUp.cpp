@@ -7,7 +7,7 @@
 
 #include "BombUp.hpp"
 
-bomb::object::BombUp::BombUp(bomb::IAssetLoader &loader,
+bomb::object::BombUp::BombUp(bomb::IAssetManager &loader,
 	const irr::core::vector3df &pos) :
 	Power(loader, pos, "models/powers/bombs/bombUp.obj")
 {

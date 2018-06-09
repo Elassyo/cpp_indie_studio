@@ -36,7 +36,7 @@ void bomb::MapConstructor::rmBlock(const irr::core::vector2di &pos)
 }
 
 std::unique_ptr<bomb::Map> bomb::MapConstructor::construct(
-	bomb::IAssetLoader &loader,
+	bomb::IAssetManager &loader,
 	const irr::core::vector3df &pos,
 	const irr::core::vector3df &size,
 	const irr::core::vector3df &rotation)

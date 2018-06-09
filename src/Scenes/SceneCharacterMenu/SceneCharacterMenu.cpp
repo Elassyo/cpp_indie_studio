@@ -11,7 +11,7 @@ bomb::scene::SceneCharacterMenu::SceneCharacterMenu(
 	bomb::PersistentInfo &infos) : AScene(infos), _charLoader() {}
 
 bomb::scene::SceneStatus bomb::scene::SceneCharacterMenu::start(
-	IAssetLoader &loader)
+	IAssetManager &loader)
 {
 	_running = true;
 	_menu.createMenu(loader);
@@ -136,7 +136,7 @@ void bomb::scene::SceneCharacterMenu::addGameButtons()
 }
 
 bomb::scene::SceneStatus bomb::scene::SceneCharacterMenu::loop(
-	bomb::IAssetLoader &loader)
+	bomb::IAssetManager &loader)
 {
 	_menu.updateButtons(loader, true);
 	return _running ? CONTINUE : END;
@@ -146,12 +146,12 @@ void bomb::scene::SceneCharacterMenu::save()
 {
 }
 
-void bomb::scene::SceneCharacterMenu::reset(bomb::IAssetLoader &loader)
+void bomb::scene::SceneCharacterMenu::reset(bomb::IAssetManager &loader)
 {
 	(void) loader;
 }
 
-void bomb::scene::SceneCharacterMenu::clean(IAssetLoader &loader)
+void bomb::scene::SceneCharacterMenu::clean(IAssetManager &loader)
 {
 	_menu.clean();
 	(void) loader;

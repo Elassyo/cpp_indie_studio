@@ -11,7 +11,7 @@
 	#include <memory>
 	#include <irrlicht/vector3d.h>
 
-	#include "../../Interface/IAssetLoader.hpp"
+	#include "../../Interface/IAssetManager.hpp"
 
 #define BLOCK_OBJ_SIZE 2
 
@@ -19,7 +19,7 @@ class unique_ptr;
 namespace bomb {
 	class AMapBlock : public virtual ISerializable {
 	public:
-		AMapBlock(IAssetLoader &loader,
+		AMapBlock(IAssetManager &loader,
 			const irr::core::vector3df &pos,
 			const irr::core::vector3df &scale,
 			const irr::core::vector3df &rotation,
@@ -28,9 +28,9 @@ namespace bomb {
 			size_t hp);
 		AMapBlock();
 
-		virtual bool explode(size_t damage, IAssetLoader &loader) = 0;
+		virtual bool explode(size_t damage, IAssetManager &loader) = 0;
 		virtual std::unique_ptr<AMapBlock> clone(
-			IAssetLoader &loader,
+			IAssetManager &loader,
 			const irr::core::vector3df &pos,
 			const irr::core::vector3df &scale,
 			const irr::core::vector3df &rotation,

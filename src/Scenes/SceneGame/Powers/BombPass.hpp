@@ -14,7 +14,7 @@ namespace bomb {
 	namespace object {
 		class BombPass : public Power {
 		public:
-			BombPass(bomb::IAssetLoader &loader,
+			BombPass(bomb::IAssetManager &loader,
 				 const irr::core::vector3df &pos);
 			bool activate(bomb::Map &map,
 				      bomb::game::Player &player) override;

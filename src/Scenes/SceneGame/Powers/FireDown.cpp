@@ -7,7 +7,7 @@
 
 #include "FireDown.hpp"
 
-bomb::object::FireDown::FireDown(bomb::IAssetLoader &loader,
+bomb::object::FireDown::FireDown(bomb::IAssetManager &loader,
 	const irr::core::vector3df &pos) :
 	Power(loader, pos, "models/powers/fires/fireDown.obj")
 {

@@ -7,7 +7,7 @@
 
 #include "BombPass.hpp"
 
-bomb::object::BombPass::BombPass(bomb::IAssetLoader &loader,
+bomb::object::BombPass::BombPass(bomb::IAssetManager &loader,
 	const irr::core::vector3df &pos) :
 	Power(loader, pos, "models/powers/bombPass/bombPass.obj")
 {

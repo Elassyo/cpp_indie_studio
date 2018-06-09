@@ -12,11 +12,11 @@
 	#include <map>
 	#include <vector>
 
-	#include "../../Interface/IAssetLoader.hpp"
+	#include "../../Interface/IAssetManager.hpp"
 	#include "../../AnimatedObject.hpp"
 	#include "Player.hpp"
 	#include "../../AnimatedObject.hpp"
-	#include "../../Interface/IAssetLoader.hpp"
+	#include "../../Interface/IAssetManager.hpp"
 	#include "../../Map/MapGenerator.hpp"
 	#include "../../Map/Map.hpp"
 	#include "../../Player/PlayerActionner.hpp"
@@ -38,11 +38,11 @@ namespace bomb {
 			Game(PersistentInfo &_infos);
 
 			void createGame(
-				IAssetLoader &loader,
+				IAssetManager &loader,
 				irr::video::ITexture *pTexture
 			);
 			int getMapSize() const;
-			void execute(IAssetLoader &loader);
+			void execute(IAssetManager &loader);
 			bool handleEvent(const irr::SEvent &event);
 			std::shared_ptr<Map> &getMap();
 
@@ -51,10 +51,10 @@ namespace bomb {
 
 		private:
 			void createMap(
-				IAssetLoader &loader,
+				IAssetManager &loader,
 				unsigned int size
 			);
-			void createPlayer(bomb::IAssetLoader &loader,
+			void createPlayer(bomb::IAssetManager &loader,
 				const std::string &path,
 				std::unique_ptr<IPlayerController> controller,
 				const irr::core::vector3di &spawn
@@ -72,9 +72,9 @@ namespace bomb {
 
 			void killPlayersInBlast(
 				std::vector<irr::core::vector2di> &vector,
-				bomb::IAssetLoader &loader);
-			void executePlayers(IAssetLoader &loader);
-			void executeBombs(IAssetLoader &loader);
+				bomb::IAssetManager &loader);
+			void executePlayers(IAssetManager &loader);
+			void executeBombs(IAssetManager &loader);
 		};
 	}
 }

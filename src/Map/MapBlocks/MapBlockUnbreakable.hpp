@@ -8,14 +8,14 @@
 #ifndef CPP_INDIE_STUDIO_MAPBLOCKUNBREAKABLE_HPP
 	#define CPP_INDIE_STUDIO_MAPBLOCKUNBREAKABLE_HPP
 
-	#include "../../Interface/IAssetLoader.hpp"
+	#include "../../Interface/IAssetManager.hpp"
 	#include "AMapBlock.hpp"
 
 namespace bomb {
 	class MapBlockUnbreakable : public AMapBlock {
 	public:
 		MapBlockUnbreakable(
-			IAssetLoader &loader,
+			IAssetManager &loader,
 			const irr::core::vector3df &pos,
 			const irr::core::vector3df &scale,
 			const irr::core::vector3df &rotation,
@@ -23,10 +23,10 @@ namespace bomb {
 		);
 		MapBlockUnbreakable();
 
-		bool explode(size_t damage, IAssetLoader &loader) override;
+		bool explode(size_t damage, IAssetManager &loader) override;
 
 		std::unique_ptr<bomb::AMapBlock> clone(
-			IAssetLoader &loader,
+			IAssetManager &loader,
 			const irr::core::vector3df &pos,
 			const irr::core::vector3df &scale,
 			const irr::core::vector3df &rotation,

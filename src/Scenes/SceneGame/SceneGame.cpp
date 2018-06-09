@@ -27,14 +27,14 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
 }
 
 bomb::scene::SceneStatus bomb::scene::SceneGame::loop(
-	bomb::IAssetLoader &loader)
+	bomb::IAssetManager &loader)
 {
 	explodeBombs(loader);
 	_game.execute(loader);
 	return _running ? CONTINUE : END;
 }
 
-void bomb::scene::SceneGame::explodeBombs(bomb::IAssetLoader &loader)
+void bomb::scene::SceneGame::explodeBombs(bomb::IAssetManager &loader)
 {
 	for (auto &bomb : _bombs)
 		bomb.get()->tryToActivate(*_game.getMap(),
@@ -46,12 +46,12 @@ void bomb::scene::SceneGame::save()
 {
 }
 
-void bomb::scene::SceneGame::reset(bomb::IAssetLoader &loader)
+void bomb::scene::SceneGame::reset(bomb::IAssetManager &loader)
 {
 	(void) loader;
 }
 
-void bomb::scene::SceneGame::clean(IAssetLoader &loader)
+void bomb::scene::SceneGame::clean(IAssetManager &loader)
 {
 	_game.getMap()->clean(loader);
 }
