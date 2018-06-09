@@ -57,7 +57,6 @@ std::unique_ptr<bomb::Map> bomb::MapConstructor::construct(
 			loader, blockPos, size, rotation, block.first));
 		cells[block.first.X + block.first.Y * _mapSize] = block.second;
 	}
-	std::cout << _blocks.size() << " : " << _mapSize << std::endl;
 	return std::make_unique<bomb::Map>(_blocks, cells);
 }
 

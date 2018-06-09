@@ -21,6 +21,7 @@ namespace bomb {
 		int getPlayerNbr() const;
 		std::array<PlayerInfo, 4> getPlayerInfos() const;
 		PlayerInfo getPlayerInfos(int idx) const;
+		int getMapSize() const;
 		bool generateMap() const;
 
 		void setFileName(const std::string &);
@@ -28,7 +29,9 @@ namespace bomb {
 		void setgenerateMap(bool gm);
 		void setPlayerInfos(std::array<PlayerInfo, 4> playerInfos);
 		void setPlayerInfos(int idx, PlayerInfo playerinfo);
+		void setMapSize(int mapSize);
 	private:
+		int _mapSize;
 		int _playerNbr;
 		bool _generateMap;
 		std::string _fileMap;

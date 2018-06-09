@@ -22,9 +22,14 @@ namespace bomb {
 
 		bool isAI() const;
 		game::Character getCharacter() const;
-		IPlayerController::Actions getActionFromKey(irr::EKEY_CODE)
-		const;
+		IPlayerController::Actions getActionFromKey(
+			irr::EKEY_CODE) const;
+		std::map<irr::EKEY_CODE, IPlayerController::Actions>
+		getKeys() const;
 
+		void setKeys(
+			std::map<irr::EKEY_CODE,
+				IPlayerController::Actions> keys);
 		void setIsAI(bool isAI);
 		void setCharacter(game::Character character);
 	private:
