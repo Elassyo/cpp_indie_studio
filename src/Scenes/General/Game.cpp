@@ -117,9 +117,13 @@ void bomb::game::Game::killPlayersInBlast(
 		if (!p.first.isAlive())
 			continue;
 		for (auto b : blast) {
-			if ((int)p.first.getExactPos().X == b.X &&
-				(int)p.first.getExactPos().Z == b.Y)
+			irr::core::vector2di pos(
+				static_cast<irr::s32>(p.first.getExactPos().X),
+				static_cast<irr::s32>(p.first.getExactPos().Z));
+			if (pos == b) {
 				p.first.setAlive(false, loader);
+				break;
+			}
 		}
 	}
 }
