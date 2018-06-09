@@ -19,7 +19,8 @@ bomb::GameEngine::GameEngine(const std::wstring &winName,
 	_videoDriver(_device->getVideoDriver()),
 	_sceneManager(_device->getSceneManager()),
 	_camera(nullptr),
-	_assetsPath(Version::GetCurrentVersion().getAssetsPath())
+	_assetsPath(Version::GetCurrentVersion().getAssetsPath()),
+	_audioMgr(_assetsPath)
 {
 	_device->setWindowCaption(winName.c_str());
 }
@@ -62,7 +63,12 @@ irr::video::ITexture *bomb::GameEngine::loadTexture(const std::string &path)
 
 void bomb::GameEngine::loadAudioFile(const std::string &path)
 {
-	_audioMgr.loadAudioFile(_assetsPath + path);
+	_audioMgr.loadAudioFile(path);
+}
+
+void bomb::GameEngine::unloadAudioFile(const std::string &path)
+{
+	_audioMgr.unloadAudioFile(path);
 }
 
 irr::gui::IGUIFont *bomb::GameEngine::loadFont(const std::string &path)
@@ -151,14 +157,9 @@ bomb::GameEngine::createPlaneObject(const std::string &name,
 	return ptr;
 }
 
-void bomb::GameEngine::unloadMusic(const std::string &path)
-{
-	_audioMgr.unloadAudioFile(path);
-}
-
 void bomb::GameEngine::playMusic(const std::string &path)
 {
-	_audioMgr.loadAudioFile(path);
+	_audioMgr.playMusic(path);
 }
 
 void bomb::GameEngine::stopAll()

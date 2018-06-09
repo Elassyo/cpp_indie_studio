@@ -68,7 +68,7 @@ namespace bomb {
 		const irr::core::dimension2d<irr::u32> &getScreenSize()
 			override;
 
-		void unloadMusic(const std::string &path) override;
+		void unloadAudioFile(const std::string &path) override;
 		void playMusic(const std::string &path) override;
 		void pauseAll() override;
 		void stopAll() override;
