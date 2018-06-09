@@ -22,8 +22,8 @@ void bomb::game::Game::createGame(IAssetLoader &loader,
 			     std::make_unique<bomb::player::AIController>(_map),
 			     {i % 2 ? 1 : MAP_SIZE - 2, 0,
 			      i > 1 ? MAP_SIZE - 2 : 1});
-	_map->setTextures(texture);
 	reset();
+	(void) texture;
 }
 
 void bomb::game::Game::createMap(
