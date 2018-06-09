@@ -9,7 +9,7 @@
 
 bomb::menu::GraphicButton::GraphicButton(irr::gui::IGUIButton *button,
 	irr::core::vector2df pos, int id) :
-	GraphicElement(button, pos), _event(nullptr), _id(id)
+	GraphicElement(button, pos, id), _element(button), _event(nullptr)
 {
 	button->setScaleImage(true);
 	button->setDrawBorder(false);
@@ -30,16 +30,32 @@ bool bomb::menu::GraphicButton::isPressed(const irr::SEvent &event)
 	return false;
 }
 
-void bomb::menu::GraphicButton::setFont(irr::gui::IGUIFont *font)
+void bomb::menu::GraphicButton::setIsPushable(bool isPushable)
 {
-	((irr::gui::IGUIButton *)_element)->setOverrideFont(font);
+	_element->setIsPushButton(!isPushable);
+	_element->setPressed(false);
 }
 
-void bomb::menu::GraphicButton::setTexture(irr::video::ITexture *texture,
-					   irr::video::ITexture *pressed)
+void bomb::menu::GraphicButton::setFont(irr::gui::IGUIFont *font)
 {
-	((irr::gui::IGUIButton *)_element)->setImage(texture);
-	((irr::gui::IGUIButton *)_element)->setPressedImage(pressed);
+	_element->setOverrideFont(font);
+}
+
+void bomb::menu::GraphicButton::setTextures(irr::video::ITexture *texture,
+					    irr::video::ITexture *pressed)
+{
+	setTexture(texture);
+	setPressedTexture(pressed);
+}
+
+void bomb::menu::GraphicButton::setTexture(irr::video::ITexture *texture)
+{
+	_element->setImage(texture);
+}
+
+void bomb::menu::GraphicButton::setPressedTexture(irr::video::ITexture *pressed)
+{
+	_element->setPressedImage(pressed);
 }
 
 const std::function<void()> &bomb::menu::GraphicButton::getEvent() const
@@ -50,15 +66,4 @@ const std::function<void()> &bomb::menu::GraphicButton::getEvent() const
 void bomb::menu::GraphicButton::setEvent(std::function <void ()> &event)
 {
 	_event = event;
-}
-
-int bomb::menu::GraphicButton::getId() const
-{
-	return _id;
-}
-
-
-void bomb::menu::GraphicButton::setText(const wchar_t *text)
-{
-	((irr::gui::IGUIButton *) _element)->setText(text);
 }

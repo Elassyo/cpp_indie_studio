@@ -8,8 +8,9 @@
 #include "AnimatedObject.hpp"
 #include "Exception/Exception.hpp"
 
-bomb::AnimatedObject::AnimatedObject(irr::scene::IAnimatedMeshSceneNode *node):
-		AObject(node), _node(node)
+bomb::AnimatedObject::AnimatedObject(irr::scene::IAnimatedMeshSceneNode *node,
+IAudioPlayer &ap):
+		AObject(node, ap), _node(node)
 {
 	if (!node)
 		throw Exception("AnimatedObject",
@@ -26,5 +27,21 @@ void bomb::AnimatedObject::setTexture(uint32_t layer,
 
 std::string bomb::AnimatedObject::toString()
 {
-	return "";
+	return "AnimatedObject";
+}
+
+void bomb::AnimatedObject::move(const irr::core::vector3df &v)
+{
+	_node->setPosition(_node->getPosition() + v);
+}
+
+void bomb::AnimatedObject::scale(const irr::core::vector3df &v)
+{
+	_node->setScale(_node->getScale() + v);
+
+}
+
+void bomb::AnimatedObject::rotate(const irr::core::vector3df &v)
+{
+	_node->setRotation(_node->getRotation() + v);
 }

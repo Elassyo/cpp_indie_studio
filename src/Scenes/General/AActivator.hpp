@@ -9,18 +9,22 @@
 	#define CPP_INDIE_STUDIO_IACTIVATOR_HPP
 
 	#include "../../Map/Map.hpp"
-
-	#include "GameInfo.hpp"
+	#include "Player.hpp"
+	#include "../../Player/PlayerActionner.hpp"
 
 namespace bomb {
 	namespace game {
 		class AActivator {
 		public:
 			AActivator();
-			bool tryToActivate(GameInfo &infos);
+			bool tryToActivate(bomb::Map &map,
+				std::vector<std::pair<Player, PlayerActionner>>
+				&players);
 		protected:
-			virtual bool isActivable(GameInfo &infos) = 0;
-			virtual bool activate(GameInfo &infos) = 0;
+			virtual int isActivable(bomb::Map &map, std::vector
+				<std::pair<Player, PlayerActionner>> &) = 0;
+			virtual bool activate(bomb::Map &map,
+				bomb::game::Player &player) = 0;
 		private:
 			bool _activated;
 		};

@@ -10,7 +10,6 @@
 
 	#include <iostream>
 	#include <map>
-	#include <iostream>
 	#include <thread>
 	#include <chrono>
 	
@@ -20,7 +19,9 @@
 	#include "../Scenes/General/Clock.hpp"
 	#include "SceneGame/SceneGame.hpp"
 	#include "SceneHomeMenu/SceneHomeMenu.hpp"
-
+	#include "SceneOptionMenu/SceneOptionMenu.hpp"
+	#include "General/PersistentInfo.hpp"
+	#include "SceneCharacterMenu/SceneCharacterMenu.hpp"
 
 namespace bomb {
 	namespace scene {
@@ -31,10 +32,11 @@ namespace bomb {
 			void launchScene(const std::string &);
 
 		private:
-			void _loopScene(std::shared_ptr<IGameScene> &);
+			bool _loopScene(std::shared_ptr<IGameScene> &);
 			GameEngine & _gameEngine;
 			std::map<std::string, std::shared_ptr<IGameScene>>
 				_scenes;
+			PersistentInfo _info;
 		};
 	}
 }

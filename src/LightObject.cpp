@@ -8,8 +8,9 @@
 #include "Exception/Exception.hpp"
 #include "LightObject.hpp"
 
-bomb::LightObject::LightObject(irr::scene::ILightSceneNode *node):
-	AObject(node), _node(node)
+bomb::LightObject::LightObject(irr::scene::ILightSceneNode *node,
+			       IAudioPlayer &ap):
+	AObject(node, ap), _node(node)
 {
 	if (!node)
 		throw Exception("LightObject",
@@ -24,5 +25,5 @@ void bomb::LightObject::setTexture(uint32_t layer,
 
 std::string bomb::LightObject::toString()
 {
-	return "";
+	return "LightObject";
 }

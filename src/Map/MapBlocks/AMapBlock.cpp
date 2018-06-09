@@ -12,7 +12,7 @@ bomb::AMapBlock::AMapBlock(IAssetLoader &loader,
 	const irr::core::vector3df &pos,
 	const irr::core::vector3df &size,
 	const irr::core::vector3df &rotation,
-	const irr::core::vector3di &mapPos,
+	const irr::core::vector2di &mapPos,
 	const std::string &path,
 	size_t hp) :
 	_mapPos(mapPos), _hp(hp)
@@ -26,7 +26,7 @@ bomb::AMapBlock::AMapBlock()
 	_block = nullptr;
 }
 
-const irr::core::vector3di &bomb::AMapBlock::getMapPos() const
+const irr::core::vector2di &bomb::AMapBlock::getMapPos() const
 {
 	return _mapPos;
 }

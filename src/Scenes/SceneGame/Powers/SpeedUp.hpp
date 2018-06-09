@@ -16,7 +16,8 @@ namespace bomb {
 		public:
 			SpeedUp(bomb::IAssetLoader &loader,
 				const irr::core::vector3df &pos);
-			bool activate(game::GameInfo &infos) override;
+			bool activate(bomb::Map &map,
+				      bomb::game::Player &player) override;
 		};
 	}
 }

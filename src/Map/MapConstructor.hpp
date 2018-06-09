@@ -17,15 +17,11 @@
 namespace bomb {
 	class MapConstructor {
 	public:
-		enum BlockType {
-			UNBREAKABLE,
-			BREAKABLE
-		};
-
 		explicit MapConstructor(unsigned int mapSize);
 
-		void addBlock(const irr::core::vector3di &, BlockType type);
-		void rmBlock(const irr::core::vector3di &);
+		void addBlock(const irr::core::vector2di &, Map::BlockType
+		type);
+		void rmBlock(const irr::core::vector2di &);
 
 		std::unique_ptr<bomb::Map> construct(
 			IAssetLoader &loader,
@@ -36,9 +32,9 @@ namespace bomb {
 		int getSize();
 	private:
 		unsigned int _mapSize;
-		std::map<irr::core::vector3di, BlockType> _mapBlocks;
+		std::map<irr::core::vector2di, Map::BlockType> _mapBlocks;
 
-		static const std::unordered_map<bomb::MapConstructor::BlockType,
+		static const std::unordered_map<bomb::Map::BlockType,
 			std::shared_ptr<bomb::AMapBlock>> Blocks;
 	};
 }

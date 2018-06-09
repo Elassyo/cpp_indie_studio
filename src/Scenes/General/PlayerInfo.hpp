@@ -5,39 +5,33 @@
 // PlayerInfo.hpp
 //
 
-#ifndef CPP_INDIE_STUDIO_PLAYERINFO_HPP
-	#define CPP_INDIE_STUDIO_PLAYERINFO_HPP
+#ifndef CPP_INDIE_STUDIO_PLAYERINFO2_HPP
+	#define CPP_INDIE_STUDIO_PLAYERINFO2_HPP
 
-	#include <cstdint>
+	#include <utility>
+	#include <unordered_map>
+	#include <irrlicht/irrlicht.h>
+#include <map>
+#include "../../Interface/IPlayerController.hpp"
 
 namespace bomb {
-	namespace game {
-		class PlayerInfo {
-		public:
-			PlayerInfo();
+	class PlayerInfo {
+	public:
+		PlayerInfo();
 
-			uint8_t getNbBombs() const;
-			uint8_t getSpeed() const;
-			uint8_t getBombRange() const;
-			bool isGhostMode() const;
-			bool isAlive() const;
-			uint8_t getCharacterIndex() const;
+		bool isAI() const;
+		wchar_t *getModelPath() const;
+		IPlayerController::Actions getActionFromKey(irr::EKEY_CODE)
+		const;
 
-			void setNbBombs(uint8_t _nbBombs);
-			void setSpeed(uint8_t _speed);
-			void setBombRange(uint8_t _bombRange);
-			void setGhostMode(bool _ghostMode);
-			void setAlive(bool _alive);
-			void setCharacterIndex(uint8_t _characterIndex);
-
-		private:
-			uint8_t _nbBombs;
-			uint8_t _speed;
-			uint8_t _bombRange;
-			bool _ghostMode;
-			bool _alive;
-			uint8_t _characterIndex;
-		};
-	}
+		void setIsAI(bool isAI);
+		void setModelPath(wchar_t *modelPath);
+	private:
+		bool _isAI;
+		wchar_t *_modelPath;
+		std::map<irr::EKEY_CODE,
+			IPlayerController::Actions> _keys;
+	};
 }
+
 #endif /* CPP_INDIE_STUDIO_PLAYERINFO_HPP */

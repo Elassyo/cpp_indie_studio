@@ -17,10 +17,15 @@ namespace bomb {
 	class AnimatedObject : public AObject {
 	public:
 		explicit AnimatedObject(
-			irr::scene::IAnimatedMeshSceneNode *node);
+			irr::scene::IAnimatedMeshSceneNode *node,
+			IAudioPlayer &ap);
 
 		void setTexture(uint32_t layer,
 			irr::video::ITexture *texture) override;
+
+		void move(const irr::core::vector3df &v);
+		void scale(const irr::core::vector3df &v);
+		void rotate(const irr::core::vector3df &v);
 
 		std::string toString() override;
 

@@ -7,15 +7,19 @@
 
 #include "SceneGame.hpp"
 
+bomb::scene::SceneGame::SceneGame(bomb::PersistentInfo &_infos) :
+	AScene(_infos), _game(_infos), _running(true)
+{}
+
 bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
 {
-	//Testing loader (Temporary)
 	_blocksTextures = loader.loadTexture("models/blocks/spritesheet.png");
-	_gameInfo.createMap(loader, _blocksTextures);
+	_game.createGame(loader, _blocksTextures);
 	auto cam = loader.getCamera();
-	cam->setPosition({20, 10, (float)_gameInfo.getMapSize() / 2});
-	cam->setRotation({(float)_gameInfo.getMapSize() / 2,
-			0, (float)_gameInfo.getMapSize() / 2});
+	float mid = (float)(_game.getMapSize() - 1) / 2;
+	cam->setPos({mid, (float)_game.getMapSize() * 0.8f,
+		(float)_game.getMapSize() * 0.8f});
+	cam->setTarget({mid, 0, mid + 1});
 	return BEGIN;
 }
 
@@ -23,13 +27,16 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::loop(
 	bomb::IAssetLoader &loader)
 {
 	explodeBombs(loader);
-	return CONTINUE;
+	_game.execute(loader);
+	return _running ? CONTINUE : END;
 }
 
 void bomb::scene::SceneGame::explodeBombs(bomb::IAssetLoader &loader)
 {
 	for (auto &bomb : _bombs)
-		bomb.get()->tryToActivate(_gameInfo);
+		bomb.get()->tryToActivate(*_game.getMap(),
+		_game.getPlayers());
+	(void) loader;
 }
 
 void bomb::scene::SceneGame::save()
@@ -38,6 +45,7 @@ void bomb::scene::SceneGame::save()
 
 void bomb::scene::SceneGame::reset(bomb::IAssetLoader &loader)
 {
+	(void) loader;
 }
 
 void bomb::scene::SceneGame::clean()
@@ -52,5 +60,10 @@ std::string bomb::scene::SceneGame::nextScene()
 
 bool bomb::scene::SceneGame::onEvent(const irr::SEvent &event)
 {
+	if (event.EventType == irr::EET_KEY_INPUT_EVENT) {
+		_game.handleEvent(event);
+		if (event.KeyInput.Key == irr::KEY_ESCAPE)
+			_running = false;
+	}
 	return true;
 }

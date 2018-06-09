@@ -1,74 +1,45 @@
 //
 // EPITECH PROJECT, 2018
-// cpp_indie_studio
+// cpp_indie_studios
 // File description:
 // PlayerInfo.cpp
 //
 
 #include "PlayerInfo.hpp"
 
-bomb::game::PlayerInfo::PlayerInfo() :
-	_nbBombs(1), _speed(10), _bombRange(1), _ghostMode(false), _alive(true),
-	_characterIndex(0)
+bomb::PlayerInfo::PlayerInfo() : _isAI(true), _modelPath(nullptr),
+	_keys({{irr::KEY_UP, IPlayerController::MV_UP},
+		{irr::KEY_DOWN, IPlayerController::MV_DOWN},
+		{irr::KEY_LEFT, IPlayerController::MV_LEFT},
+		{irr::KEY_RIGHT, IPlayerController::MV_RIGHT},
+		{irr::KEY_SPACE, IPlayerController::PUT_BOMB}})
 {
 }
 
-unsigned char bomb::game::PlayerInfo::getNbBombs() const
+bool bomb::PlayerInfo::isAI() const
 {
-	return _nbBombs;
+	return _isAI;
 }
 
-unsigned char bomb::game::PlayerInfo::getSpeed() const
+void bomb::PlayerInfo::setIsAI(bool isAI)
 {
-	return _speed;
+	_isAI = isAI;
 }
 
-unsigned char bomb::game::PlayerInfo::getBombRange() const
+wchar_t *bomb::PlayerInfo::getModelPath() const
 {
-	return _bombRange;
+	return _modelPath;
 }
 
-bool bomb::game::PlayerInfo::isGhostMode() const
+void bomb::PlayerInfo::setModelPath(wchar_t *modelPath)
 {
-	return _ghostMode;
+	PlayerInfo::_modelPath = modelPath;
 }
 
-bool bomb::game::PlayerInfo::isAlive() const
+bomb::IPlayerController::Actions
+bomb::PlayerInfo::getActionFromKey(irr::EKEY_CODE key) const
 {
-	return _alive;
-}
-
-unsigned char bomb::game::PlayerInfo::getCharacterIndex() const
-{
-	return _characterIndex;
-}
-
-void bomb::game::PlayerInfo::setNbBombs(unsigned char _nbBombs)
-{
-	PlayerInfo::_nbBombs = _nbBombs;
-}
-
-void bomb::game::PlayerInfo::setSpeed(unsigned char _speed)
-{
-	PlayerInfo::_speed = _speed;
-}
-
-void bomb::game::PlayerInfo::setBombRange(unsigned char _bombRange)
-{
-	PlayerInfo::_bombRange = _bombRange;
-}
-
-void bomb::game::PlayerInfo::setGhostMode(bool _ghostMode)
-{
-	PlayerInfo::_ghostMode = _ghostMode;
-}
-
-void bomb::game::PlayerInfo::setAlive(bool _alive)
-{
-	PlayerInfo::_alive = _alive;
-}
-
-void bomb::game::PlayerInfo::setCharacterIndex(unsigned char _characterIndex)
-{
-	PlayerInfo::_characterIndex = _characterIndex;
+	if (_keys.find(key) == _keys.end())
+		return IPlayerController::UNDEFINED;
+	return _keys.at(key);
 }

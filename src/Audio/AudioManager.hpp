@@ -15,10 +15,14 @@
 
 	#include "AudioBuffer.hpp"
 	#include "../AObject.hpp"
+	#include "../Interface/IAudioListener.hpp"
+	#include "../Interface/IAudioPlayer.hpp"
 
 namespace bomb {
 
-	class AudioManager {
+	class AudioManager :
+		public virtual IAudioListener,
+		public virtual IAudioPlayer {
 	public:
 		AudioManager();
 		AudioManager(const AudioManager &other) = delete;
@@ -32,7 +36,7 @@ namespace bomb {
 		void updateListener(irr::scene::ICameraSceneNode *camera);
 
 		void playMusic(const std::string &path);
-		void playSound(const std::string &path, const AObject &obj);
+		void playSound(const std::string &path, const IObject &obj) override;
 
 		void pauseAll();
 		void resumeAll();

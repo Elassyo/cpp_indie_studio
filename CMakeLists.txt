@@ -13,21 +13,21 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     add_compile_options("/DBOMB_VERSION=WINDOWS")
     include_directories(
-        "C:\\irrlicht-1.8.4\\include"
-        "C:\\Program Files (x86)\\OpenAL 1.1 SDK\\include"
-        "C:\\libogg-1.3.3\\include"
-        "C:\\libvorbis-1.3.6\\include")
+            "C:\\irrlicht-1.8.4\\include"
+            "C:\\Program Files (x86)\\OpenAL 1.1 SDK\\include"
+            "C:\\libogg-1.3.3\\include"
+            "C:\\libvorbis-1.3.6\\include")
     link_directories(
-        "C:\\irrlicht-1.8.4\\lib\\Win64-visualStudio"
-        "C:\\Program Files (x86)\\OpenAL 1.1 SDK\\libs\\Win64"
-        "C:\\libvorbis-1.3.6\\win32\\VS2010\\x64\\Release")
+            "C:\\irrlicht-1.8.4\\lib\\Win64-visualStudio"
+            "C:\\Program Files (x86)\\OpenAL 1.1 SDK\\libs\\Win64"
+            "C:\\libvorbis-1.3.6\\win32\\VS2010\\x64\\Release")
     set(LIBOPENAL_NAME OpenAL32)
     set(LIBVORBISFILE_NAME libvorbisfile)
 
     set(LIBEXTRA_NAME Shell32)
 
     set(SRC_RESOURCES
-        win/bombermario.rc)
+            win/bombermario.rc)
 endif()
 
 set(SRC_FILES
@@ -47,6 +47,9 @@ set(SRC_FILES
         src/Interface/IRenderWindow.hpp
         src/Interface/ISerializable.hpp
         src/Interface/ITransformable.hpp
+        src/Interface/IPlayerController.hpp
+        src/Interface/IAudioPlayer.hpp
+        src/Interface/IAudioListener.hpp
 
         src/Map/Map.cpp
         src/Map/Map.hpp
@@ -67,8 +70,17 @@ set(SRC_FILES
         src/Menu/GraphicElement.hpp
         src/Menu/GraphicText.cpp
         src/Menu/GraphicText.hpp
+        src/Menu/GraphicImage.cpp
+        src/Menu/GraphicImage.hpp
         src/Menu/Menu.cpp
         src/Menu/Menu.hpp
+
+        src/Player/APlayerController.cpp
+        src/Player/APlayerController.hpp
+        src/Player/AIController.cpp
+        src/Player/AIController.hpp
+        src/Player/PlayerActionner.cpp
+        src/Player/PlayerActionner.hpp
 
         src/Render/EventHandler.cpp
         src/Render/EventHandler.hpp
@@ -79,10 +91,17 @@ set(SRC_FILES
         src/Scenes/General/AActivator.hpp
         src/Scenes/General/Clock.cpp
         src/Scenes/General/Clock.hpp
-        src/Scenes/General/GameInfo.cpp
-        src/Scenes/General/GameInfo.hpp
+        src/Scenes/General/Game.cpp
+        src/Scenes/General/Game.hpp
+        src/Scenes/General/PersistentInfo.cpp
+        src/Scenes/General/PersistentInfo.hpp
         src/Scenes/General/PlayerInfo.cpp
         src/Scenes/General/PlayerInfo.hpp
+        src/Scenes/General/Player.cpp
+        src/Scenes/General/Player.hpp
+        src/Scenes/General/AScene.cpp
+        src/Scenes/General/AScene.hpp
+
         src/Scenes/SceneGame/Bomb.cpp
         src/Scenes/SceneGame/Bomb.hpp
         src/Scenes/SceneGame/Powers/BombDown.cpp
@@ -113,6 +132,10 @@ set(SRC_FILES
         src/Scenes/SceneGame/SceneGame.hpp
         src/Scenes/SceneHomeMenu/SceneHomeMenu.cpp
         src/Scenes/SceneHomeMenu/SceneHomeMenu.hpp
+        src/Scenes/SceneOptionMenu/SceneOptionMenu.cpp
+        src/Scenes/SceneOptionMenu/SceneOptionMenu.hpp
+        src/Scenes/SceneCharacterMenu/SceneCharacterMenu.cpp
+        src/Scenes/SceneCharacterMenu/SceneCharacterMenu.hpp
         src/Scenes/SceneLauncher.cpp
         src/Scenes/SceneLauncher.hpp
 
@@ -126,27 +149,31 @@ set(SRC_FILES
         src/StaticObject.hpp
         src/Version.cpp
         src/Version.hpp
-        )
+        src/CameraObject.cpp
+        src/CameraObject.hpp
 
-add_executable(bombermario WIN32
+        src/Xml/XmlWriter.cpp
+        src/Xml/XmlWriter.hpp)
+
+        add_executable(bombermario WIN32
         ${SRC_FILES}
         ${SRC_RESOURCES}
         src/BomberMario.cpp)
 
-add_executable(tests_map_gen
+        add_executable(tests_map_gen
         ${SRC_FILES}
         tests/MapGen.cpp)
 
-target_link_libraries(tests_map_gen Irrlicht ${LIBOPENAL_NAME} ${LIBVORBISFILE_NAME} ${LIBEXTRA_NAME})
+        target_link_libraries(tests_map_gen Irrlicht ${LIBOPENAL_NAME} ${LIBVORBISFILE_NAME} ${LIBEXTRA_NAME})
 
-target_link_libraries(bombermario Irrlicht ${LIBOPENAL_NAME} ${LIBVORBISFILE_NAME} ${LIBEXTRA_NAME})
+        target_link_libraries(bombermario Irrlicht ${LIBOPENAL_NAME} ${LIBVORBISFILE_NAME} ${LIBEXTRA_NAME})
 
-if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-    add_custom_command(TARGET bombermario POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:bombermario> ${CMAKE_SOURCE_DIR}/bomberman)
-elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
-	set_target_properties(bombermario PROPERTIES LINK_FLAGS "/ENTRY:mainCRTStartup")
-    add_custom_command(TARGET bombermario POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:bombermario> ${CMAKE_SOURCE_DIR}/win/bombermario.exe)
-endif()
+        if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+        add_custom_command(TARGET bombermario POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:bombermario> ${CMAKE_SOURCE_DIR}/bomberman)
+        elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+        set_target_properties(bombermario PROPERTIES LINK_FLAGS "/ENTRY:mainCRTStartup")
+        add_custom_command(TARGET bombermario POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:bombermario> ${CMAKE_SOURCE_DIR}/win/bombermario.exe)
+        endif()
 
-install(TARGETS bombermario DESTINATION /usr/bin/ CONFIGURATIONS Release)
-install(DIRECTORY assets/ DESTINATION /usr/share/bombermario CONFIGURATIONS Release)
+        install(TARGETS bombermario DESTINATION /usr/bin/ CONFIGURATIONS Release)
+        install(DIRECTORY assets/ DESTINATION /usr/share/bombermario CONFIGURATIONS Release)

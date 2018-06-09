@@ -17,34 +17,32 @@
 
 class unique_ptr;
 namespace bomb {
-	class AMapBlock {
+	class AMapBlock : public virtual ISerializable {
 	public:
 		AMapBlock(IAssetLoader &loader,
 			const irr::core::vector3df &pos,
 			const irr::core::vector3df &scale,
 			const irr::core::vector3df &rotation,
-			const irr::core::vector3di &mapPos,
+			const irr::core::vector2di &mapPos,
 			const std::string &path,
 			size_t hp);
 		AMapBlock();
 
-		virtual bool explode(size_t dammage) = 0;
+		virtual bool explode(size_t damage, IAssetLoader &loader) = 0;
 		virtual std::unique_ptr<AMapBlock> clone(
 			IAssetLoader &loader,
 			const irr::core::vector3df &pos,
 			const irr::core::vector3df &scale,
 			const irr::core::vector3df &rotation,
-			const irr::core::vector3di &mapPos) const = 0;
+			const irr::core::vector2di &mapPos) const = 0;
 
-		const irr::core::vector3di &getMapPos() const;
+		const irr::core::vector2di &getMapPos() const;
 		size_t getHp() const;
 		void setTextures(irr::video::ITexture *texture);
 
 	protected:
-		irr::core::vector3di _mapPos;
+		irr::core::vector2di _mapPos;
 		size_t _hp;
-
-	private:
 		std::unique_ptr<StaticObject> _block;
 	};
 }

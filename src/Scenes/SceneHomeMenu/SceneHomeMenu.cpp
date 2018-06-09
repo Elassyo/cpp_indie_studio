@@ -5,28 +5,33 @@
 // SceneLauncher.cpp
 //
 
-#include <iostream>
-
 #include "SceneHomeMenu.hpp"
+
+bomb::scene::SceneHomeMenu::SceneHomeMenu(bomb::PersistentInfo &_infos)
+	: AScene(_infos) {}
 
 bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(
 	IAssetLoader &loader)
 {
-	running = true;
+	_running = true;
 	_menu.createMenu(loader);
-	_menu.addButton(loader, {.5, .35}, 1);
-	_menu.addButtonText(1, L"Play");
-	_menu.addButtonEvent(1, [this](){
-		_nextScene = "game_scene";
+	_menu.addImage(loader.loadTexture("images/menuBack.png"), {.5, .5}, 5);
+	_menu.setElementSize(5, {1, 1});
+	_menu.addText((wchar_t *)L"SUPER\nBOMBERMARIO\nBROS.", {.5, .15}, 0);
+	_menu.setElementFont(0, menu::TITLE);
+	_menu.addButton(L"Play", {.5, .35}, 1);
+	_menu.setButtonEvent(1, [this](){
+		_nextScene = "character_scene";
 	});
-	_menu.addButton(loader, {.5, .5}, 2);
-	_menu.addButtonText(2, L"Options");
-	_menu.addButtonEvent(2, [](){});
-	_menu.addButton(loader, {.5, .65}, 3);
-	_menu.addButtonText(3, L"Quit");
-	_menu.addButtonEvent(3, [](){});
+	_menu.addButton(L"Options", {.5, .5}, 2);
+	_menu.setButtonEvent(2, [this](){
+		_nextScene = "option_scene";
+	});
+	_menu.addButton(L"Quit", {.5, .65}, 3);
+	_menu.setButtonEvent(3, [this](){
+		_nextScene = "";
+	});
 	_menu.updateButtons(loader, true);
-	loader.getCamera({10,0,10}, {0,0,0});
 	return BEGIN;
 }
 
@@ -34,7 +39,7 @@ bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::loop(
 	bomb::IAssetLoader &loader)
 {
 	_menu.updateButtons(loader, true);
-	return running ? CONTINUE : END;
+	return _running ? CONTINUE : END;
 }
 
 void bomb::scene::SceneHomeMenu::save()
@@ -43,11 +48,12 @@ void bomb::scene::SceneHomeMenu::save()
 
 void bomb::scene::SceneHomeMenu::reset(bomb::IAssetLoader &loader)
 {
+	(void) loader;
 }
 
 void bomb::scene::SceneHomeMenu::clean()
 {
-	_menu.cleanMenu();
+	_menu.clean();
 }
 
 std::string bomb::scene::SceneHomeMenu::nextScene()
@@ -60,6 +66,6 @@ bool bomb::scene::SceneHomeMenu::onEvent(const irr::SEvent &event)
 	if (event.EventType == irr::EET_MOUSE_INPUT_EVENT)
 		return false;
 	if (_menu.handleEvent(event))
-		running = false;
+		_running = false;
 	return true;
 }

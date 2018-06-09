@@ -14,41 +14,62 @@
 
 	#include "GraphicText.hpp"
 
+	#include "GraphicImage.hpp"
+
 	#include "../Interface/IAssetLoader.hpp"
 
 namespace bomb {
 	namespace menu {
+		enum MenuFonts {
+			BASIC,
+			TITLE
+		};
 		class Menu {
 		public:
 			Menu();
 
 			void createMenu(IAssetLoader &loader);
-			irr::core::vector2di
-				getButtonSize(IAssetLoader &loader) const;
 			void updateButtons(IAssetLoader &loader,
 						bool areVisible);
-			void addButton(IAssetLoader &loader,
-				irr::core::vector2df pos, int id);
-			void addButtonText(int buttonId, const wchar_t *text);
-			void addButtonEvent(int buttonId, std::function<void()>
-				event);
+			void addButton(const wchar_t *text,
+				       irr::core::vector2df pos, int id);
+			void addText(const wchar_t *text,
+				     irr::core::vector2df pos, int id);
+			void addImage(irr::video::ITexture *texture,
+				     irr::core::vector2df pos, int id);
+			void setButtonTextures(int buttonId,
+					       irr::video::ITexture *texture,
+					       irr::video::ITexture *pressed);
+			void setButtonPressedTexture(int buttonId,
+						     irr::video::ITexture *);
+			void setButtonEvent(int buttonId,
+					    std::function<void()> event);
+			void setButtonPushable(int buttonId, bool isPushable);
+			void setElementPos(int elementId,
+					   irr::core::vector2df pos);
+			void setElementSize(int elementId,
+					    irr::core::vector2df size);
+			void setElementText(int elementId, const wchar_t *text);
+			void setElementFont(int elementId, MenuFonts font);
+			void setElementTexture(int elementId,
+					       irr::video::ITexture *texture);
 			bool handleEvent(const irr::SEvent &event);
-			void cleanMenu();
+			void clean();
 		private:
 			long long getButtonById(int buttonId);
-			void createTitle(const wchar_t *text = L"");
-			irr::gui::IGUIButton *createButton(
-				irr::core::vector2di pos,
-				irr::core::vector2di size,
-				int id);
+			long long getElementById(int elementId);
+			irr::gui::IGUIButton *createButton(int id);
+			irr::gui::IGUIStaticText *createText(
+				const wchar_t *title, int id);
+			irr::gui::IGUIImage *createImage(
+				irr::video::ITexture *texture, int id);
 			irr::gui::IGUIEnvironment *_gui;
-			std::unique_ptr<GraphicText> _title;
 			irr::core::vector2df _buttonRatio;
 			irr::video::ITexture *_buttonBack;
 			irr::video::ITexture *_buttonPressed;
-			irr::gui::IGUIFont *_font;
-			irr::gui::IGUIFont *_titleFont;
-			std::vector<GraphicButton> _buttons;
+			std::map<MenuFonts, irr::gui::IGUIFont *> _fonts;
+			std::vector<std::unique_ptr<GraphicButton>> _buttons;
+			std::vector<std::unique_ptr<GraphicElement>> _elements;
 			irr::core::vector2df pos;
 		};
 	}

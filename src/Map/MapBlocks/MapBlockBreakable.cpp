@@ -12,7 +12,7 @@ bomb::MapBlockBreakable::MapBlockBreakable(
 	const irr::core::vector3df &pos,
 	const irr::core::vector3df &scale,
 	const irr::core::vector3df &rotation,
-	const irr::core::vector3di &mapPos) :
+	const irr::core::vector2di &mapPos) :
 	AMapBlock(loader, pos, scale, rotation, mapPos,
 		"models/blocks/brick.obj", 1)
 {
@@ -28,14 +28,20 @@ std::unique_ptr<bomb::AMapBlock> bomb::MapBlockBreakable::clone(
 	const irr::core::vector3df &pos,
 	const irr::core::vector3df &scale,
 	const irr::core::vector3df &rotation,
-	const irr::core::vector3di &mapPos) const
+	const irr::core::vector2di &mapPos) const
 {
 	return std::make_unique<MapBlockBreakable>
 		(loader, pos, scale, rotation, mapPos);
 }
 
-bool bomb::MapBlockBreakable::explode(size_t damage)
+bool bomb::MapBlockBreakable::explode(size_t damage, bomb::IAssetLoader &loader)
 {
-	_hp -= 1;
-	return damage <= 0;
+	_hp -= damage;
+	loader.deleteObject(std::move(_block));
+	return _hp <= 0;
+}
+
+std::string bomb::MapBlockBreakable::toString()
+{
+	return "MapBlockBreakable";
 }

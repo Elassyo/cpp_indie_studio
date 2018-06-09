@@ -19,18 +19,20 @@ namespace bomb {
 			const irr::core::vector3df &pos,
 			const irr::core::vector3df &scale,
 			const irr::core::vector3df &rotation,
-			const irr::core::vector3di &mapPos
+			const irr::core::vector2di &mapPos
 		);
 		MapBlockUnbreakable();
 
-		bool explode(size_t dammage) override;
+		bool explode(size_t damage, IAssetLoader &loader) override;
 
 		std::unique_ptr<bomb::AMapBlock> clone(
 			IAssetLoader &loader,
 			const irr::core::vector3df &pos,
 			const irr::core::vector3df &scale,
 			const irr::core::vector3df &rotation,
-			const irr::core::vector3di &mapPos) const override;
+			const irr::core::vector2di &mapPos) const override;
+
+		std::string toString() override;
 	};
 }
 

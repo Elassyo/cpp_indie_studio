@@ -26,6 +26,8 @@ bomb::GameEngine::GameEngine(const std::wstring &winName,
 
 bomb::GameEngine::~GameEngine()
 {
+	_device->closeDevice();
+	_device->run();
 	_device->drop();
 }
 
@@ -55,7 +57,6 @@ irr::gui::IGUIEnvironment *bomb::GameEngine::getGui()
 
 irr::video::ITexture *bomb::GameEngine::loadTexture(const std::string &path)
 {
-
 	return _videoDriver->getTexture((_assetsPath + path).c_str());
 }
 
@@ -77,7 +78,8 @@ std::unique_ptr<bomb::AnimatedObject> bomb::GameEngine::createAnimatedObject(
 {
 	auto ptr = std::make_unique<bomb::AnimatedObject>(
 		_sceneManager->addAnimatedMeshSceneNode(
-			_sceneManager->getMesh((_assetsPath + path).c_str())));
+			_sceneManager->getMesh((_assetsPath + path).c_str())),
+	_audioMgr);
 	ptr->setPos(pos);
 	ptr->setRot(rot);
 	ptr->setScale(scale);
@@ -92,7 +94,8 @@ std::unique_ptr<bomb::StaticObject> bomb::GameEngine::createStaticObject(
 {
 	auto ptr = std::make_unique<bomb::StaticObject>(
 		_sceneManager->addMeshSceneNode(_sceneManager->getMesh(
-			(_assetsPath + path).c_str())));
+			(_assetsPath + path).c_str())),
+	_audioMgr);
 	ptr->setPos(pos);
 	ptr->setRot(rot);
 	ptr->setScale(scale);
@@ -103,7 +106,8 @@ std::unique_ptr<bomb::LightObject> bomb::GameEngine::createLightObject(
 	const irr::core::vector3df &pos, irr::video::SColorf col, float radius)
 {
 	return std::make_unique<bomb::LightObject>(
-		_sceneManager->addLightSceneNode(nullptr, pos, col, radius));
+		_sceneManager->addLightSceneNode(nullptr, pos, col, radius),
+		_audioMgr);
 }
 
 void bomb::GameEngine::deleteObject(std::unique_ptr<bomb::IObject> obj)
@@ -111,18 +115,18 @@ void bomb::GameEngine::deleteObject(std::unique_ptr<bomb::IObject> obj)
 	_sceneManager->addToDeletionQueue(obj->getSceneNode());
 }
 
-irr::scene::ICameraSceneNode *bomb::GameEngine::getCamera(
+std::unique_ptr<bomb::CameraObject> bomb::GameEngine::getCamera(
 	const irr::core::vector3df &pos,
 	const irr::core::vector3df &rot)
 {
 	if (_camera)
-		return _camera;
+		return std::make_unique<CameraObject>(_camera, _audioMgr);
 	_camera = _sceneManager->addCameraSceneNode();
 	if (!_camera)
 		throw Exception("GameEngine", "Can't create camera");
 	_camera->setPosition(pos);
-	_camera->setTarget(rot);
-	return _camera;
+	_camera->setRotation(rot);
+	return std::make_unique<CameraObject>(_camera, _audioMgr);
 }
 
 const irr::core::dimension2d<irr::u32> &bomb::GameEngine::getScreenSize()

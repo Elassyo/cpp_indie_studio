@@ -11,7 +11,7 @@
 
 int main()
 {
-	bomb::GameEngine engine(L"BomberMario", 600, 600,
+	bomb::GameEngine engine(L"BomberMario", 1920, 1080,
 		irr::video::EDT_OPENGL);
 	bomb::scene::SceneLauncher launcher(engine);
 

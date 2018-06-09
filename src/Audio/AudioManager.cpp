@@ -67,7 +67,7 @@ void bomb::AudioManager::playMusic(const std::string &path)
 }
 
 void bomb::AudioManager::playSound(const std::string &path,
-	bomb::AObject const &obj)
+	bomb::IObject const &obj)
 {
 	ALuint buffer = getAudioBuffer(path);
 	ALuint source = getAudioSource();

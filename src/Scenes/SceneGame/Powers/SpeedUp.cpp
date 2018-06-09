@@ -13,7 +13,7 @@ bomb::object::SpeedUp::SpeedUp(bomb::IAssetLoader &loader,
 {
 }
 
-bool bomb::object::SpeedUp::activate(bomb::game::GameInfo &infos)
+bool bomb::object::SpeedUp::activate(bomb::Map &map, bomb::game::Player &player)
 {
-	return Power::activate(infos);
+	return Power::activate(map, player);
 }

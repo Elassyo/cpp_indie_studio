@@ -8,8 +8,8 @@
 #include "GraphicText.hpp"
 
 bomb::menu::GraphicText::GraphicText(irr::gui::IGUIStaticText *text,
-	irr::core::vector2df pos) :
-	GraphicElement(text, pos)
+	irr::core::vector2df pos, int id) :
+	GraphicElement(text, pos, id), _element(text)
 {
 	text->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
 	text->setTextRestrainedInside(false);
@@ -17,5 +17,10 @@ bomb::menu::GraphicText::GraphicText(irr::gui::IGUIStaticText *text,
 
 void bomb::menu::GraphicText::setFont(irr::gui::IGUIFont *font)
 {
-	((irr::gui::IGUIStaticText *)_element)->setOverrideFont(font);
+	_element->setOverrideFont(font);
+}
+
+void bomb::menu::GraphicText::setTexture(irr::video::ITexture *texture)
+{
+	texture = texture;
 }
