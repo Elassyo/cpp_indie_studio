@@ -7,7 +7,7 @@
 
 #include "SpeedDown.hpp"
 
-bomb::object::SpeedDown::SpeedDown(bomb::IAssetLoader &loader,
+bomb::object::SpeedDown::SpeedDown(bomb::IAssetManager &loader,
 	const irr::core::vector3df &pos) :
 	Power(loader, pos, "models/powers/speeds/speedDown.obj")
 {

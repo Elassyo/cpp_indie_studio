@@ -26,16 +26,16 @@ namespace bomb {
 		public:
 			PowerFactory();
 			std::unique_ptr<bomb::object::Power> getRandomPower(
-				bomb::IAssetLoader &loader,
+				bomb::IAssetManager &loader,
 				const irr::core::vector3df &pos);
 
 		private:
 			template<class T> std::unique_ptr<Power>
-			createPtr(bomb::IAssetLoader &loader,
+			createPtr(bomb::IAssetManager &loader,
 				  const irr::core::vector3df &pos);
 			std::vector<std::pair<std::unique_ptr<Power>
 			(bomb::object::PowerFactory::*)
-				(bomb::IAssetLoader &,
+				(bomb::IAssetManager &,
 				 const irr::core::vector3df &), int>> _powers;
 			int _total;
 		};

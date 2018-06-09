@@ -12,7 +12,7 @@ bomb::menu::Menu::Menu() :
 {
 }
 
-void bomb::menu::Menu::createMenu(IAssetLoader &loader)
+void bomb::menu::Menu::createMenu(IAssetManager &loader)
 {
 	_gui = loader.getGui();
 	_buttonBack = loader.loadTexture("images/buttonBack.png");
@@ -72,7 +72,7 @@ irr::gui::IGUIButton *bomb::menu::Menu::createButton(int id)
 	return _gui->addButton({ 0, 0, 1, 1 }, nullptr, id);
 }
 
-void bomb::menu::Menu::updateButtons(IAssetLoader &loader, bool areVisible)
+void bomb::menu::Menu::updateButtons(IAssetManager &loader, bool areVisible)
 {
 	const irr::core::vector2di screenSize = {
 		(int)loader.getScreenSize().Width,

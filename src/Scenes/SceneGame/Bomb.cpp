@@ -7,7 +7,7 @@
 
 #include "Bomb.hpp"
 
-bomb::object::Bomb::Bomb(bomb::IAssetLoader &loader,
+bomb::object::Bomb::Bomb(bomb::IAssetManager &loader,
 			 bomb::game::Player &player,
 			int playerIdx) :
 	_loader(loader),
@@ -61,12 +61,12 @@ int bomb::object::Bomb::isActivable(bomb::Map &map,
 	(void) player;
 }
 
-bomb::IAssetLoader &bomb::object::Bomb::getLoader() const
+bomb::IAssetManager &bomb::object::Bomb::getLoader() const
 {
 	return _loader;
 }
 
-void bomb::object::Bomb::setLoader(bomb::IAssetLoader &_loader)
+void bomb::object::Bomb::setLoader(bomb::IAssetManager &_loader)
 {
 	Bomb::_loader = _loader;
 }

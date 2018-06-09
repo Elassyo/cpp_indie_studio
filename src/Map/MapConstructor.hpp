@@ -11,7 +11,7 @@
 	#include <map>
 	#include <unordered_map>
 
-	#include "../Interface/IAssetLoader.hpp"
+	#include "../Interface/IAssetManager.hpp"
 	#include "Map.hpp"
 
 namespace bomb {
@@ -24,7 +24,7 @@ namespace bomb {
 		void rmBlock(const irr::core::vector2di &);
 
 		std::unique_ptr<bomb::Map> construct(
-			IAssetLoader &loader,
+			IAssetManager &loader,
 			const irr::core::vector3df &pos,
 			const irr::core::vector3df &size,
 			const irr::core::vector3df &rotation);

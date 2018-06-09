@@ -7,7 +7,7 @@
 
 #include "SpeedUp.hpp"
 
-bomb::object::SpeedUp::SpeedUp(bomb::IAssetLoader &loader,
+bomb::object::SpeedUp::SpeedUp(bomb::IAssetManager &loader,
 	const irr::core::vector3df &pos) :
 	Power(loader, pos, "models/powers/speeds/speedUp.obj")
 {

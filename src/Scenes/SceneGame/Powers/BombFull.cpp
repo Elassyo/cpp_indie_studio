@@ -7,7 +7,7 @@
 
 #include "BombFull.hpp"
 
-bomb::object::BombFull::BombFull(bomb::IAssetLoader &loader,
+bomb::object::BombFull::BombFull(bomb::IAssetManager &loader,
 	const irr::core::vector3df &pos) :
 	Power(loader, pos, "models/powers/bombs/bombFull.obj")
 {

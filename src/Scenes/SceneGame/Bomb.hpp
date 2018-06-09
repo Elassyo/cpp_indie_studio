@@ -8,7 +8,7 @@
 #ifndef CPP_INDIE_STUDIO_BOMB_HPP
 	#define CPP_INDIE_STUDIO_BOMB_HPP
 
-	#include "../../Interface/IAssetLoader.hpp"
+	#include "../../Interface/IAssetManager.hpp"
 	#include "../General/AActivator.hpp"
 	#include "../General/Clock.hpp"
 
@@ -16,11 +16,11 @@ namespace bomb {
 	namespace object {
 		class Bomb : public bomb::game::AActivator {
 		public:
-			Bomb(IAssetLoader &loader, bomb::game::Player
+			Bomb(IAssetManager &loader, bomb::game::Player
 			&player, int playerIdx);
 			Bomb(const Bomb &);
 
-			void setLoader(IAssetLoader &_loader);
+			void setLoader(IAssetManager &_loader);
 			void setModel(std::unique_ptr<AnimatedObject> &_model);
 			void
 			setBlast(const std::vector<
@@ -29,7 +29,7 @@ namespace bomb {
 			void setTimer(const utils::Clock &_timer);
 			void setPlayerIdx(int _playerIdx);
 
-			IAssetLoader &getLoader() const;
+			IAssetManager &getLoader() const;
 			const std::unique_ptr<AnimatedObject> &getModel() const;
 			const
 			std::vector<std::pair<irr::core::vector2di,
@@ -44,7 +44,7 @@ namespace bomb {
 
 			bool activate(bomb::Map &map,
 				bomb::game::Player &player) override;
-			bomb::IAssetLoader &_loader;
+			bomb::IAssetManager &_loader;
 			std::unique_ptr<AnimatedObject> _model;
 			std::vector<std::pair<irr::core::vector2di,
 				bomb::Map::BlockType>> _blast;

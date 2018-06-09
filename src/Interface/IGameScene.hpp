@@ -9,7 +9,7 @@
 	#define CPP_INDIE_STUDIO_IGAMESCENE_HPP
 
 	#include "IRenderWindow.hpp"
-	#include "IAssetLoader.hpp"
+	#include "IAssetManager.hpp"
 	#include "IEventScene.hpp"
 
 namespace bomb {
@@ -27,11 +27,11 @@ namespace bomb {
 			virtual ~IGameScene() = default;
 
 			virtual bomb::scene::SceneStatus
-				start(IAssetLoader &loader) = 0;
-			virtual SceneStatus loop(IAssetLoader &loader) = 0;
+				start(IAssetManager &loader) = 0;
+			virtual SceneStatus loop(IAssetManager &loader) = 0;
 			virtual void save() = 0;
-			virtual void reset(IAssetLoader &loader) = 0;
-			virtual void clean(IAssetLoader &loader) = 0;
+			virtual void reset(IAssetManager &loader) = 0;
+			virtual void clean(IAssetManager &loader) = 0;
 			virtual std::string nextScene() = 0;
 			bool onEvent(const irr::SEvent &event) override = 0;
 		};

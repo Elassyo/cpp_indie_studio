@@ -14,7 +14,7 @@ namespace bomb {
 	namespace object {
 		class BombUp : public Power {
 		public:
-			BombUp(bomb::IAssetLoader &loader,
+			BombUp(bomb::IAssetManager &loader,
 			       const irr::core::vector3df &pos);
 
 		private:

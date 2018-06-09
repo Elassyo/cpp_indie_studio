@@ -11,7 +11,7 @@ bomb::scene::SceneOptionMenu::SceneOptionMenu(bomb::PersistentInfo &_infos)
 	: AScene(_infos) {}
 
 bomb::scene::SceneStatus bomb::scene::SceneOptionMenu::start(
-	IAssetLoader &loader)
+	IAssetManager &loader)
 {
 	_running = true;
 	_menu.createMenu(loader);
@@ -46,7 +46,7 @@ void bomb::scene::SceneOptionMenu::setPlusMinusButtons()
 }
 
 bomb::scene::SceneStatus bomb::scene::SceneOptionMenu::loop(
-	bomb::IAssetLoader &loader)
+	bomb::IAssetManager &loader)
 {
 	_menu.updateButtons(loader, true);
 	return _running ? CONTINUE : END;
@@ -56,12 +56,12 @@ void bomb::scene::SceneOptionMenu::save()
 {
 }
 
-void bomb::scene::SceneOptionMenu::reset(bomb::IAssetLoader &loader)
+void bomb::scene::SceneOptionMenu::reset(bomb::IAssetManager &loader)
 {
 	(void) loader;
 }
 
-void bomb::scene::SceneOptionMenu::clean(IAssetLoader &loader)
+void bomb::scene::SceneOptionMenu::clean(IAssetManager &loader)
 {
 	_menu.clean();
 	(void) loader;

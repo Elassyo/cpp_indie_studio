@@ -14,7 +14,7 @@ namespace bomb {
 	namespace object {
 		class BombFull : public bomb::object::Power {
 		public:
-			BombFull(bomb::IAssetLoader &loader,
+			BombFull(bomb::IAssetManager &loader,
 				 const irr::core::vector3df &pos);
 
 		private:

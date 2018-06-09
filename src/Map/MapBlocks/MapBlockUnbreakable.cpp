@@ -8,7 +8,7 @@
 #include "MapBlockUnbreakable.hpp"
 
 bomb::MapBlockUnbreakable::MapBlockUnbreakable(
-	bomb::IAssetLoader &loader,
+	bomb::IAssetManager &loader,
 	const irr::core::vector3df &pos,
 	const irr::core::vector3df &scale,
 	const irr::core::vector3df &rotation,
@@ -24,7 +24,7 @@ bomb::MapBlockUnbreakable::MapBlockUnbreakable():
 }
 
 std::unique_ptr<bomb::AMapBlock> bomb::MapBlockUnbreakable::clone(
-	bomb::IAssetLoader &loader,
+	bomb::IAssetManager &loader,
 	const irr::core::vector3df &pos,
 	const irr::core::vector3df &scale,
 	const irr::core::vector3df &rotation,
@@ -34,7 +34,7 @@ std::unique_ptr<bomb::AMapBlock> bomb::MapBlockUnbreakable::clone(
 		(loader, pos, scale, rotation, mapPos);
 }
 
-bool bomb::MapBlockUnbreakable::explode(size_t damage, IAssetLoader &loader)
+bool bomb::MapBlockUnbreakable::explode(size_t damage, IAssetManager &loader)
 {
 	(void) damage;
 	(void) loader;

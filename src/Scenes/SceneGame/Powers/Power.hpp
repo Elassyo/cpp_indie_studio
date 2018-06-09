@@ -14,7 +14,7 @@ namespace bomb {
 	namespace object {
 		class Power : public game::AActivator {
 		public:
-			Power(bomb::IAssetLoader &loader,
+			Power(bomb::IAssetManager &loader,
 			      const irr::core::vector3df &pos,
 			      std::string path);
 
@@ -27,7 +27,7 @@ namespace bomb {
 					std::vector<std::pair<game::Player,
 						PlayerActionner>>
 					&vector) override;
-			bomb::IAssetLoader &_loader;
+			bomb::IAssetManager &_loader;
 			std::unique_ptr<StaticObject> _model;
 		};
 	}
