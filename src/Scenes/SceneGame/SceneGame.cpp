@@ -1,3 +1,4 @@
+
 //
 // EPITECH PROJECT, 2018
 // cpp_indie_studio
@@ -50,6 +51,9 @@ void bomb::scene::SceneGame::save()
 	xml::XmlWriter xmlWriter("test.xml");
 
 	xmlWriter.mapToSection(_game.getMap());
+	for (size_t i = 0; i < _game.getPlayers().size(); i++) {
+		xmlWriter.playerToSection(_game.getPlayers()[i].first);
+	}
 }
 
 void bomb::scene::SceneGame::reset(bomb::IAssetManager &loader)

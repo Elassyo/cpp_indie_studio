@@ -18,12 +18,12 @@ namespace bomb {
 			SHYGUY_RED,
 			SHYGUY_BLUE,
 			SELECT_BEGIN,
-			DRYBONES,
-			KOOPA,
-			LAKITU,
-			LUIGI,
 			MARIO,
+			LUIGI,
 			YOSHI,
+			KOOPA,
+			DRYBONES,
+			LAKITU,
 			SELECT_END
 		};
 

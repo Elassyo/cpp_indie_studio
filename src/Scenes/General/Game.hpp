@@ -27,6 +27,8 @@
 	#include "../../Player/AIController.hpp"
 	#include "../SceneGame/Powers/Power.hpp"
 	#include "../SceneGame/Powers/PowerFactory.hpp"
+	#include "../../Xml/XmlReader.hpp"
+
 
 namespace bomb {
 	namespace game {
@@ -34,11 +36,16 @@ namespace bomb {
 
 		class Game {
 		public:
-			Game(PersistentInfo &_infos);
+			explicit Game(PersistentInfo &_infos);
 
 			void createGame(
 				IAssetManager &loader,
 				irr::video::ITexture *pTexture
+			);
+			void createGame(
+				IAssetManager &loader,
+				irr::video::ITexture *pTexture,
+				const std::string &fileName
 			);
 			int getMapSize() const;
 			void execute(IAssetManager &loader);
@@ -47,12 +54,16 @@ namespace bomb {
 
 			std::vector<std::pair<Player, PlayerActionner>>
 				&getPlayers();
-
 		private:
 			void createMap(
 				IAssetManager &loader,
 				unsigned int size
 			);
+			void createMap(
+				IAssetManager &loader,
+				xml::XmlReader &
+			);
+
 			void createPlayer(
 				IAssetLoader &loader,
 				const std::string &path,
@@ -64,6 +75,7 @@ namespace bomb {
 			void killPowersInBlast(
 				irr::core::vector2di vector,
 				IAssetManager &manager);
+			void fuseBombInBlast(irr::core::vector2di pos);
 			void blastObjects(
 				std::vector<std::pair<irr::core::vector2di,
 					Map::BlockType>> vector,
@@ -84,6 +96,8 @@ namespace bomb {
 			std::vector<bomb::object::Bomb *> _bombs;
 			std::vector<std::unique_ptr<bomb::object::Power>>
 				_powers;
+			std::unordered_map
+				<std::wstring, Map::BlockType> _strBlk;
 			int _mapSize;
 			bomb::object::PowerFactory _factory;
 		};
