@@ -8,7 +8,8 @@
 #include "../Exception/Exception.hpp"
 #include "AudioManager.hpp"
 
-bomb::AudioManager::AudioManager()
+bomb::AudioManager::AudioManager(const std::string &assetsPath) :
+	_assetsPath(assetsPath)
 {
 	_device = alcOpenDevice(nullptr);
 	if (!_device)
@@ -34,7 +35,7 @@ void bomb::AudioManager::loadAudioFile(const std::string &path)
 {
 	if (_audioBuffers.find(path) != _audioBuffers.end())
 		return;
-	_audioBuffers[path] = new AudioBuffer(path);
+	_audioBuffers[path] = new AudioBuffer(_assetsPath + path);
 }
 
 void bomb::AudioManager::unloadAudioFile(const std::string &path)
