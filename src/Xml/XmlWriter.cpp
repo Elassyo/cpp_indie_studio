@@ -14,15 +14,18 @@ bomb::xml::XmlWriter::XmlWriter(const irr::core::stringw &fileName) :
 			      {Map::BlockType::UNBREAKABLE, L"unbreakable"},
 			      {Map::BlockType::EMPTY, L"empty"}})
 {
-	auto nullDevice = irr::createDevice(irr::video::EDT_NULL);
+	_nullDevice = irr::createDevice(irr::video::EDT_NULL);
 
-	if (!nullDevice)
+	if (!_nullDevice)
 		throw Exception("XmlWriter", "Can't load null device");
-	_xmlWriter = nullDevice->getFileSystem()->createXMLWriter(fileName);
+	_xmlWriter = _nullDevice->getFileSystem()->createXMLWriter(fileName);
 }
 
 bomb::xml::XmlWriter::~XmlWriter()
 {
+	_nullDevice->closeDevice();
+	_nullDevice->run();
+	_nullDevice->drop();
 	_xmlWriter->drop();
 }
 

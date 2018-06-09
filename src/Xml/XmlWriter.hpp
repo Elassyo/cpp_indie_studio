@@ -31,6 +31,7 @@ namespace bomb {
 		private:
 			std::wstring _strToWstr(const std::string &) const;
 
+			irr::IrrlichtDevice *_nullDevice;
 			irr::io::IXMLWriter *_xmlWriter;
 			const std::unordered_map<Map::BlockType, std::wstring>
 				_blockTypeStr;
