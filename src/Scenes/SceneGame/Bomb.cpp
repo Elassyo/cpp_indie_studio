@@ -10,9 +10,8 @@
 bomb::object::Bomb::Bomb(bomb::IAssetManager &loader,
 			 bomb::game::Player &player,
 			int playerIdx) :
-	_loader(loader),
-	_model(loader.createAnimatedObject(
-	"models/bob-bomb.x", player.getExactPos(), {.5, .5, .5})),
+	_model(loader.createAnimatedObject("models/bob-bomb.x",
+		player.getExactPos(), {.5, .5, .5})),
 	_timer(2000), _playerIdx(playerIdx)
 {
 }
@@ -48,14 +47,13 @@ bool bomb::object::Bomb::activate(bomb::Map &map, bomb::game::Player &player,
 				    static_cast<irr::s32>(_model->getPos().Z)};
 	map[pos] = Map::EMPTY;
 	deleteBlock(map, pos);
-	_loader.deleteObject(std::move(_model));
+	loader.deleteObject(std::move(_model));
 	player.setNbBombs(static_cast<uint8_t>(player.getNbBombs() + 1));
 	blastLine(map, pos, {1, 0}, player.getBombRange());
 	blastLine(map, pos, {0, 1}, player.getBombRange());
 	blastLine(map, pos, {0, -1}, player.getBombRange());
 	blastLine(map, pos, {-1, 0}, player.getBombRange());
 	return true;
-	(void) loader;
 }
 
 int bomb::object::Bomb::isActivable(bomb::Map &map,

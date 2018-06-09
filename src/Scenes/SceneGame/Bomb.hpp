@@ -31,7 +31,7 @@ namespace bomb {
 			bool deleteBlock(Map &map, irr::core::vector3di pos);
 			bool blastLine(Map &map, irr::core::vector3di pos,
 				       irr::core::vector2di iterator, int max);
-			bomb::IAssetManager &_loader;
+
 			std::unique_ptr<AnimatedObject> _model;
 			std::vector<std::pair<irr::core::vector2di,
 				bomb::Map::BlockType>> _blast;

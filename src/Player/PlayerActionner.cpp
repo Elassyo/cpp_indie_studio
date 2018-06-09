@@ -34,6 +34,7 @@ void bomb::PlayerActionner::addBomb(bomb::Map &map,
 		player.setNbBombs
 			(static_cast<uint8_t>(player.getNbBombs() - 1));
 		player.setBombReady(true);
+		map[pos] = Map::BOMB;
 	}
 }
 
