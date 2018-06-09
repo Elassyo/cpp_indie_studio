@@ -46,14 +46,6 @@ namespace bomb {
 			bool handleEvent(const irr::SEvent &event);
 			std::shared_ptr<Map> &getMap();
 
-		enum Character {
-				SHYGUY_WHITE,
-				SHYGUY_BLACK,
-				SHYGUY_RED,
-				SHYGUY_BLUE,
-				DRYBONES
-			};
-
 			std::vector<std::pair<Player, PlayerActionner>>
 				&getPlayers();
 
@@ -71,6 +63,7 @@ namespace bomb {
 			void reset();
 
 			PersistentInfo &_infos;
+			bomb::game::CharacterLoader _charLoader;
 			std::vector<std::pair<Player, PlayerActionner>>
 				_players;
 			std::shared_ptr<bomb::Map> _map;
