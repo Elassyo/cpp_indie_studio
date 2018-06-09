@@ -10,10 +10,13 @@
 
 	#include <memory>
 	#include <string>
+	#include <vector>
 	#include <AL/al.h>
 	#include <vorbis/vorbisfile.h>
 
 namespace bomb {
+
+	constexpr int LOOP_REPEATS = 42;
 
 	class AudioBuffer {
 	public:
@@ -22,14 +25,25 @@ namespace bomb {
 
 		~AudioBuffer();
 
-		ALuint getBuffer() const;
+		std::vector<ALuint> getBuffers() const;
 
 	private:
-		void readFile(OggVorbis_File *vf, std::size_t size);
+		void readFile(OggVorbis_File *vf);
+
+		void cutParts(OggVorbis_File *vf);
+		void cutPart(ogg_int64_t start, ogg_int64_t end);
+		ogg_int64_t getLoopStart(OggVorbis_File *vf);
+
+		ALenum getAlFormat() const;
 
 		std::unique_ptr<int16_t[]> _buf;
+		ogg_int64_t _samples;
 
-		ALuint _buffer;
+		int _channels;
+		long _rate;
+
+		std::vector<ALuint> _parts;
+		std::vector<ALuint> _buffers;
 	};
 
 }
