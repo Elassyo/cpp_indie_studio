@@ -132,6 +132,7 @@ void bomb::game::Game::blastObjects(
 	for (auto &b : blast) {
 		killPlayersInBlast(b.first, manager);
 		killPowersInBlast(b.first, manager);
+		fuseBombInBlast(b.first);
 	}
 }
 
@@ -148,6 +149,14 @@ void bomb::game::Game::killPowersInBlast(irr::core::vector2di pos,
 			++p;
 	}
 }
+
+void bomb::game::Game::fuseBombInBlast(irr::core::vector2di pos)
+{
+	for (auto &b : _bombs)
+		if (b->getPos() == pos)
+			b->fuse();
+}
+
 
 void bomb::game::Game::killPlayersInBlast(irr::core::vector2di pos,
 	bomb::IAssetManager &loader)
