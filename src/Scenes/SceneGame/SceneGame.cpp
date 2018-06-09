@@ -12,7 +12,7 @@ bomb::scene::SceneGame::SceneGame(bomb::PersistentInfo &_infos) :
 {
 }
 
-bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
+bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetManager &loader)
 {
 	_blocksTextures = loader.loadTexture("models/blocks/spritesheet.png");
 	_game.createGame(loader, _blocksTextures);
@@ -54,11 +54,17 @@ void bomb::scene::SceneGame::reset(bomb::IAssetManager &loader)
 void bomb::scene::SceneGame::clean(IAssetManager &loader)
 {
 	_game.getMap()->clean(loader);
+	auto &p = _game.getPlayers();
+	for (unsigned int i = 0; i < _game.getPlayers().size(); ++i) {
+		p[i].first.setAlive(false, loader);
+	}
+	p.clear();
+	_running = true;
 }
 
 std::string bomb::scene::SceneGame::nextScene()
 {
-	return "";
+	return "home_scene";
 }
 
 bool bomb::scene::SceneGame::onEvent(const irr::SEvent &event)
@@ -68,5 +74,6 @@ bool bomb::scene::SceneGame::onEvent(const irr::SEvent &event)
 		if (event.KeyInput.Key == irr::KEY_ESCAPE)
 			_running = false;
 	}
+
 	return true;
 }

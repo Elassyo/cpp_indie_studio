@@ -21,7 +21,7 @@ namespace bomb {
 			~SceneGame() override = default;
 
 			bomb::scene::SceneStatus start(
-				IAssetLoader &loader) override;
+				IAssetManager &loader) override;
 			SceneStatus loop(IAssetManager &loader) override;
 			void save() override;
 			void reset(IAssetManager &loader) override;

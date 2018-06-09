@@ -25,6 +25,8 @@
 	#include "PersistentInfo.hpp"
 	#include "../../Exception/Exception.hpp"
 	#include "../../Player/AIController.hpp"
+#include "../SceneGame/Powers/Power.hpp"
+#include "../SceneGame/Powers/PowerFactory.hpp"
 
 
 #define MAP_SIZE 15
@@ -54,13 +56,20 @@ namespace bomb {
 				IAssetManager &loader,
 				unsigned int size
 			);
-			void createPlayer(bomb::IAssetManager &loader,
-				const std::string &path,
-				std::unique_ptr<IPlayerController> controller,
-				const irr::core::vector3di &spawn
-			);
-
+			void createPlayer(IAssetLoader &loader,
+					  const std::string &path,
+					  std::unique_ptr<IPlayerController> controller,
+					  const irr::core::vector3di &spawn);
+			void killPlayersInBlast(
+				std::vector<std::pair<irr::core::vector2di,
+					Map::BlockType>> &blast,
+					IAssetManager &loader);
+			void executePlayers(IAssetManager &loader);
+			void executeBombs(IAssetManager &loader);
 			void reset();
+			void
+			spawnPowers(std::vector<std::pair<irr::core::vector2di,
+				Map::BlockType>> &blast, IAssetManager &loader);
 
 			PersistentInfo &_infos;
 			bomb::game::CharacterLoader _charLoader;
@@ -68,13 +77,11 @@ namespace bomb {
 				_players;
 			std::shared_ptr<bomb::Map> _map;
 			std::vector<bomb::object::Bomb *> _bombs;
+			std::vector<std::unique_ptr<bomb::object::Power>>
+				_powers;
 			int _mapSize;
-
-			void killPlayersInBlast(
-				std::vector<irr::core::vector2di> &vector,
-				bomb::IAssetManager &loader);
-			void executePlayers(IAssetManager &loader);
-			void executeBombs(IAssetManager &loader);
+			bomb::object::PowerFactory _factory;
+			void executePowers(IAssetLoader &loader);
 		};
 	}
 }

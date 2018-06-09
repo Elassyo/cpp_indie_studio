@@ -20,12 +20,13 @@ bomb::object::Bomb::Bomb(bomb::IAssetManager &loader,
 
 bool bomb::object::Bomb::deleteBlock(bomb::Map &map, irr::core::vector3df pos)
 {
+	auto last = map[pos];
 	if (map[pos] == Map::BREAKABLE)
 		map[pos] = Map::EMPTY;
 	if (map[pos] == Map::UNBREAKABLE || map[pos] == Map::BOMB)
 		return false;
-	_blast.emplace_back(static_cast<irr::s32>(pos.X),
-			static_cast<irr::s32>(pos.Z));
+	_blast.emplace_back(irr::core::vector2di(static_cast<irr::s32>(pos.X),
+			static_cast<irr::s32>(pos.Z)), last);
 	return true;
 }
 
@@ -81,13 +82,15 @@ void bomb::object::Bomb::setModel(std::unique_ptr<AnimatedObject> &_model)
 	Bomb::_model = std::move(_model);
 }
 
-const std::vector<irr::core::vector2di> &bomb::object::Bomb::getBlast() const
+const std::vector<std::pair<irr::core::vector2di, bomb::Map::BlockType>>
+	&bomb::object::Bomb::getBlast() const
 {
 	return _blast;
 }
 
 void
-bomb::object::Bomb::setBlast(const std::vector<irr::core::vector2di> &_blast)
+bomb::object::Bomb::setBlast(const std::vector<std::pair<irr::core::vector2di,
+	bomb::Map::BlockType>> &_blast)
 {
 	Bomb::_blast = _blast;
 }

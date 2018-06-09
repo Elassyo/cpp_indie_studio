@@ -19,13 +19,13 @@ namespace bomb {
 	namespace game {
 		class Player {
 		public:
-			Player(bomb::IAssetManager &loader,
-				const std::string &path,
-				std::unique_ptr<bomb::IPlayerController> &ctrl,
-				const irr::core::vector3df &pos,
-				const irr::core::vector3df &scale,
-			       	const irr::core::vector3df &rotation,
-				bomb::PlayerInfo &info);
+			Player(IAssetLoader &loader,
+			       const std::string &path,
+			       std::unique_ptr<bomb::IPlayerController> &ctrl,
+			       const irr::core::vector3df &pos,
+			       const irr::core::vector3df &scale,
+			       const irr::core::vector3df &rotation,
+			       bomb::PlayerInfo &info);
 
 			IPlayerController::Actions
 			getActionFromEvent(const irr::SEvent &event);
