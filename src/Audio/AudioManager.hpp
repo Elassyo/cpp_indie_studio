@@ -24,7 +24,7 @@ namespace bomb {
 		public virtual IAudioListener,
 		public virtual IAudioPlayer {
 	public:
-		AudioManager();
+		explicit AudioManager(const std::string &assetsPath);
 		AudioManager(const AudioManager &other) = delete;
 		~AudioManager();
 
@@ -47,6 +47,8 @@ namespace bomb {
 	private:
 		std::vector<ALuint> getAudioBuffers(const std::string &path);
 		ALuint getAudioSource();
+
+		std::string _assetsPath;
 
 		ALCdevice *_device;
 		ALCcontext *_context;

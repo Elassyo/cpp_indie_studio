@@ -14,7 +14,7 @@
 bomb::AudioBuffer::AudioBuffer(const char *path)
 {
 	OggVorbis_File vf;
-	if (ov_fopen(path, &vf) == 0)
+	if (ov_fopen(path, &vf) != 0)
 		throw Exception("AudioBuffer", "Failed to open file");
 	vorbis_info *vi = ov_info(&vf, -1);
 	_channels = vi->channels;

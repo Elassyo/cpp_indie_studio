@@ -17,7 +17,7 @@ namespace bomb {
 	class IAssetManager : public virtual IAssetLoader {
 	public:
 		virtual void deleteObject(std::unique_ptr<IObject> obj) = 0;
-		virtual void unloadMusic(const std::string &) = 0;
+		virtual void unloadAudioFile(const std::string &) = 0;
 
 		virtual const irr::core::dimension2d<irr::u32> &
 			getScreenSize() = 0;

@@ -17,7 +17,7 @@ bool bomb::object::Power::activate(bomb::Map &map, bomb::game::Player &player,
 				   IAssetManager &loader)
 {
 	addPower(player);
-	loader.deleteObject(std::move(_model));
+	destroy(loader);
 	return true;
 	(void) map;
 }
@@ -42,4 +42,18 @@ int bomb::object::Power::isActivable(bomb::Map &map,
 	}
 	return -1;
 	(void) map;
+}
+
+irr::core::position2di bomb::object::Power::getPos()
+{
+	if (_model == nullptr)
+		return {-1, -1};
+	return {static_cast<irr::s32>(_model->getPos().X),
+		static_cast<irr::s32>(_model->getPos().Z)};
+}
+
+void bomb::object::Power::destroy(bomb::IAssetManager &manager)
+{
+	if (_model != nullptr)
+		manager.deleteObject(std::move(_model));
 }
