@@ -19,12 +19,13 @@ bomb::scene::SceneStatus bomb::scene::SceneOptionMenu::start(
 	_menu.setElementSize(5, {1, 1});
 	_menu.addText((wchar_t *)L"SUPER\nBOMBERMARIO\nBROS.", {.5, .15}, 0);
 	_menu.setElementFont(0, menu::TITLE);
-	_menu.addButton(L"Volume", {.5, .35}, 1);
-	_menu.setButtonPushable(1, false);
-	_menu.addButton(L"Map Size", {.5, .5}, 2);
-	_menu.setButtonPushable(2, false);
-	_menu.addButton(L"Back", {.5, .65}, 3);
+	_menu.addButton(L"Change Keys", {.5, .6}, 3);
 	_menu.setButtonEvent(3, [this](){
+		_nextScene = "key_scene";
+		_running = false;
+	});
+	_menu.addButton(L"Back", {.5, .75}, 4);
+	_menu.setButtonEvent(4, [this](){
 		_nextScene = "home_scene";
 		_running = false;
 	});
@@ -35,13 +36,17 @@ bomb::scene::SceneStatus bomb::scene::SceneOptionMenu::start(
 
 void bomb::scene::SceneOptionMenu::setPlusMinusButtons()
 {
-	_menu.addButton(L"-", {.4, .35}, 10);
-	_menu.addButton(L"+", {.6, .35}, 11);
-	_menu.addButton(L"-", {.4, .5}, 12);
+	_menu.addButton(L"Volume", {.5, .3}, 1);
+	_menu.setButtonPushable(1, false);
+	_menu.addButton(L"-", {.4, .3}, 10);
+	_menu.addButton(L"+", {.6, .3}, 11);
+	_menu.addButton(L"Map Size", {.5, .45}, 2);
+	_menu.setButtonPushable(2, false);
+	_menu.addButton(L"-", {.4, .45}, 12);
 	_menu.setButtonEvent(12, [this](){
 		changeMapSize(-2);
 	});
-	_menu.addButton(L"+", {.6, .5}, 13);
+	_menu.addButton(L"+", {.6, .45}, 13);
 	_menu.setButtonEvent(13, [this](){
 		changeMapSize(2);
 	});
