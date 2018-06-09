@@ -84,7 +84,6 @@ std::unique_ptr<bomb::AnimatedObject> bomb::GameEngine::createAnimatedObject(
 	ptr->setRot(rot);
 	ptr->setScale(scale);
 	return ptr;
-
 }
 
 std::unique_ptr<bomb::StaticObject> bomb::GameEngine::createStaticObject(

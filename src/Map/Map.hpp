@@ -29,17 +29,16 @@ namespace bomb {
 		Map(const std::vector<std::shared_ptr<AMapBlock>> &_blocks,
 		    std::vector<BlockType> &cells);
 
-		void explode(irr::core::vector3di pos,
-			size_t range, size_t damage);
 		void setTextures(irr::video::ITexture *texture);
 
 		bool blockAt(const irr::core::vector2di &coord);
 
 		int getSize() const;
 		void setSize(int size);
-		void addBomb(size_t x, size_t y);
+		void updateFromCells(IAssetLoader &loader);
 		BlockType &operator[](std::size_t idx);
 		BlockType &operator[](irr::core::vector3di &pos);
+		BlockType &operator[](irr::core::vector3df pos);
 
 		friend std::ostream &
 		operator<<(std::ostream &os, const Map &map);

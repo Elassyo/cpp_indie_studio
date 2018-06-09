@@ -34,9 +34,10 @@ std::unique_ptr<bomb::AMapBlock> bomb::MapBlockUnbreakable::clone(
 		(loader, pos, scale, rotation, mapPos);
 }
 
-bool bomb::MapBlockUnbreakable::explode(size_t damage)
+bool bomb::MapBlockUnbreakable::explode(size_t damage, IAssetLoader &loader)
 {
 	(void) damage;
+	(void) loader;
 	return false;
 }
 

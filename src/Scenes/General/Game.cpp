@@ -75,12 +75,17 @@ int bomb::game::Game::getMapSize() const
 
 void bomb::game::Game::execute(bomb::IAssetLoader &loader)
 {
-	for (auto &p : _players) {
-		p.first.execute(*_map);
-		p.second.actionnate(*_map, p.first);
-		if (p.first.isBombReady()) {
-			_bombs.emplace_back(std::make_unique<object::Bomb>
-			(loader, p.first));
+	for (auto i = 0; i < NB_PLAYERS; ++i) {
+		_players[i].first.execute(*_map);
+		_players[i].second.actionnate(*_map, _players[i].first);
+		if (_players[i].first.isBombReady()) {
+			_bombs.emplace_back(loader, _players[i].first, i);
+			_players[i].first.setBombReady(false);
+		}
+	}
+	for (auto &b : _bombs) {
+		if (b.tryToActivate(*_map, _players)) {
+			_map->updateFromCells(loader);
 		}
 	}
 }

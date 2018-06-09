@@ -6,25 +6,13 @@
 //
 
 #include "Map.hpp"
+#include "../Exception/Exception.hpp"
 
 bomb::Map::Map(const std::vector<std::shared_ptr<bomb::AMapBlock>> &_blocks,
 	std::vector<Map::BlockType> &cells) :
 	_blocks(_blocks), _cells(cells),
 	_size(static_cast<int>(sqrt(cells.size())))
 {
-}
-
-void bomb::Map::explode(irr::core::vector3di pos, size_t range, size_t damage)
-{
-	(void) pos;
-	(void) range;
-	(void) damage;
-	for (auto &e : _blocks) {
-		/* TODO: Verifier la position */
-		if (e->explode(damage)) {
-			/* TODO: Supprimer le block */
-		}
-	}
 }
 
 void bomb::Map::setTextures(irr::video::ITexture *texture)
@@ -49,14 +37,20 @@ bomb::Map::BlockType &bomb::Map::operator[](std::size_t idx)
 
 bomb::Map::BlockType &bomb::Map::operator[](irr::core::vector3di &pos)
 {
-	return _cells[pos.X + pos.Z * _size];
+	auto idx = pos.X + pos.Z * _size;
+	if ((unsigned int)idx < _cells.size())
+		return _cells[idx];
+	throw
+		bomb::Exception("Map", "Invalid index");
 }
 
-void bomb::Map::addBomb(std::size_t x, std::size_t y)
+bomb::Map::BlockType &bomb::Map::operator[](irr::core::vector3df pos)
 {
-	auto idx = x + y * _size;
-	if (_cells.at(idx) == EMPTY)
-		_cells.at(idx) = BOMB;
+	auto idx = static_cast<unsigned int>(pos.X + pos.Z * _size);
+	if (idx < _cells.size())
+		return _cells[idx];
+	throw
+		bomb::Exception("Map", "Invalid index");
 }
 
 bool bomb::Map::blockAt(const irr::core::vector2di &coord)
@@ -78,4 +72,17 @@ std::ostream &operator<<(std::ostream &os, const bomb::Map &map) {
 			os << "\n";
 	}
 	return os;
+}
+
+void bomb::Map::updateFromCells(bomb::IAssetLoader &loader)
+{
+	auto b = _blocks.begin();
+	while (b != _blocks.end()) {
+		if (_cells[b->get()->getMapPos().X
+			+ b->get()->getMapPos().Y * _size] == EMPTY) {
+			b->get()->explode(b->get()->getHp(), loader);
+			b = _blocks.erase(b);
+		} else
+			b++;
+	}
 }

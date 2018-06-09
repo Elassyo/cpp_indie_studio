@@ -74,7 +74,7 @@ namespace bomb {
 			std::vector<std::pair<Player, PlayerActionner>>
 				_players;
 			std::shared_ptr<bomb::Map> _map;
-			std::vector<std::unique_ptr<bomb::object::Bomb>> _bombs;
+			std::vector<bomb::object::Bomb> _bombs;
 			int _mapSize;
 		};
 	}

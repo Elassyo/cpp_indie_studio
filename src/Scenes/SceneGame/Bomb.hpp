@@ -16,7 +16,8 @@ namespace bomb {
 	namespace object {
 		class Bomb : public bomb::game::AActivator {
 		public:
-			Bomb(IAssetLoader &loader, bomb::game::Player &player);
+			Bomb(IAssetLoader &loader, bomb::game::Player
+			&player, int playerIdx);
 
 		protected:
 			int isActivable(bomb::Map &map,
@@ -31,6 +32,8 @@ namespace bomb {
 			bomb::utils::Clock _timer;
 			std::unique_ptr<AnimatedObject> _model;
 			int _playerIdx;
+
+			bool deleteBlock(Map &map, irr::core::vector3df pos);
 		};
 	}
 }

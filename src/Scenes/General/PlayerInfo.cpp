@@ -11,10 +11,9 @@ bomb::PlayerInfo::PlayerInfo() : _isAI(true), _modelPath(nullptr),
 	_keys({{irr::KEY_UP, IPlayerController::MV_UP},
 		{irr::KEY_DOWN, IPlayerController::MV_DOWN},
 		{irr::KEY_LEFT, IPlayerController::MV_LEFT},
-		{irr::KEY_RIGHT, IPlayerController::MV_RIGHT}})
+		{irr::KEY_RIGHT, IPlayerController::MV_RIGHT},
+		{irr::KEY_SPACE, IPlayerController::PUT_BOMB}})
 {
-	if (_keys.find(irr::KEY_UP) == _keys.end())
-		printf("ededede\n");
 }
 
 bool bomb::PlayerInfo::isAI() const
