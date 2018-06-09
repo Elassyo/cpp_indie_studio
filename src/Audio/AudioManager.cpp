@@ -24,6 +24,7 @@ bomb::AudioManager::~AudioManager()
 {
 	for (auto &_audioBuffer : _audioBuffers)
 		delete _audioBuffer.second;
+	alDeleteSources(_audioSources.size(), _audioSources.data());
 	alcMakeContextCurrent(nullptr);
 	alcDestroyContext(_context);
 	alcCloseDevice(_device);
@@ -58,22 +59,20 @@ void bomb::AudioManager::updateListener(irr::scene::ICameraSceneNode *camera)
 
 void bomb::AudioManager::playMusic(const std::string &path)
 {
-	ALuint buffer = getAudioBuffer(path);
+	std::vector<ALuint> buffers = getAudioBuffers(path);
 	ALuint source = getAudioSource();
-	alSourcei(source, AL_LOOPING, AL_TRUE);
-	alSourcei(source, AL_BUFFER, buffer);
+	alSourceQueueBuffers(source, buffers.size(), buffers.data());
 	alSourcePlay(source);
 }
 
 void bomb::AudioManager::playSound(const std::string &path,
 	bomb::IObject const &obj)
 {
-	ALuint buffer = getAudioBuffer(path);
+	std::vector<ALuint> buffers = getAudioBuffers(path);
 	ALuint source = getAudioSource();
 	irr::core::vector3d pos = obj.getPos();
 	alSource3f(source, AL_POSITION, pos.X, pos.Y, pos.Z);
-	alSourcei(source, AL_LOOPING, AL_FALSE);
-	alSourcei(source, AL_BUFFER, buffer);
+	alSourceQueueBuffers(source, buffers.size(), buffers.data());
 	alSourcePlay(source);
 }
 
@@ -82,13 +81,13 @@ void bomb::AudioManager::setVolume(float gain)
 	alListenerf(AL_GAIN, gain);
 }
 
-ALuint bomb::AudioManager::getAudioBuffer(const std::string &path)
+std::vector<ALuint> bomb::AudioManager::getAudioBuffers(const std::string &path)
 {
 	auto it = _audioBuffers.find(path);
 	if (it == _audioBuffers.end())
 		throw Exception("AudioManager",
 			"Unknown audio file '" + path + "'");
-	return it->second->getBuffer();
+	return it->second->getBuffers();
 }
 
 ALuint bomb::AudioManager::getAudioSource()

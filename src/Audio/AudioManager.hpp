@@ -45,7 +45,7 @@ namespace bomb {
 		void setVolume(float gain);
 
 	private:
-		ALuint getAudioBuffer(const std::string &path);
+		std::vector<ALuint> getAudioBuffers(const std::string &path);
 		ALuint getAudioSource();
 
 		ALCdevice *_device;

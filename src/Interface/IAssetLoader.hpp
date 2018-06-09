@@ -11,16 +11,12 @@
 	#include <memory>
 
 	#include <irrlicht/irrlicht.h>
-
 	#include "../Audio/AudioBuffer.hpp"
-
 	#include "../AnimatedObject.hpp"
-
 	#include "../CameraObject.hpp"
-
-	#include "../StaticObject.hpp"
-
+	#include "../PlaneObject.hpp"
 	#include "../LightObject.hpp"
+	#include "../StaticObject.hpp"
 
 namespace bomb {
 	namespace menu {
@@ -46,6 +42,12 @@ namespace bomb {
 				irr::core::vector3df pos = {0, 0, 0},
 				irr::core::vector3df scale = {1, 1, 1},
 				irr::core::vector3df rot = {0, 0, 0}) = 0;
+		virtual std::unique_ptr<PlaneObject> createPlaneObject(
+			const std::string &path,
+			irr::core::vector3df pos = {0, 0, 0},
+			irr::core::vector3df rot = {0, 0, 0},
+			irr::core::vector3df scale = {0, 0, 0}
+			) = 0;
 		virtual std::unique_ptr<CameraObject> getCamera(
 			const irr::core::vector3df &pos = {0, 0, 0},
 			const irr::core::vector3df &rot = {0, 0, 0}) = 0;

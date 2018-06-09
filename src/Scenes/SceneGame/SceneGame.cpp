@@ -9,7 +9,8 @@
 
 bomb::scene::SceneGame::SceneGame(bomb::PersistentInfo &_infos) :
 	AScene(_infos), _game(_infos), _running(true)
-{}
+{
+}
 
 bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
 {
@@ -20,6 +21,8 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetLoader &loader)
 	cam->setPos({mid, (float)_game.getMapSize() * 0.8f,
 		(float)_game.getMapSize() * 0.8f});
 	cam->setTarget({mid, 0, mid + 1});
+	loader.loadAudioFile("music/mario64-bobomb-battlefield.ogg");
+	loader.playMusic("music/mario64-bobomb-battlefield.ogg");
 	return BEGIN;
 }
 
