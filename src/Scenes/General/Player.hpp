@@ -29,7 +29,6 @@ namespace bomb {
 
 			IPlayerController::Actions
 			getActionFromEvent(const irr::SEvent &event);
-			void execute(Map &map);
 
 			uint8_t getNbBombs() const;
 			float getSpeed() const;

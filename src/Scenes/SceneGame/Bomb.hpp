@@ -28,14 +28,15 @@ namespace bomb {
 			bool activate(bomb::Map &map,
 				      bomb::game::Player &player,
 				      IAssetManager &loader) override;
+			bool deleteBlock(Map &map, irr::core::vector3di pos);
+			bool blastLine(Map &map, irr::core::vector3di pos,
+				       irr::core::vector2di iterator, int max);
 			bomb::IAssetManager &_loader;
 			std::unique_ptr<AnimatedObject> _model;
 			std::vector<std::pair<irr::core::vector2di,
 				bomb::Map::BlockType>> _blast;
 			bomb::utils::Clock _timer;
 			int _playerIdx;
-
-			bool deleteBlock(Map &map, irr::core::vector3df pos);
 		};
 	}
 }

@@ -86,7 +86,6 @@ void bomb::game::Game::executePlayers(bomb::IAssetManager &loader)
 	for (auto i = 0; i < NB_PLAYERS; ++i) {
 		if (!_players[i].first.isAlive())
 			continue;
-		_players[i].first.execute(*_map);
 		_players[i].second.actionnate(*_map, _players[i].first);
 		if (_players[i].first.isBombReady()) {
 			_bombs.emplace_back(new bomb::object::Bomb

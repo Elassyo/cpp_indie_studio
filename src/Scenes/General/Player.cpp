@@ -29,17 +29,6 @@ bomb::game::Player::Player(IAssetLoader &loader,
 	_model = loader.createAnimatedObject(path, pos, scale, rotation);
 }
 
-void bomb::game::Player::execute(bomb::Map &map)
-{
-	(void) map;
-/*	if (isAI()) {
-		_controller->execute({static_cast<irr::s32>(_obj->getPos().X),
-				static_cast<irr::s32>(_obj->getPos().Z)});
-		auto action = _controller->requestMovement();
-		_actionner.sendAction(map, _obj, action);
-	}*/
-}
-
 bomb::IPlayerController::Actions
 bomb::game::Player::getActionFromEvent(const irr::SEvent &event)
 {
