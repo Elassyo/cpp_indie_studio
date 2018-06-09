@@ -13,8 +13,7 @@ bomb::object::FireFull::FireFull(bomb::IAssetManager &loader,
 {
 }
 
-bool bomb::object::FireFull::activate(bomb::Map &map, bomb::game::Player &player)
+void bomb::object::FireFull::addPower(bomb::game::Player &player)
 {
 	player.setBombRange(99);
-	return Power::activate(map, player);
 }

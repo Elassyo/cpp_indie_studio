@@ -36,15 +36,14 @@ void bomb::game::Game::createMap(
 	_map = std::move(pattern.construct(loader, {0, 0, 0},
 		{1, 1, 1}, {0, 0, 0}));
 	loader.createLightObject({(float)pattern.getSize() / 2,
-			(float)pattern.getSize(),
-			(float)pattern.getSize() / 2},
+		(float)pattern.getSize(), (float)pattern.getSize() / 2},
 		{1, 1, 1}, pattern.getSize());
 }
 
 void bomb::game::Game::createPlayer(IAssetLoader &loader,
-				    const std::string &path,
-				    std::unique_ptr<bomb::IPlayerController> controller,
-				    const irr::core::vector3di &spawn)
+			const std::string &path,
+			std::unique_ptr<bomb::IPlayerController> controller,
+			const irr::core::vector3di &spawn)
 {
 	if (_players.size() >= NB_PLAYERS)
 		throw bomb::Exception("GameCreation", "Too much players");
@@ -71,11 +70,11 @@ void bomb::game::Game::execute(bomb::IAssetManager &loader)
 	executePowers(loader);
 }
 
-void bomb::game::Game::executePowers(bomb::IAssetLoader &loader)
+void bomb::game::Game::executePowers(bomb::IAssetManager &loader)
 {
 	auto p = _powers.begin();
 	while (p != _powers.end()) {
-		if ((*p)->tryToActivate(*_map, _players)) {
+		if ((*p)->tryToActivate(*_map, _players, loader)) {
 			p = _powers.erase(p);
 		} else
 			p++;
@@ -102,10 +101,10 @@ void bomb::game::Game::executeBombs(bomb::IAssetManager &loader)
 {
 	auto bomb = _bombs.begin();
 	while (bomb != _bombs.end()) {
-		if ((*bomb)->tryToActivate(*_map, _players)) {
+		if ((*bomb)->tryToActivate(*_map, _players, loader)) {
 			auto blast = (*bomb)->getBlast();
 			_map->updateFromCells(loader);
-			killPlayersInBlast(blast, loader);
+			blastObjects(blast, loader);
 			spawnPowers(blast, loader);
 			bomb = _bombs.erase(bomb);
 		} else
@@ -126,23 +125,42 @@ void bomb::game::Game::spawnPowers(
 	}
 }
 
-void bomb::game::Game::killPlayersInBlast(
+void bomb::game::Game::blastObjects(
 	std::vector<std::pair<irr::core::vector2di,
-		bomb::Map::BlockType>> &blast,
+	bomb::Map::BlockType>> blast,
+	bomb::IAssetManager &manager)
+{
+	for (auto &b : blast) {
+		killPlayersInBlast(b.first, manager);
+		killPowersInBlast(b.first, manager);
+	}
+}
+
+void bomb::game::Game::killPowersInBlast(irr::core::vector2di pos,
+	bomb::IAssetManager &manager)
+{
+	auto p = _powers.begin();
+	while (p != _powers.end()) {
+		auto powerPos = p->get()->getPos();
+		if (powerPos == pos) {
+			p->get()->destroy(manager);
+			p = _powers.erase(p);
+		} else
+			++p;
+	}
+}
+
+void bomb::game::Game::killPlayersInBlast(irr::core::vector2di pos,
 	bomb::IAssetManager &loader)
 {
 	for (auto &p : _players) {
 		if (!p.first.isAlive())
 			continue;
-		for (auto b : blast) {
-			irr::core::vector2di pos(
-				static_cast<irr::s32>(p.first.getExactPos().X),
-				static_cast<irr::s32>(p.first.getExactPos().Z));
-			if (pos == b.first) {
-				p.first.setAlive(false, loader);
-				break;
-			}
-		}
+		irr::core::vector2di playerPos(
+			static_cast<irr::s32>(p.first.getExactPos().X),
+			static_cast<irr::s32>(p.first.getExactPos().Z));
+		if (playerPos == pos)
+			p.first.setAlive(false, loader);
 	}
 }
 

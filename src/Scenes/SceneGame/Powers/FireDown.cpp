@@ -13,9 +13,8 @@ bomb::object::FireDown::FireDown(bomb::IAssetManager &loader,
 {
 }
 
-bool bomb::object::FireDown::activate(bomb::Map &map, bomb::game::Player &player)
+void bomb::object::FireDown::addPower(bomb::game::Player &player)
 {
 	if (player.getBombRange() > 1)
 		player.setBombRange(player.getBombRange() - 1);
-	return Power::activate(map, player);
 }

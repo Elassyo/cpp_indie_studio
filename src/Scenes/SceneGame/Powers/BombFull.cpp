@@ -13,9 +13,7 @@ bomb::object::BombFull::BombFull(bomb::IAssetManager &loader,
 {
 }
 
-bool bomb::object::BombFull::activate(bomb::Map &map,
-		bomb::game::Player &player)
+void bomb::object::BombFull::addPower(bomb::game::Player &player)
 {
 	player.setNbBombs(99);
-	return Power::activate(map, player);
 }

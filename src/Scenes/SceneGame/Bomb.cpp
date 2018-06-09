@@ -30,7 +30,8 @@ bool bomb::object::Bomb::deleteBlock(bomb::Map &map, irr::core::vector3df pos)
 	return true;
 }
 
-bool bomb::object::Bomb::activate(bomb::Map &map, bomb::game::Player &player)
+bool bomb::object::Bomb::activate(bomb::Map &map, bomb::game::Player &player,
+				  IAssetManager &loader)
 {
 	auto pos = _model->getPos();
 	map[pos] = Map::EMPTY;
@@ -48,6 +49,7 @@ bool bomb::object::Bomb::activate(bomb::Map &map, bomb::game::Player &player)
 			deleteBlock(map, {pos.X, pos.Y, pos.Z - 1});
 	}
 	return true;
+	(void) loader;
 }
 
 int bomb::object::Bomb::isActivable(bomb::Map &map,
@@ -61,64 +63,8 @@ int bomb::object::Bomb::isActivable(bomb::Map &map,
 	(void) player;
 }
 
-bomb::IAssetManager &bomb::object::Bomb::getLoader() const
-{
-	return _loader;
-}
-
-void bomb::object::Bomb::setLoader(bomb::IAssetManager &_loader)
-{
-	Bomb::_loader = _loader;
-}
-
-const std::unique_ptr<bomb::AnimatedObject> &bomb::object::Bomb::getModel()
-const
-{
-	return _model;
-}
-
-void bomb::object::Bomb::setModel(std::unique_ptr<AnimatedObject> &_model)
-{
-	Bomb::_model = std::move(_model);
-}
-
 const std::vector<std::pair<irr::core::vector2di, bomb::Map::BlockType>>
-	&bomb::object::Bomb::getBlast() const
+&bomb::object::Bomb::getBlast() const
 {
 	return _blast;
-}
-
-void
-bomb::object::Bomb::setBlast(const std::vector<std::pair<irr::core::vector2di,
-	bomb::Map::BlockType>> &_blast)
-{
-	Bomb::_blast = _blast;
-}
-
-const bomb::utils::Clock &bomb::object::Bomb::getTimer() const
-{
-	return _timer;
-}
-
-void bomb::object::Bomb::setTimer(const bomb::utils::Clock &_timer)
-{
-	Bomb::_timer = _timer;
-}
-
-int bomb::object::Bomb::getPlayerIdx() const
-{
-	return _playerIdx;
-}
-
-void bomb::object::Bomb::setPlayerIdx(int _playerIdx)
-{
-	Bomb::_playerIdx = _playerIdx;
-}
-
-bomb::object::Bomb::Bomb(const bomb::object::Bomb &bomb) :
-	_loader(bomb.getLoader()),
-	_blast(bomb.getBlast()),
-	_timer(bomb.getTimer()),
-	_playerIdx(bomb.getPlayerIdx())
-{
 }

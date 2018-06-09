@@ -13,9 +13,8 @@ bomb::object::BombDown::BombDown(bomb::IAssetManager &loader,
 {
 }
 
-bool bomb::object::BombDown::activate(bomb::Map &map, bomb::game::Player &player)
+void bomb::object::BombDown::addPower(bomb::game::Player &player)
 {
 	if (player.getNbBombs() > 1)
 		player.setNbBombs(player.getNbBombs() - 1);
-	return Power::activate(map, player);
 }
