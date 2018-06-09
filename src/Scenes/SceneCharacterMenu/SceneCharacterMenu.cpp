@@ -21,6 +21,7 @@ bomb::scene::SceneStatus bomb::scene::SceneCharacterMenu::start(
 	_menu.setElementFont(0, menu::TITLE);
 	addGameButtons();
 	addPlayerButtons();
+	addCharacterButtons();
 	initModelPaths();
 	_menu.updateButtons(loader, true);
 	return BEGIN;
@@ -55,15 +56,59 @@ void bomb::scene::SceneCharacterMenu::addPlayerButtons()
 	});
 }
 
+void bomb::scene::SceneCharacterMenu::addCharacterButtons()
+{
+	_menu.addButton(L"Shy Guy", {.20, .5}, 11);
+	_menu.setButtonPushable(11, false);
+	_menu.setButtonEvent(11, [this](){
+		changeCharacter(1);
+	});
+	_menu.addButton(L"Shy Guy", {.40, .5}, 12);
+	_menu.setButtonPushable(12, false);
+	_menu.setButtonEvent(12, [this](){
+		changeCharacter(2);
+	});
+	_menu.addButton(L"Shy Guy", {.60, .5}, 13);
+	_menu.setButtonPushable(13, false);
+	_menu.setButtonEvent(13, [this](){
+		changeCharacter(3);
+	});
+	_menu.addButton(L"Shy Guy", {.80, .5}, 14);
+	_menu.setButtonPushable(14, false);
+	_menu.setButtonEvent(14, [this](){
+		changeCharacter(4);
+	});
+}
+
 void bomb::scene::SceneCharacterMenu::changePlayerType(int idx, wchar_t *model)
 {
 	PlayerInfo player = _infos.getPlayerInfos(idx - 1);
+
 	_menu.setElementText(idx, std::wstring(
 		std::to_wstring(idx ) + L" : "
 		+ (player.isAI() ? L"Player" : L"AI")).c_str());
 	player.setModelPath(player.isAI() ? (wchar_t *)L"models/characters/skelerex/skelerex.mtl" : model);
+	_menu.setButtonPushable(10 + idx, player.isAI());
 	player.setIsAI(!player.isAI());
 	_infos.setPlayerInfos(idx - 1, player);
+	updateCharacter(idx, player);
+}
+
+void bomb::scene::SceneCharacterMenu::changeCharacter(int idx)
+{
+	PlayerInfo player = _infos.getPlayerInfos(idx - 1);
+
+	if (!player.isAI()) {
+		updateCharacter(idx, player);
+	}
+}
+
+void bomb::scene::SceneCharacterMenu::updateCharacter(int idx, PlayerInfo player)
+{
+	if (player.isAI())
+		_menu.setElementText(10 + idx, L"Shy Guy");
+	else
+		_menu.setElementText(10 + idx, L"Dry Bones");
 }
 
 void bomb::scene::SceneCharacterMenu::addGameButtons()

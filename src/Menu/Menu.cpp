@@ -121,24 +121,24 @@ long long bomb::menu::Menu::getElementById(int elementId)
 
 void bomb::menu::Menu::setButtonTextures(int buttonId,
 					 irr::video::ITexture *texture,
-					 irr::video::ITexture *pressed)
+					 irr::video::ITexture *prssed)
 {
 	long long idx = getButtonById(buttonId);
 
 	if (idx == -1)
 		return;
 	_buttons.at(static_cast<unsigned long>(idx))->setTexture(texture);
-	_buttons.at(static_cast<unsigned long>(idx))->setPressedTexture(pressed);
+	_buttons.at(static_cast<unsigned long>(idx))->setPressedTexture(prssed);
 }
 
 void bomb::menu::Menu::setButtonPressedTexture(int buttonId,
-					       irr::video::ITexture *pressed)
+					       irr::video::ITexture *prssed)
 {
 	long long idx = getButtonById(buttonId);
 
 	if (idx == -1)
 		return;
-	_buttons.at(static_cast<unsigned long>(idx))->setPressedTexture(pressed);
+	_buttons.at(static_cast<unsigned long>(idx))->setPressedTexture(prssed);
 }
 
 void bomb::menu::Menu::setButtonEvent(int buttonId, std::function<void()> event)
@@ -148,6 +148,18 @@ void bomb::menu::Menu::setButtonEvent(int buttonId, std::function<void()> event)
 	if (idx == -1)
 		return;
 	_buttons.at(static_cast<unsigned long>(idx))->setEvent(event);
+}
+
+void
+bomb::menu::Menu::setButtonPushable(int buttonId, bool isPushable)
+{
+	long long idx = getButtonById(buttonId);
+
+	if (idx == -1)
+		return;
+	_buttons.at(static_cast<unsigned long>(idx))->setIsPushable(isPushable);
+	_buttons.at(static_cast<unsigned long>(idx))->setTexture(
+		isPushable ? _buttonBack : _buttonPressed);
 }
 
 void bomb::menu::Menu::setElementPos(int elementId, irr::core::vector2df pos)

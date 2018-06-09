@@ -43,8 +43,6 @@ bool bomb::object::Bomb::activate(bomb::Map &map, bomb::game::Player &player)
 			deleteBlock(map, {pos.X, pos.Y, pos.Z - 1});
 	}
 	return true;
-	(void) map;
-	(void) player;
 }
 
 int bomb::object::Bomb::isActivable(bomb::Map &map,

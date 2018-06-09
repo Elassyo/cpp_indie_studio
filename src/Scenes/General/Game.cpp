@@ -17,16 +17,16 @@ void bomb::game::Game::createGame(IAssetLoader &loader,
 	createMap(loader, MAP_SIZE);
 
 	/* TEMPORALY */
-	createPlayer(loader, "models/characters/shyGuy/shyGuyBlack.obj",
+	createPlayer(loader, "models/characters/shyGuy/shyGuyWhite.obj",
 		std::make_unique<bomb::player::AIController>(_map),
 		{1, 0, 1});
-	createPlayer(loader, "models/characters/shyGuy/shyGuyBlue.obj",
+	createPlayer(loader, "models/characters/shyGuy/shyGuyBlack.obj",
 		std::make_unique<bomb::player::AIController>(_map),
 		{1, 0, MAP_SIZE - 2});
-	createPlayer(loader, "models/characters/shyGuy/shyGuyRed.obj",
+	createPlayer(loader, "models/characters/shyGuy/shyGuyBlue.obj",
 		std::make_unique<bomb::player::AIController>(_map),
 		{MAP_SIZE - 2, 0, 1});
-	createPlayer(loader, "models/characters/shyGuy/shyGuyWhite.obj",
+	createPlayer(loader, "models/characters/shyGuy/shyGuyRed.obj",
 		std::make_unique<bomb::player::AIController>(_map),
 		{MAP_SIZE - 2, 0, MAP_SIZE - 2});
 	_map->setTextures(texture);
@@ -43,7 +43,7 @@ void bomb::game::Game::createMap(
 	_map = std::move(pattern.construct(loader, {0, 0, 0},
 		{1, 1, 1}, {0, 0, 0}));
 	loader.createLightObject({(float)pattern.getSize() / 2,
-			(float)pattern.getSize() / 2,
+			(float)pattern.getSize(),
 			(float)pattern.getSize() / 2},
 		{1, 1, 1}, pattern.getSize());
 }

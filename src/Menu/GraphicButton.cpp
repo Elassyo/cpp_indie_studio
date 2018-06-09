@@ -30,6 +30,12 @@ bool bomb::menu::GraphicButton::isPressed(const irr::SEvent &event)
 	return false;
 }
 
+void bomb::menu::GraphicButton::setIsPushable(bool isPushable)
+{
+	_element->setIsPushButton(!isPushable);
+	_element->setPressed(false);
+}
+
 void bomb::menu::GraphicButton::setFont(irr::gui::IGUIFont *font)
 {
 	_element->setOverrideFont(font);
