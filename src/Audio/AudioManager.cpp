@@ -24,6 +24,7 @@ bomb::AudioManager::~AudioManager()
 {
 	for (auto &_audioBuffer : _audioBuffers)
 		delete _audioBuffer.second;
+	alDeleteSources(_audioSources.size(), _audioSources.data());
 	alcMakeContextCurrent(nullptr);
 	alcDestroyContext(_context);
 	alcCloseDevice(_device);
