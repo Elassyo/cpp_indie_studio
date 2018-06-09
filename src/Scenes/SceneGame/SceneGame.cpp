@@ -44,6 +44,9 @@ void bomb::scene::SceneGame::explodeBombs(bomb::IAssetManager &loader)
 
 void bomb::scene::SceneGame::save()
 {
+	xml::XmlWriter xmlWriter("test.xml");
+
+	xmlWriter.mapToSection(_game.getMap());
 }
 
 void bomb::scene::SceneGame::reset(bomb::IAssetManager &loader)
@@ -73,6 +76,8 @@ bool bomb::scene::SceneGame::onEvent(const irr::SEvent &event)
 		_game.handleEvent(event);
 		if (event.KeyInput.Key == irr::KEY_ESCAPE)
 			_running = false;
+		if (event.KeyInput.Key == irr::KEY_KEY_S)
+			this->save();
 	}
 
 	return true;

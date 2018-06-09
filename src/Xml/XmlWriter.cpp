@@ -8,25 +8,21 @@
 #include "XmlWriter.hpp"
 #include "../Exception/Exception.hpp"
 
-bomb::xml::XmlWriter::XmlWriter(const irr::core::stringw &fileName) :
-	_blockTypeStr({	      {Map::BlockType::BOMB, L"bomb"},
-			      {Map::BlockType::BREAKABLE, L"breakable"},
-			      {Map::BlockType::UNBREAKABLE, L"unbreakable"},
-			      {Map::BlockType::EMPTY, L"empty"}})
+bomb::xml::XmlWriter::XmlWriter(const std::string &fileName) :
+	_fstream(fileName),
+	_blockTypeStr({	      {Map::BlockType::BOMB, "Bomb"},
+			      {Map::BlockType::BREAKABLE, "Breakable"},
+			      {Map::BlockType::UNBREAKABLE, "Unbreakable"},
+			      {Map::BlockType::EMPTY, "Empty"}})
 {
-	_nullDevice = irr::createDevice(irr::video::EDT_NULL);
-
-	if (!_nullDevice)
-		throw Exception("XmlWriter", "Can't load null device");
-	_xmlWriter = _nullDevice->getFileSystem()->createXMLWriter(fileName);
+	if (!_fstream)
+		throw Exception("XmlWriter", "Can't create save file : " + fileName);
+	_fstream << "<?xml version=\"1.0\"?>" << std::endl;
 }
 
 bomb::xml::XmlWriter::~XmlWriter()
 {
-	_nullDevice->closeDevice();
-	_nullDevice->run();
-	_nullDevice->drop();
-	_xmlWriter->drop();
+	_fstream.close();
 }
 
 bool bomb::xml::XmlWriter::iObjectToSection(std::unique_ptr<IObject> &object)
@@ -38,30 +34,20 @@ bool bomb::xml::XmlWriter::iObjectToSection(std::unique_ptr<IObject> &object)
 bool bomb::xml::XmlWriter::mapBlockToSection(Map::BlockType blockType,
 					     int x, int y)
 {
-	_xmlWriter->writeElement(_blockTypeStr.at(blockType).c_str(), true,
-				L"x", std::to_wstring(x).c_str(),
-				L"y", std::to_wstring(y).c_str());
-	_xmlWriter->writeLineBreak();
+	_fstream << "<" << _blockTypeStr.at(blockType) << " " << "x=\"" <<
+		 x << "\" y=\"" << y << "\"/>" << std::endl;
 	return true;
-}
-
-std::wstring bomb::xml::XmlWriter::_strToWstr(const std::string &str) const
-{
-	std::wstring res(str.length(),L' ');
-
-	std::copy(str.begin(), str.end(), res.begin());
-	return res;
 }
 
 bool bomb::xml::XmlWriter::mapToSection(std::shared_ptr<bomb::Map> &map)
 {
-	_xmlWriter->writeElement(L"Map");
-	_xmlWriter->writeLineBreak();
+	_fstream << "\t<Map>" << std::endl;
 	int size = map->getSize();
-	for (int i = 0; i < size * size; i++)
+	for (int i = 0; i < size * size; i++) {
+		_fstream << "\t\t";
 		mapBlockToSection((*map)[i], i % size, i / size);
-	_xmlWriter->writeClosingTag(L"Map");
-	_xmlWriter->writeLineBreak();
+	}
+	_fstream << "\t</Map>" << std::endl;
 	return true;
 }
 
@@ -69,11 +55,8 @@ bool bomb::xml::XmlWriter::playerToSection(const game::Player &player)
 {
 	auto pos = player.getExactPos();
 
-	_xmlWriter->writeElement(L"PlayerInfo", true,
-	L"isIA", std::to_wstring(player.isAI()).c_str(),
-	L"isAlive", std::to_wstring(player.isAlive()).c_str(),
-	L"x", std::to_wstring(pos.X).c_str(),
-	L"y", std::to_wstring(pos.Y).c_str());
-	_xmlWriter->writeLineBreak();
+	_fstream << "<PlayerInfo isAI=\"" << player.isAI() << "\" isAlive=\"" <<
+		 player.isAlive() << "\" x=\"" << pos.X << "\"y=" << pos.Y <<
+		 "\"/>" << std::endl;
 	return true;
 }
