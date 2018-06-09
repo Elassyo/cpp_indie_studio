@@ -12,7 +12,8 @@ bomb::game::Player::Player(bomb::IAssetLoader &loader,
 	std::unique_ptr<bomb::IPlayerController> &controller,
 	const irr::core::vector3df &pos,
 	const irr::core::vector3df &scale,
-	const irr::core::vector3df &rotation) :
+	const irr::core::vector3df &rotation,
+	bomb::PlayerInfo &info) :
 	_maxNbBombs(1),
 	_nbBombs(1),
 	_speed(0.1f),
@@ -21,16 +22,10 @@ bomb::game::Player::Player(bomb::IAssetLoader &loader,
 	_alive(true),
 	_AI(false),
 	_bombReady(false),
-	_keys({{irr::KEY_UP, {IPlayerController::MV_UP,
-		(wchar_t *)L"Up"}},
-		{irr::KEY_DOWN, {IPlayerController::MV_DOWN,
-		(wchar_t *)L"Down"}},
-		{irr::KEY_LEFT, {IPlayerController::MV_LEFT,
-		(wchar_t *)L"Left"}},
-		{irr::KEY_RIGHT, {IPlayerController::MV_RIGHT,
-		(wchar_t *) L"Right"}}}),
-	_controller(std::move(controller))
+	_controller(std::move(controller)),
+	_genericInfos(info)
 {
+	info.getActionFromKey(irr::KEY_UP);
 	_model = loader.createAnimatedObject(path, pos, scale, rotation);
 }
 
@@ -46,12 +41,9 @@ void bomb::game::Player::execute(bomb::Map &map)
 }
 
 bomb::IPlayerController::Actions
-bomb::game::Player::getActionFromEvent(bomb::Map &map, const irr::SEvent &event)
+bomb::game::Player::getActionFromEvent(const irr::SEvent &event)
 {
-	if (_keys.find(event.KeyInput.Key) == _keys.end())
-		return IPlayerController::UNDEFINED;
-	return _keys.at(event.KeyInput.Key).first;
-	(void) map;
+	return _genericInfos.getActionFromKey(event.KeyInput.Key);
 }
 
 unsigned char bomb::game::Player::getNbBombs() const
@@ -72,6 +64,11 @@ unsigned char bomb::game::Player::getBombRange() const
 bool bomb::game::Player::isGhostMode() const
 {
 	return _ghostMode;
+}
+
+bool bomb::game::Player::isGhostBombMode() const
+{
+	return _ghostBombMode;
 }
 
 bool bomb::game::Player::isAlive() const
@@ -99,19 +96,25 @@ void bomb::game::Player::setGhostMode(bool _ghostMode)
 	Player::_ghostMode = _ghostMode;
 }
 
-void bomb::game::Player::setAlive(bool _alive)
+void bomb::game::Player::setGhostBombMode(bool _ghostBombMode)
 {
+	Player::_ghostBombMode = _ghostBombMode;
+}
+
+void bomb::game::Player::setAlive(bool _alive, IAssetLoader &loader)
+{
+	loader.deleteObject(std::move(_model));
 	Player::_alive = _alive;
 }
 
 bool bomb::game::Player::isAI() const
 {
-	return _AI;
+	return _genericInfos.isAI();
 }
 
 void bomb::game::Player::setAI(bool AI)
 {
-	Player::_AI = AI;
+	_genericInfos.setIsAI(AI);
 }
 
 std::unique_ptr<bomb::AnimatedObject> &bomb::game::Player::getModel()

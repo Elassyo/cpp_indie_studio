@@ -13,6 +13,7 @@
 #include "../../Interface/IAssetLoader.hpp"
 #include "../../Interface/IPlayerController.hpp"
 #include "../../Map/Map.hpp"
+#include "PlayerInfo.hpp"
 
 namespace bomb {
 	namespace game {
@@ -23,16 +24,18 @@ namespace bomb {
 				std::unique_ptr<bomb::IPlayerController> &ctrl,
 				const irr::core::vector3df &pos,
 				const irr::core::vector3df &scale,
-			       	const irr::core::vector3df &rotation);
+			       	const irr::core::vector3df &rotation,
+				bomb::PlayerInfo &info);
 
 			IPlayerController::Actions
-			getActionFromEvent(Map &map, const irr::SEvent &event);
+			getActionFromEvent(const irr::SEvent &event);
 			void execute(Map &map);
 
 			uint8_t getNbBombs() const;
 			float getSpeed() const;
 			uint8_t getBombRange() const;
 			bool isGhostMode() const;
+			bool isGhostBombMode() const;
 			bool isAlive() const;
 			bool isAI() const;
 			void setBombReady(bool);
@@ -42,27 +45,26 @@ namespace bomb {
 			void setSpeed(float _speed);
 			void setBombRange(uint8_t _bombRange);
 			void setGhostMode(bool _ghostMode);
-			void setAlive(bool _alive);
+			void setGhostBombMode(bool _ghostBombMode);
+			void setAlive(bool _alive, IAssetLoader &loader);
 			void setAI(bool AI);
 			bool isBombReady();
 
 			std::unique_ptr<AnimatedObject> &getModel();
-
 		private:
 			uint8_t _maxNbBombs;
 			uint8_t _nbBombs;
 			float _speed;
 			uint8_t _bombRange;
 			bool _ghostMode;
+			bool _ghostBombMode;
 			bool _alive;
 			bool _AI;
 			bool _bombReady;
-			std::unordered_map<irr::EKEY_CODE,
-				std::pair<bomb::IPlayerController::Actions,
-					wchar_t *>> _keys;
 
 			std::unique_ptr<AnimatedObject> _model;
 			std::unique_ptr<IPlayerController> _controller;
+			bomb::PlayerInfo _genericInfos;
 		};
 	}
 }

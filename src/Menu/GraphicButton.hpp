@@ -21,6 +21,7 @@ namespace bomb {
 				      irr::core::vector2df pos, int id);
 			bool isPressed(const irr::SEvent &event);
 			const std::function<void()> &getEvent() const;
+			void setIsPushable(bool isPushable);
 			void setFont(irr::gui::IGUIFont *font) override;
 			void setTextures(irr::video::ITexture *texture,
 					 irr::video::ITexture *pressed);

@@ -9,7 +9,8 @@
 
 bomb::object::Power::Power(bomb::IAssetLoader &loader,
 	const irr::core::vector3df &pos, std::string path) :
-	_loader(loader), _model(loader.createStaticObject(path, pos))
+	_loader(loader),
+	_model(loader.createStaticObject(path, pos, {.5, .5, .5}))
 {
 }
 
@@ -26,7 +27,13 @@ int bomb::object::Power::isActivable(bomb::Map &map,
 	std::vector<std::pair<bomb::game::Player,
 	bomb::PlayerActionner>> &vector)
 {
-	return false;
+	auto pos = _model->getPos();
+	for (unsigned int i = 0; i <= vector.size(); ++i) {
+		auto playerPos = vector[i].first.getExactPos();
+		if ((int)playerPos.X == (int)pos.X
+		    && (int)playerPos.Y == (int)pos.Y)
+			return i;
+	}
+	return -1;
 	(void) map;
-	(void) vector;
 }

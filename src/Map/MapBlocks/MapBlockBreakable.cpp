@@ -34,10 +34,11 @@ std::unique_ptr<bomb::AMapBlock> bomb::MapBlockBreakable::clone(
 		(loader, pos, scale, rotation, mapPos);
 }
 
-bool bomb::MapBlockBreakable::explode(size_t damage)
+bool bomb::MapBlockBreakable::explode(size_t damage, bomb::IAssetLoader &loader)
 {
-	_hp -= 1;
-	return damage <= 0;
+	_hp -= damage;
+	loader.deleteObject(std::move(_block));
+	return _hp <= 0;
 }
 
 std::string bomb::MapBlockBreakable::toString()

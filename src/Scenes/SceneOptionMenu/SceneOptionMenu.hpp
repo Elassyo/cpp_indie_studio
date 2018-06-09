@@ -24,12 +24,13 @@ namespace bomb {
 			SceneStatus loop(IAssetLoader &loader) override;
 			void save() override;
 			void reset(IAssetLoader &loader) override;
-			void clean() override;
+			void clean(IAssetLoader &loader) override;
 			std::string nextScene() override;
 
 			bool onEvent(const irr::SEvent &event) override;
 
 		private:
+			void setPlusMinusButtons();
 			bomb::menu::Menu _menu;
 			bool _running;
 			std::string _nextScene;

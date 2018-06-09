@@ -15,5 +15,6 @@ bomb::object::WallPass::WallPass(bomb::IAssetLoader &loader,
 
 bool bomb::object::WallPass::activate(bomb::Map &map, bomb::game::Player &player)
 {
+	player.setGhostMode(true);
 	return Power::activate(map, player);
 }

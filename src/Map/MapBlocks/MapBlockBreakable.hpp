@@ -23,7 +23,7 @@ namespace bomb {
 		);
 		MapBlockBreakable();
 
-		bool explode(size_t damage) override;
+		bool explode(size_t damage, IAssetLoader &loader) override;
 
 		std::unique_ptr<bomb::AMapBlock> clone(
 			IAssetLoader &loader,

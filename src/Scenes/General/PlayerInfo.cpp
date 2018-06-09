@@ -7,8 +7,14 @@
 
 #include "PlayerInfo.hpp"
 
-bomb::PlayerInfo::PlayerInfo() : _isAI(true), _modelPath(nullptr)
-{}
+bomb::PlayerInfo::PlayerInfo() : _isAI(true), _character(game::SHYGUY_WHITE),
+	_keys({{irr::KEY_UP, IPlayerController::MV_UP},
+		{irr::KEY_DOWN, IPlayerController::MV_DOWN},
+		{irr::KEY_LEFT, IPlayerController::MV_LEFT},
+		{irr::KEY_RIGHT, IPlayerController::MV_RIGHT},
+		{irr::KEY_SPACE, IPlayerController::PUT_BOMB}})
+{
+}
 
 bool bomb::PlayerInfo::isAI() const
 {
@@ -20,25 +26,20 @@ void bomb::PlayerInfo::setIsAI(bool isAI)
 	_isAI = isAI;
 }
 
-const std::unordered_map <irr::EKEY_CODE,
-	std::pair<bomb::IPlayerController::Actions, wchar_t *>>
-	&bomb::PlayerInfo::getKeys() const
+bomb::game::Character bomb::PlayerInfo::getCharacter() const
 {
-	return _keys;
+	return _character;
 }
 
-void bomb::PlayerInfo::setKeys(
-	const std::unordered_map<irr::EKEY_CODE,
-	std::pair<bomb::IPlayerController::Actions,wchar_t *>> &keys) {
-	_keys = keys;
+void bomb::PlayerInfo::setCharacter(bomb::game::Character modelPath)
+{
+	_character = modelPath;
 }
 
-wchar_t *bomb::PlayerInfo::getModelPath() const
+bomb::IPlayerController::Actions
+bomb::PlayerInfo::getActionFromKey(irr::EKEY_CODE key) const
 {
-	return _modelPath;
-}
-
-void bomb::PlayerInfo::setModelPath(wchar_t *modelPath)
-{
-	PlayerInfo::_modelPath = modelPath;
+	if (_keys.find(key) == _keys.end())
+		return IPlayerController::UNDEFINED;
+	return _keys.at(key);
 }

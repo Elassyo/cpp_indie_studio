@@ -25,17 +25,18 @@ namespace bomb {
 			SceneStatus loop(IAssetLoader &loader) override;
 			void save() override;
 			void reset(IAssetLoader &loader) override;
-			void clean() override;
+			void clean(IAssetLoader &loader) override;
 			std::string nextScene() override;
 
 			bool onEvent(const irr::SEvent &event) override;
 
 		private:
 			void explodeBombs(bomb::IAssetLoader &loader);
-			
+
 			irr::video::ITexture *_blocksTextures;
 			std::vector<std::unique_ptr<bomb::object::Bomb>> _bombs;
 			bomb::game::Game _game;
+			bool _running;
 		};
 	}
 }

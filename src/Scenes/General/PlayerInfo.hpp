@@ -11,7 +11,9 @@
 	#include <utility>
 	#include <unordered_map>
 	#include <irrlicht/irrlicht.h>
+	#include <map>
 	#include "../../Interface/IPlayerController.hpp"
+	#include "CharacterLoader.hpp"
 
 namespace bomb {
 	class PlayerInfo {
@@ -19,21 +21,17 @@ namespace bomb {
 		PlayerInfo();
 
 		bool isAI() const;
+		game::Character getCharacter() const;
+		IPlayerController::Actions getActionFromKey(irr::EKEY_CODE)
+		const;
+
 		void setIsAI(bool isAI);
-		const std::unordered_map<irr::EKEY_CODE,
-			std::pair<IPlayerController::Actions, wchar_t *>> &
-			getKeys() const;
-		void setKeys(const std::unordered_map<irr::EKEY_CODE,
-			std::pair<IPlayerController::Actions, wchar_t *>>
-			&keys);
-		wchar_t *getModelPath() const;
-		void setModelPath(wchar_t *modelPath);
+		void setCharacter(game::Character character);
 	private:
 		bool _isAI;
-		wchar_t *_modelPath;
-		std::unordered_map<irr::EKEY_CODE,
-			std::pair<bomb::IPlayerController::Actions,
-				wchar_t *>> _keys;
+		game::Character _character;
+		std::map<irr::EKEY_CODE,
+			IPlayerController::Actions> _keys;
 	};
 }
 

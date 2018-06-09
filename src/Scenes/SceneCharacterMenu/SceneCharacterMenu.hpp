@@ -26,16 +26,21 @@ namespace bomb {
 			SceneStatus loop(IAssetLoader &loader) override;
 			void save() override;
 			void reset(IAssetLoader &loader) override;
-			void clean() override;
+			void clean(IAssetLoader &loader) override;
 			std::string nextScene() override;
 
 			bool onEvent(const irr::SEvent &event) override;
 
 		private:
 			void addPlayerButtons();
+			void addCharacterButtons();
 			void addGameButtons();
 			void initModelPaths();
-			void changePlayerType(int idx, wchar_t *model);
+			void changePlayerType(int idx,
+					      game::Character character);
+			void changeCharacter(int idx);
+			void updateCharacter(int idx, PlayerInfo player);
+			bomb::game::CharacterLoader _charLoader;
 			bomb::menu::Menu _menu;
 			bool _running;
 			std::string _nextScene;

@@ -6,30 +6,24 @@
 */
 
 #include "Game.hpp"
-#include "../../Exception/Exception.hpp"
-#include "../../Player/AIController.hpp"
+
+bomb::game::Game::Game(bomb::PersistentInfo &infos) :
+	_infos(infos), _charLoader()
+{
+}
 
 void bomb::game::Game::createGame(IAssetLoader &loader,
-	irr::video::ITexture *texture)
+				  irr::video::ITexture *texture)
 {
 	createMap(loader, MAP_SIZE);
-
-	/* TEMPORALY */
-	createPlayer(loader, "models/characters/shyGuy/shyGuyBlack.obj",
-		std::make_unique<bomb::player::AIController>(_map),
-		{1, 0, 1});
-	createPlayer(loader, "models/characters/shyGuy/shyGuyBlue.obj",
-		std::make_unique<bomb::player::AIController>(_map),
-		{1, 0, MAP_SIZE - 2});
-	createPlayer(loader, "models/characters/shyGuy/shyGuyRed.obj",
-		std::make_unique<bomb::player::AIController>(_map),
-		{MAP_SIZE - 2, 0, 1});
-	createPlayer(loader, "models/characters/shyGuy/shyGuyWhite.obj",
-		std::make_unique<bomb::player::AIController>(_map),
-		{MAP_SIZE - 2, 0, MAP_SIZE - 2});
-	//createPlayer(loader, "models/characters/skelerex/skelerex.obj", SKELEREX, {0, 0, 0});
-	_map->setTextures(texture);
+	for (int i = 0; i < 4; ++i)
+		createPlayer(loader, _charLoader.getCharacterPath(
+			_infos.getPlayerInfos(i).getCharacter()),
+			     std::make_unique<bomb::player::AIController>(_map),
+			     {i % 2 ? 1 : MAP_SIZE - 2, 0,
+			      i > 1 ? MAP_SIZE - 2 : 1});
 	reset();
+	(void) texture;
 }
 
 void bomb::game::Game::createMap(
@@ -42,7 +36,7 @@ void bomb::game::Game::createMap(
 	_map = std::move(pattern.construct(loader, {0, 0, 0},
 		{1, 1, 1}, {0, 0, 0}));
 	loader.createLightObject({(float)pattern.getSize() / 2,
-			(float)pattern.getSize() / 2,
+			(float)pattern.getSize(),
 			(float)pattern.getSize() / 2},
 		{1, 1, 1}, pattern.getSize());
 }
@@ -54,11 +48,10 @@ void bomb::game::Game::createPlayer(bomb::IAssetLoader &loader,
 {
 	if (_players.size() >= NB_PLAYERS)
 		throw bomb::Exception("GameCreation", "Too much players");
-
-	/* A CHANGER ! ECHELLES DE TAILLE */
 	_players.push_back({bomb::game::Player(loader, path, controller,
 		{(float)spawn.X, (float)spawn.Y, (float)spawn.Z},
-		{.5, .5, .5}, {0, 0, 0}), {true}});
+		{.5, .5, .5}, {0, 0, 0},
+		_infos.getPlayerInfos()[_players.size()]), {true}});
 }
 
 void bomb::game::Game::reset()
@@ -73,26 +66,71 @@ int bomb::game::Game::getMapSize() const
 
 void bomb::game::Game::execute(bomb::IAssetLoader &loader)
 {
+	executePlayers(loader);
+	executeBombs(loader);
+}
+
+void bomb::game::Game::executePlayers(bomb::IAssetLoader &loader)
+{
+	for (auto i = 0; i < NB_PLAYERS; ++i) {
+		if (!_players[i].first.isAlive())
+			continue;
+		_players[i].first.execute(*_map);
+		_players[i].second.actionnate(*_map, _players[i].first);
+		if (_players[i].first.isBombReady()) {
+			_bombs.emplace_back(new bomb::object::Bomb
+				(loader, _players[i].first, i));
+			_players[i].first.setBombReady(false);
+		}
+	}
+
+}
+
+void bomb::game::Game::executeBombs(bomb::IAssetLoader &loader)
+{
+	auto bomb = _bombs.begin();
+	while (bomb != _bombs.end()) {
+		if ((*bomb)->tryToActivate(*_map, _players)) {
+			auto blast = (*bomb)->getBlast();
+			_map->updateFromCells(loader);
+			killPlayersInBlast(blast, loader);
+			bomb = _bombs.erase(bomb);
+		} else
+			bomb++;
+	}
+}
+
+void bomb::game::Game::killPlayersInBlast(
+	std::vector<irr::core::vector2di> &blast,
+	bomb::IAssetLoader &loader)
+{
 	for (auto &p : _players) {
-		p.first.execute(*_map);
-		p.second.actionnate(*_map, p.first);
-		if (p.first.isBombReady()) {
-			_bombs.emplace_back(std::make_unique<object::Bomb>
-			(loader, p.first));
+		if (!p.first.isAlive())
+			continue;
+		for (auto b : blast) {
+			irr::core::vector2di pos(
+				static_cast<irr::s32>(p.first.getExactPos().X),
+				static_cast<irr::s32>(p.first.getExactPos().Z));
+			if (pos == b) {
+				p.first.setAlive(false, loader);
+				break;
+			}
 		}
 	}
 }
 
 bool bomb::game::Game::handleEvent(const irr::SEvent &event)
 {
-	//Check if keyEvent is in player keyset and call his handleEvent method
-	auto action = _players[0].first.getActionFromEvent(*_map, event);
-	if (action != IPlayerController::UNDEFINED) {
-		if (event.KeyInput.PressedDown)
-			_players[0].second.sendAction(
-				*_map, _players[0].first, action);
-		else
-			_players[0].second.removeAction(action);
+	for (auto &p : _players) {
+		if (p.first.isAI() || !p.first.isAlive())
+			continue;
+		auto action = p.first.getActionFromEvent(event);
+		if (action != IPlayerController::UNDEFINED) {
+			if (event.KeyInput.PressedDown)
+				p.second.sendAction(*_map, p.first, action);
+			else
+				p.second.removeAction(action);
+		}
 	}
 	return true;
 }

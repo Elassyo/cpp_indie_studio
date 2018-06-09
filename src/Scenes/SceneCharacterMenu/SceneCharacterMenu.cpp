@@ -8,7 +8,7 @@
 #include "SceneCharacterMenu.hpp"
 
 bomb::scene::SceneCharacterMenu::SceneCharacterMenu(
-	bomb::PersistentInfo &infos) : AScene(infos) {}
+	bomb::PersistentInfo &infos) : AScene(infos), _charLoader() {}
 
 bomb::scene::SceneStatus bomb::scene::SceneCharacterMenu::start(
 	IAssetLoader &loader)
@@ -21,6 +21,7 @@ bomb::scene::SceneStatus bomb::scene::SceneCharacterMenu::start(
 	_menu.setElementFont(0, menu::TITLE);
 	addGameButtons();
 	addPlayerButtons();
+	addCharacterButtons();
 	initModelPaths();
 	_menu.updateButtons(loader, true);
 	return BEGIN;
@@ -29,41 +30,90 @@ bomb::scene::SceneStatus bomb::scene::SceneCharacterMenu::start(
 void bomb::scene::SceneCharacterMenu::initModelPaths()
 {
 	auto playerInfos = _infos.getPlayerInfos();
-	playerInfos[0].setModelPath((wchar_t *)L"models/characters/shyGuy/shyGuyWhite.mtl");
-	playerInfos[1].setModelPath((wchar_t *)L"models/characters/shyGuy/shyGuyBlack.mtl");
-	playerInfos[2].setModelPath((wchar_t *)L"models/characters/shyGuy/shyGuyBlue.mtl");
-	playerInfos[3].setModelPath((wchar_t *)L"models/characters/shyGuy/shyGuyRed.mtl");
+	playerInfos[0].setCharacter(bomb::game::SHYGUY_WHITE);
+	playerInfos[1].setCharacter(bomb::game::SHYGUY_BLACK);
+	playerInfos[2].setCharacter(bomb::game::SHYGUY_BLUE);
+	playerInfos[3].setCharacter(bomb::game::SHYGUY_RED);
+	_infos.setPlayerInfos(playerInfos);
 }
 
 void bomb::scene::SceneCharacterMenu::addPlayerButtons()
 {
 	_menu.addButton(L"1 : AI", {.20, .33}, 1);
 	_menu.setButtonEvent(1, [this](){
-		changePlayerType(1, (wchar_t *)L"models/characters/shyGuy/shyGuyWhite.mtl");
+		changePlayerType(1, bomb::game::SHYGUY_WHITE);
 	});
 	_menu.addButton(L"2 : AI", {.40, .33}, 2);
 	_menu.setButtonEvent(2, [this](){
-		changePlayerType(2, (wchar_t *)L"models/characters/shyGuy/shyGuyBlack.mtl");
+		changePlayerType(2, bomb::game::SHYGUY_BLACK);
 	});
 	_menu.addButton(L"3 : AI", {.60, .33}, 3);
 	_menu.setButtonEvent(3, [this](){
-		changePlayerType(3, (wchar_t *)L"models/characters/shyGuy/shyGuyBlue.mtl");
+		changePlayerType(3, bomb::game::SHYGUY_BLUE);
 	});
 	_menu.addButton(L"4 : AI", {.80, .33}, 4);
 	_menu.setButtonEvent(4, [this](){
-		changePlayerType(4, (wchar_t *)L"models/characters/shyGuy/shyGuyRed.mtl");
+		changePlayerType(4, bomb::game::SHYGUY_RED);
 	});
 }
 
-void bomb::scene::SceneCharacterMenu::changePlayerType(int idx, wchar_t *model)
+void bomb::scene::SceneCharacterMenu::addCharacterButtons()
+{
+	_menu.addButton(L"Shy Guy", {.20, .5}, 11);
+	_menu.setButtonPushable(11, false);
+	_menu.setButtonEvent(11, [this](){
+		changeCharacter(1);
+	});
+	_menu.addButton(L"Shy Guy", {.40, .5}, 12);
+	_menu.setButtonPushable(12, false);
+	_menu.setButtonEvent(12, [this](){
+		changeCharacter(2);
+	});
+	_menu.addButton(L"Shy Guy", {.60, .5}, 13);
+	_menu.setButtonPushable(13, false);
+	_menu.setButtonEvent(13, [this](){
+		changeCharacter(3);
+	});
+	_menu.addButton(L"Shy Guy", {.80, .5}, 14);
+	_menu.setButtonPushable(14, false);
+	_menu.setButtonEvent(14, [this](){
+		changeCharacter(4);
+	});
+}
+
+void bomb::scene::SceneCharacterMenu::changePlayerType(
+	int idx, game::Character character)
 {
 	PlayerInfo player = _infos.getPlayerInfos(idx - 1);
+
 	_menu.setElementText(idx, std::wstring(
 		std::to_wstring(idx ) + L" : "
 		+ (player.isAI() ? L"Player" : L"AI")).c_str());
-	player.setModelPath(player.isAI() ? (wchar_t *)L"models/characters/skelerex/skelerex.mtl" : model);
+	player.setCharacter(!player.isAI() ? character :
+			    _charLoader.getNextCharacter(game::SELECT_BEGIN));
+	_menu.setButtonPushable(10 + idx, player.isAI());
 	player.setIsAI(!player.isAI());
 	_infos.setPlayerInfos(idx - 1, player);
+	updateCharacter(idx, player);
+}
+
+void bomb::scene::SceneCharacterMenu::changeCharacter(int idx)
+{
+	PlayerInfo player = _infos.getPlayerInfos(idx - 1);
+
+	if (!player.isAI()) {
+		player.setCharacter(_charLoader.getNextCharacter(
+			player.getCharacter()));
+		_infos.setPlayerInfos(idx - 1, player);
+		updateCharacter(idx, player);
+	}
+}
+
+void bomb::scene::SceneCharacterMenu::updateCharacter(int idx,
+						      PlayerInfo player)
+{
+	_menu.setElementText(10 + idx, _charLoader.getCharacterName(
+		player.getCharacter()));
 }
 
 void bomb::scene::SceneCharacterMenu::addGameButtons()
@@ -101,9 +151,10 @@ void bomb::scene::SceneCharacterMenu::reset(bomb::IAssetLoader &loader)
 	(void) loader;
 }
 
-void bomb::scene::SceneCharacterMenu::clean()
+void bomb::scene::SceneCharacterMenu::clean(IAssetLoader &loader)
 {
 	_menu.clean();
+	(void) loader;
 }
 
 std::string bomb::scene::SceneCharacterMenu::nextScene()

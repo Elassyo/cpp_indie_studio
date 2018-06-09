@@ -28,7 +28,7 @@ namespace bomb {
 			size_t hp);
 		AMapBlock();
 
-		virtual bool explode(size_t dammage) = 0;
+		virtual bool explode(size_t damage, IAssetLoader &loader) = 0;
 		virtual std::unique_ptr<AMapBlock> clone(
 			IAssetLoader &loader,
 			const irr::core::vector3df &pos,
@@ -43,8 +43,6 @@ namespace bomb {
 	protected:
 		irr::core::vector2di _mapPos;
 		size_t _hp;
-
-	private:
 		std::unique_ptr<StaticObject> _block;
 	};
 }

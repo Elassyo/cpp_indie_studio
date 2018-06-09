@@ -22,9 +22,12 @@
 	#include "../../Player/PlayerActionner.hpp"
 	#include "../../Xml/XmlWriter.hpp"
 	#include "../SceneGame/Bomb.hpp"
+	#include "PersistentInfo.hpp"
+	#include "../../Exception/Exception.hpp"
+	#include "../../Player/AIController.hpp"
 
 
-#define MAP_SIZE 16
+#define MAP_SIZE 15
 
 namespace bomb {
 	namespace game {
@@ -32,7 +35,7 @@ namespace bomb {
 
 		class Game {
 		public:
-			Game() = default;
+			Game(PersistentInfo &_infos);
 
 			void createGame(
 				IAssetLoader &loader,
@@ -42,14 +45,6 @@ namespace bomb {
 			void execute(IAssetLoader &loader);
 			bool handleEvent(const irr::SEvent &event);
 			std::shared_ptr<Map> &getMap();
-
-		enum Character {
-				SHYGUY_WHITE,
-				SHYGUY_BLACK,
-				SHYGUY_RED,
-				SHYGUY_BLUE,
-				SKELEREX
-			};
 
 			std::vector<std::pair<Player, PlayerActionner>>
 				&getPlayers();
@@ -67,11 +62,19 @@ namespace bomb {
 
 			void reset();
 
+			PersistentInfo &_infos;
+			bomb::game::CharacterLoader _charLoader;
 			std::vector<std::pair<Player, PlayerActionner>>
 				_players;
 			std::shared_ptr<bomb::Map> _map;
-			std::vector<std::unique_ptr<bomb::object::Bomb>> _bombs;
+			std::vector<bomb::object::Bomb *> _bombs;
 			int _mapSize;
+
+			void killPlayersInBlast(
+				std::vector<irr::core::vector2di> &vector,
+				bomb::IAssetLoader &loader);
+			void executePlayers(IAssetLoader &loader);
+			void executeBombs(IAssetLoader &loader);
 		};
 	}
 }
