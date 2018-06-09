@@ -31,7 +31,7 @@ namespace bomb {
 			virtual SceneStatus loop(IAssetLoader &loader) = 0;
 			virtual void save() = 0;
 			virtual void reset(IAssetLoader &loader) = 0;
-			virtual void clean() = 0;
+			virtual void clean(IAssetLoader &loader) = 0;
 			virtual std::string nextScene() = 0;
 			bool onEvent(const irr::SEvent &event) override = 0;
 		};

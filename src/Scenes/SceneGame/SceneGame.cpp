@@ -48,9 +48,9 @@ void bomb::scene::SceneGame::reset(bomb::IAssetLoader &loader)
 	(void) loader;
 }
 
-void bomb::scene::SceneGame::clean()
+void bomb::scene::SceneGame::clean(IAssetLoader &loader)
 {
-	delete _blocksTextures;
+	_game.getMap()->clean(loader);
 }
 
 std::string bomb::scene::SceneGame::nextScene()

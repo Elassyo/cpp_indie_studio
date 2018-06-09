@@ -32,7 +32,7 @@ void bomb::scene::SceneLauncher::launchScene(const std::string &name)
 			"Failed to launch scene " + name);
 	_gameEngine.listenEventScene(scene);
 	bool running = _loopScene(scene);
-	scene->clean();
+	scene->clean(_gameEngine);
 	_gameEngine.listenEventScene(nullptr);
 	std::string next = scene->nextScene();
 	if (!next.empty() && running)

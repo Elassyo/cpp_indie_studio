@@ -151,9 +151,10 @@ void bomb::scene::SceneCharacterMenu::reset(bomb::IAssetLoader &loader)
 	(void) loader;
 }
 
-void bomb::scene::SceneCharacterMenu::clean()
+void bomb::scene::SceneCharacterMenu::clean(IAssetLoader &loader)
 {
 	_menu.clean();
+	(void) loader;
 }
 
 std::string bomb::scene::SceneCharacterMenu::nextScene()
