@@ -7,28 +7,21 @@
 
 #include "Game.hpp"
 
-bomb::game::Game::Game(bomb::PersistentInfo &infos) : _infos(infos)
+bomb::game::Game::Game(bomb::PersistentInfo &infos) :
+	_infos(infos), _charLoader()
 {
 }
 
 void bomb::game::Game::createGame(IAssetLoader &loader,
-	irr::video::ITexture *texture)
+				  irr::video::ITexture *texture)
 {
 	createMap(loader, MAP_SIZE);
-
-	/* TEMPORALY */
-	createPlayer(loader, "models/characters/shyGuy/shyGuyWhite.obj",
-		std::make_unique<bomb::player::AIController>(_map),
-		{1, 0, 1});
-	createPlayer(loader, "models/characters/shyGuy/shyGuyBlack.obj",
-		std::make_unique<bomb::player::AIController>(_map),
-		{1, 0, MAP_SIZE - 2});
-	createPlayer(loader, "models/characters/shyGuy/shyGuyBlue.obj",
-		std::make_unique<bomb::player::AIController>(_map),
-		{MAP_SIZE - 2, 0, 1});
-	createPlayer(loader, "models/characters/shyGuy/shyGuyRed.obj",
-		std::make_unique<bomb::player::AIController>(_map),
-		{MAP_SIZE - 2, 0, MAP_SIZE - 2});
+	for (int i = 0; i < 4; ++i)
+		createPlayer(loader, _charLoader.getCharacterPath(
+			_infos.getPlayerInfos(i).getCharacter()),
+			     std::make_unique<bomb::player::AIController>(_map),
+			     {i % 2 ? 1 : MAP_SIZE - 2, 0,
+			      i > 1 ? MAP_SIZE - 2 : 1});
 	_map->setTextures(texture);
 	reset();
 }
@@ -55,8 +48,6 @@ void bomb::game::Game::createPlayer(bomb::IAssetLoader &loader,
 {
 	if (_players.size() >= NB_PLAYERS)
 		throw bomb::Exception("GameCreation", "Too much players");
-
-	/* A CHANGER ! ECHELLES DE TAILLE */
 	_players.push_back({bomb::game::Player(loader, path, controller,
 		{(float)spawn.X, (float)spawn.Y, (float)spawn.Z},
 		{.5, .5, .5}, {0, 0, 0},

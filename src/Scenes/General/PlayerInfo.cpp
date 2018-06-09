@@ -7,7 +7,7 @@
 
 #include "PlayerInfo.hpp"
 
-bomb::PlayerInfo::PlayerInfo() : _isAI(true), _modelPath(nullptr),
+bomb::PlayerInfo::PlayerInfo() : _isAI(true), _character(game::SHYGUY_WHITE),
 	_keys({{irr::KEY_UP, IPlayerController::MV_UP},
 		{irr::KEY_DOWN, IPlayerController::MV_DOWN},
 		{irr::KEY_LEFT, IPlayerController::MV_LEFT},
@@ -26,14 +26,14 @@ void bomb::PlayerInfo::setIsAI(bool isAI)
 	_isAI = isAI;
 }
 
-wchar_t *bomb::PlayerInfo::getModelPath() const
+bomb::game::Character bomb::PlayerInfo::getCharacter() const
 {
-	return _modelPath;
+	return _character;
 }
 
-void bomb::PlayerInfo::setModelPath(wchar_t *modelPath)
+void bomb::PlayerInfo::setCharacter(bomb::game::Character modelPath)
 {
-	PlayerInfo::_modelPath = modelPath;
+	_character = modelPath;
 }
 
 bomb::IPlayerController::Actions
