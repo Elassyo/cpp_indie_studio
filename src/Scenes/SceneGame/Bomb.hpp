@@ -21,6 +21,8 @@ namespace bomb {
 
 			const std::vector<std::pair<irr::core::vector2di,
 				bomb::Map::BlockType>> &getBlast() const;
+			irr::core::position2di getPos();
+			void fuse();
 		private:
 			int isActivable(bomb::Map &map,
 				std::vector<std::pair<game::Player,

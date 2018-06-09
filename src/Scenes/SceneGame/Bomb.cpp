@@ -21,7 +21,7 @@ bool bomb::object::Bomb::deleteBlock(bomb::Map &map, irr::core::vector3di pos)
 	auto last = map[pos];
 	if (map[pos] == Map::BREAKABLE)
 		map[pos] = Map::EMPTY;
-	if (map[pos] == Map::UNBREAKABLE || map[pos] == Map::BOMB)
+	if (map[pos] == Map::UNBREAKABLE)
 		return false;
 	_blast.emplace_back(irr::core::vector2di(pos.X, pos.Z), last);
 	return last == Map::EMPTY;
@@ -71,4 +71,18 @@ const std::vector<std::pair<irr::core::vector2di, bomb::Map::BlockType>>
 &bomb::object::Bomb::getBlast() const
 {
 	return _blast;
+}
+
+irr::core::position2di bomb::object::Bomb::getPos()
+{
+	if (_model == nullptr)
+		return {-1, -1};
+	return {static_cast<irr::s32>(_model->getPos().X),
+		static_cast<irr::s32>(_model->getPos().Z)};
+}
+
+void bomb::object::Bomb::fuse()
+{
+	_timer.setTimerInterval(250);
+	_timer.reset();
 }

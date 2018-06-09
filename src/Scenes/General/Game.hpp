@@ -34,7 +34,7 @@ namespace bomb {
 
 		class Game {
 		public:
-			Game(PersistentInfo &_infos);
+			explicit Game(PersistentInfo &_infos);
 
 			void createGame(
 				IAssetManager &loader,
@@ -47,7 +47,6 @@ namespace bomb {
 
 			std::vector<std::pair<Player, PlayerActionner>>
 				&getPlayers();
-
 		private:
 			void createMap(
 				IAssetManager &loader,
@@ -64,6 +63,7 @@ namespace bomb {
 			void killPowersInBlast(
 				irr::core::vector2di vector,
 				IAssetManager &manager);
+			void fuseBombInBlast(irr::core::vector2di pos);
 			void blastObjects(
 				std::vector<std::pair<irr::core::vector2di,
 					Map::BlockType>> vector,
