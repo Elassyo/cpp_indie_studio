@@ -36,9 +36,11 @@ namespace bomb {
 			void addCharacterButtons();
 			void addGameButtons();
 			void initModelPaths();
-			void changePlayerType(int idx, wchar_t *model);
+			void changePlayerType(int idx,
+					      game::Character character);
 			void changeCharacter(int idx);
 			void updateCharacter(int idx, PlayerInfo player);
+			bomb::game::CharacterLoader _charLoader;
 			bomb::menu::Menu _menu;
 			bool _running;
 			std::string _nextScene;
