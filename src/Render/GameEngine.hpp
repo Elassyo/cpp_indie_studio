@@ -9,6 +9,7 @@
 	#define CPP_INDIE_STUDIO_GAMEENGINE_HPP
 
 	#include <memory>
+	#include <utility>
 	#include <irrlicht/irrlicht.h>
 	#include "../Audio/AudioManager.hpp"
 	#include "../Interface/IAssetManager.hpp"
@@ -17,8 +18,10 @@
 	#include "../CameraObject.hpp"
 	#include "../StaticObject.hpp"
 	#include "../LightObject.hpp"
+	#include "../BillboardObject.hpp"
 	#include "../Version.hpp"
 	#include "EventHandler.hpp"
+	#include "../Exception/Exception.hpp"
 
 
 namespace bomb {
@@ -60,6 +63,11 @@ namespace bomb {
 			 irr::core::vector3df pos,
 			 irr::core::vector3df rot,
 			 irr::core::vector3df scale) override;
+
+		std::unique_ptr<BillboardObject>
+		createBillboardObject(irr::core::vector3df pos,
+				      irr::core::vector3df rot,
+				      irr::core::vector3df scale) override;
 
 		void deleteObject(std::unique_ptr<IObject> obj) override;
 		std::unique_ptr<CameraObject> getCamera(

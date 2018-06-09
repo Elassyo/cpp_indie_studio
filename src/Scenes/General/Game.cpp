@@ -15,13 +15,13 @@ bomb::game::Game::Game(bomb::PersistentInfo &infos) :
 void bomb::game::Game::createGame(IAssetManager &loader,
 				  irr::video::ITexture *texture)
 {
-	createMap(loader, MAP_SIZE);
+	createMap(loader, _infos.getMapSize());
 	for (int i = 0; i < 4; ++i)
 		createPlayer(loader, _charLoader.getCharacterPath(
 			_infos.getPlayerInfos(i).getCharacter()),
 			     std::make_unique<bomb::player::AIController>(_map),
-			     {i % 2 ? 1 : MAP_SIZE - 2, 0,
-			      i > 1 ? MAP_SIZE - 2 : 1});
+			     {i % 2 ? 1 : _infos.getMapSize() - 2, 0,
+			      i > 1 ? _infos.getMapSize() - 2 : 1});
 	reset();
 	(void) texture;
 }
@@ -30,7 +30,6 @@ void bomb::game::Game::createMap(
 	bomb::IAssetManager &loader, unsigned int size)
 {
 	bomb::MapConstructor pattern = MapGenerator(size).generate();
-	pattern.dumpMap();
 
 	_mapSize = pattern.getSize();
 	_map = std::move(pattern.construct(loader, {0, 0, 0},

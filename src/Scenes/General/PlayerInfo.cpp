@@ -43,3 +43,15 @@ bomb::PlayerInfo::getActionFromKey(irr::EKEY_CODE key) const
 		return IPlayerController::UNDEFINED;
 	return _keys.at(key);
 }
+
+std::map<irr::EKEY_CODE, bomb::IPlayerController::Actions>
+        bomb::PlayerInfo::getKeys() const
+{
+	return _keys;
+}
+
+void bomb::PlayerInfo::setKeys(std::map<irr::EKEY_CODE,
+	bomb::IPlayerController::Actions> keys)
+{
+	_keys = keys;
+}
