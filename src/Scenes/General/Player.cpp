@@ -66,6 +66,11 @@ bool bomb::game::Player::isGhostMode() const
 	return _ghostMode;
 }
 
+bool bomb::game::Player::isGhostBombMode() const
+{
+	return _ghostBombMode;
+}
+
 bool bomb::game::Player::isAlive() const
 {
 	return _alive;
@@ -89,6 +94,11 @@ void bomb::game::Player::setBombRange(unsigned char _bombRange)
 void bomb::game::Player::setGhostMode(bool _ghostMode)
 {
 	Player::_ghostMode = _ghostMode;
+}
+
+void bomb::game::Player::setGhostBombMode(bool _ghostBombMode)
+{
+	Player::_ghostBombMode = _ghostBombMode;
 }
 
 void bomb::game::Player::setAlive(bool _alive, IAssetLoader &loader)

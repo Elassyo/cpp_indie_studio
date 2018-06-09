@@ -35,6 +35,7 @@ namespace bomb {
 			float getSpeed() const;
 			uint8_t getBombRange() const;
 			bool isGhostMode() const;
+			bool isGhostBombMode() const;
 			bool isAlive() const;
 			bool isAI() const;
 			void setBombReady(bool);
@@ -44,6 +45,7 @@ namespace bomb {
 			void setSpeed(float _speed);
 			void setBombRange(uint8_t _bombRange);
 			void setGhostMode(bool _ghostMode);
+			void setGhostBombMode(bool _ghostBombMode);
 			void setAlive(bool _alive, IAssetLoader &loader);
 			void setAI(bool AI);
 			bool isBombReady();
@@ -55,6 +57,7 @@ namespace bomb {
 			float _speed;
 			uint8_t _bombRange;
 			bool _ghostMode;
+			bool _ghostBombMode;
 			bool _alive;
 			bool _AI;
 			bool _bombReady;

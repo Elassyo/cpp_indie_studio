@@ -15,5 +15,7 @@ bomb::object::SpeedUp::SpeedUp(bomb::IAssetLoader &loader,
 
 bool bomb::object::SpeedUp::activate(bomb::Map &map, bomb::game::Player &player)
 {
+	if (player.getSpeed() < 1.0f)
+		player.setSpeed(player.getSpeed() + 0.05f);
 	return Power::activate(map, player);
 }

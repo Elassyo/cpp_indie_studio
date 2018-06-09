@@ -15,5 +15,6 @@ bomb::object::BombPass::BombPass(bomb::IAssetLoader &loader,
 
 bool bomb::object::BombPass::activate(bomb::Map &map, bomb::game::Player &player)
 {
+	player.setGhostBombMode(true);
 	return Power::activate(map, player);
 }

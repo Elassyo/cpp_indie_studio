@@ -15,5 +15,7 @@ bomb::object::BombUp::BombUp(bomb::IAssetLoader &loader,
 
 bool bomb::object::BombUp::activate(bomb::Map &map, bomb::game::Player &player)
 {
+	if (player.getNbBombs() < 99)
+		player.setNbBombs(player.getNbBombs() + 1);
 	return Power::activate(map, player);
 }
