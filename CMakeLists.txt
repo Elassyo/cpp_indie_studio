@@ -171,7 +171,7 @@ set(SRC_FILES
         src/Xml/XmlReader.hpp
         )
 
-        add_executable(bombermario WIN32
+        add_executable(bombermario #WIN32
         ${SRC_FILES}
         ${SRC_RESOURCES}
         src/BomberMario.cpp)

@@ -13,10 +13,12 @@
 #endif
 
 #if (BOMB_VERSION == LINUX_DEV)
+
 bomb::Version bomb::Version::GetCurrentVersion()
 {
 	return Version("./assets/", "./");
 }
+
 #elif (BOMB_VERSION == LINUX_REL)
 
 	#include <algorithm>
@@ -43,6 +45,7 @@ bomb::Version bomb::Version::GetCurrentVersion()
 	}
 	return Version("/usr/share/bombermario/", home + '/' + savePath);
 }
+
 #elif (BOMB_VERSION == WINDOWS)
 
 	#include <ShlObj.h>
@@ -50,11 +53,21 @@ bomb::Version bomb::Version::GetCurrentVersion()
 bomb::Version bomb::Version::GetCurrentVersion()
 {
 	TCHAR localAppData[MAX_PATH];
-	SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, localAppData);
-	return Version(std::string(localAppData) + "\\BomberMario\\");
+	TCHAR myDocuments[MAX_PATH];
+	SHGetFolderPathA(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, localAppData);
+	SHGetFolderPathA(NULL, CSIDL_MYDOCUMENTS, NULL, 0, myDocuments);
+	std::string savePath = std::string(myDocuments) +
+		"\\My Games\\BomberMario\\";
+	int res = SHCreateDirectoryExA(NULL, savePath.c_str(), NULL);
+	if (res != ERROR_SUCCESS && res != ERROR_ALREADY_EXISTS)
+		throw Exception("Version", "Failed to create save directory");
+	return Version(std::string(localAppData) + "\\BomberMario\\", savePath);
 }
+
 #else
+
 	#error Invalid build version
+
 #endif
 
 bomb::Version::Version(const std::string &assetsPath,
