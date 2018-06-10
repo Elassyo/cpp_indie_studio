@@ -10,6 +10,7 @@
 
 	#include "../../Menu/Menu.hpp"
 	#include "../General/AScene.hpp"
+	#include <thread>
 
 namespace bomb {
 	namespace scene {
@@ -30,7 +31,9 @@ namespace bomb {
 			bool onEvent(const irr::SEvent &event) override;
 
 		private:
+			void addButtons();
 			void launchMainMusic(IAssetManager &loader);
+			std::unique_ptr<CameraObject> _cam;
 			bomb::menu::Menu _menu;
 			bool _running;
 			std::string _nextScene;
