@@ -105,7 +105,8 @@ void bomb::object::Bomb::simulateBlast(bomb::BomberMap &map,
 				    static_cast<irr::s32>(_model->getPos().Z)};
 	if (pos.X == 0 && pos.Y == 0 && pos.Z == 0)
 		return;
-	map[pos] = BomberMap::EMPTY;
+	if (destroy)
+		map[pos] = BomberMap::EMPTY;
 	if (!isEnd(map, pos) && destroy)
 		deleteBlock(map, pos);
 	blastLine(map, pos, {1, 0}, player.getBombRange(), destroy);

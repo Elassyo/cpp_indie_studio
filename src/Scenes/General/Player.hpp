@@ -46,7 +46,7 @@ namespace bomb {
 			void setBombRange(uint8_t _bombRange);
 			void setGhostMode(bool _ghostMode);
 			void setGhostBombMode(bool _ghostBombMode);
-			void setAlive(bool _alive, IAssetManager &loader);
+			void setAlive(bool alive, IAssetManager &loader);
 			void setAI(bool AI);
 			bool isBombReady();
 			void setKeys(std::map<irr::EKEY_CODE,

@@ -27,8 +27,22 @@ namespace bomb {
 				       std::array<game::Player, 4> &players,
 				       BomberMap &map, int index);
 		private:
-			std::unordered_map<bomb::IPlayerController::Actions,
+			std::map<bomb::IPlayerController::Actions,
 				irr::core::vector3df> _moves;
+			unsigned int getClosestEnenemy(
+				std::array<game::Player, 4> &array, int index);
+			IPlayerController::Actions vecToDir(
+				irr::core::vector3d<irr::f32> vector3d);
+			std::map<irr::core::vector2di,
+				IPlayerController::Actions>
+			searchSaferBlock(
+				BomberMap &map, Map safeMap,
+				std::map<irr::core::vector2di,
+					IPlayerController::Actions> poses,
+				IPlayerController::Actions &action);
+			IPlayerController::Actions searchSaferBlock(
+				BomberMap &map, Map &safeMap,
+				irr::core::vector2di vector2d);
 		};
 	}
 }

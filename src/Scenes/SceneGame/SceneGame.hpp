@@ -36,6 +36,7 @@ namespace bomb {
 			void explodeBombs(bomb::IAssetManager &loader);
 			void checkVictory();
 			void move_camera(const irr::SEvent &event);
+			void createGame(IAssetManager &loader);
 
 			bomb::menu::Menu _menu;
 			game::CharacterLoader _charLoader;

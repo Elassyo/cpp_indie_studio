@@ -146,6 +146,7 @@ void bomb::scene::SceneCharacterMenu::addGameButtons()
 	});
 	_menu.addButton(L"Load Game", {.5f, .75f}, 7);
 	_menu.setButtonEvent(7, [this](){
+		_infos.setGenerateMap(false);
 		_nextScene = "game_scene";
 		_running = false;
 	});

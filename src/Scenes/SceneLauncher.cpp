@@ -51,9 +51,9 @@ bool bomb::scene::SceneLauncher::_loopScene
 	{
 		clock.reset();
 		_gameEngine.refresh();
-		if (clock.getElapsedTime() < 16)
-			std::this_thread::sleep_for
-			(std::chrono::microseconds(16 - clock.getElapsedTime()));
+		while (clock.getElapsedTime() < 16)
+			std::this_thread::sleep_for(std::chrono::milliseconds(
+				16 - clock.getElapsedTime()));
 		running = _gameEngine.isRunning();
 	}
 	return running;

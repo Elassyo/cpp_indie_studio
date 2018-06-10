@@ -81,6 +81,11 @@ void bomb::MapConstructor::dumpMap()
 	}
 }
 
+void bomb::MapConstructor::setSize(unsigned int size)
+{
+	_mapSize = size;
+}
+
 int bomb::MapConstructor::getSize()
 {
 	return _mapSize;
