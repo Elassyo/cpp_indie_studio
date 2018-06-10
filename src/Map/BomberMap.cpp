@@ -11,9 +11,9 @@
 
 bomb::BomberMap::BomberMap(const std::vector<std::shared_ptr<bomb::AMapBlock>> &_blocks,
 	std::vector<BomberMap::BlockType> &cells) :
-	_blocks(_blocks)
+	bomb::Map((int)sqrt(cells.size())), _blocks(_blocks),
+	_bombRanges((int)sqrt(cells.size()))
 {
-	setSize(static_cast<int>(sqrt(cells.size())));
 	_cells = cells;
 	_bombRanges.setSize(_size);
 }
@@ -48,4 +48,9 @@ bomb::BomberMap::addBlast(std::vector<std::pair<irr::core::vector2di,
 {
 	for (auto &b : blast)
 		_bombRanges[b.first] = BOMB;
+}
+
+bomb::Map &bomb::BomberMap::getBombRanges()
+{
+	return _bombRanges;
 }

@@ -29,6 +29,9 @@ namespace bomb {
 		void removeAction(IPlayerController::Actions actions);
 		IPlayerController::Actions getAction();
 
+		std::unordered_map<IPlayerController::Actions,
+			irr::core::vector3df> &getMoves();
+
 	private:
 		std::unordered_map<bomb::IPlayerController::Actions,
 			irr::core::vector3df> _moves;

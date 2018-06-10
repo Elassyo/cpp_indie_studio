@@ -156,3 +156,9 @@ bomb::IPlayerController::Actions bomb::PlayerActionner::getAction()
 {
 	return _currentAction;
 }
+
+std::unordered_map<bomb::IPlayerController::Actions,
+	irr::core::vector3df> &bomb::PlayerActionner::getMoves()
+{
+	return _moves;
+}

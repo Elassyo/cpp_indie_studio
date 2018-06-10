@@ -30,7 +30,7 @@ std::unique_ptr<bomb::object::Power>
 bomb::object::PowerFactory::getRandomPower(bomb::IAssetManager &loader,
 					   const irr::core::vector3df &pos)
 {
-	float item = ((float)std::rand() / RAND_MAX) * _total;
+	float item = std::rand() % (_total + 1);
 	int actual = 0;
 
 	if (_total == 0)
