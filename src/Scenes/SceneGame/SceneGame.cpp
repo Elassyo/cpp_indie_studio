@@ -25,13 +25,12 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetManager &loader)
 	auto plane = loader.createPlaneObject({0, 0, 0}, {100, 100, 100});
 	plane->setTexture(0, loader.loadTexture("images/grass.png"));
 	_playing = true;
-	_blocksTextures = loader.loadTexture("models/blocks/spritesheet.png");
+	_camera = loader.getCamera();
 	createGame(loader);
-	auto cam = loader.getCamera();
 	float mid = (float)(_game.getMapSize() - 1) / 2;
-	cam->setPos({mid, (float)_game.getMapSize() * 0.8f,
+	_camera->setPos({mid, (float)_game.getMapSize() * 0.8f,
 		(float)_game.getMapSize() * 0.8f});
-	cam->setTarget({mid, 0, mid + 1});
+	_camera->setTarget({mid, 0, mid + 1});
 	loadSounds(loader);
 	_menu.updateButtons(loader, true);
 	return BEGIN;
@@ -127,6 +126,7 @@ void bomb::scene::SceneGame::clean(IAssetManager &loader)
 	for (unsigned int i = 0; i < _game.getPlayers().size(); ++i) {
 		p[i].setAlive(false, loader);
 	}
+	_camera.reset(nullptr);
 	_running = true;
 }
 
@@ -143,7 +143,35 @@ bool bomb::scene::SceneGame::onEvent(const irr::SEvent &event)
 			_running = false;
 		if (event.KeyInput.Key == irr::KEY_RETURN)
 			this->save();
+		move_camera(event);
 	}
 
 	return true;
+}
+
+void bomb::scene::SceneGame::move_camera(const irr::SEvent &event)
+{
+	auto pos = _camera->getPos();
+	switch (event.KeyInput.Key) {
+	case irr::KEY_BACK:
+		_camera->setPos({pos.X + 0.1f, pos.Y, pos.Z});
+		break;
+	case irr::KEY_HOME:
+		_camera->setPos({pos.X - 0.1f, pos.Y, pos.Z});
+		break;
+	case irr::KEY_PRIOR:
+		_camera->setPos({pos.X, pos.Y + 0.1f, pos.Z});
+		break;
+	case irr::KEY_NEXT:
+		_camera->setPos({pos.X, pos.Y - 0.1f, pos.Z});
+		break;
+	case irr::KEY_F1:
+		_camera->setPos(pos + 1);
+		break;
+	case irr::KEY_F2:
+		_camera->setPos(pos - 1);
+		break;
+	default:
+		break;
+	}
 }

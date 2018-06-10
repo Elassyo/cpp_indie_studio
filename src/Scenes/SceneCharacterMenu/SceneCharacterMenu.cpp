@@ -6,6 +6,8 @@
 //
 
 #include "SceneCharacterMenu.hpp"
+#include "../../Exception/Exception.hpp"
+#include "../../Xml/XmlReader.hpp"
 
 bomb::scene::SceneCharacterMenu::SceneCharacterMenu(
 	bomb::PersistentInfo &infos) : AScene(infos), _charLoader() {}
@@ -145,11 +147,16 @@ void bomb::scene::SceneCharacterMenu::addGameButtons()
 		_running = false;
 	});
 	_menu.addButton(L"Load Game", {.5f, .75f}, 7);
-	_menu.setButtonEvent(7, [this](){
-		_infos.setGenerateMap(false);
-		_nextScene = "game_scene";
-		_running = false;
-	});
+	try {
+		xml::XmlReader xml(_infos.getFileName());
+		_menu.setButtonEvent(7, [this]() {
+			_infos.setGenerateMap(false);
+			_nextScene = "game_scene";
+			_running = false;
+		});
+	} catch (const Exception &) {
+		_menu.setButtonPushable(7, false);
+	}
 	_menu.addButton(L"Back", {.75f, .75f}, 8);
 	_menu.setButtonEvent(8, [this](){
 		_nextScene = "home_scene";

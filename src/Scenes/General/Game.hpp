@@ -59,7 +59,7 @@ namespace bomb {
 			void createMap(
 				IAssetManager &loader, xml::XmlReader &);
 			void setPlayerAttributes(bomb::IAssetManager &loader,
-						 xml::XmlReader &xmlReader,
+						 xml::XmlReader &FxmlReader,
 						 int i);
 			void createPlayer(IAssetLoader &loader,
 					  const std::string &path,
