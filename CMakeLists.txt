@@ -54,6 +54,8 @@ set(SRC_FILES
 
         src/Map/Map.cpp
         src/Map/Map.hpp
+        src/Map/AMap.cpp
+        src/Map/AMap.hpp
         src/Map/MapBlocks/AMapBlock.cpp
         src/Map/MapBlocks/AMapBlock.hpp
         src/Map/MapBlocks/MapBlockBreakable.cpp
