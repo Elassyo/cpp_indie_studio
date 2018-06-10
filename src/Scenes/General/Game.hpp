@@ -57,6 +57,7 @@ namespace bomb {
 			std::shared_ptr<BomberMap> &getMap();
 			int getMapSize() const;
 			std::array<Player, 4> & getPlayers();
+			void clean(IAssetManager &loader);
 		private:
 			void createMap(
 				IAssetManager &loader,
@@ -95,16 +96,13 @@ namespace bomb {
 			bomb::game::CharacterLoader _charLoader;
 			std::array<Player, 4> _players;
 			std::array<PlayerActionner, 4> _playersActionners;
-//			std::map<Player *, PlayerActionner> _players;
 			std::shared_ptr<bomb::BomberMap> _map;
 			std::vector<bomb::object::Bomb *> _bombs;
 			std::vector<std::unique_ptr<bomb::object::Power>>
 				_powers;
 			bomb::ai::AIController _controller;
-
 			std::unordered_map
 				<std::wstring, BomberMap::BlockType> _strBlk;
-
 			int _mapSize;
 			bomb::object::PowerFactory _factory;
 			std::vector<object::ExplosionBlast> _explosionBlasts;

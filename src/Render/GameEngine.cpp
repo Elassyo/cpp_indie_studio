@@ -15,8 +15,8 @@ bomb::GameEngine::GameEngine(const std::wstring &winName,
 	_videoDriver(_device->getVideoDriver()),
 	_sceneManager(_device->getSceneManager()),
 	_camera(nullptr),
-	_assetsPath(Version::GetCurrentVersion().getAssetsPath()),
-	_audioMgr(_assetsPath)
+	_version(Version::GetCurrentVersion()),
+	_audioMgr(_version.getAssetsPath())
 {
 	_device->setWindowCaption(winName.c_str());
 }
@@ -54,7 +54,8 @@ irr::gui::IGUIEnvironment *bomb::GameEngine::getGui()
 
 irr::video::ITexture *bomb::GameEngine::loadTexture(const std::string &path)
 {
-	auto ptr = _videoDriver->getTexture((_assetsPath + path).c_str());
+	auto ptr = _videoDriver->getTexture(
+		(_version.getAssetsPath() + path).c_str());
 	if (!ptr)
 		throw Exception("GameEngine", "can't open texture " + path);
 	return ptr;
@@ -72,7 +73,7 @@ void bomb::GameEngine::unloadAudioFile(const std::string &path)
 
 irr::gui::IGUIFont *bomb::GameEngine::loadFont(const std::string &path)
 {
-	return getGui()->getFont((_assetsPath + path).c_str());
+	return getGui()->getFont((_version.getAssetsPath() + path).c_str());
 }
 
 std::unique_ptr<bomb::AnimatedObject> bomb::GameEngine::createAnimatedObject(
@@ -83,8 +84,9 @@ std::unique_ptr<bomb::AnimatedObject> bomb::GameEngine::createAnimatedObject(
 {
 	auto ptr = std::make_unique<bomb::AnimatedObject>(
 		_sceneManager->addAnimatedMeshSceneNode(
-			_sceneManager->getMesh((_assetsPath + path).c_str())),
-	_audioMgr);
+			_sceneManager->getMesh(
+				(_version.getAssetsPath() + path).c_str())),
+		_audioMgr);
 	ptr->setPos(pos);
 	ptr->setRot(rot);
 	ptr->setScale(scale);
@@ -99,7 +101,7 @@ std::unique_ptr<bomb::StaticObject> bomb::GameEngine::createStaticObject(
 {
 	auto ptr = std::make_unique<bomb::StaticObject>(
 		_sceneManager->addMeshSceneNode(_sceneManager->getMesh(
-			(_assetsPath + path).c_str())),
+			(_version.getAssetsPath() + path).c_str())),
 	_audioMgr);
 	ptr->setPos(pos);
 	ptr->setRot(rot);
@@ -175,7 +177,7 @@ void bomb::GameEngine::pauseAll()
 
 std::unique_ptr<bomb::BillboardObject>
 bomb::GameEngine::createBillboardObject(irr::core::vector3df pos,
-					irr::core::vector3df scale,
+					irr::core::vector2df size,
 					irr::core::vector3df rot)
 {
 	auto ptr = std::make_unique<bomb::BillboardObject>(
@@ -183,7 +185,7 @@ bomb::GameEngine::createBillboardObject(irr::core::vector3df pos,
 		_audioMgr);
 	ptr->setPos(pos);
 	ptr->setRot(rot);
-	ptr->setScale(scale);
+	ptr->setSize(size);
 	return ptr;
 }
 

@@ -7,6 +7,21 @@
 
 #include "Map.hpp"
 
+bomb::Map::Map(int _size) : _size(_size)
+{
+	setSize(_size);
+}
+
+void bomb::Map::addWalls()
+{
+	for (int i = 0; i < _size; ++i) {
+		(*this)[irr::core::vector2di(0, i)] = UNBREAKABLE;
+		(*this)[irr::core::vector2di(i, 0)] = UNBREAKABLE;
+		(*this)[irr::core::vector2di(_size - 1, i)] = UNBREAKABLE;
+		(*this)[irr::core::vector2di(i, _size - 1)] = UNBREAKABLE;
+	}
+}
+
 int bomb::Map::getSize() const
 {
 	return _size;

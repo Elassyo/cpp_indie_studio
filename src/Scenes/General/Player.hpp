@@ -49,7 +49,8 @@ namespace bomb {
 			void setAlive(bool _alive, IAssetManager &loader);
 			void setAI(bool AI);
 			bool isBombReady();
-
+			void setKeys(std::map<irr::EKEY_CODE,
+				bomb::IPlayerController::Actions> keys);
 			std::unique_ptr<AnimatedObject> &getModel();
 		private:
 			uint8_t _maxNbBombs;

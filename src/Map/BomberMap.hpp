@@ -21,6 +21,8 @@ namespace bomb {
 		void updateFromCells(IAssetManager &loader);
 		void addBlast(std::vector<std::pair<irr::core::vector2di,
 				BlockType>> blast);
+		Map &getBombRanges();
+
 	private:
 		std::vector<std::shared_ptr<bomb::AMapBlock>> _blocks;
 		Map _bombRanges;

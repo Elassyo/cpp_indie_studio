@@ -40,3 +40,9 @@ void bomb::AMapBlock::setTextures(irr::video::ITexture *texture)
 {
 	_block->setTexture(0, texture);
 }
+
+void bomb::AMapBlock::destroy(bomb::IAssetManager &manager)
+{
+	if (_block != nullptr)
+		manager.deleteObject(std::move(_block));
+}

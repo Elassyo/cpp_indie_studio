@@ -108,6 +108,7 @@ void bomb::game::Game::createPlayer(IAssetLoader &loader,
 	_players[index] = bomb::game::Player(
 		loader, path, {(float)spawn.X, (float)spawn.Y, (float)spawn.Z},
 		{.5, .5, .5}, {0, 0, 0}, pInfos);
+	_players[index].setKeys(_infos.getPlayerInfos(index).getKeys());
 	_playersActionners[index] = bomb::PlayerActionner(!pInfos.isAI());
 }
 
@@ -211,7 +212,7 @@ void bomb::game::Game::blastObjects(
 	for (auto &b : blast) {
 		auto p = manager.createBillboardObject(
 			{(float) b.first.X, 0.5f, (float) b.first.Y},
-			{0.5f, 0.5f, 0.5f});
+			{3.f, 3.f});
 		p->setTexture(0, manager.loadTexture("images/explosion.png"));
 		_explosionBlasts.emplace_back(object::ExplosionBlast(
 			std::move(p)));
@@ -286,4 +287,14 @@ std::array<bomb::game::Player, 4> &bomb::game::Game::getPlayers()
 std::shared_ptr<bomb::BomberMap> &bomb::game::Game::getMap()
 {
 	return _map;
+}
+
+void bomb::game::Game::clean(IAssetManager &loader)
+{
+	for (auto &power : _powers)
+		power->destroy(loader);
+	for (auto &bomb : _bombs)
+		bomb->destroy(loader);
+	_powers.clear();
+	_bombs.clear();
 }

@@ -11,43 +11,43 @@ bomb::game::CharacterLoader::CharacterLoader() :
 	_characters({{SHYGUY_WHITE, CharacterInfo(L"Shy Guy",
 				"models/characters/shyGuy/shyGuyWhite.obj",
 				"images/characters/ShyGuyWhite-MK8.png",
-			    	"sfx/shy-guy-hit.ogg")},
+				"sfx/shy-guy.ogg", "sfx/shy-guy-hit.ogg")},
 		     {SHYGUY_BLACK, CharacterInfo(L"Shy Guy",
 				"models/characters/shyGuy/shyGuyBlack.obj",
 				"images/characters/ShyGuyBlack-MK8.png",
-				"sfx/shy-guy-hit.ogg")},
+				"sfx/shy-guy.ogg", "sfx/shy-guy-hit.ogg")},
 		     {SHYGUY_BLUE, CharacterInfo(L"Shy Guy",
 				"models/characters/shyGuy/shyGuyBlue.obj",
 				"images/characters/ShyGuyBlue-MK8.png",
-				"sfx/shy-guy-hit.ogg")},
+				"sfx/shy-guy.ogg", "sfx/shy-guy-hit.ogg")},
 		     {SHYGUY_RED, CharacterInfo(L"Shy Guy",
 				"models/characters/shyGuy/shyGuyRed.obj",
 				"images/characters/MK8_ShyGuy_Icon.png",
-				"sfx/shy-guy-hit.ogg")},
-		     {DRYBONES, CharacterInfo(L"Dry Bones",
+				"sfx/shy-guy.ogg", "sfx/shy-guy-hit.ogg")},
+		     {DRYBONES, CharacterInfo(L" Dry\nBones",
 				"models/characters/dryBones/dryBones.obj",
 				"images/characters/MK8_Dry_Bones_Icon.png",
-				"sfx/dry-bones-hit.ogg")},
+				"sfx/dry-bones.ogg", "sfx/dry-bones-hit.ogg")},
 		     {KOOPA, CharacterInfo(L"Koopa",
 				"models/characters/koopa/koopa.obj",
 				"images/characters/MK8_Koopa_Icon.png",
-				"sfx/koopa-hit.ogg")},
+				"sfx/koopa.ogg", "sfx/koopa-hit.ogg")},
 		     {LAKITU, CharacterInfo(L"Lakitu",
 				"models/characters/lakitu/lakitu.obj",
 				"images/characters/MK8_Lakitu_Icon.png",
-				"sfx/lakitu-hit.ogg")},
+				"sfx/lakitu.ogg", "sfx/lakitu-hit.ogg")},
 		     {LUIGI, CharacterInfo(L"Luigi",
 				"models/characters/luigi/luigi.obj",
 				"images/characters/MK8_Luigi_Icon.png",
-		     		"sfx/luigi-hit.ogg")},
+				"sfx/luigi.ogg", "sfx/luigi-hit.ogg")},
 		     {MARIO, CharacterInfo(L"Mario",
 				"models/characters/mario/mario.obj",
 				"images/characters/MK8_Mario_Icon.png",
-				"sfx/mario-hit.ogg")},
+				"sfx/mario.ogg", "sfx/mario-hit.ogg")},
 		     {YOSHI, CharacterInfo(L"Yoshi",
 				"models/characters/yoshi/yoshi.obj",
 				"images/characters/MK8_Yoshi_Icon.png",
-				"sfx/yoshi-hit.ogg")}})
+				"sfx/yoshi.ogg", "sfx/yoshi-hit.ogg")}})
 {}
 
 std::string bomb::game::CharacterLoader::getCharacterPath(Character character)
@@ -70,6 +70,14 @@ irr::video::ITexture *bomb::game::CharacterLoader::getCharacterTexture(
 {
 	if (_characters.find(character) != _characters.end())
 		return _characters.at(character).getTexture();
+	return nullptr;
+}
+
+std::string bomb::game::CharacterLoader::getSfxPath(
+	bomb::game::Character character)
+{
+	if (_characters.find(character) != _characters.end())
+		return _characters.at(character).getSfxPath();
 	return nullptr;
 }
 
@@ -116,6 +124,7 @@ void bomb::game::CharacterLoader::loadImages(bomb::IAssetManager &manager)
 void bomb::game::CharacterLoader::loadSounds(bomb::IAssetManager &manager)
 {
 	for (auto &c : _characters) {
+		manager.loadAudioFile(c.second.getSfxPath());
 		manager.loadAudioFile(c.second.getHitSfxPath());
 	}
 }
@@ -123,6 +132,7 @@ void bomb::game::CharacterLoader::loadSounds(bomb::IAssetManager &manager)
 void bomb::game::CharacterLoader::unloadSounds(bomb::IAssetManager &manager)
 {
 	for (auto &c : _characters) {
+		manager.unloadAudioFile(c.second.getSfxPath());
 		manager.unloadAudioFile(c.second.getHitSfxPath());
 	}
 }

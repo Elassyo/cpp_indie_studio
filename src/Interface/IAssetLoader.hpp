@@ -9,9 +9,8 @@
 	#define CPP_INDIE_STUDIO_IASSETLOADER_HPP
 
 	#include <memory>
-
 	#include <irrlicht/irrlicht.h>
-	#include "../Audio/AudioBuffer.hpp"
+
 	#include "../AnimatedObject.hpp"
 	#include "../BillboardObject.hpp"
 	#include "../CameraObject.hpp"
@@ -48,9 +47,8 @@ namespace bomb {
 			irr::core::vector3df rot = {0, 0, 0}) = 0;
 		virtual std::unique_ptr<BillboardObject> createBillboardObject(
 			irr::core::vector3df pos = {0, 0, 0},
-			irr::core::vector3df scale = {0, 0, 0},
-			irr::core::vector3df rot = {0, 0, 0}
-		) = 0;
+			irr::core::vector2df size = {0, 0},
+			irr::core::vector3df rot = {0, 0, 0}) = 0;
 		virtual std::unique_ptr<CameraObject> getCamera(
 			const irr::core::vector3df &pos = {0, 0, 0},
 			const irr::core::vector3df &rot = {0, 0, 0}) = 0;

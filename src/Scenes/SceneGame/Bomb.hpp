@@ -26,6 +26,8 @@ namespace bomb {
 			void
 			addBlastToMap(BomberMap &map, game::Player &player);
 			int getPlayerIdx() const;
+			void destroy(IAssetManager &manager);
+
 		private:
 			int isActivable(bomb::BomberMap &map,
 					std::array<bomb::game::Player, 4>
