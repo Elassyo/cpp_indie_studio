@@ -137,15 +137,17 @@ const irr::core::dimension2d<irr::u32> &bomb::GameEngine::getScreenSize()
 }
 
 std::unique_ptr<bomb::PlaneObject>
-bomb::GameEngine::createPlaneObject(const std::string &name,
-				    irr::core::vector3df pos,
-				    irr::core::vector3df rot,
-				    irr::core::vector3df scale)
+bomb::GameEngine::createPlaneObject(irr::core::vector3df pos,
+				    irr::core::vector3df scale,
+				    irr::core::vector3df rot)
 {
-	irr::scene::IAnimatedMesh *imesh = _sceneManager->addHillPlaneMesh
-		(irr::io::path(name.c_str()), irr::core::dimension2df(10, 10),
-		 irr::core::dimension2d<unsigned int>(10, 10));
-	auto node = _sceneManager->addAnimatedMeshSceneNode(imesh);
+	irr::scene::IMesh *imesh = _sceneManager->getGeometryCreator()->
+		createPlaneMesh(irr::core::dimension2df(10, 10),
+		irr::core::dimension2d<unsigned int>(10, 10), nullptr,
+		irr::core::dimension2df(500.f, 500.f));
+
+	irr::scene::IMeshSceneNode *node = _sceneManager->addMeshSceneNode
+		(imesh);
 	auto ptr = std::make_unique<PlaneObject>(node, _audioMgr);
 	ptr->setPos(pos);
 	ptr->setRot(rot);
@@ -170,8 +172,8 @@ void bomb::GameEngine::pauseAll()
 
 std::unique_ptr<bomb::BillboardObject>
 bomb::GameEngine::createBillboardObject(irr::core::vector3df pos,
-					irr::core::vector3df rot,
-					irr::core::vector3df scale)
+					irr::core::vector3df scale,
+					irr::core::vector3df rot)
 {
 	auto ptr = std::make_unique<bomb::BillboardObject>(
 		_sceneManager->addBillboardSceneNode(),
@@ -180,4 +182,9 @@ bomb::GameEngine::createBillboardObject(irr::core::vector3df pos,
 	ptr->setRot(rot);
 	ptr->setScale(scale);
 	return ptr;
+}
+
+void bomb::GameEngine::setVolume(float gain)
+{
+	_audioMgr.setVolume(gain);
 }

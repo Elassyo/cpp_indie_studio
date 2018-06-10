@@ -33,6 +33,7 @@
 ;Pages
 
   !insertmacro MUI_PAGE_WELCOME
+  !insertmacro MUI_PAGE_COMPONENTS
   !insertmacro MUI_PAGE_DIRECTORY
   !insertmacro MUI_PAGE_INSTFILES
   !define MUI_FINISHPAGE_RUN
@@ -50,7 +51,8 @@
 ;--------------------------------
 ;Installer Sections
 
-Section "Core" SecCore
+Section "BomberMario" SecBomb
+  SectionIn RO
 
   SetOutPath "$INSTDIR"
 
@@ -81,7 +83,7 @@ Section "Microsoft Visual C/C++ 2017 Redistributable" SecVCRedist
 
 SectionEnd
 
-Section "OpenAL" SecOAL
+Section "OpenAL Driver" SecOAL
 
   SetOutPath "$INSTDIR\redist"
 
@@ -98,13 +100,34 @@ Section "OpenAL" SecOAL
 
 SectionEnd
 
-Section "Misc" SecMisc
+Section "Desktop Shortcut" SecDeskLnk
 
   CreateShortCut "$DESKTOP\BomberMario.lnk" "$INSTDIR\bombermario.exe" "" "$INSTDIR\bombermario.exe" 0
 
+SectionEnd
+
+Section "Uninstaller" SecUninst
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
 SectionEnd
+
+;--------------------------------
+;Sections descriptions
+
+LangString DESC_SecBomb ${LANG_ENGLISH} "The BomberMario game"
+LangString DESC_SecVCRedist ${LANG_ENGLISH} "The Microsoft Visual C/C++ 2017 Redistributable required to run the game"
+LangString DESC_SecOAL ${LANG_ENGLISH} "The OpenAL Driver required to play music and sound effects in the game"
+LangString DESC_SecDeskLnk ${LANG_ENGLISH} "Create a shortcut to the game on your desktop"
+LangString DESC_SecUninst ${LANG_ENGLISH} "Create an uninstaller"
+
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+  !insertmacro MUI_DESCRIPTION_TEXT ${SecBomb} $(DESC_SecBomb)
+  !insertmacro MUI_DESCRIPTION_TEXT ${SecVCRedist} $(DESC_SecVCRedist)
+  !insertmacro MUI_DESCRIPTION_TEXT ${SecOAL} $(DESC_SecOAL)
+  !insertmacro MUI_DESCRIPTION_TEXT ${SecDeskLnk} $(DESC_SecDeskLnk)
+  !insertmacro MUI_DESCRIPTION_TEXT ${SecUninst} $(DESC_SecUninst)
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
+
 
 ;--------------------------------
 ;Uninstaller Section

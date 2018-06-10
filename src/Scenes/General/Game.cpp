@@ -66,7 +66,7 @@ bomb::game::Game::createMap(bomb::IAssetManager &loader,
 					{0, 0, 0});
 	loader.createLightObject({(float)_mapSize / 2,
 				  (float)_mapSize, (float)_mapSize / 2},
-				 {1, 1, 1}, _mapSize);
+				 {1.0f, 1.0f, 1.0f}, (float)_mapSize);
 }
 
 void bomb::game::Game::createGame(IAssetManager &loader,
@@ -94,7 +94,7 @@ void bomb::game::Game::createMap(
 	auto light = loader.createLightObject(
 		{(float)pattern.getSize() / 2,
 		 (float)pattern.getSize(), (float)pattern.getSize() / 2},
-		{1, 1, 1}, pattern.getSize());
+		{1.0f, 1.0f, 1.0f}, (float)pattern.getSize());
 }
 
 void bomb::game::Game::createPlayer(IAssetLoader &loader,
@@ -217,7 +217,6 @@ void bomb::game::Game::fuseBombInBlast(irr::core::vector2di pos)
 		if (b->getPos() == pos)
 			b->fuse();
 }
-
 
 void bomb::game::Game::killPlayersInBlast(irr::core::vector2di pos,
 	bomb::IAssetManager &loader)

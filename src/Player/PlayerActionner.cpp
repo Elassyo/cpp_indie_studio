@@ -21,7 +21,7 @@ bomb::PlayerActionner::PlayerActionner(bool permanent) :
 	_currentAction(IPlayerController::UNDEFINED),
 	_nextAction(IPlayerController::UNDEFINED),
 	_target({-1, -1, -1}),
-	_speedRatio(0.05),
+	_speedRatio(0.05f),
 	_repeatActionMode(permanent),
 	_repeat(permanent),
 	_latence(500)

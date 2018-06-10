@@ -14,7 +14,7 @@ namespace bomb {
 	class PlaneObject : public AObject {
 	public:
 		explicit PlaneObject(
-			irr::scene::IAnimatedMeshSceneNode *,
+			irr::scene::IMeshSceneNode *,
 			bomb::IAudioPlayer &);
 
 		void setTexture(uint32_t layer,
@@ -23,7 +23,7 @@ namespace bomb {
 		std::string toString() override;
 
 	private:
-		irr::scene::IAnimatedMeshSceneNode *_animatedNode;
+		irr::scene::IMeshSceneNode *_iNode;
 	};
 }
 

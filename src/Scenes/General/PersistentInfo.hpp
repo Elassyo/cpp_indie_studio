@@ -8,8 +8,8 @@
 #ifndef CPP_INDIE_STUDIO_PERSISTENTINFO_HPP
 	#define CPP_INDIE_STUDIO_PERSISTENTINFO_HPP
 
+	#include <array>
 	#include <string>
-	#include <vector>
 	#include "PlayerInfo.hpp"
 
 namespace bomb {
@@ -21,19 +21,25 @@ namespace bomb {
 		int getPlayerNbr() const;
 		std::array<PlayerInfo, 4> getPlayerInfos() const;
 		PlayerInfo getPlayerInfos(int idx) const;
+		float getVolume() const;
 		int getMapSize() const;
 		bool generateMap() const;
-
+		bool MainMusic() const;
+		void setVolume(float volume);
 		void setFileName(const std::string &);
 		void setPlayerNbr(int playerNbr);
 		void setgenerateMap(bool gm);
+		void setMainMusic(bool mainMusic);
 		void setPlayerInfos(std::array<PlayerInfo, 4> playerInfos);
 		void setPlayerInfos(int idx, PlayerInfo playerinfo);
 		void setMapSize(int mapSize);
+
 	private:
 		int _mapSize;
 		int _playerNbr;
+		float _volume;
 		bool _generateMap;
+		bool _mainMusic;
 		std::string _fileMap;
 		std::array<PlayerInfo, 4> _playerInfos;
 	};
