@@ -103,6 +103,7 @@ void bomb::scene::SceneOptionMenu::changeMapSize(int change)
 bomb::scene::SceneStatus bomb::scene::SceneOptionMenu::loop(
 	bomb::IAssetManager &loader)
 {
+	loader.setVolume(_infos.getVolume());
 	_menu.updateButtons(loader, true);
 	return _running ? CONTINUE : END;
 }

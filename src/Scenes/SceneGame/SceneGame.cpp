@@ -22,6 +22,9 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetManager &loader)
 	_menu.addImage(loader.loadTexture("images/empty.png"), {.5f, .55f}, 2);
 	_menu.setElementSize(2, {.1f, .1f});
 	_menu.setElementRenderMode(2, menu::GraphicElement::HEIGHT_BASED);
+	auto plane = loader.createPlaneObject("field",
+					      {0, 0, 0}, {100, 100, 100});
+	plane->setTexture(0, loader.loadTexture("images/grass.png"));
 	_playing = true;
 	_blocksTextures = loader.loadTexture("models/blocks/spritesheet.png");
 	_game.createGame(loader, _blocksTextures);
