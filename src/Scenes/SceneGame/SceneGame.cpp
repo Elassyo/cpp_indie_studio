@@ -109,6 +109,7 @@ void bomb::scene::SceneGame::reset(bomb::IAssetManager &loader)
 void bomb::scene::SceneGame::clean(IAssetManager &loader)
 {
 	_menu.clean();
+	_game.clean(loader);
 	loader.stopAll();
 	_game.getMap()->clean(loader);
 	auto &p = _game.getPlayers();

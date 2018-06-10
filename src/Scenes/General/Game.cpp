@@ -269,3 +269,13 @@ std::shared_ptr<bomb::BomberMap> &bomb::game::Game::getMap()
 {
 	return _map;
 }
+
+void bomb::game::Game::clean(IAssetManager &loader)
+{
+	for (auto &power : _powers)
+		power->destroy(loader);
+	for (auto &bomb : _bombs)
+		bomb->destroy(loader);
+	_powers.clear();
+	_bombs.clear();
+}

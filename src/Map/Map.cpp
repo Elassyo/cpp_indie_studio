@@ -14,7 +14,7 @@ bomb::Map::Map(int _size) : _size(_size)
 
 void bomb::Map::addWalls()
 {
-	for (unsigned int i = 0; i < _size; ++i) {
+	for (int i = 0; i < _size; ++i) {
 		(*this)[irr::core::vector2di(0, i)] = UNBREAKABLE;
 		(*this)[irr::core::vector2di(i, 0)] = UNBREAKABLE;
 		(*this)[irr::core::vector2di(_size - 1, i)] = UNBREAKABLE;

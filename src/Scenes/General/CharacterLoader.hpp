@@ -37,6 +37,7 @@ namespace bomb {
 			void unloadSounds(IAssetManager &manager);
 			std::string getCharacterPath(Character character);
 			std::string getCharacterImagePath(Character character);
+			std::string getSfxPath(Character character);
 			std::string getHitSfxPath(Character character);
 			const wchar_t *getCharacterName(Character character);
 			Character getNextCharacter(Character character);

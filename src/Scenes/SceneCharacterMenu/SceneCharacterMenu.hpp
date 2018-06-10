@@ -40,6 +40,7 @@ namespace bomb {
 					      game::Character character);
 			void changeCharacter(int idx);
 			void updateCharacter(int idx, PlayerInfo player);
+			std::unique_ptr<CameraObject> _cam;
 			bomb::game::CharacterLoader _charLoader;
 			bomb::menu::Menu _menu;
 			bool _running;

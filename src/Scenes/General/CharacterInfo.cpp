@@ -9,12 +9,13 @@
 #include <utility>
 
 bomb::game::CharacterInfo::CharacterInfo(const wchar_t *name,
-					std::string modelPath,
-					std::string iconPath,
-					std::string hitSfxPath) :
+					 std::string modelPath,
+					 std::string iconPath,
+					 std::string sfxPath,
+					 std::string hitSfxPath) :
 	_name(name), _modelPath(std::move(modelPath)),
-	_iconPath(std::move(iconPath)), _hitSfxPath(hitSfxPath),
-	_texture(nullptr)
+	_iconPath(std::move(iconPath)), _sfxPath(std::move(sfxPath)),
+	_hitSfxPath(std::move(hitSfxPath)), _texture(nullptr)
 {}
 
 const wchar_t *bomb::game::CharacterInfo::getName()
@@ -35,6 +36,11 @@ std::string &bomb::game::CharacterInfo::getIconPath()
 std::string &bomb::game::CharacterInfo::getHitSfxPath()
 {
 	return _hitSfxPath;
+}
+
+std::string &bomb::game::CharacterInfo::getSfxPath()
+{
+	return _sfxPath;
 }
 
 irr::video::ITexture *bomb::game::CharacterInfo::getTexture() const
