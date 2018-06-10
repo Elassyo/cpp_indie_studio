@@ -11,12 +11,10 @@
 
 int main()
 {
-	bomb::GameEngine engine(L"BomberMario", 1920, 1080,
-		irr::video::EDT_OPENGL);
-	bomb::scene::SceneLauncher launcher(engine);
-
 	try {
-		launcher.launchScene("home_scene");
+		bomb::GameEngine engine(L"BomberMario", 1920, 1080,
+			irr::video::EDT_OPENGL);
+		bomb::scene::SceneLauncher(engine).launchScene("home_scene");
 	} catch (bomb::Exception &e) {
 		std::cout << e.what() << std::endl;
 	}

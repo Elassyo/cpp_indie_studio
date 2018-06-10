@@ -6,9 +6,11 @@
 //
 
 #ifndef CPP_INDIE_STUDIO_AICONTROLLER_HPP
-#define CPP_INDIE_STUDIO_AICONTROLLER_HPP
+	#define CPP_INDIE_STUDIO_AICONTROLLER_HPP
 
-#include "PlayerActionner.hpp"
+	#include <array>
+	
+	#include "PlayerActionner.hpp"
 
 namespace bomb {
 	namespace ai {

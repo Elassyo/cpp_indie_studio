@@ -15,15 +15,15 @@ namespace bomb {
 		class Power : public game::AActivator {
 		public:
 			Power(bomb::IAssetManager &loader,
-			      const irr::core::vector3df &pos,
-			      std::string path);
+				const irr::core::vector3df &pos,
+				std::string path);
 			irr::core::position2di getPos();
 			void destroy(IAssetManager &manager);
 
 		private:
 			bool activate(bomb::BomberMap &map,
-				      bomb::game::Player &player,
-				      IAssetManager &loader) override;
+				bomb::game::Player &player,
+				IAssetManager &loader) override;
 			virtual void addPower(bomb::game::Player &player);
 
 			int isActivable(bomb::BomberMap &map,
