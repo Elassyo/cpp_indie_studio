@@ -41,7 +41,7 @@ void bomb::scene::SceneOptionMenu::setVolumeButtons()
 	_menu.setButtonPushable(1, false);
 	_menu.addButton(L"-", {.375f, .3f}, 10);
 	_menu.setElementFont(10, menu::MenuFonts::TITLE);
-	_menu.setElementSize(10, {.05f, .1});
+	_menu.setElementSize(10, {.05f, .1f});
 	_menu.setButtonEvent(10, [this](){
 		changeVolume(-.05f);
 	});
@@ -66,7 +66,7 @@ void bomb::scene::SceneOptionMenu::setSizeButtons()
 	});
 	_menu.addButton(L"+", {.625f, .45f}, 13);
 	_menu.setElementFont(13, menu::MenuFonts::TITLE);
-	_menu.setElementSize(13, {.05f, .1});
+	_menu.setElementSize(13, {.05f, .1f});
 	_menu.setButtonEvent(13, [this](){
 		changeMapSize(2);
 	});

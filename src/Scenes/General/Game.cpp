@@ -104,10 +104,11 @@ void bomb::game::Game::createPlayer(IAssetLoader &loader,
 {
 	if (_players.size() >= NB_PLAYERS)
 		throw bomb::Exception("GameCreation", "Too much players");
-	_players.push_back({bomb::game::Player(loader, path, controller,
-		{(float)spawn.X, (float)spawn.Y, (float)spawn.Z},
-		{.5, .5, .5}, {0, 0, 0},
-		_infos.getPlayerInfos()[_players.size()]), {true}});
+	_players.push_back(std::make_pair<Player,PlayerActionner>(
+		Player(loader, path, controller,
+			{(float)spawn.X, (float)spawn.Y, (float)spawn.Z},
+			{.5, .5, .5}, {0, 0, 0},
+			_infos.getPlayerInfos()[_players.size()]), {true}));
 }
 
 void bomb::game::Game::reset()
