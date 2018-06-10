@@ -5,7 +5,6 @@
 // AIController.cpp
 //
 
-
 #include "AIController.hpp"
 
 bomb::ai::AIController::AIController() :
@@ -14,7 +13,8 @@ bomb::ai::AIController::AIController() :
 	       {IPlayerController::MV_DOWN, {0, 0, 1}},
 	       {IPlayerController::MV_RIGHT, {-1, 0, 0}},
 	       {IPlayerController::MV_LEFT, {1, 0, 0}}}
-{}
+{
+}
 
 void bomb::ai::AIController::executeAI(
 	bomb::PlayerActionner &actionner,
@@ -30,7 +30,7 @@ void bomb::ai::AIController::executeAI(
 		executeOffensiveAI(actionner, players, map, index);
 	if (rand() % 10000 < 5)
 		actionner.sendAction(map, players[index],
-					IPlayerController::PUT_BOMB);
+			IPlayerController::PUT_BOMB);
 }
 
 void bomb::ai::AIController::executeDefensiveAI(
