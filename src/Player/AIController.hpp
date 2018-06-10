@@ -43,6 +43,10 @@ namespace bomb {
 			IPlayerController::Actions searchSaferBlock(
 				BomberMap &map, Map &safeMap,
 				irr::core::vector2di vector2d);
+
+			void executerRandomAI(PlayerActionner &actionner,
+			      std::array<game::Player, 4> &players, BomberMap &map,
+			      int index);
 		};
 	}
 }

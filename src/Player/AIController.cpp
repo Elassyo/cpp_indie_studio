@@ -16,6 +16,8 @@ bomb::ai::AIController::AIController() :
 {
 }
 
+
+
 void bomb::ai::AIController::executeAI(
 	bomb::PlayerActionner &actionner,
 	std::array<bomb::game::Player, 4> &players,
@@ -24,13 +26,21 @@ void bomb::ai::AIController::executeAI(
 	auto pos = players[index].getExactPos();
 	if (pos.Z == 0 && pos.X == 0 && pos.Y == 0)
 		return;
-	if (map.getBombRanges()[players[index].getExactPos()] == Map::BOMB)
-		executeDefensiveAI(actionner, players, map, index);
-	else
-		executeOffensiveAI(actionner, players, map, index);
-	if (rand() % 100 < 5)
-		actionner.sendAction(map, players[index],
-			IPlayerController::PUT_BOMB);
+	executerRandomAI(actionner, players, map, index);
+}
+
+void bomb::ai::AIController::executerRandomAI(
+	bomb::PlayerActionner &actionner,
+	std::array<bomb::game::Player, 4> &players,
+	bomb::BomberMap &map, int index)
+{
+	std::array<IPlayerController::Actions, 4> moves =
+		{IPlayerController::MV_DOWN,
+		 IPlayerController::MV_LEFT,
+		 IPlayerController::MV_RIGHT,
+		IPlayerController::MV_UP};
+	auto move = moves[rand() % 4];
+	actionner.sendAction(map, players[index], move);
 }
 
 void bomb::ai::AIController::executeDefensiveAI(
@@ -39,6 +49,7 @@ void bomb::ai::AIController::executeDefensiveAI(
 	bomb::BomberMap &map, int index)
 
 {
+	std::cout << map.getBombRanges() << std::endl;
 	Map safeMap(map.getSize());
 	safeMap.addWalls();
 	auto myPos = players[index].getExactPos();
@@ -57,7 +68,11 @@ void bomb::ai::AIController::executeOffensiveAI(
 	auto hisPos = players[closestP].getExactPos();
 	auto myPos = players[index].getExactPos();
 	auto dir = vecToDir(hisPos - myPos);
-	actionner.sendAction(map, players[index], dir);
+	if (rand() % 1000 < 5)
+		actionner.sendAction(map, players[index],
+				     IPlayerController::PUT_BOMB);
+	else
+		actionner.sendAction(map, players[index], dir);
 }
 
 unsigned int bomb::ai::AIController::getClosestEnenemy(
