@@ -33,6 +33,7 @@
 namespace bomb {
 	namespace game {
 		constexpr int NB_PLAYERS = 4;
+		constexpr int RATIO_POWERS = 30;
 
 		class Game {
 		public:

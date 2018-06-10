@@ -174,7 +174,7 @@ void bomb::game::Game::spawnPowers(
 	IAssetManager &loader)
 {
 	for (auto b : blast) {
-		if (b.second == Map::BREAKABLE)
+		if (b.second == Map::BREAKABLE & rand() % 100 <= RATIO_POWERS)
 			_powers.emplace_back(_factory.getRandomPower(loader,
 				{static_cast<irr::f32>(b.first.X), 0,
 				static_cast<irr::f32>(b.first.Y)}));
