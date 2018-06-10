@@ -25,10 +25,10 @@ namespace bomb {
 				      bomb::game::Player &player,
 				      IAssetManager &loader) override;
 			virtual void addPower(bomb::game::Player &player);
-			int isActivable(
-				bomb::BomberMap &map,
-				std::vector<std::pair<game::Player,
-					PlayerActionner>>&vector) override;
+
+			int isActivable(bomb::BomberMap &map,
+					std::array<game::Player, 4> &array) override;
+
 			std::unique_ptr<StaticObject> _model;
 		};
 	}

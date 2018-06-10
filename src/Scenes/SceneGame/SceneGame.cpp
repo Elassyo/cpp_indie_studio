@@ -53,9 +53,9 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::loop(
 
 void bomb::scene::SceneGame::explodeBombs(bomb::IAssetManager &loader)
 {
-/*	for (auto &bomb : _bombs)
+	for (auto &bomb : _bombs)
 		bomb.get()->tryToActivate(*_game.getMap(),
-		_game.getPlayers(), loader);*/
+		_game.getPlayers(), loader);
 	(void) loader;
 }
 

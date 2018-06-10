@@ -60,15 +60,14 @@ bool bomb::object::Bomb::activate(bomb::BomberMap &map,
 }
 
 int bomb::object::Bomb::isActivable(bomb::BomberMap &map,
-	std::vector<std::pair<bomb::game::Player,
-		bomb::PlayerActionner>> &player)
+				std::array<bomb::game::Player, 4> &player)
 {
 	if (_timer.isReady())
 		return _playerIdx;
 	return -1;
 	(void) map;
 	(void) player;
-}
+};
 
 const std::vector<std::pair<irr::core::vector2di, bomb::BomberMap::BlockType>>
 &bomb::object::Bomb::getBlast() const
@@ -118,4 +117,4 @@ void bomb::object::Bomb::simulateBlast(bomb::BomberMap &map,
 int bomb::object::Bomb::getPlayerIdx() const
 {
 	return _playerIdx;
-};
+}

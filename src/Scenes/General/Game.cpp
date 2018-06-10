@@ -73,11 +73,12 @@ void bomb::game::Game::createGame(IAssetManager &loader,
 				  irr::video::ITexture *texture)
 {
 	createMap(loader, _infos.getMapSize());
-	for (unsigned int i = 0; i < 4; ++i)
+	for (unsigned int i = 0; i < 4; ++i) {
 		createPlayer(loader, _charLoader.getCharacterPath(
 			_infos.getPlayerInfos(i).getCharacter()),
 			     {i % 2 ? 1 : _infos.getMapSize() - 2, 0,
 			      i > 1 ? _infos.getMapSize() - 2 : 1}, i);
+	}
 	reset();
 	(void) texture;
 }
@@ -103,10 +104,11 @@ void bomb::game::Game::createPlayer(IAssetLoader &loader,
 {
 	if (index >= NB_PLAYERS)
 		throw bomb::Exception("GameCreation", "Too much players");
-	auto &pInfos = _infos.getPlayerInfos()[_players.size()];
+	auto &pInfos = _infos.getPlayerInfos()[index];
 	_players[index] = bomb::game::Player(
 		loader, path, {(float)spawn.X, (float)spawn.Y, (float)spawn.Z},
 		{.5, .5, .5}, {0, 0, 0}, pInfos);
+	_playersActionners[index] = bomb::PlayerActionner(!pInfos.isAI());
 }
 
 void bomb::game::Game::reset()
@@ -130,10 +132,10 @@ void bomb::game::Game::executePowers(bomb::IAssetManager &loader)
 {
 	auto p = _powers.begin();
 	while (p != _powers.end()) {
-/*		if ((*p)->tryToActivate(*_map, _players, loader)) {
+		if ((*p)->tryToActivate(*_map, _players, loader)) {
 			p = _powers.erase(p);
 		} else
-			p++;*/
+			p++;
 	}
 }
 
@@ -158,14 +160,14 @@ void bomb::game::Game::executeBombs(bomb::IAssetManager &loader)
 	while (bomb != _bombs.end()) {
 		unsigned int idx = (unsigned int)(*bomb)->getPlayerIdx();
 		(*bomb)->addBlastToMap(*_map, _players.at(idx));
-/*		if ((*bomb)->tryToActivate(*_map, _players, loader)) {
+		if ((*bomb)->tryToActivate(*_map, _players, loader)) {
 			auto blast = (*bomb)->getBlast();
 			_map->updateFromCells(loader);
 			blastObjects(blast, loader);
 			spawnPowers(blast, loader);
 			bomb = _bombs.erase(bomb);
 		} else
-			bomb++;*/
+			bomb++;
 	}
 }
 
