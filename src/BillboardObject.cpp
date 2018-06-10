@@ -8,7 +8,8 @@
 #include "BillboardObject.hpp"
 
 bomb::BillboardObject::BillboardObject
-	(irr::scene::IBillboardSceneNode *billboardSceneNode, bomb::IAudioPlayer &ap) :
+	(irr::scene::IBillboardSceneNode *billboardSceneNode,
+	 bomb::IAudioPlayer &ap) :
 	AObject(billboardSceneNode, ap), _inode(billboardSceneNode)
 {
 }
@@ -16,7 +17,19 @@ bomb::BillboardObject::BillboardObject
 void bomb::BillboardObject::setTexture
 	(uint32_t layer, irr::video::ITexture *texture)
 {
+	_inode->setMaterialFlag(irr::video::EMF_COLOR_MASK, true);
+	_inode->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 	_inode->setMaterialTexture(layer, texture);
+}
+
+irr::core::dimension2df bomb::BillboardObject::getSize() const
+{
+	return _inode->getSize();
+}
+
+void bomb::BillboardObject::setSize(const irr::core::dimension2df &scale)
+{
+	_inode->setSize(scale);
 }
 
 std::string bomb::BillboardObject::toString()

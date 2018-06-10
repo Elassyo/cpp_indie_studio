@@ -54,7 +54,10 @@ irr::gui::IGUIEnvironment *bomb::GameEngine::getGui()
 
 irr::video::ITexture *bomb::GameEngine::loadTexture(const std::string &path)
 {
-	return _videoDriver->getTexture((_assetsPath + path).c_str());
+	auto ptr = _videoDriver->getTexture((_assetsPath + path).c_str());
+	if (!ptr)
+		throw Exception("GameEngine", "can't open texture " + path);
+	return ptr;
 }
 
 void bomb::GameEngine::loadAudioFile(const std::string &path)

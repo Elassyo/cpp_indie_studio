@@ -28,6 +28,7 @@
 	#include "../SceneGame/Powers/Power.hpp"
 	#include "../SceneGame/Powers/PowerFactory.hpp"
 	#include "../../Xml/XmlReader.hpp"
+	#include "../SceneGame/ExplosionBlast.hpp"
 
 
 namespace bomb {
@@ -84,6 +85,7 @@ namespace bomb {
 			void executePlayers(IAssetManager &loader);
 			void executeBombs(IAssetManager &loader);
 			void executePowers(IAssetManager &loader);
+			void executeBlast(IAssetManager &manager);
 			void reset();
 			void
 			spawnPowers(std::vector<std::pair<irr::core::vector2di,
@@ -105,6 +107,7 @@ namespace bomb {
 
 			int _mapSize;
 			bomb::object::PowerFactory _factory;
+			std::vector<object::ExplosionBlast> _explosionBlasts;
 		};
 	}
 }

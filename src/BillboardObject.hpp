@@ -19,6 +19,9 @@ namespace bomb {
 				irr::video::ITexture *texture) override;
 		std::string toString() override;
 
+		void setSize(const irr::core::dimension2df &);
+		irr::core::dimension2df getSize() const;
+
 	private:
 		irr::scene::IBillboardSceneNode *_inode;
 	};
