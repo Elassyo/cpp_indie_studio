@@ -218,14 +218,21 @@ void bomb::game::Game::fuseBombInBlast(irr::core::vector2di pos)
 void bomb::game::Game::killPlayersInBlast(irr::core::vector2di pos,
 	bomb::IAssetManager &loader)
 {
-	for (auto &p : _players) {
-		if (!p.first.isAlive())
+	for (unsigned int i = 0; i < _players.size(); ++i) {
+		if (!_players[i].first.isAlive())
 			continue;
 		irr::core::vector2di playerPos(
-			static_cast<irr::s32>(p.first.getExactPos().X),
-			static_cast<irr::s32>(p.first.getExactPos().Z));
-		if (playerPos == pos)
-			p.first.setAlive(false, loader);
+			static_cast<irr::s32>(
+				_players[i].first.getExactPos().X),
+			static_cast<irr::s32>(
+				_players[i].first.getExactPos().Z));
+		if (playerPos == pos) {
+			_players[i].first.getModel()->playSound(
+				_charLoader.getHitSfxPath(
+					_infos.getPlayerInfos(i)
+						.getCharacter()));
+			_players[i].first.setAlive(false, loader);
+		}
 	}
 }
 

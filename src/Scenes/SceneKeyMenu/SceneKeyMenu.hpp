@@ -33,6 +33,8 @@ namespace bomb {
 			bool onEvent(const irr::SEvent &event) override;
 
 		private:
+			void setCtrl(IPlayerController::Actions action);
+			void createButtons();
 			void createKeyButtons();
 			void changePlayer();
 			void setActionKey(const irr::SEvent &event);

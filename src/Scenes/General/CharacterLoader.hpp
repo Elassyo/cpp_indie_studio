@@ -33,8 +33,11 @@ namespace bomb {
 		public:
 			CharacterLoader();
 			void loadImages(IAssetManager &manager);
+			void loadSounds(IAssetManager &manager);
+			void unloadSounds(IAssetManager &manager);
 			std::string getCharacterPath(Character character);
 			std::string getCharacterImagePath(Character character);
+			std::string getHitSfxPath(Character character);
 			const wchar_t *getCharacterName(Character character);
 			Character getNextCharacter(Character character);
 			Character getPrevCharacter(Character character);

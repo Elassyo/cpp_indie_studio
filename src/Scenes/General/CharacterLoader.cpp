@@ -23,17 +23,24 @@ bomb::game::CharacterLoader::CharacterLoader() :
 		     {DRYBONES, CharacterInfo(L"Dry Bones",
 				"models/characters/dryBones/dryBones.obj",
 				"images/characters/MK8_Dry_Bones_Icon.png")},
-		     {KOOPA, CharacterInfo(L"Koopa", "models/characters/koopa/koopa.obj",
+		     {KOOPA, CharacterInfo(L"Koopa",
+				"models/characters/koopa/koopa.obj",
 				"images/characters/MK8_Koopa_Icon.png")},
 		     {LAKITU, CharacterInfo(L"Lakitu",
 				"models/characters/lakitu/lakitu.obj",
 				"images/characters/MK8_Lakitu_Icon.png")},
-		     {LUIGI, CharacterInfo(L"Luigi", "models/characters/luigi/luigi.obj",
-				"images/characters/MK8_Luigi_Icon.png")},
-		     {MARIO, CharacterInfo(L"Mario", "models/characters/mario/mario.obj",
-				"images/characters/MK8_Mario_Icon.png")},
-		     {YOSHI, CharacterInfo(L"Yoshi", "models/characters/yoshi/yoshi.obj",
-				"images/characters/MK8_Yoshi_Icon.png")}})
+		     {LUIGI, CharacterInfo(L"Luigi",
+				"models/characters/luigi/luigi.obj",
+				"images/characters/MK8_Luigi_Icon.png",
+		     		"sfx/luigi-hit.ogg")},
+		     {MARIO, CharacterInfo(L"Mario",
+				"models/characters/mario/mario.obj",
+				"images/characters/MK8_Mario_Icon.png",
+				"sfx/mario-hit.ogg")},
+		     {YOSHI, CharacterInfo(L"Yoshi",
+				"models/characters/yoshi/yoshi.obj",
+				"images/characters/MK8_Yoshi_Icon.png",
+				"sfx/yoshi-hit.ogg")}})
 {}
 
 std::string bomb::game::CharacterLoader::getCharacterPath(Character character)
@@ -56,6 +63,14 @@ irr::video::ITexture *bomb::game::CharacterLoader::getCharacterTexture(
 {
 	if (_characters.find(character) != _characters.end())
 		return _characters.at(character).getTexture();
+	return nullptr;
+}
+
+std::string bomb::game::CharacterLoader::getHitSfxPath(
+	bomb::game::Character character)
+{
+	if (_characters.find(character) != _characters.end())
+		return _characters.at(character).getHitSfxPath();
 	return nullptr;
 }
 
@@ -88,5 +103,19 @@ void bomb::game::CharacterLoader::loadImages(bomb::IAssetManager &manager)
 	for (auto &c : _characters) {
 		auto path = manager.loadTexture(c.second.getIconPath());
 		c.second.setTexture(path);
+	}
+}
+
+void bomb::game::CharacterLoader::loadSounds(bomb::IAssetManager &manager)
+{
+	for (auto &c : _characters) {
+		manager.loadAudioFile(c.second.getHitSfxPath());
+	}
+}
+
+void bomb::game::CharacterLoader::unloadSounds(bomb::IAssetManager &manager)
+{
+	for (auto &c : _characters) {
+		manager.unloadAudioFile(c.second.getHitSfxPath());
 	}
 }

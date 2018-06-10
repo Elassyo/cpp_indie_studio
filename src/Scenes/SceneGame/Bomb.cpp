@@ -45,6 +45,8 @@ bool bomb::object::Bomb::activate(bomb::Map &map, bomb::game::Player &player,
 	irr::core::vector3di pos = {static_cast<irr::s32>(_model->getPos().X),
 				    static_cast<irr::s32>(_model->getPos().Y),
 				    static_cast<irr::s32>(_model->getPos().Z)};
+
+	_model->playSound("sfx/boom.ogg");
 	map[pos] = Map::EMPTY;
 	deleteBlock(map, pos);
 	loader.deleteObject(std::move(_model));

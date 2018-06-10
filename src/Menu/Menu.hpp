@@ -53,6 +53,8 @@ namespace bomb {
 			void setElementFont(int elementId, MenuFonts font);
 			void setElementTexture(int elementId,
 					       irr::video::ITexture *texture);
+			void setElementVisibility(int elementId,
+						  bool visibility);
 			void setElementRenderMode(int id, GraphicElement::RenderMode rMode);
 			bool handleEvent(const irr::SEvent &event);
 			void clean();

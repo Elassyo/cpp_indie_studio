@@ -237,6 +237,22 @@ void bomb::menu::Menu::setElementTexture(int elementId,
 			texture);
 }
 
+void bomb::menu::Menu::setElementVisibility(int elementId, bool visibility)
+{
+	long long idx = getElementById(elementId);
+
+	if (idx == -1) {
+		idx = getButtonById(elementId);
+		if (idx != -1)
+			_buttons.at(
+				static_cast<unsigned long>(idx))->setVisibility(
+				visibility);
+	}
+	else
+		_elements.at(static_cast<unsigned long>(idx))->setVisibility(
+			visibility);
+}
+
 void bomb::menu::Menu::clean()
 {
 	_elements.clear();

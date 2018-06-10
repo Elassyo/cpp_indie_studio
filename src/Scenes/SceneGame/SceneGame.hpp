@@ -11,6 +11,7 @@
 	#include "Bomb.hpp"
 	#include "../General/Game.hpp"
 	#include "../General/AScene.hpp"
+	#include "../../Menu/Menu.hpp"
 
 namespace bomb {
 	namespace scene {
@@ -32,7 +33,11 @@ namespace bomb {
 
 		private:
 			void explodeBombs(bomb::IAssetManager &loader);
+			void checkVictory();
 
+			bomb::menu::Menu _menu;
+			game::CharacterLoader _charLoader;
+			bool _playing;
 			irr::video::ITexture *_blocksTextures;
 			std::vector<std::unique_ptr<bomb::object::Bomb>> _bombs;
 			bomb::game::Game _game;
