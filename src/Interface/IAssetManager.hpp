@@ -23,6 +23,7 @@ namespace bomb {
 			getScreenSize() = 0;
 
 		virtual void playMusic(const std::string &) = 0;
+		virtual void setVolume(float gain) = 0;
 		virtual void pauseAll() = 0;
 		virtual void stopAll() = 0;
 	};

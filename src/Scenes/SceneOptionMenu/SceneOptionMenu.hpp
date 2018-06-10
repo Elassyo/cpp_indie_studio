@@ -31,7 +31,9 @@ namespace bomb {
 
 		private:
 			void changeMapSize(int change);
-			void setPlusMinusButtons();
+			void changeVolume(float change);
+			void setSizeButtons();
+			void setVolumeButtons();
 			bomb::menu::Menu _menu;
 			bool _running;
 			std::string _nextScene;

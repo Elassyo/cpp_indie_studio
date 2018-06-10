@@ -29,32 +29,62 @@ bomb::scene::SceneStatus bomb::scene::SceneOptionMenu::start(
 		_nextScene = "home_scene";
 		_running = false;
 	});
-	setPlusMinusButtons();
+	setVolumeButtons();
+	setSizeButtons();
 	_menu.updateButtons(loader, true);
 	return BEGIN;
 }
 
-void bomb::scene::SceneOptionMenu::setPlusMinusButtons()
+void bomb::scene::SceneOptionMenu::setVolumeButtons()
 {
 	_menu.addButton(L"Volume", {.5f, .3f}, 1);
 	_menu.setButtonPushable(1, false);
 	_menu.addButton(L"-", {.375f, .3f}, 10);
+	_menu.setElementFont(10, menu::MenuFonts::TITLE);
+	_menu.setElementSize(10, {.05f, .1f});
+	_menu.setButtonEvent(10, [this](){
+		changeVolume(-.05f);
+	});
 	_menu.addButton(L"+", {.625f, .3f}, 11);
-	_menu.addButton(L"BomberMap Size", {.5f, .45f}, 2);
+	_menu.setElementFont(11, menu::MenuFonts::TITLE);
+	_menu.setElementSize(11, {.05f, .1f});
+	_menu.setButtonEvent(11, [this](){
+		changeVolume(.05f);
+	});
+	changeVolume(0);
+}
+
+void bomb::scene::SceneOptionMenu::setSizeButtons()
+{
+	_menu.addButton(L"Map Size", {.5f, .45f}, 2);
 	_menu.setButtonPushable(2, false);
 	_menu.addButton(L"-", {.375f, .45f}, 12);
+	_menu.setElementFont(12, menu::MenuFonts::TITLE);
+	_menu.setElementSize(12, {.05f, .1f});
 	_menu.setButtonEvent(12, [this](){
 		changeMapSize(-2);
 	});
 	_menu.addButton(L"+", {.625f, .45f}, 13);
+	_menu.setElementFont(13, menu::MenuFonts::TITLE);
+	_menu.setElementSize(13, {.05f, .1f});
 	_menu.setButtonEvent(13, [this](){
 		changeMapSize(2);
 	});
-	for (int id = 10; id <= 13; ++id) {
-		_menu.setElementFont(id, menu::MenuFonts::TITLE);
-		_menu.setElementSize(id, {.05f, .1f});
-	}
 	changeMapSize(0);
+}
+
+void bomb::scene::SceneOptionMenu::changeVolume(float change)
+{
+	float vol = _infos.getVolume() + change;
+
+	if (vol < 0)
+		vol = 0;
+	if (vol > 1)
+		vol = 1;
+	_infos.setVolume(vol);
+	_menu.setElementText(1, std::wstring(
+		L"Volume\n   " + std::to_wstring((int)(vol * 100)))
+		.append(L"%").c_str());
 }
 
 void bomb::scene::SceneOptionMenu::changeMapSize(int change)
@@ -67,7 +97,7 @@ void bomb::scene::SceneOptionMenu::changeMapSize(int change)
 		mapSize = 51;
 	_infos.setMapSize(mapSize);
 	_menu.setElementText(2, std::wstring(
-		L"BomberMap Size\n       " + std::to_wstring(mapSize)).c_str());
+		L"Map Size\n      " + std::to_wstring(mapSize)).c_str());
 }
 
 bomb::scene::SceneStatus bomb::scene::SceneOptionMenu::loop(

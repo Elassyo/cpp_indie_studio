@@ -13,6 +13,7 @@ bomb::scene::SceneHomeMenu::SceneHomeMenu(bomb::PersistentInfo &_infos)
 bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(
 	IAssetManager &loader)
 {
+	launchMainMusic(loader);
 	_running = true;
 	_menu.createMenu(loader);
 	_menu.addImage(loader.loadTexture("images/menuBack.png"), {.5f, .5f}, 5);
@@ -33,6 +34,17 @@ bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(
 	});
 	_menu.updateButtons(loader, true);
 	return BEGIN;
+}
+
+void bomb::scene::SceneHomeMenu::launchMainMusic(IAssetManager &loader)
+{
+	if (!_infos.MainMusic()) {
+		loader.loadAudioFile(
+			"music/mario-and-luigi-partners-in-time.ogg");
+		loader.playMusic("music/mario-and-luigi-partners-in-time.ogg");
+		_infos.setMainMusic(true);
+	}
+
 }
 
 bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::loop(

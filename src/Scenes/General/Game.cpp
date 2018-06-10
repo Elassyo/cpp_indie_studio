@@ -218,7 +218,6 @@ void bomb::game::Game::fuseBombInBlast(irr::core::vector2di pos)
 			b->fuse();
 }
 
-
 void bomb::game::Game::killPlayersInBlast(irr::core::vector2di pos,
 	bomb::IAssetManager &loader)
 {
