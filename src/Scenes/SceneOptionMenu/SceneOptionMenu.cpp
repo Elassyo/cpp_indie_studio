@@ -38,15 +38,15 @@ void bomb::scene::SceneOptionMenu::setPlusMinusButtons()
 {
 	_menu.addButton(L"Volume", {.5, .3}, 1);
 	_menu.setButtonPushable(1, false);
-	_menu.addButton(L"-", {.4, .3}, 10);
-	_menu.addButton(L"+", {.6, .3}, 11);
+	_menu.addButton(L"-", {.375, .3}, 10);
+	_menu.addButton(L"+", {.625, .3}, 11);
 	_menu.addButton(L"Map Size", {.5, .45}, 2);
 	_menu.setButtonPushable(2, false);
-	_menu.addButton(L"-", {.4, .45}, 12);
+	_menu.addButton(L"-", {.375, .45}, 12);
 	_menu.setButtonEvent(12, [this](){
 		changeMapSize(-2);
 	});
-	_menu.addButton(L"+", {.6, .45}, 13);
+	_menu.addButton(L"+", {.625, .45}, 13);
 	_menu.setButtonEvent(13, [this](){
 		changeMapSize(2);
 	});

@@ -39,19 +39,19 @@ bomb::scene::SceneStatus bomb::scene::SceneKeyMenu::start(
 
 void bomb::scene::SceneKeyMenu::createKeyButtons()
 {
-	_menu.addButton(L"Key UP", {.33, .45}, 6);
+	_menu.addButton(L"Key UP", {.25, .45}, 6);
 	_menu.setButtonEvent(6, [this](){
 		_ctrl = IPlayerController::MV_UP;
 	});
-	_menu.addButton(L"Key DOWN", {.33, .65}, 7);
+	_menu.addButton(L"Key DOWN", {.25, .65}, 7);
 	_menu.setButtonEvent(7, [this](){
 		_ctrl = IPlayerController::MV_DOWN;
 	});
-	_menu.addButton(L"Key LEFT", {.66, .45}, 8);
+	_menu.addButton(L"Key LEFT", {.75, .45}, 8);
 	_menu.setButtonEvent(8, [this](){
 		_ctrl = IPlayerController::MV_LEFT;
 	});
-	_menu.addButton(L"Ley RIGHT", {.66, .65}, 9);
+	_menu.addButton(L"Ley RIGHT", {.75, .65}, 9);
 	_menu.setButtonEvent(9, [this](){
 		_ctrl = IPlayerController::MV_RIGHT;
 	});
