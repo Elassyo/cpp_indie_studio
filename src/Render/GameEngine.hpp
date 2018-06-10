@@ -81,6 +81,8 @@ namespace bomb {
 		void pauseAll() override;
 		void stopAll() override;
 
+		void setVolume(float gain) override;
+
 	private:
 		EventHandler _evtHandler;
 		irr::IrrlichtDevice *_device;

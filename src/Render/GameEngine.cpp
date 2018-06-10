@@ -181,3 +181,8 @@ bomb::GameEngine::createBillboardObject(irr::core::vector3df pos,
 	ptr->setScale(scale);
 	return ptr;
 }
+
+void bomb::GameEngine::setVolume(float gain)
+{
+	_audioMgr.setVolume(gain);
+}
