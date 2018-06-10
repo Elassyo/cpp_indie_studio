@@ -125,6 +125,8 @@ bool bomb::game::Player::isBombReady()
 
 irr::core::vector3df bomb::game::Player::getExactPos() const
 {
+	if (!_alive)
+		return irr::core::vector3df(0, 0, 0);
 	irr::core::vector3di pos(static_cast<irr::s32>(_model->getPos().X),
 			static_cast<irr::s32>(_model->getPos().Y),
 			static_cast<irr::s32>(_model->getPos().Z));
