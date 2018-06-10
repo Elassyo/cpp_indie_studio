@@ -55,6 +55,7 @@ bool bomb::object::Bomb::activate(bomb::BomberMap &map,
 				bomb::game::Player &player,
 				IAssetManager &loader)
 {
+	_model->playSound("sfx/boom.ogg");
 	player.setNbBombs(static_cast<uint8_t>(player.getNbBombs() + 1));
 	simulateBlast(map, player, true);
 	loader.deleteObject(std::move(_model));

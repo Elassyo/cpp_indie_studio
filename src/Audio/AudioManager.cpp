@@ -77,6 +77,13 @@ void bomb::AudioManager::playSound(const std::string &path,
 	alSourcePlay(source);
 }
 
+float bomb::AudioManager::getVolume() const
+{
+	float gain;
+	alGetListenerf(AL_GAIN, &gain);
+	return gain;
+}
+
 void bomb::AudioManager::setVolume(float gain)
 {
 	alListenerf(AL_GAIN, gain);

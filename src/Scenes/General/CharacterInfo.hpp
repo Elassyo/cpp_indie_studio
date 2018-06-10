@@ -15,18 +15,22 @@ namespace bomb {
 	namespace game {
 		class CharacterInfo {
 		public:
-			CharacterInfo(const wchar_t *name,
-				      std::string modelPath,
-				      std::string iconPath);
-			 const wchar_t *getName();
-			 std::string &getModelPath();
-			 std::string &getIconPath();
+			CharacterInfo(
+				const wchar_t *name,
+				std::string modelPath,
+				std::string iconPath,
+				std::string hitSfxPath = "sfx/thwomp.ogg");
+			const wchar_t *getName();
+			std::string &getModelPath();
+			std::string &getIconPath();
+			std::string &getHitSfxPath();
 			irr::video::ITexture *getTexture() const;
 			void setTexture(irr::video::ITexture *texture);
 		private:
 			 const wchar_t *_name;
 			 std::string _modelPath;
-			 std::string _iconPath;
+			std::string _iconPath;
+			std::string _hitSfxPath;
 			 irr::video::ITexture *_texture;
 		};
 	}

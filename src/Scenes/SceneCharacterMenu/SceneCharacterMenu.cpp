@@ -18,7 +18,7 @@ bomb::scene::SceneStatus bomb::scene::SceneCharacterMenu::start(
 	_menu.createMenu(loader);
 	_menu.addImage(loader.loadTexture("images/menuBack.png"), {.5, .5}, 5);
 	_menu.setElementSize(5, {1, 1});
-	_menu.addText((wchar_t *)L"SUPER\nBOMBERMARIO\nBROS.", {.5, .15}, 0);
+	_menu.addText(L"SUPER\nBOMBERMARIO\nBROS.", {.5, .15}, 0);
 	_menu.setElementFont(0, menu::TITLE);
 	addGameButtons();
 	addPlayerButtons();
@@ -66,7 +66,8 @@ void bomb::scene::SceneCharacterMenu::addPlayerButtons()
 	});
 }
 
-void bomb::scene::SceneCharacterMenu::addCharacterButtons(IAssetManager &manager)
+void bomb::scene::SceneCharacterMenu::addCharacterButtons(
+	IAssetManager &manager)
 {
 	for (int i = 0; i < 4; ++i) {
 		_menu.addButton(_charLoader.getCharacterName(

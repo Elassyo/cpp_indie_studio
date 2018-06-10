@@ -42,6 +42,7 @@ namespace bomb {
 		void resumeAll();
 		void stopAll();
 
+		float getVolume() const;
 		void setVolume(float gain);
 
 	private:
