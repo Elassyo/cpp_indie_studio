@@ -8,7 +8,8 @@
 #include "PersistentInfo.hpp"
 
 bomb::PersistentInfo::PersistentInfo(int plnbr, bool gm, const std::string &f)
-	: _mapSize(15), _playerNbr(plnbr), _generateMap(gm), _fileMap(f)
+	: _mapSize(15), _playerNbr(plnbr), _volume(1),
+	  _generateMap(gm), _mainMusic(false), _fileMap(f)
 {
 	_playerInfos[1].setKeys(
 		{{irr::KEY_KEY_Z, IPlayerController::MV_UP},
@@ -91,4 +92,24 @@ int bomb::PersistentInfo::getMapSize() const
 void bomb::PersistentInfo::setMapSize(int mapSize)
 {
 	_mapSize = mapSize;
+}
+
+float bomb::PersistentInfo::getVolume() const
+{
+	return _volume;
+}
+
+void bomb::PersistentInfo::setVolume(float volume)
+{
+	_volume = volume;
+}
+
+bool bomb::PersistentInfo::MainMusic() const
+{
+	return _mainMusic;
+}
+
+void bomb::PersistentInfo::setMainMusic(bool mainMusic)
+{
+	_mainMusic = mainMusic;
 }
