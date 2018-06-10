@@ -10,7 +10,6 @@
 
 	#include <memory>
 	#include <irrlicht/vector3d.h>
-
 	#include "../../Interface/IAssetManager.hpp"
 
 #define BLOCK_OBJ_SIZE 2
@@ -39,6 +38,7 @@ namespace bomb {
 		const irr::core::vector2di &getMapPos() const;
 		size_t getHp() const;
 		void setTextures(irr::video::ITexture *texture);
+		void destroy(IAssetManager &manager);
 
 	protected:
 		irr::core::vector2di _mapPos;

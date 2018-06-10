@@ -38,6 +38,9 @@ void bomb::BomberMap::updateFromCells(bomb::IAssetManager &loader)
 
 void bomb::BomberMap::clean(bomb::IAssetManager &loader)
 {
+	for (auto &block : _blocks)
+		block->destroy(loader);
+	_blocks.clear();
 	fill(_cells.begin(), _cells.end(), BomberMap::EMPTY);
 	updateFromCells(loader);
 }
