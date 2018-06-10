@@ -13,7 +13,7 @@ bomb::object::Power::Power(bomb::IAssetManager &loader,
 {
 }
 
-bool bomb::object::Power::activate(bomb::Map &map, bomb::game::Player &player,
+bool bomb::object::Power::activate(bomb::BomberMap &map, bomb::game::Player &player,
 				   IAssetManager &loader)
 {
 	addPower(player);
@@ -27,7 +27,7 @@ void bomb::object::Power::addPower(bomb::game::Player &player)
 	(void) player;
 }
 
-int bomb::object::Power::isActivable(bomb::Map &map,
+int bomb::object::Power::isActivable(bomb::BomberMap &map,
 	std::vector<std::pair<bomb::game::Player,
 	bomb::PlayerActionner>> &vector)
 {

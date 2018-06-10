@@ -9,7 +9,7 @@
 #define CPP_INDIE_STUDIO_PLAYERACTIONNER_HPP
 
 #include <unordered_map>
-#include "../Map/Map.hpp"
+#include "../Map/BomberMap.hpp"
 #include "../Interface/IPlayerController.hpp"
 #include "../Scenes/General/Clock.hpp"
 #include "../Scenes/General/Player.hpp"
@@ -19,9 +19,9 @@ namespace bomb {
 	public:
 		PlayerActionner(bool enableRepeat);
 
-		void actionnate(Map &map, bomb::game::Player &player);
+		void actionnate(BomberMap &map, bomb::game::Player &player);
 		void
-		sendAction(Map &map, game::Player &player,
+		sendAction(BomberMap &map, game::Player &player,
 			IPlayerController::Actions action);
 		void setSpeedRatio(float speedRatio);
 
@@ -38,13 +38,13 @@ namespace bomb {
 		bool _repeat;
 		bomb::utils::Clock _latence;
 
-		void move(Map &map, game::Player &player);
+		void move(BomberMap &map, game::Player &player);
 		irr::core::vector3di vecfCast(irr::core::vector3df &vec);
 		bool isTargetReached(irr::core::vector3d<irr::f32> &vector3d);
 		irr::core::vector3df veciCast(irr::core::vector3di &vec);
 		void updateAction();
-		void addBomb(Map &map, game::Player &player);
-		void changeTargetTile(Map &map, irr::core::vector3di playerPos,
+		void addBomb(BomberMap &map, game::Player &player);
+		void changeTargetTile(BomberMap &map, irr::core::vector3di playerPos,
 			      game::Player &player);
 	};
 }

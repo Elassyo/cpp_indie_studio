@@ -16,18 +16,18 @@ bomb::object::Bomb::Bomb(bomb::IAssetManager &loader,
 {
 }
 
-bool bomb::object::Bomb::deleteBlock(bomb::Map &map, irr::core::vector3di pos)
+bool bomb::object::Bomb::deleteBlock(bomb::BomberMap &map, irr::core::vector3di pos)
 {
 	auto last = map[pos];
-	if (map[pos] == Map::BREAKABLE)
-		map[pos] = Map::EMPTY;
-	if (map[pos] == Map::UNBREAKABLE)
+	if (map[pos] == BomberMap::BREAKABLE)
+		map[pos] = BomberMap::EMPTY;
+	if (map[pos] == BomberMap::UNBREAKABLE)
 		return false;
 	_blast.emplace_back(irr::core::vector2di(pos.X, pos.Z), last);
-	return last == Map::EMPTY;
+	return last == BomberMap::EMPTY;
 }
 
-bool bomb::object::Bomb::blastLine(bomb::Map &map, irr::core::vector3di pos,
+bool bomb::object::Bomb::blastLine(bomb::BomberMap &map, irr::core::vector3di pos,
 				   irr::core::vector2di iterator, int max)
 {
 	for (auto i = 0; i < max; ++i) {
@@ -39,13 +39,13 @@ bool bomb::object::Bomb::blastLine(bomb::Map &map, irr::core::vector3di pos,
 	return true;
 }
 
-bool bomb::object::Bomb::activate(bomb::Map &map, bomb::game::Player &player,
+bool bomb::object::Bomb::activate(bomb::BomberMap &map, bomb::game::Player &player,
 				  IAssetManager &loader)
 {
 	irr::core::vector3di pos = {static_cast<irr::s32>(_model->getPos().X),
 				    static_cast<irr::s32>(_model->getPos().Y),
 				    static_cast<irr::s32>(_model->getPos().Z)};
-	map[pos] = Map::EMPTY;
+	map[pos] = BomberMap::EMPTY;
 	deleteBlock(map, pos);
 	loader.deleteObject(std::move(_model));
 	player.setNbBombs(static_cast<uint8_t>(player.getNbBombs() + 1));
@@ -56,7 +56,7 @@ bool bomb::object::Bomb::activate(bomb::Map &map, bomb::game::Player &player,
 	return true;
 }
 
-int bomb::object::Bomb::isActivable(bomb::Map &map,
+int bomb::object::Bomb::isActivable(bomb::BomberMap &map,
 	std::vector<std::pair<bomb::game::Player,
 		bomb::PlayerActionner>> &player)
 {
@@ -67,7 +67,7 @@ int bomb::object::Bomb::isActivable(bomb::Map &map,
 	(void) player;
 }
 
-const std::vector<std::pair<irr::core::vector2di, bomb::Map::BlockType>>
+const std::vector<std::pair<irr::core::vector2di, bomb::BomberMap::BlockType>>
 &bomb::object::Bomb::getBlast() const
 {
 	return _blast;

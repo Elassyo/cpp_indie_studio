@@ -8,7 +8,7 @@
 #include "AIController.hpp"
 #include "../Exception/Exception.hpp"
 
-bomb::player::AIController::AIController(const std::shared_ptr<bomb::Map> &map):
+bomb::player::AIController::AIController(const std::shared_ptr<bomb::BomberMap> &map):
 	APlayerController(), _map(map)
 {
 	_haveQuest = false;

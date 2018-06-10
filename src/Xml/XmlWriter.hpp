@@ -14,7 +14,7 @@
 	#include <unordered_map>
 
 #include "../Interface/IObject.hpp"
-	#include "../Map/Map.hpp"
+	#include "../Map/BomberMap.hpp"
 	#include "../Scenes/General/Player.hpp"
 
 namespace bomb {
@@ -25,14 +25,14 @@ namespace bomb {
 			~XmlWriter();
 
 			bool iObjectToSection(std::unique_ptr<IObject> &);
-			bool mapBlockToSection(Map::BlockType, int, int);
-			bool mapToSection(std::shared_ptr<Map> &);
+			bool mapBlockToSection(BomberMap::BlockType, int, int);
+			bool mapToSection(std::shared_ptr<BomberMap> &);
 			bool playerToSection(const game::Player &);
 
 		private:
 			std::ofstream _fstream;
 
-			const std::unordered_map<Map::BlockType, std::string>
+			const std::unordered_map<BomberMap::BlockType, std::string>
 				_blockTypeStr;
 			};
 		}

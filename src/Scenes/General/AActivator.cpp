@@ -10,7 +10,7 @@
 bomb::game::AActivator::AActivator() : _activated(false) {}
 
 bool bomb::game::AActivator::tryToActivate(
-	bomb::Map &map,
+	bomb::BomberMap &map,
 	std::vector<std::pair<Player, PlayerActionner>> &players,
 	IAssetManager &loader)
 {

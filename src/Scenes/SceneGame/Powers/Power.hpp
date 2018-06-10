@@ -21,12 +21,12 @@ namespace bomb {
 			void destroy(IAssetManager &manager);
 
 		private:
-			bool activate(bomb::Map &map,
+			bool activate(bomb::BomberMap &map,
 				      bomb::game::Player &player,
 				      IAssetManager &loader) override;
 			virtual void addPower(bomb::game::Player &player);
 			int isActivable(
-				bomb::Map &map,
+				bomb::BomberMap &map,
 				std::vector<std::pair<game::Player,
 					PlayerActionner>>&vector) override;
 			std::unique_ptr<StaticObject> _model;

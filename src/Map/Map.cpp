@@ -6,36 +6,73 @@
 //
 
 #include "Map.hpp"
-#include "../Exception/Exception.hpp"
 
-bomb::Map::Map(const std::vector<std::shared_ptr<bomb::AMapBlock>> &_blocks,
-	std::vector<Map::BlockType> &cells) :
-	_blocks(_blocks)
-{
-	_cells = cells;
-	setSize(static_cast<int>(sqrt(cells.size())));
+int bomb::Map::getSize() const {
+	return _size;
 }
 
-bool bomb::Map::blockAt(const irr::core::vector2di &coord)
-{
-	return _cells[coord.X + coord.Y * _size] != BlockType::EMPTY;
+void bomb::Map::setSize(int size) {
+	Map::_size = size;
 }
 
-void bomb::Map::updateFromCells(bomb::IAssetManager &loader)
+bomb::Map::BlockType &bomb::Map::operator[](std::size_t idx)
 {
-	auto b = _blocks.begin();
-	while (b != _blocks.end()) {
-		if (_cells[b->get()->getMapPos().X
-			+ b->get()->getMapPos().Y * _size] == EMPTY) {
-			b->get()->explode(b->get()->getHp(), loader);
-			b = _blocks.erase(b);
-		} else
-			b++;
+	return _cells[idx];
+}
+
+bomb::Map::BlockType &bomb::Map::operator[](irr::core::vector3di pos)
+{
+	auto idx = pos.X + pos.Z * _size;
+	if ((unsigned int)idx < _cells.size())
+		return _cells[idx];
+	throw
+		bomb::Exception("Map", "Invalid index");
+}
+
+bomb::Map::BlockType &bomb::Map::operator[](irr::core::vector3df pos)
+{
+	auto idx = static_cast<unsigned int>(pos.X + pos.Z * _size);
+	if (idx < _cells.size())
+		return _cells[idx];
+	throw
+		bomb::Exception("Map", "Invalid index");
+}
+
+bomb::Map::BlockType &bomb::Map::operator[](irr::core::vector2di pos)
+{
+	auto idx = pos.X + pos.Y * _size;
+	if ((unsigned int)idx < _cells.size())
+		return _cells[idx];
+	throw
+		bomb::Exception("Map", "Invalid index");
+}
+
+bomb::Map::BlockType &bomb::Map::operator[](irr::core::vector2df pos)
+{
+	auto idx = static_cast<unsigned int>(pos.X + pos.Y * _size);
+	if (idx < _cells.size())
+		return _cells[idx];
+	throw
+		bomb::Exception("Map", "Invalid index");
+}
+
+const std::vector<bomb::Map::BlockType> &bomb::Map::getCells() const
+{
+	return _cells;
+}
+
+std::ostream &operator<<(std::ostream &os, const bomb::Map &map) {
+	int  i = 0;
+	for (auto cell : map.getCells()) {
+		os << " " << cell;
+		++i;
+		if (i % map.getSize() == 0)
+			os << "\n";
 	}
+	return os;
 }
 
-void bomb::Map::clean(bomb::IAssetManager &loader)
+void bomb::Map::clean()
 {
 	fill(_cells.begin(), _cells.end(), Map::EMPTY);
-	updateFromCells(loader);
 }
