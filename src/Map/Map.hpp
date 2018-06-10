@@ -39,12 +39,14 @@ namespace bomb {
 		BlockType &operator[](irr::core::vector3df pos);
 		BlockType &operator[](irr::core::vector2di pos);
 		BlockType &operator[](irr::core::vector2df pos);
-		friend std::ostream &
-		operator<<(std::ostream &os, const Map &map);
+
 	protected:
 		std::vector<BlockType> _cells;
 		int _size;
 	};
 }
+
+
+std::ostream &operator<<(std::ostream &os, const bomb::Map &map);
 
 #endif /* CPP_INDIE_STUDIO_AMAP_HPP */
