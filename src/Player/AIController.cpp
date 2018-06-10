@@ -10,3 +10,13 @@
 
 bomb::ai::AIController::AIController()
 {}
+
+void bomb::ai::AIController::executeAI(
+	bomb::PlayerActionner &actionner,
+	std::array<bomb::game::Player, 4> &players,
+	bomb::BomberMap &map, int index)
+{
+	if (rand() % 10000 < 5)
+		actionner.sendAction(map, players[index],
+				     IPlayerController::PUT_BOMB);
+}
