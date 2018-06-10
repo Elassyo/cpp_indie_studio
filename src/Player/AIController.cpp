@@ -27,6 +27,10 @@ void bomb::ai::AIController::executeAI(
 	if (pos.Z == 0 && pos.X == 0 && pos.Y == 0)
 		return;
 	executerRandomAI(actionner, players, map, index);
+	if (map.getBombRanges()[players[index].getExactPos()] == Map::BOMB)
+		executeDefensiveAI(actionner, players, map, index);
+	else
+		executeOffensiveAI(actionner, players, map, index);
 }
 
 void bomb::ai::AIController::executerRandomAI(
@@ -40,8 +44,13 @@ void bomb::ai::AIController::executerRandomAI(
 		 IPlayerController::MV_RIGHT,
 		IPlayerController::MV_UP};
 	auto move = moves[rand() % 4];
-	actionner.sendAction(map, players[index], move);
+	if (rand() % 10000 < 5)
+		actionner.sendAction(map, players[index],
+				     IPlayerController::PUT_BOMB);
+	else
+		actionner.sendAction(map, players[index], move);
 }
+
 
 void bomb::ai::AIController::executeDefensiveAI(
 	bomb::PlayerActionner &actionner,
@@ -125,6 +134,7 @@ std::map<irr::core::vector2di, bomb::IPlayerController::Actions>
 				safeMap[pos] = (Map::BlockType) tmp2.first;
 				if (map.getBombRanges()[pos] == Map::EMPTY) {
 					action = tmp.second;
+					printf("find\n");
 					return vec;
 				}
 			}
