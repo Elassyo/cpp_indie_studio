@@ -39,3 +39,11 @@ void bomb::BomberMap::clean(bomb::IAssetManager &loader)
 	fill(_cells.begin(), _cells.end(), BomberMap::EMPTY);
 	updateFromCells(loader);
 }
+
+void
+bomb::BomberMap::addBlast(std::vector<std::pair<irr::core::vector2di,
+				  bomb::BomberMap::BlockType>> blast)
+{
+	for (auto &b : blast)
+		_bombRanges[b.first] = EMPTY;
+}

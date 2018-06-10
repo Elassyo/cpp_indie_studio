@@ -19,8 +19,11 @@ namespace bomb {
 		void clean(IAssetManager &loader);
 		bool blockAt(const irr::core::vector2di &coord);
 		void updateFromCells(IAssetManager &loader);
+		void addBlast(std::vector<std::pair<irr::core::vector2di,
+				BlockType>> blast);
 	private:
 		std::vector<std::shared_ptr<bomb::AMapBlock>> _blocks;
+		Map _bombRanges;
 	};
 }
 

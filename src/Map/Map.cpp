@@ -7,11 +7,13 @@
 
 #include "Map.hpp"
 
-int bomb::Map::getSize() const {
+int bomb::Map::getSize() const
+{
 	return _size;
 }
 
-void bomb::Map::setSize(int size) {
+void bomb::Map::setSize(int size)
+{
 	Map::_size = size;
 }
 
@@ -61,7 +63,8 @@ const std::vector<bomb::Map::BlockType> &bomb::Map::getCells() const
 	return _cells;
 }
 
-std::ostream &operator<<(std::ostream &os, const bomb::Map &map) {
+std::ostream &operator<<(std::ostream &os, const bomb::Map &map)
+{
 	int  i = 0;
 	for (auto cell : map.getCells()) {
 		os << " " << cell;

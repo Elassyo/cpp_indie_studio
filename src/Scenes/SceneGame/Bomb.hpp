@@ -23,6 +23,8 @@ namespace bomb {
 				bomb::BomberMap::BlockType>> &getBlast() const;
 			irr::core::position2di getPos();
 			void fuse();
+			void
+			addBlastToMap(BomberMap &map, game::Player &player);
 		private:
 			int isActivable(bomb::BomberMap &map,
 				std::vector<std::pair<game::Player,
@@ -32,7 +34,12 @@ namespace bomb {
 				      IAssetManager &loader) override;
 			bool deleteBlock(BomberMap &map, irr::core::vector3di pos);
 			bool blastLine(BomberMap &map, irr::core::vector3di pos,
-				       irr::core::vector2di iterator, int max);
+				       irr::core::vector2di iterator, int max,
+					bool blast);
+			bool isEnd(BomberMap &map,
+				const irr::core::vector3di &pos);
+			void simulateBlast(BomberMap &map, game::Player &player,
+					   bool destroy);
 
 			std::unique_ptr<AnimatedObject> _model;
 			std::vector<std::pair<irr::core::vector2di,
