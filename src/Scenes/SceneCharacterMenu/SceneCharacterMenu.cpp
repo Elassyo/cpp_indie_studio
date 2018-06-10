@@ -17,7 +17,7 @@ bomb::scene::SceneStatus bomb::scene::SceneCharacterMenu::start(
 	initModelPaths();
 	_menu.createMenu(loader);
 	_menu.addImage(loader.loadTexture("images/menuBack.png"),
-		       {.5f, .5f}, 5);
+		{.5f, .5f}, 5);
 	_menu.setElementSize(5, {1, 1});
 	_menu.addText(L"SUPER\nBOMBERMARIO\nBROS.", {.5f, .15f}, 0);
 	_menu.setElementFont(0, menu::TITLE);
@@ -73,12 +73,12 @@ void bomb::scene::SceneCharacterMenu::addCharacterButtons(
 	for (int i = 0; i < 4; ++i) {
 		_menu.addButton(_charLoader.getCharacterName(
 			_infos.getPlayerInfos(i).getCharacter()),
-				{.20f * (i + 1), .5f}, 11 + i);
-		_menu.setElementSize(11 + i, {.15,.15f});
-		_menu.setElementRenderMode(11 + i,
-					   menu::GraphicElement::HEIGHT_BASED);
-		_menu.setButtonPushable(11 + i,
-					!_infos.getPlayerInfos(i).isAI());
+				{.20f * (i + 1), .5f}, 10 + i + 1);
+		_menu.setElementSize(10 + i + 1, {.15f, .15f});
+		_menu.setElementRenderMode(10 + i + 1,
+			bomb::menu::GraphicElement::HEIGHT_BASED);
+		_menu.setButtonPushable(
+			10 + i + 1, !_infos.getPlayerInfos(i).isAI());
 	}
 	_menu.setButtonEvent(11, [this](){
 		changeCharacter(1);

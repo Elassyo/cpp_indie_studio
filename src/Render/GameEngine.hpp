@@ -61,13 +61,13 @@ namespace bomb {
 		std::unique_ptr<PlaneObject> createPlaneObject
 			(const std::string &path,
 			 irr::core::vector3df pos,
-			 irr::core::vector3df rot,
-			 irr::core::vector3df scale) override;
+			 irr::core::vector3df scale,
+			 irr::core::vector3df rot) override;
 
 		std::unique_ptr<BillboardObject>
 		createBillboardObject(irr::core::vector3df pos,
-				      irr::core::vector3df rot,
-				      irr::core::vector3df scale) override;
+				      irr::core::vector3df scale,
+				      irr::core::vector3df rot) override;
 
 		void deleteObject(std::unique_ptr<IObject> obj) override;
 		std::unique_ptr<CameraObject> getCamera(

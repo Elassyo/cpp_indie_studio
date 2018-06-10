@@ -5,6 +5,7 @@
 // Created by Gregory EPLE
 //
 
+#include <algorithm>
 #include "Menu.hpp"
 
 bomb::menu::Menu::Menu() :
