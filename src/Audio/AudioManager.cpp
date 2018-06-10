@@ -62,7 +62,7 @@ void bomb::AudioManager::playMusic(const std::string &path)
 {
 	std::vector<ALuint> buffers = getAudioBuffers(path);
 	ALuint source = getAudioSource();
-	alSourcef(source, AL_GAIN, 0.4);
+	alSourcef(source, AL_GAIN, 0.4f);
 	alSourceQueueBuffers(source, buffers.size(), buffers.data());
 	alSourcePlay(source);
 }
@@ -74,7 +74,7 @@ void bomb::AudioManager::playSound(const std::string &path,
 	ALuint source = getAudioSource();
 	irr::core::vector3d pos = obj.getPos();
 	alSource3f(source, AL_POSITION, pos.X / 20, pos.Y / 20, pos.Z / 20);
-	alSourcef(source, AL_GAIN, 1.0);
+	alSourcef(source, AL_GAIN, 1.0f);
 	alSourceQueueBuffers(source, buffers.size(), buffers.data());
 	alSourcePlay(source);
 }
