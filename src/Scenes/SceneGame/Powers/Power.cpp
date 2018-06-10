@@ -13,9 +13,11 @@ bomb::object::Power::Power(bomb::IAssetManager &loader,
 {
 }
 
-bool bomb::object::Power::activate(bomb::BomberMap &map, bomb::game::Player &player,
+bool bomb::object::Power::activate(bomb::BomberMap &map,
+				   bomb::game::Player &player,
 				   IAssetManager &loader)
 {
+	_model->playSound("sfx/ploop.ogg");
 	addPower(player);
 	destroy(loader);
 	return true;

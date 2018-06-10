@@ -32,6 +32,7 @@ namespace bomb {
 			bool onEvent(const irr::SEvent &event) override;
 
 		private:
+			void loadSounds(IAssetManager &loader);
 			void explodeBombs(bomb::IAssetManager &loader);
 			void checkVictory();
 

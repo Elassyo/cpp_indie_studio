@@ -19,7 +19,6 @@ namespace bomb {
 
 			~SceneHomeMenu() override = default;
 
-
 			bomb::scene::SceneStatus start(
 				IAssetManager &loader) override;
 			SceneStatus loop(IAssetManager &loader) override;
@@ -31,6 +30,7 @@ namespace bomb {
 			bool onEvent(const irr::SEvent &event) override;
 
 		private:
+			void launchMainMusic(IAssetManager &loader);
 			bomb::menu::Menu _menu;
 			bool _running;
 			std::string _nextScene;

@@ -16,12 +16,11 @@ bomb::scene::SceneGame::SceneGame(bomb::PersistentInfo &_infos) :
 bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetManager &loader)
 {
 	_charLoader.loadImages(loader);
-	_charLoader.loadSounds(loader);
 	_menu.createMenu(loader);
-	_menu.addText(L"", {.5, .45}, 1);
+	_menu.addText(L"", {.5f, .45f}, 1);
 	_menu.setElementFont(1, menu::TITLE);
-	_menu.addImage(loader.loadTexture("images/empty.png"), {.5, .55}, 2);
-	_menu.setElementSize(2, {.1, .1});
+	_menu.addImage(loader.loadTexture("images/empty.png"), {.5f, .55f}, 2);
+	_menu.setElementSize(2, {.1f, .1f});
 	_menu.setElementRenderMode(2, menu::GraphicElement::HEIGHT_BASED);
 	_playing = true;
 	_blocksTextures = loader.loadTexture("models/blocks/spritesheet.png");
@@ -31,9 +30,7 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetManager &loader)
 	cam->setPos({mid, (float)_game.getMapSize() * 0.8f,
 		(float)_game.getMapSize() * 0.8f});
 	cam->setTarget({mid, 0, mid + 1});
-	loader.loadAudioFile("sfx/boom.ogg");
-	loader.loadAudioFile("music/mario64-bobomb-battlefield.ogg");
-	loader.playMusic("music/mario64-bobomb-battlefield.ogg");
+	loadSounds(loader);
 	_menu.updateButtons(loader, true);
 	return BEGIN;
 }
@@ -49,6 +46,15 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::loop(
 		return CONTINUE;
 	loader.stopAll();
 	return END;
+}
+
+void bomb::scene::SceneGame::loadSounds(IAssetManager &loader)
+{
+	_charLoader.loadSounds(loader);
+	loader.loadAudioFile("sfx/boom.ogg");
+	loader.loadAudioFile("sfx/ploop.ogg");
+	loader.loadAudioFile("music/mario64-bobomb-battlefield.ogg");
+	loader.playMusic("music/mario64-bobomb-battlefield.ogg");
 }
 
 void bomb::scene::SceneGame::explodeBombs(bomb::IAssetManager &loader)
@@ -102,9 +108,6 @@ void bomb::scene::SceneGame::clean(IAssetManager &loader)
 {
 	_menu.clean();
 	loader.stopAll();
-	_charLoader.unloadSounds(loader);
-	loader.unloadAudioFile("sfx/boom.ogg");
-	loader.unloadAudioFile("music/mario64-bobomb-battlefield.ogg");
 	_game.getMap()->clean(loader);
 	auto &p = _game.getPlayers();
 	for (unsigned int i = 0; i < _game.getPlayers().size(); ++i) {
