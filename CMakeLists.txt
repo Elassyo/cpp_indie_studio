@@ -139,6 +139,8 @@ set(SRC_FILES
         src/Scenes/SceneHomeMenu/SceneHomeMenu.hpp
         src/Scenes/SceneOptionMenu/SceneOptionMenu.cpp
         src/Scenes/SceneOptionMenu/SceneOptionMenu.hpp
+        src/Scenes/SceneKeyMenu/IrrKeyToStr.cpp
+        src/Scenes/SceneKeyMenu/IrrKeyToStr.hpp
         src/Scenes/SceneKeyMenu/SceneKeyMenu.cpp
         src/Scenes/SceneKeyMenu/SceneKeyMenu.hpp
         src/Scenes/SceneCharacterMenu/SceneCharacterMenu.cpp

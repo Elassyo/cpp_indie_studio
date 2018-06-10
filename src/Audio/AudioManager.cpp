@@ -96,8 +96,10 @@ ALuint bomb::AudioManager::getAudioSource()
 	for (ALuint source : _audioSources) {
 		ALint state;
 		alGetSourcei(source, AL_SOURCE_STATE, &state);
-		if (state == AL_STOPPED)
+		if (state == AL_STOPPED) {
+			alSourcei(source, AL_BUFFER, AL_NONE);
 			return source;
+		}
 	}
 	ALuint source;
 	alGenSources(1, &source);

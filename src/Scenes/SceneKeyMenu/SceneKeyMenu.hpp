@@ -9,7 +9,10 @@
 	#define CPP_INDIE_STUDIO_SCENEKEYMENU_HPP
 
 	#include "../../Menu/Menu.hpp"
+
 	#include "../General/AScene.hpp"
+
+	#include "IrrKeyToStr.hpp"
 
 namespace bomb {
 	namespace scene {
@@ -30,9 +33,21 @@ namespace bomb {
 			bool onEvent(const irr::SEvent &event) override;
 
 		private:
+			void createKeyButtons();
+			void changePlayer();
+			void setActionKey(const irr::SEvent &event);
+			void updateKey(IPlayerController::Actions action);
+			void updateKeys();
+			irr::EKEY_CODE getKeyByAction(
+				IPlayerController::Actions action);
 			bomb::menu::Menu _menu;
 			bool _running;
 			std::string _nextScene;
+			int _player;
+			IPlayerController::Actions _ctrl;
+			std::map<irr::EKEY_CODE,
+				IPlayerController::Actions> _keys;
+			IrrKeyToStr _keyToStr;
 		};
 	}
 }

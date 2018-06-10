@@ -27,6 +27,8 @@
 	#include "../../Player/AIController.hpp"
 	#include "../SceneGame/Powers/Power.hpp"
 	#include "../SceneGame/Powers/PowerFactory.hpp"
+	#include "../../Xml/XmlReader.hpp"
+
 
 namespace bomb {
 	namespace game {
@@ -40,6 +42,11 @@ namespace bomb {
 				IAssetManager &loader,
 				irr::video::ITexture *pTexture
 			);
+			void createGame(
+				IAssetManager &loader,
+				irr::video::ITexture *pTexture,
+				const std::string &fileName
+			);
 			int getMapSize() const;
 			void execute(IAssetManager &loader);
 			bool handleEvent(const irr::SEvent &event);
@@ -52,6 +59,11 @@ namespace bomb {
 				IAssetManager &loader,
 				unsigned int size
 			);
+			void createMap(
+				IAssetManager &loader,
+				xml::XmlReader &
+			);
+
 			void createPlayer(
 				IAssetLoader &loader,
 				const std::string &path,
@@ -84,6 +96,8 @@ namespace bomb {
 			std::vector<bomb::object::Bomb *> _bombs;
 			std::vector<std::unique_ptr<bomb::object::Power>>
 				_powers;
+			std::unordered_map
+				<std::wstring, Map::BlockType> _strBlk;
 			int _mapSize;
 			bomb::object::PowerFactory _factory;
 		};

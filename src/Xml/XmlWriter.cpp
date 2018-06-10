@@ -56,7 +56,7 @@ bool bomb::xml::XmlWriter::playerToSection(const game::Player &player)
 	auto pos = player.getExactPos();
 
 	_fstream << "<PlayerInfo isAI=\"" << player.isAI() << "\" isAlive=\"" <<
-		 player.isAlive() << "\" x=\"" << pos.X << "\"y=" << pos.Y <<
+		 player.isAlive() << "\" x=\"" << pos.X << "\" y=\"" << pos.Y <<
 		 "\"/>" << std::endl;
 	return true;
 }
