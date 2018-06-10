@@ -137,15 +137,17 @@ const irr::core::dimension2d<irr::u32> &bomb::GameEngine::getScreenSize()
 }
 
 std::unique_ptr<bomb::PlaneObject>
-bomb::GameEngine::createPlaneObject(const std::string &name,
-				    irr::core::vector3df pos,
+bomb::GameEngine::createPlaneObject(irr::core::vector3df pos,
 				    irr::core::vector3df scale,
 				    irr::core::vector3df rot)
 {
-	irr::scene::IAnimatedMesh *imesh = _sceneManager->addHillPlaneMesh
-		(irr::io::path(name.c_str()), irr::core::dimension2df(10, 10),
-		 irr::core::dimension2d<unsigned int>(10, 10));
-	auto node = _sceneManager->addAnimatedMeshSceneNode(imesh);
+	irr::scene::IMesh *imesh = _sceneManager->getGeometryCreator()->
+		createPlaneMesh(irr::core::dimension2df(10, 10),
+		irr::core::dimension2d<unsigned int>(10, 10), nullptr,
+		irr::core::dimension2df(500.f, 500.f));
+
+	irr::scene::IMeshSceneNode *node = _sceneManager->addMeshSceneNode
+		(imesh);
 	auto ptr = std::make_unique<PlaneObject>(node, _audioMgr);
 	ptr->setPos(pos);
 	ptr->setRot(rot);

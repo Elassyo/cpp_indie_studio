@@ -58,11 +58,10 @@ namespace bomb {
 		std::unique_ptr<bomb::LightObject> createLightObject(
 			const irr::core::vector3df &pos,
 			irr::video::SColorf col, float radius) override;
-		std::unique_ptr<PlaneObject> createPlaneObject
-			(const std::string &path,
-			 irr::core::vector3df pos,
-			 irr::core::vector3df scale,
-			 irr::core::vector3df rot) override;
+		std::unique_ptr<bomb::PlaneObject> createPlaneObject
+			(irr::core::vector3df pos,
+							    irr::core::vector3df scale,
+							    irr::core::vector3df rot) override;
 
 		std::unique_ptr<BillboardObject>
 		createBillboardObject(irr::core::vector3df pos,

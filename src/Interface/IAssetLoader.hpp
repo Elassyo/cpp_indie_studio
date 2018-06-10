@@ -42,12 +42,10 @@ namespace bomb {
 			irr::core::vector3df pos = {0, 0, 0},
 			irr::core::vector3df scale = {1, 1, 1},
 			irr::core::vector3df rot = {0, 0, 0}) = 0;
-		virtual std::unique_ptr<PlaneObject> createPlaneObject(
-			const std::string &path,
+		virtual std::unique_ptr<bomb::PlaneObject> createPlaneObject(
 			irr::core::vector3df pos = {0, 0, 0},
-			irr::core::vector3df scale = {0, 0, 0},
-			irr::core::vector3df rot = {0, 0, 0}
-		) = 0;
+			irr::core::vector3df scale = {1, 1, 1},
+			irr::core::vector3df rot = {0, 0, 0}) = 0;
 		virtual std::unique_ptr<BillboardObject> createBillboardObject(
 			irr::core::vector3df pos = {0, 0, 0},
 			irr::core::vector3df scale = {0, 0, 0},
