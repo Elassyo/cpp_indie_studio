@@ -161,6 +161,7 @@ void bomb::game::Game::executePlayers(bomb::IAssetManager &loader)
 void bomb::game::Game::executeBombs(bomb::IAssetManager &loader)
 {
 	auto bomb = _bombs.begin();
+	_map->getBombRanges().clean();
 	while (bomb != _bombs.end()) {
 		unsigned int idx = (unsigned int)(*bomb)->getPlayerIdx();
 		(*bomb)->addBlastToMap(*_map, _players.at(idx));
