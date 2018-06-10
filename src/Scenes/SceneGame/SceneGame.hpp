@@ -35,9 +35,11 @@ namespace bomb {
 			void loadSounds(IAssetManager &loader);
 			void explodeBombs(bomb::IAssetManager &loader);
 			void checkVictory();
+			void move_camera(const irr::SEvent &event);
 
 			bomb::menu::Menu _menu;
 			game::CharacterLoader _charLoader;
+			std::unique_ptr<CameraObject> _camera;
 			bool _playing;
 			irr::video::ITexture *_blocksTextures;
 			std::vector<std::unique_ptr<bomb::object::Bomb>> _bombs;
