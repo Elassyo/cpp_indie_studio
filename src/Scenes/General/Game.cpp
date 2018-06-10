@@ -29,8 +29,9 @@ void bomb::game::Game::createGame(bomb::IAssetManager &loader,
 			createMap(loader, xmlReader);
 		if (xmlReader.getNodeName() == L"PlayerInfo") {
 			PlayerInfo player = _infos.getPlayerInfos(i);
-			player.setCharacter((Character)xmlReader.getIntValue
-				(L"character"));
+			player.setCharacter(
+				(Character)xmlReader.getIntValue(L"character"));
+			player.setIsAI((bool)xmlReader.getIntValue(L"isAI"));
 			_infos.setPlayerInfos(i, player);
 			createPlayer(loader, _charLoader.getCharacterPath(
 				_infos.getPlayerInfos(i).getCharacter()),
@@ -45,10 +46,10 @@ void bomb::game::Game::createGame(bomb::IAssetManager &loader,
 void bomb::game::Game::setPlayerAttributes(bomb::IAssetManager &loader,
 					   xml::XmlReader &xmlReader, int i)
 {
-	_players[i].setAlive((bool) xmlReader.getIntValue(L"isAlive"), loader);
-	_players[i].setAI((bool) xmlReader.getIntValue(L"isAI"));
-	_players[i].setGhostMode((bool) xmlReader.getIntValue(L"isGhost"));
-	_players[i].setGhostMode((bool) xmlReader.getIntValue(L"isBombGhost"));
+	_players[i].setAlive((bool)xmlReader.getIntValue(L"isAlive"), loader);
+	_players[i].setAI((bool)xmlReader.getIntValue(L"isAI"));
+	_players[i].setGhostMode((bool)xmlReader.getIntValue(L"isGhost"));
+	_players[i].setGhostMode((bool)xmlReader.getIntValue(L"isBombGhost"));
 	_players[i].setSpeed(xmlReader.getFloatValue(L"speed"));
 	_players[i].setBombRange((uint8_t)xmlReader.getIntValue(L"range"));
 	_players[i].setNbBombs((uint8_t)xmlReader.getIntValue(L"nbBombs"));
