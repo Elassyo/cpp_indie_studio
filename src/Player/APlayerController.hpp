@@ -8,7 +8,7 @@
 #ifndef CPP_INDIE_STUDIO_APLAYERCONTROLLER_HPP
 #define CPP_INDIE_STUDIO_APLAYERCONTROLLER_HPP
 
-#include "../Map/Map.hpp"
+#include "../Map/BomberMap.hpp"
 #include "../Interface/IPlayerController.hpp"
 
 namespace bomb {

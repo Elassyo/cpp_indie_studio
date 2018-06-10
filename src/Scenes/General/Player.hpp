@@ -12,7 +12,7 @@
 #include "../../AnimatedObject.hpp"
 #include "../../Interface/IAssetManager.hpp"
 #include "../../Interface/IPlayerController.hpp"
-#include "../../Map/Map.hpp"
+#include "../../Map/BomberMap.hpp"
 #include "PlayerInfo.hpp"
 
 namespace bomb {

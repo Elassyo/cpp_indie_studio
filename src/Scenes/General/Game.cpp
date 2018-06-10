@@ -9,12 +9,12 @@
 
 bomb::game::Game::Game(bomb::PersistentInfo &infos) :
 	_infos(infos), _charLoader(),
-	_strBlk({{L"Bomb", Map::BlockType::BOMB},
+	_strBlk({{L"Bomb", BomberMap::BlockType::BOMB},
 		 {L"Breakable",
-			   Map::BlockType::BREAKABLE},
+			   BomberMap::BlockType::BREAKABLE},
 		 {L"Unbreakable",
-			   Map::BlockType::UNBREAKABLE},
-		 {L"Empty", Map::BlockType::EMPTY}})
+			   BomberMap::BlockType::UNBREAKABLE},
+		 {L"Empty", BomberMap::BlockType::EMPTY}})
 {
 }
 
@@ -26,7 +26,7 @@ void bomb::game::Game::createGame(bomb::IAssetManager &loader,
 	int i = 0;
 
 	while (xmlReader.read()) {
-		if (xmlReader.getActualSection() == L"Map")
+		if (xmlReader.getActualSection() == L"BomberMap")
 			createMap(loader, xmlReader);
 		if (xmlReader.getNodeName() == L"PlayerInfo") {
 			createPlayer(loader, _charLoader.getCharacterPath(
@@ -51,7 +51,7 @@ bomb::game::Game::createMap(bomb::IAssetManager &loader,
 	int size = 0;
 
 	while (xmlReader.read()) {
-		if (xmlReader.getActualSection() != L"Map")
+		if (xmlReader.getActualSection() != L"BomberMap")
 			return;
 		if (_strBlk.find(xmlReader.getNodeName()) != _strBlk.end()) {
 			pos.X = xmlReader.getIntValue(L"x");
@@ -170,11 +170,12 @@ void bomb::game::Game::executeBombs(bomb::IAssetManager &loader)
 
 void bomb::game::Game::spawnPowers(
 	std::vector<std::pair<irr::core::vector2di,
-		bomb::Map::BlockType>> &blast,
+		bomb::BomberMap::BlockType>> &blast,
 	IAssetManager &loader)
 {
 	for (auto b : blast) {
-		if (b.second == Map::BREAKABLE)
+		if (b.second == BomberMap::BREAKABLE &&
+		    rand() % 100 <= RATIO_POWERS)
 			_powers.emplace_back(_factory.getRandomPower(loader,
 				{static_cast<irr::f32>(b.first.X), 0,
 				static_cast<irr::f32>(b.first.Y)}));
@@ -183,7 +184,7 @@ void bomb::game::Game::spawnPowers(
 
 void bomb::game::Game::blastObjects(
 	std::vector<std::pair<irr::core::vector2di,
-	bomb::Map::BlockType>> blast,
+	bomb::BomberMap::BlockType>> blast,
 	bomb::IAssetManager &manager)
 {
 	for (auto &b : blast) {
@@ -258,7 +259,7 @@ bomb::game::Game::getPlayers()
 	return _players;
 }
 
-std::shared_ptr<bomb::Map> &bomb::game::Game::getMap()
+std::shared_ptr<bomb::BomberMap> &bomb::game::Game::getMap()
 {
 	return _map;
 }

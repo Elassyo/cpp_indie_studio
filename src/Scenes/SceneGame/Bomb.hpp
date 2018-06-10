@@ -20,23 +20,30 @@ namespace bomb {
 			&player, int playerIdx);
 
 			const std::vector<std::pair<irr::core::vector2di,
-				bomb::Map::BlockType>> &getBlast() const;
+				bomb::BomberMap::BlockType>> &getBlast() const;
 			irr::core::position2di getPos();
 			void fuse();
+			void
+			addBlastToMap(BomberMap &map, game::Player &player);
 		private:
-			int isActivable(bomb::Map &map,
+			int isActivable(bomb::BomberMap &map,
 				std::vector<std::pair<game::Player,
 				PlayerActionner>> &vector) override;
-			bool activate(bomb::Map &map,
+			bool activate(bomb::BomberMap &map,
 				      bomb::game::Player &player,
 				      IAssetManager &loader) override;
-			bool deleteBlock(Map &map, irr::core::vector3di pos);
-			bool blastLine(Map &map, irr::core::vector3di pos,
-				       irr::core::vector2di iterator, int max);
+			bool deleteBlock(BomberMap &map, irr::core::vector3di pos);
+			bool blastLine(BomberMap &map, irr::core::vector3di pos,
+				       irr::core::vector2di iterator, int max,
+					bool blast);
+			bool isEnd(BomberMap &map,
+				const irr::core::vector3di &pos);
+			void simulateBlast(BomberMap &map, game::Player &player,
+					   bool destroy);
 
 			std::unique_ptr<AnimatedObject> _model;
 			std::vector<std::pair<irr::core::vector2di,
-				bomb::Map::BlockType>> _blast;
+				bomb::BomberMap::BlockType>> _blast;
 			bomb::utils::Clock _timer;
 			int _playerIdx;
 		};

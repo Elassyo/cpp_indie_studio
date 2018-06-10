@@ -8,7 +8,7 @@
 #include "PowerFactory.hpp"
 
 bomb::object::PowerFactory::PowerFactory() :
-	_powers({{&bomb::object::PowerFactory::createPtr<BombUp>, 200},
+	_powers({{&bomb::object::PowerFactory::createPtr<BombUp>, 20},
 		 {&bomb::object::PowerFactory::createPtr<SpeedUp>, 20},
 		 {&bomb::object::PowerFactory::createPtr<FireUp>, 20},
 		 {&bomb::object::PowerFactory::createPtr<BombDown>, 10},

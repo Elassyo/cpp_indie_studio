@@ -18,7 +18,7 @@
 	#include "../../AnimatedObject.hpp"
 	#include "../../Interface/IAssetManager.hpp"
 	#include "../../Map/MapGenerator.hpp"
-	#include "../../Map/Map.hpp"
+	#include "../../Map/BomberMap.hpp"
 	#include "../../Player/PlayerActionner.hpp"
 	#include "../../Xml/XmlWriter.hpp"
 	#include "../SceneGame/Bomb.hpp"
@@ -33,6 +33,7 @@
 namespace bomb {
 	namespace game {
 		constexpr int NB_PLAYERS = 4;
+		constexpr int RATIO_POWERS = 30;
 
 		class Game {
 		public:
@@ -50,7 +51,7 @@ namespace bomb {
 			int getMapSize() const;
 			void execute(IAssetManager &loader);
 			bool handleEvent(const irr::SEvent &event);
-			std::shared_ptr<Map> &getMap();
+			std::shared_ptr<BomberMap> &getMap();
 
 			std::vector<std::pair<Player, PlayerActionner>>
 				&getPlayers();
@@ -78,7 +79,7 @@ namespace bomb {
 			void fuseBombInBlast(irr::core::vector2di pos);
 			void blastObjects(
 				std::vector<std::pair<irr::core::vector2di,
-					Map::BlockType>> vector,
+					BomberMap::BlockType>> vector,
 				IAssetManager &manager);
 			void executePlayers(IAssetManager &loader);
 			void executeBombs(IAssetManager &loader);
@@ -86,18 +87,18 @@ namespace bomb {
 			void reset();
 			void
 			spawnPowers(std::vector<std::pair<irr::core::vector2di,
-				Map::BlockType>> &blast, IAssetManager &loader);
+				BomberMap::BlockType>> &blast, IAssetManager &loader);
 
 			PersistentInfo &_infos;
 			bomb::game::CharacterLoader _charLoader;
 			std::vector<std::pair<Player, PlayerActionner>>
 				_players;
-			std::shared_ptr<bomb::Map> _map;
+			std::shared_ptr<bomb::BomberMap> _map;
 			std::vector<bomb::object::Bomb *> _bombs;
 			std::vector<std::unique_ptr<bomb::object::Power>>
 				_powers;
 			std::unordered_map
-				<std::wstring, Map::BlockType> _strBlk;
+				<std::wstring, BomberMap::BlockType> _strBlk;
 			int _mapSize;
 			bomb::object::PowerFactory _factory;
 		};

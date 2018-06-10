@@ -16,49 +16,53 @@ bomb::object::Bomb::Bomb(bomb::IAssetManager &loader,
 {
 }
 
-bool bomb::object::Bomb::deleteBlock(bomb::Map &map, irr::core::vector3di pos)
-{
-	auto last = map[pos];
-	if (map[pos] == Map::BREAKABLE)
-		map[pos] = Map::EMPTY;
-	if (map[pos] == Map::UNBREAKABLE)
-		return false;
-	_blast.emplace_back(irr::core::vector2di(pos.X, pos.Z), last);
-	return last == Map::EMPTY;
-}
 
-bool bomb::object::Bomb::blastLine(bomb::Map &map, irr::core::vector3di pos,
-				   irr::core::vector2di iterator, int max)
+
+bool bomb::object::Bomb::deleteBlock(bomb::BomberMap &map,
+				irr::core::vector3di pos)
 {
-	for (auto i = 0; i < max; ++i) {
-		pos.X += iterator.X;
-		pos.Z += iterator.Y;
-		if (!deleteBlock(map, pos))
-			return true;
+	if (map[pos] == BomberMap::BREAKABLE) {
+		map[pos] = BomberMap::EMPTY;
+		return true;
 	}
 	return true;
 }
 
-bool bomb::object::Bomb::activate(bomb::Map &map, bomb::game::Player &player,
-				  IAssetManager &loader)
+bool bomb::object::Bomb::isEnd(bomb::BomberMap &map,
+			const irr::core::vector3di &pos)
 {
-	irr::core::vector3di pos = {static_cast<irr::s32>(_model->getPos().X),
-				    static_cast<irr::s32>(_model->getPos().Y),
-				    static_cast<irr::s32>(_model->getPos().Z)};
+	if (map[pos] == BomberMap::UNBREAKABLE)
+		return false;
+	_blast.emplace_back(irr::core::vector2di(pos.X, pos.Z), map[pos]);
+	return map[pos] == BomberMap::EMPTY;
+}
 
-	_model->playSound("sfx/boom.ogg");
-	map[pos] = Map::EMPTY;
-	deleteBlock(map, pos);
-	loader.deleteObject(std::move(_model));
-	player.setNbBombs(static_cast<uint8_t>(player.getNbBombs() + 1));
-	blastLine(map, pos, {1, 0}, player.getBombRange());
-	blastLine(map, pos, {0, 1}, player.getBombRange());
-	blastLine(map, pos, {0, -1}, player.getBombRange());
-	blastLine(map, pos, {-1, 0}, player.getBombRange());
+bool bomb::object::Bomb::blastLine(bomb::BomberMap &map,
+				irr::core::vector3di pos,
+				irr::core::vector2di iterator,
+				int max, bool blast)
+{
+	for (auto i = 0; i < max; ++i) {
+		pos.X += iterator.X;
+		pos.Z += iterator.Y;
+		if (!isEnd(map, pos))
+			return !blast || deleteBlock(map, pos);
+	}
 	return true;
 }
 
-int bomb::object::Bomb::isActivable(bomb::Map &map,
+bool bomb::object::Bomb::activate(bomb::BomberMap &map,
+				bomb::game::Player &player,
+				IAssetManager &loader)
+{
+	_model->playSound("sfx/boom.ogg");
+	player.setNbBombs(static_cast<uint8_t>(player.getNbBombs() + 1));
+	simulateBlast(map, player, true);
+	loader.deleteObject(std::move(_model));
+	return true;
+}
+
+int bomb::object::Bomb::isActivable(bomb::BomberMap &map,
 	std::vector<std::pair<bomb::game::Player,
 		bomb::PlayerActionner>> &player)
 {
@@ -69,7 +73,7 @@ int bomb::object::Bomb::isActivable(bomb::Map &map,
 	(void) player;
 }
 
-const std::vector<std::pair<irr::core::vector2di, bomb::Map::BlockType>>
+const std::vector<std::pair<irr::core::vector2di, bomb::BomberMap::BlockType>>
 &bomb::object::Bomb::getBlast() const
 {
 	return _blast;
@@ -88,3 +92,25 @@ void bomb::object::Bomb::fuse()
 	_timer.setTimerInterval(100);
 	_timer.reset();
 }
+
+void bomb::object::Bomb::addBlastToMap(bomb::BomberMap &map,
+				bomb::game::Player &player)
+{
+	simulateBlast(map, player, false);
+	map.addBlast(_blast);
+	_blast.clear();
+};
+
+void bomb::object::Bomb::simulateBlast(bomb::BomberMap &map,
+				bomb::game::Player &player, bool destroy)
+{
+	irr::core::vector3di pos = {static_cast<irr::s32>(_model->getPos().X),
+				    static_cast<irr::s32>(_model->getPos().Y),
+				    static_cast<irr::s32>(_model->getPos().Z)};
+	map[pos] = BomberMap::EMPTY;
+	deleteBlock(map, pos);
+	blastLine(map, pos, {1, 0}, player.getBombRange(), destroy);
+	blastLine(map, pos, {0, 1}, player.getBombRange(), destroy);
+	blastLine(map, pos, {0, -1}, player.getBombRange(), destroy);
+	blastLine(map, pos, {-1, 0}, player.getBombRange(), destroy);
+};

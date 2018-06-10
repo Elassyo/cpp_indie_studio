@@ -40,7 +40,7 @@ void bomb::scene::SceneOptionMenu::setPlusMinusButtons()
 	_menu.setButtonPushable(1, false);
 	_menu.addButton(L"-", {.375, .3}, 10);
 	_menu.addButton(L"+", {.625, .3}, 11);
-	_menu.addButton(L"Map Size", {.5, .45}, 2);
+	_menu.addButton(L"BomberMap Size", {.5, .45}, 2);
 	_menu.setButtonPushable(2, false);
 	_menu.addButton(L"-", {.375, .45}, 12);
 	_menu.setButtonEvent(12, [this](){
@@ -67,7 +67,7 @@ void bomb::scene::SceneOptionMenu::changeMapSize(int change)
 		mapSize = 51;
 	_infos.setMapSize(mapSize);
 	_menu.setElementText(2, std::wstring(
-		L"Map Size\n       " + std::to_wstring(mapSize)).c_str());
+		L"BomberMap Size\n       " + std::to_wstring(mapSize)).c_str());
 }
 
 bomb::scene::SceneStatus bomb::scene::SceneOptionMenu::loop(

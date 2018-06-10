@@ -11,7 +11,7 @@
 	#include <ctime>
 	#include <map>
 	#include <random>
-	#include "Map.hpp"
+	#include "BomberMap.hpp"
 	#include "MapConstructor.hpp"
 
 namespace bomb {

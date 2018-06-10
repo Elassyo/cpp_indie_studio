@@ -12,18 +12,18 @@
 	#include <unordered_map>
 
 	#include "../Interface/IAssetManager.hpp"
-	#include "Map.hpp"
+	#include "BomberMap.hpp"
 
 namespace bomb {
 	class MapConstructor {
 	public:
 		explicit MapConstructor(unsigned int mapSize);
 
-		void addBlock(const irr::core::vector2di &, Map::BlockType
+		void addBlock(const irr::core::vector2di &, BomberMap::BlockType
 		type);
 		void rmBlock(const irr::core::vector2di &);
 
-		std::unique_ptr<bomb::Map> construct(
+		std::unique_ptr<bomb::BomberMap> construct(
 			IAssetManager &loader,
 			const irr::core::vector3df &pos,
 			const irr::core::vector3df &size,
@@ -32,9 +32,9 @@ namespace bomb {
 		int getSize();
 	private:
 		unsigned int _mapSize;
-		std::map<irr::core::vector2di, Map::BlockType> _mapBlocks;
+		std::map<irr::core::vector2di, BomberMap::BlockType> _mapBlocks;
 
-		static const std::unordered_map<bomb::Map::BlockType,
+		static const std::unordered_map<bomb::BomberMap::BlockType,
 			std::shared_ptr<bomb::AMapBlock>> Blocks;
 	};
 }

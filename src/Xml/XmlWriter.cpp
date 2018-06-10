@@ -10,10 +10,10 @@
 
 bomb::xml::XmlWriter::XmlWriter(const std::string &fileName) :
 	_fstream(fileName),
-	_blockTypeStr({	      {Map::BlockType::BOMB, "Bomb"},
-			      {Map::BlockType::BREAKABLE, "Breakable"},
-			      {Map::BlockType::UNBREAKABLE, "Unbreakable"},
-			      {Map::BlockType::EMPTY, "Empty"}})
+	_blockTypeStr({	      {BomberMap::BlockType::BOMB, "Bomb"},
+			      {BomberMap::BlockType::BREAKABLE, "Breakable"},
+			      {BomberMap::BlockType::UNBREAKABLE, "Unbreakable"},
+			      {BomberMap::BlockType::EMPTY, "Empty"}})
 {
 	if (!_fstream)
 		throw Exception("XmlWriter", "Can't create save file : " + fileName);
@@ -31,7 +31,7 @@ bool bomb::xml::XmlWriter::iObjectToSection(std::unique_ptr<IObject> &object)
 	return false;
 }
 
-bool bomb::xml::XmlWriter::mapBlockToSection(Map::BlockType blockType,
+bool bomb::xml::XmlWriter::mapBlockToSection(BomberMap::BlockType blockType,
 					     int x, int y)
 {
 	_fstream << "<" << _blockTypeStr.at(blockType) << " " << "x=\"" <<
@@ -39,15 +39,15 @@ bool bomb::xml::XmlWriter::mapBlockToSection(Map::BlockType blockType,
 	return true;
 }
 
-bool bomb::xml::XmlWriter::mapToSection(std::shared_ptr<bomb::Map> &map)
+bool bomb::xml::XmlWriter::mapToSection(std::shared_ptr<bomb::BomberMap> &map)
 {
-	_fstream << "\t<Map>" << std::endl;
+	_fstream << "\t<BomberMap>" << std::endl;
 	int size = map->getSize();
 	for (int i = 0; i < size * size; i++) {
 		_fstream << "\t\t";
 		mapBlockToSection((*map)[i], i % size, i / size);
 	}
-	_fstream << "\t</Map>" << std::endl;
+	_fstream << "\t</BomberMap>" << std::endl;
 	return true;
 }
 

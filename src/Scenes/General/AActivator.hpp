@@ -8,7 +8,7 @@
 #ifndef CPP_INDIE_STUDIO_IACTIVATOR_HPP
 	#define CPP_INDIE_STUDIO_IACTIVATOR_HPP
 
-	#include "../../Map/Map.hpp"
+	#include "../../Map/BomberMap.hpp"
 	#include "Player.hpp"
 	#include "../../Player/PlayerActionner.hpp"
 
@@ -17,14 +17,14 @@ namespace bomb {
 		class AActivator {
 		public:
 			AActivator();
-			bool tryToActivate(bomb::Map &map,
+			bool tryToActivate(bomb::BomberMap &map,
 				std::vector<std::pair<Player, PlayerActionner>>
 				&players, IAssetManager &loader);
 
 		private:
-			virtual int isActivable(bomb::Map &map, std::vector
+			virtual int isActivable(bomb::BomberMap &map, std::vector
 				<std::pair<Player, PlayerActionner>> &) = 0;
-			virtual bool activate(bomb::Map &map,
+			virtual bool activate(bomb::BomberMap &map,
 					      bomb::game::Player &player,
 					      IAssetManager &loader) = 0;
 			bool _activated;

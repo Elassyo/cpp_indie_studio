@@ -25,20 +25,20 @@ bomb::PlayerActionner::PlayerActionner(bool permanent) :
 {
 }
 
-void bomb::PlayerActionner::addBomb(bomb::Map &map,
+void bomb::PlayerActionner::addBomb(bomb::BomberMap &map,
 	bomb::game::Player &player)
 {
 	auto tmp = player.getModel()->getPos();
 	auto pos = vecfCast(tmp);
-	if (player.getNbBombs() >= 1 && map[pos] == Map::EMPTY) {
+	if (player.getNbBombs() >= 1 && map[pos] == BomberMap::EMPTY) {
 		player.setNbBombs
 			(static_cast<uint8_t>(player.getNbBombs() - 1));
 		player.setBombReady(true);
-		map[pos] = Map::BOMB;
+		map[pos] = BomberMap::BOMB;
 	}
 }
 
-void bomb::PlayerActionner::sendAction(bomb::Map &map,
+void bomb::PlayerActionner::sendAction(bomb::BomberMap &map,
 	bomb::game::Player &player,
 	bomb::IPlayerController::Actions action)
 {
@@ -53,7 +53,7 @@ void bomb::PlayerActionner::sendAction(bomb::Map &map,
 	}
 }
 
-void bomb::PlayerActionner::actionnate(bomb::Map &map,
+void bomb::PlayerActionner::actionnate(bomb::BomberMap &map,
 	bomb::game::Player &player)
 {
 	if (_currentAction == IPlayerController::UNDEFINED || _target.X == -1) {
@@ -65,7 +65,7 @@ void bomb::PlayerActionner::actionnate(bomb::Map &map,
 		move(map, player);
 }
 
-void bomb::PlayerActionner::move(bomb::Map &map,
+void bomb::PlayerActionner::move(bomb::BomberMap &map,
 	game::Player &player)
 {
 	_speedRatio = player.getSpeed();
@@ -87,7 +87,7 @@ void bomb::PlayerActionner::updateAction()
 	_nextAction = IPlayerController::UNDEFINED;
 }
 
-void bomb::PlayerActionner::changeTargetTile(bomb::Map &map,
+void bomb::PlayerActionner::changeTargetTile(bomb::BomberMap &map,
 	irr::core::vector3di playerPos,
 	game::Player &player)
 {
@@ -99,9 +99,9 @@ void bomb::PlayerActionner::changeTargetTile(bomb::Map &map,
 		return;
 	}
 	_target = playerPos + vecfCast(_moves[_currentAction]);
-	if (map[_target] != Map::EMPTY &&
-		(!player.isGhostMode() || map[_target] != Map::BREAKABLE) &&
-		(!player.isGhostBombMode() || map[_target] != Map::BOMB)) {
+	if (map[_target] != BomberMap::EMPTY &&
+		(!player.isGhostMode() || map[_target] != BomberMap::BREAKABLE) &&
+		(!player.isGhostBombMode() || map[_target] != BomberMap::BOMB)) {
 		_target = {-1, -1, -1};
 		_currentAction = IPlayerController::UNDEFINED;
 	}

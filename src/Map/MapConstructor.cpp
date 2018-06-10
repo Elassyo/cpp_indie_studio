@@ -11,10 +11,10 @@
 #include "../Map/MapBlocks/MapBlockUnbreakable.hpp"
 #include "MapConstructor.hpp"
 
-const std::unordered_map<bomb::Map::BlockType,
+const std::unordered_map<bomb::BomberMap::BlockType,
 	std::shared_ptr<bomb::AMapBlock>> bomb::MapConstructor::Blocks = {
-	{ Map::UNBREAKABLE, std::make_shared<bomb::MapBlockUnbreakable>() },
-	{ Map::BREAKABLE, std::make_shared<bomb::MapBlockBreakable>() }
+	{ BomberMap::UNBREAKABLE, std::make_shared<bomb::MapBlockUnbreakable>() },
+	{ BomberMap::BREAKABLE, std::make_shared<bomb::MapBlockBreakable>() }
 };
 
 bomb::MapConstructor::MapConstructor(unsigned int mapSize) :
@@ -23,7 +23,7 @@ bomb::MapConstructor::MapConstructor(unsigned int mapSize) :
 }
 
 void bomb::MapConstructor::addBlock(const irr::core::vector2di &pos,
-					Map::BlockType type)
+					BomberMap::BlockType type)
 {
 	_mapBlocks[pos] = type;
 }
@@ -35,14 +35,14 @@ void bomb::MapConstructor::rmBlock(const irr::core::vector2di &pos)
 		_mapBlocks.erase(it);
 }
 
-std::unique_ptr<bomb::Map> bomb::MapConstructor::construct(
+std::unique_ptr<bomb::BomberMap> bomb::MapConstructor::construct(
 	bomb::IAssetManager &loader,
 	const irr::core::vector3df &pos,
 	const irr::core::vector3df &size,
 	const irr::core::vector3df &rotation)
 {
 	std::vector<std::shared_ptr<bomb::AMapBlock>> _blocks;
-	std::vector<Map::BlockType> cells(_mapSize * _mapSize, Map::EMPTY);
+	std::vector<BomberMap::BlockType> cells(_mapSize * _mapSize, BomberMap::EMPTY);
 
 	for (auto &block : _mapBlocks) {
 		irr::core::vector3df blockPos = {
@@ -57,7 +57,7 @@ std::unique_ptr<bomb::Map> bomb::MapConstructor::construct(
 			loader, blockPos, size, rotation, block.first));
 		cells[block.first.X + block.first.Y * _mapSize] = block.second;
 	}
-	return std::make_unique<bomb::Map>(_blocks, cells);
+	return std::make_unique<bomb::BomberMap>(_blocks, cells);
 }
 
 void bomb::MapConstructor::dumpMap()
