@@ -20,6 +20,8 @@
 namespace bomb {
 	class Map {
 	public:
+		Map(int _size);
+
 		enum BlockType {
 			UNBREAKABLE,
 			BOMB,
@@ -33,6 +35,7 @@ namespace bomb {
 		void setSize(int size);
 		int getSize() const;
 		const std::vector<BlockType> &getCells() const;
+		void addWalls();
 
 		BlockType &operator[](std::size_t idx);
 		BlockType &operator[](irr::core::vector3di pos);

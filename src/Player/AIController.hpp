@@ -18,6 +18,15 @@ namespace bomb {
 			void executeAI(PlayerActionner &actionner,
 				       std::array<game::Player, 4> &players,
 				       BomberMap &map, int index);
+			void executeDefensiveAI(PlayerActionner &actionner,
+				       std::array<game::Player, 4> &players,
+				       BomberMap &map, int index);
+			void executeOffensiveAI(PlayerActionner &actionner,
+				       std::array<game::Player, 4> &players,
+				       BomberMap &map, int index);
+		private:
+			std::unordered_map<bomb::IPlayerController::Actions,
+				irr::core::vector3df> _moves;
 		};
 	}
 }
