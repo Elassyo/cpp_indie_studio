@@ -54,9 +54,6 @@ bool bomb::object::Bomb::activate(bomb::BomberMap &map,
 {
 	_model->playSound("sfx/boom.ogg");
 	player.setNbBombs(static_cast<uint8_t>(player.getNbBombs() + 1));
-	map[player.getExactPos()] = Map::BOMB;
-	std::cout << map << std::endl;
-	std::cout << map.getBombRanges() << std::endl;
 	simulateBlast(map, player, true);
 	loader.deleteObject(std::move(_model));
 	return true;
@@ -108,7 +105,8 @@ void bomb::object::Bomb::simulateBlast(bomb::BomberMap &map,
 				    static_cast<irr::s32>(_model->getPos().Z)};
 	if (pos.X == 0 && pos.Y == 0 && pos.Z == 0)
 		return;
-	map[pos] = BomberMap::EMPTY;
+	if (destroy)
+		map[pos] = BomberMap::EMPTY;
 	if (!isEnd(map, pos) && destroy)
 		deleteBlock(map, pos);
 	blastLine(map, pos, {1, 0}, player.getBombRange(), destroy);

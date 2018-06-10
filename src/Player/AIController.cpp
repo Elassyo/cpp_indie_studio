@@ -53,12 +53,6 @@ void bomb::ai::AIController::executeOffensiveAI(
 	std::array<bomb::game::Player, 4> &players,
 	bomb::BomberMap &map, int index)
 {
-	std::array<IPlayerController::Actions, 4> moves =
-		{IPlayerController::MV_DOWN,
-		IPlayerController::MV_LEFT,
-		IPlayerController::MV_RIGHT,
-		IPlayerController::MV_UP};
-	auto move = moves[rand() % 4];
 	unsigned int closestP = getClosestEnenemy(players, index);
 	auto hisPos = players[closestP].getExactPos();
 	auto myPos = players[index].getExactPos();
@@ -74,7 +68,7 @@ unsigned int bomb::ai::AIController::getClosestEnenemy(
 	unsigned int maxIndex = 0;
 
 	for (unsigned int i = 0; i < players.size(); ++i) {
-		if (i == index)
+		if (i == (unsigned int)index)
 			continue;
 		auto hisPos = players[index].getExactPos();
 		auto diff = myPos.getDistanceFrom(hisPos);
