@@ -89,8 +89,9 @@ void bomb::game::Game::createMap(
 	_mapSize = pattern.getSize();
 	_map = std::move(pattern.construct(loader, {0, 0, 0},
 		{1, 1, 1}, {0, 0, 0}));
-	loader.createLightObject({(float)pattern.getSize() / 2,
-		(float)pattern.getSize(), (float)pattern.getSize() / 2},
+	auto light = loader.createLightObject(
+		{(float)pattern.getSize() / 2,
+		 (float)pattern.getSize(), (float)pattern.getSize() / 2},
 		{1, 1, 1}, pattern.getSize());
 }
 
@@ -186,6 +187,7 @@ void bomb::game::Game::blastObjects(
 	for (auto &b : blast) {
 		killPlayersInBlast(b.first, manager);
 		killPowersInBlast(b.first, manager);
+		fuseBombInBlast(b.first);
 	}
 }
 
@@ -202,6 +204,14 @@ void bomb::game::Game::killPowersInBlast(irr::core::vector2di pos,
 			++p;
 	}
 }
+
+void bomb::game::Game::fuseBombInBlast(irr::core::vector2di pos)
+{
+	for (auto &b : _bombs)
+		if (b->getPos() == pos)
+			b->fuse();
+}
+
 
 void bomb::game::Game::killPlayersInBlast(irr::core::vector2di pos,
 	bomb::IAssetManager &loader)

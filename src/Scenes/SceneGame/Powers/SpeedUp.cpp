@@ -15,6 +15,6 @@ bomb::object::SpeedUp::SpeedUp(bomb::IAssetManager &loader,
 
 void bomb::object::SpeedUp::addPower(bomb::game::Player &player)
 {
-	if (player.getSpeed() < 1.0f)
-		player.setSpeed(player.getSpeed() + 0.05f);
+	if (player.getSpeed() < 0.5f)
+		player.setSpeed(player.getSpeed() + 0.01f);
 }

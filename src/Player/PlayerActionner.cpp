@@ -68,6 +68,7 @@ void bomb::PlayerActionner::actionnate(bomb::Map &map,
 void bomb::PlayerActionner::move(bomb::Map &map,
 	game::Player &player)
 {
+	_speedRatio = player.getSpeed();
 	auto dir = _moves.at(_currentAction) * _speedRatio;
 	auto dest = player.getModel()->getPos() + dir;
 	if (isTargetReached(dest)) {
