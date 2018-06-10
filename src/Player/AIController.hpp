@@ -8,11 +8,16 @@
 #ifndef CPP_INDIE_STUDIO_AICONTROLLER_HPP
 #define CPP_INDIE_STUDIO_AICONTROLLER_HPP
 
+#include "PlayerActionner.hpp"
+
 namespace bomb {
 	namespace ai {
 		class AIController {
 		public:
 			AIController();
+			void executeAI(PlayerActionner &actionner,
+				       std::array<game::Player, 4> &players,
+				       BomberMap &map, int index);
 		};
 	}
 }

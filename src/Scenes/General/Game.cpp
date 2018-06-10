@@ -145,6 +145,9 @@ void bomb::game::Game::executePlayers(bomb::IAssetManager &loader)
 	for (auto i = 0; i < NB_PLAYERS; ++i) {
 		if (!_players[i].isAlive())
 			continue;
+		if (_players[i].isAI())
+			_controller.executeAI(
+				_playersActionners[i], _players, *_map, i);
 		_playersActionners[i].actionnate(*_map, _players[i]);
 		if (_players[i].isBombReady()) {
 			_bombs.emplace_back(new bomb::object::Bomb
