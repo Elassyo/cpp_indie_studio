@@ -107,10 +107,18 @@ void bomb::object::Bomb::simulateBlast(bomb::BomberMap &map,
 	irr::core::vector3di pos = {static_cast<irr::s32>(_model->getPos().X),
 				    static_cast<irr::s32>(_model->getPos().Y),
 				    static_cast<irr::s32>(_model->getPos().Z)};
+	if (pos.X == 0 && pos.Y == 0 && pos.Z == 0)
+		return;
 	map[pos] = BomberMap::EMPTY;
-	deleteBlock(map, pos);
+	if (!isEnd(map, pos) && destroy)
+		deleteBlock(map, pos);
 	blastLine(map, pos, {1, 0}, player.getBombRange(), destroy);
 	blastLine(map, pos, {0, 1}, player.getBombRange(), destroy);
 	blastLine(map, pos, {0, -1}, player.getBombRange(), destroy);
 	blastLine(map, pos, {-1, 0}, player.getBombRange(), destroy);
+}
+
+int bomb::object::Bomb::getPlayerIdx() const
+{
+	return _playerIdx;
 };

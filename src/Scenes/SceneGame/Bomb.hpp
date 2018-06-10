@@ -25,6 +25,7 @@ namespace bomb {
 			void fuse();
 			void
 			addBlastToMap(BomberMap &map, game::Player &player);
+			int getPlayerIdx() const;
 		private:
 			int isActivable(bomb::BomberMap &map,
 				std::vector<std::pair<game::Player,
@@ -39,7 +40,7 @@ namespace bomb {
 			bool isEnd(BomberMap &map,
 				const irr::core::vector3di &pos);
 			void simulateBlast(BomberMap &map, game::Player &player,
-					   bool destroy);
+					bool destroy);
 
 			std::unique_ptr<AnimatedObject> _model;
 			std::vector<std::pair<irr::core::vector2di,

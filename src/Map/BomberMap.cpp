@@ -5,6 +5,7 @@
 // BomberMap.cpp
 //
 
+#include <iostream>
 #include "BomberMap.hpp"
 #include "../Exception/Exception.hpp"
 
@@ -12,8 +13,9 @@ bomb::BomberMap::BomberMap(const std::vector<std::shared_ptr<bomb::AMapBlock>> &
 	std::vector<BomberMap::BlockType> &cells) :
 	_blocks(_blocks)
 {
-	_cells = cells;
 	setSize(static_cast<int>(sqrt(cells.size())));
+	_cells = cells;
+	_bombRanges.setSize(_size);
 }
 
 bool bomb::BomberMap::blockAt(const irr::core::vector2di &coord)
@@ -45,5 +47,5 @@ bomb::BomberMap::addBlast(std::vector<std::pair<irr::core::vector2di,
 				  bomb::BomberMap::BlockType>> blast)
 {
 	for (auto &b : blast)
-		_bombRanges[b.first] = EMPTY;
+		_bombRanges[b.first] = BOMB;
 }

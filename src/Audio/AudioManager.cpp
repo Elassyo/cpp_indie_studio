@@ -54,7 +54,7 @@ void bomb::AudioManager::updateListener(irr::scene::ICameraSceneNode *camera)
 	irr::core::vector3df at = pos - target;
 	const irr::core::vector3df &up = camera->getUpVector();
 	ALfloat orientation[] = { at.X, at.Y, at.Z, up.X, up.Y, up.Z };
-	alListener3f(AL_POSITION, pos.X, pos.Y, pos.Z);
+	alListener3f(AL_POSITION, pos.X / 20, pos.Y / 20, pos.Z / 20);
 	alListenerfv(AL_ORIENTATION, orientation);
 }
 
@@ -62,6 +62,7 @@ void bomb::AudioManager::playMusic(const std::string &path)
 {
 	std::vector<ALuint> buffers = getAudioBuffers(path);
 	ALuint source = getAudioSource();
+	alSourcef(source, AL_GAIN, 0.4);
 	alSourceQueueBuffers(source, buffers.size(), buffers.data());
 	alSourcePlay(source);
 }
@@ -72,7 +73,8 @@ void bomb::AudioManager::playSound(const std::string &path,
 	std::vector<ALuint> buffers = getAudioBuffers(path);
 	ALuint source = getAudioSource();
 	irr::core::vector3d pos = obj.getPos();
-	alSource3f(source, AL_POSITION, pos.X, pos.Y, pos.Z);
+	alSource3f(source, AL_POSITION, pos.X / 20, pos.Y / 20, pos.Z / 20);
+	alSourcef(source, AL_GAIN, 1.0);
 	alSourceQueueBuffers(source, buffers.size(), buffers.data());
 	alSourcePlay(source);
 }

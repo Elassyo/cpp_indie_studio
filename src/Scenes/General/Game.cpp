@@ -157,6 +157,8 @@ void bomb::game::Game::executeBombs(bomb::IAssetManager &loader)
 {
 	auto bomb = _bombs.begin();
 	while (bomb != _bombs.end()) {
+		unsigned int idx = (unsigned int)(*bomb)->getPlayerIdx();
+		(*bomb)->addBlastToMap(*_map, _players.at(idx).first);
 		if ((*bomb)->tryToActivate(*_map, _players, loader)) {
 			auto blast = (*bomb)->getBlast();
 			_map->updateFromCells(loader);

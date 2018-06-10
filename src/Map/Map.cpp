@@ -15,6 +15,7 @@ int bomb::Map::getSize() const
 void bomb::Map::setSize(int size)
 {
 	Map::_size = size;
+	_cells.resize(static_cast<unsigned long>(pow(_size, 2)), EMPTY);
 }
 
 bomb::Map::BlockType &bomb::Map::operator[](std::size_t idx)
@@ -28,7 +29,9 @@ bomb::Map::BlockType &bomb::Map::operator[](irr::core::vector3di pos)
 	if ((unsigned int)idx < _cells.size())
 		return _cells[idx];
 	throw
-		bomb::Exception("Map", "Invalid index");
+		bomb::Exception("Map",
+		std::string("Invalid index : ") + std::to_string(pos.X)
+		+ " , " + std::to_string(pos.Z));
 }
 
 bomb::Map::BlockType &bomb::Map::operator[](irr::core::vector3df pos)
@@ -63,7 +66,7 @@ const std::vector<bomb::Map::BlockType> &bomb::Map::getCells() const
 	return _cells;
 }
 
-std::ostream &operator<<(std::ostream &os, const bomb::Map &map)
+std::ostream &bomb::operator<<(std::ostream &os, const bomb::Map &map)
 {
 	int  i = 0;
 	for (auto cell : map.getCells()) {
