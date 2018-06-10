@@ -8,12 +8,13 @@
 #include "Game.hpp"
 
 bomb::game::Game::Game(bomb::PersistentInfo &infos) :
-	_infos(infos), _charLoader(), _strBlk({{L"Bomb", Map::BlockType::BOMB},
-					{L"Breakable",
-						Map::BlockType::BREAKABLE},
-					{L"Unbreakable",
-						       Map::BlockType::UNBREAKABLE},
-					{L"Empty", Map::BlockType::EMPTY}})
+	_infos(infos), _charLoader(),
+	_strBlk({{L"Bomb", Map::BlockType::BOMB},
+		 {L"Breakable",
+			   Map::BlockType::BREAKABLE},
+		 {L"Unbreakable",
+			   Map::BlockType::UNBREAKABLE},
+		 {L"Empty", Map::BlockType::EMPTY}})
 {
 }
 
@@ -55,7 +56,8 @@ bomb::game::Game::createMap(bomb::IAssetManager &loader,
 		if (_strBlk.find(xmlReader.getNodeName()) != _strBlk.end()) {
 			pos.X = xmlReader.getIntValue(L"x");
 			pos.Y = xmlReader.getIntValue(L"y");
-			mapConstructor.addBlock(pos, _strBlk[xmlReader.getNodeName()]);
+			mapConstructor.addBlock(
+				pos, _strBlk[xmlReader.getNodeName()]);
 			++size;
 		}
 	}

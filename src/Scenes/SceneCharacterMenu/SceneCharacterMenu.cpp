@@ -30,7 +30,6 @@ bomb::scene::SceneStatus bomb::scene::SceneCharacterMenu::start(
 void bomb::scene::SceneCharacterMenu::initModelPaths()
 {
 	auto players = _infos.getPlayerInfos();
-	players[0].setCharacter(bomb::game::SHYGUY_WHITE);
 	if (players[1].getCharacter() == game::SHYGUY_WHITE)
 		players[1].setCharacter(bomb::game::SHYGUY_BLACK);
 	if (players[2].getCharacter() == game::SHYGUY_WHITE)
@@ -93,7 +92,7 @@ void bomb::scene::SceneCharacterMenu::changePlayerType(
 	PlayerInfo player = _infos.getPlayerInfos(idx - 1);
 
 	_menu.setElementText(idx, std::wstring(
-		std::to_wstring(idx ) + L" : "
+		std::to_wstring(idx) + L" : "
 		+ (player.isAI() ? L"Player" : L"AI")).c_str());
 	player.setCharacter(!player.isAI() ? character :
 			    _charLoader.getNextCharacter(game::SELECT_BEGIN));
