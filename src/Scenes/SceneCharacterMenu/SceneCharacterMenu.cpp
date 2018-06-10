@@ -13,6 +13,7 @@ bomb::scene::SceneCharacterMenu::SceneCharacterMenu(
 bomb::scene::SceneStatus bomb::scene::SceneCharacterMenu::start(
 	IAssetManager &loader)
 {
+	_cam = loader.getCamera();
 	_running = true;
 	initModelPaths();
 	_menu.createMenu(loader);
@@ -26,6 +27,7 @@ bomb::scene::SceneStatus bomb::scene::SceneCharacterMenu::start(
 	addCharacterButtons(loader);
 	_menu.updateButtons(loader, true);
 	_charLoader.loadImages(loader);
+	_charLoader.loadSounds(loader);
 	for (int i = 0; i < 4; ++i)
 		updateCharacter(i + 1, _infos.getPlayerInfos().at(i));
 	return BEGIN;
@@ -131,6 +133,8 @@ void bomb::scene::SceneCharacterMenu::updateCharacter(int idx,
 	_menu.setButtonTextures(10 + idx,
 		_charLoader.getCharacterTexture(player.getCharacter()),
 		_charLoader.getCharacterTexture(player.getCharacter()));
+	_cam->playSound(_charLoader.getSfxPath(player.getCharacter()));
+
 }
 
 void bomb::scene::SceneCharacterMenu::addGameButtons()

@@ -118,3 +118,9 @@ int bomb::object::Bomb::getPlayerIdx() const
 {
 	return _playerIdx;
 }
+
+void bomb::object::Bomb::destroy(bomb::IAssetManager &manager)
+{
+	if (_model != nullptr)
+		manager.deleteObject(std::move(_model));
+}
