@@ -92,6 +92,8 @@ set(SRC_FILES
         src/Scenes/General/AActivator.hpp
         src/Scenes/General/CharacterLoader.cpp
         src/Scenes/General/CharacterLoader.hpp
+        src/Scenes/General/CharacterInfo.cpp
+        src/Scenes/General/CharacterInfo.hpp
         src/Scenes/General/Clock.cpp
         src/Scenes/General/Clock.hpp
         src/Scenes/General/Game.cpp

@@ -33,7 +33,7 @@ namespace bomb {
 
 		private:
 			void addPlayerButtons();
-			void addCharacterButtons();
+			void addCharacterButtons(IAssetManager &manager);
 			void addGameButtons();
 			void initModelPaths();
 			void changePlayerType(int idx,

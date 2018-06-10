@@ -22,8 +22,11 @@ bomb::scene::SceneStatus bomb::scene::SceneCharacterMenu::start(
 	_menu.setElementFont(0, menu::TITLE);
 	addGameButtons();
 	addPlayerButtons();
-	addCharacterButtons();
+	addCharacterButtons(loader);
 	_menu.updateButtons(loader, true);
+	_charLoader.loadImages(loader);
+	for (int i = 0; i < 4; ++i)
+		updateCharacter(i + 1, _infos.getPlayerInfos().at(i));
 	return BEGIN;
 }
 
@@ -64,12 +67,15 @@ void bomb::scene::SceneCharacterMenu::addPlayerButtons()
 	});
 }
 
-void bomb::scene::SceneCharacterMenu::addCharacterButtons()
+void bomb::scene::SceneCharacterMenu::addCharacterButtons(IAssetManager &manager)
 {
 	for (int i = 0; i < 4; ++i) {
 		_menu.addButton(_charLoader.getCharacterName(
 			_infos.getPlayerInfos(i).getCharacter()),
 				{.20f * (i + 1), .5}, 10 + i + 1);
+		_menu.setElementSize(10 + i + 1, {.15,.15});
+		_menu.setElementRenderMode(10 + i + 1,
+			bomb::menu::GraphicElement::HEIGHT_BASED);
 		_menu.setButtonPushable(
 			10 + i + 1, !_infos.getPlayerInfos(i).isAI());
 	}
@@ -120,6 +126,9 @@ void bomb::scene::SceneCharacterMenu::updateCharacter(int idx,
 {
 	_menu.setElementText(10 + idx, _charLoader.getCharacterName(
 		player.getCharacter()));
+	_menu.setButtonTextures(10 + idx,
+		_charLoader.getCharacterTexture(player.getCharacter()),
+		_charLoader.getCharacterTexture(player.getCharacter()));
 }
 
 void bomb::scene::SceneCharacterMenu::addGameButtons()

@@ -243,3 +243,20 @@ void bomb::menu::Menu::clean()
 	_buttons.clear();
 	_gui->clear();
 }
+
+void bomb::menu::Menu::setElementRenderMode(int elementId,
+	bomb::menu::GraphicElement::RenderMode rMode)
+{
+	long long idx = getElementById(elementId);
+
+	if (idx == -1) {
+		idx = getButtonById(elementId);
+		if (idx != -1)
+			_buttons.at(
+				static_cast<unsigned long>(idx))->setRenderMode(
+				rMode);
+	}
+	else
+		_elements.at(
+			static_cast<unsigned long>(idx))->setRenderMode(rMode);
+}

@@ -9,6 +9,8 @@
 #define CPP_INDIE_STUDIO_CHARACTERLOADER_HPP
 
 #include <map>
+#include "CharacterInfo.hpp"
+#include "../../Interface/IAssetManager.hpp"
 
 namespace bomb {
 	namespace game {
@@ -30,14 +32,16 @@ namespace bomb {
 		class CharacterLoader {
 		public:
 			CharacterLoader();
+			void loadImages(IAssetManager &manager);
 			std::string getCharacterPath(Character character);
+			std::string getCharacterImagePath(Character character);
 			const wchar_t *getCharacterName(Character character);
 			Character getNextCharacter(Character character);
 			Character getPrevCharacter(Character character);
-
+			irr::video::ITexture
+			*getCharacterTexture(Character character);
 		private:
-			std::map<Character, std::pair<const wchar_t *,
-				std::string>>_characters;
+			std::map<Character, CharacterInfo> _characters;
 		};
 	}
 }
