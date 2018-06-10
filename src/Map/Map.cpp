@@ -66,7 +66,12 @@ const std::vector<bomb::Map::BlockType> &bomb::Map::getCells() const
 	return _cells;
 }
 
-std::ostream &bomb::operator<<(std::ostream &os, const bomb::Map &map)
+void bomb::Map::clean()
+{
+	fill(_cells.begin(), _cells.end(), Map::EMPTY);
+}
+
+std::ostream &operator<<(std::ostream &os, const bomb::Map &map)
 {
 	int  i = 0;
 	for (auto cell : map.getCells()) {
@@ -76,9 +81,4 @@ std::ostream &bomb::operator<<(std::ostream &os, const bomb::Map &map)
 			os << "\n";
 	}
 	return os;
-}
-
-void bomb::Map::clean()
-{
-	fill(_cells.begin(), _cells.end(), Map::EMPTY);
 }
