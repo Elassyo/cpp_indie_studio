@@ -40,15 +40,10 @@ namespace bomb {
 		public:
 			explicit Game(PersistentInfo &_infos);
 
+			void createGame(IAssetManager &loader);
 			void createGame(
 				IAssetManager &loader,
-				irr::video::ITexture *pTexture
-			);
-			void createGame(
-				IAssetManager &loader,
-				irr::video::ITexture *pTexture,
-				const std::string &fileName
-			);
+				const std::string &fileName);
 
 			void execute(IAssetManager &loader);
 			bool handleEvent(const irr::SEvent &event);
@@ -60,14 +55,12 @@ namespace bomb {
 			void clean(IAssetManager &loader);
 		private:
 			void createMap(
-				IAssetManager &loader,
-				unsigned int size
-			);
+				IAssetManager &loader, unsigned int size);
 			void createMap(
-				IAssetManager &loader,
-				xml::XmlReader &
-			);
-
+				IAssetManager &loader, xml::XmlReader &);
+			void setPlayerAttributes(bomb::IAssetManager &loader,
+						 xml::XmlReader &xmlReader,
+						 int i);
 			void createPlayer(IAssetLoader &loader,
 					  const std::string &path,
 					  const irr::core::vector3di &spawn,

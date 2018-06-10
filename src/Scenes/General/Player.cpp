@@ -26,7 +26,8 @@ bomb::game::Player::Player(IAssetLoader &loader,
 	_bombReady(false),
 	_genericInfos(info)
 {
-	_model = loader.createAnimatedObject(path, pos, scale, rotation);
+	_model = std::move(
+		loader.createAnimatedObject(path, pos, scale, rotation));
 }
 
 bomb::IPlayerController::Actions
@@ -90,11 +91,11 @@ void bomb::game::Player::setGhostBombMode(bool _ghostBombMode)
 	Player::_ghostBombMode = _ghostBombMode;
 }
 
-void bomb::game::Player::setAlive(bool _alive, IAssetManager &loader)
+void bomb::game::Player::setAlive(bool alive, IAssetManager &loader)
 {
-	if (_model != nullptr)
+	if (!alive && _model)
 		loader.deleteObject(std::move(_model));
-	Player::_alive = _alive;
+	Player::_alive = alive;
 }
 
 bool bomb::game::Player::isAI() const

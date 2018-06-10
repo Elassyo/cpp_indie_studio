@@ -27,7 +27,7 @@ elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     set(LIBEXTRA_NAME Shell32)
 
     set(SRC_RESOURCES
-            win/bombermario.rc src/Player/AIController.cpp src/Player/AIController.hpp)
+            win/bombermario.rc)
 endif()
 
 set(SRC_FILES

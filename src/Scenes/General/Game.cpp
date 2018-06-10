@@ -19,7 +19,6 @@ bomb::game::Game::Game(bomb::PersistentInfo &infos) :
 }
 
 void bomb::game::Game::createGame(bomb::IAssetManager &loader,
-				  irr::video::ITexture *pTexture,
 				  const std::string &fileName)
 {
 	xml::XmlReader xmlReader(fileName);
@@ -29,48 +28,58 @@ void bomb::game::Game::createGame(bomb::IAssetManager &loader,
 		if (xmlReader.getActualSection() == L"BomberMap")
 			createMap(loader, xmlReader);
 		if (xmlReader.getNodeName() == L"PlayerInfo") {
+			PlayerInfo player = _infos.getPlayerInfos(i);
+			player.setCharacter((Character)xmlReader.getIntValue
+				(L"character"));
+			_infos.setPlayerInfos(i, player);
 			createPlayer(loader, _charLoader.getCharacterPath(
 				_infos.getPlayerInfos(i).getCharacter()),
 					{xmlReader.getIntValue(L"x"), 0,
-					xmlReader.getIntValue(L"y")}, i);
-			_players[i].setAlive((bool) xmlReader
-				.getIntValue(L"isAlive"), loader);
-			_players[i].setAI((bool) xmlReader
-				.getIntValue(L"isAI"));
+					xmlReader.getIntValue(L"z")}, i);
+			setPlayerAttributes(loader, xmlReader, i);
 			i++;
 		}
 	}
 }
 
-void
-bomb::game::Game::createMap(bomb::IAssetManager &loader,
-			    bomb::xml::XmlReader &xmlReader)
+void bomb::game::Game::setPlayerAttributes(bomb::IAssetManager &loader,
+					   xml::XmlReader &xmlReader, int i)
 {
-	MapConstructor mapConstructor(0);
+	_players[i].setAlive((bool) xmlReader.getIntValue(L"isAlive"), loader);
+	_players[i].setAI((bool) xmlReader.getIntValue(L"isAI"));
+	_players[i].setGhostMode((bool) xmlReader.getIntValue(L"isGhost"));
+	_players[i].setGhostMode((bool) xmlReader.getIntValue(L"isBombGhost"));
+	_players[i].setSpeed(xmlReader.getFloatValue(L"speed"));
+	_players[i].setBombRange((uint8_t)xmlReader.getIntValue(L"range"));
+	_players[i].setNbBombs((uint8_t)xmlReader.getIntValue(L"nbBombs"));
+}
+
+void bomb::game::Game::createMap(bomb::IAssetManager &loader,
+				 bomb::xml::XmlReader &xmlReader)
+{
+	MapConstructor mapConstructor((unsigned)xmlReader.getIntValue(L"size"));
 	irr::core::vector2di pos;
-	int size = 0;
 
 	while (xmlReader.read()) {
 		if (xmlReader.getActualSection() != L"BomberMap")
-			return;
-		if (_strBlk.find(xmlReader.getNodeName()) != _strBlk.end()) {
+			break;
+		if (_strBlk.find(xmlReader.getNodeName()) != _strBlk.end()
+		    && xmlReader.getNodeName() != L"Empty") {
 			pos.X = xmlReader.getIntValue(L"x");
 			pos.Y = xmlReader.getIntValue(L"y");
 			mapConstructor.addBlock(
 				pos, _strBlk[xmlReader.getNodeName()]);
-			++size;
 		}
 	}
-	_mapSize = size;
-	_map = mapConstructor.construct(loader, {0, 0, 0}, {1, 1, 1},
-					{0, 0, 0});
+	_mapSize = mapConstructor.getSize();
+	_infos.setMapSize(mapConstructor.getSize());
+	_map = mapConstructor.construct(loader, {0, 0, 0}, {1, 1, 1}, {0, 0, 0});
 	loader.createLightObject({(float)_mapSize / 2,
 				  (float)_mapSize, (float)_mapSize / 2},
 				 {1.0f, 1.0f, 1.0f}, (float)_mapSize);
 }
 
-void bomb::game::Game::createGame(IAssetManager &loader,
-				  irr::video::ITexture *texture)
+void bomb::game::Game::createGame(IAssetManager &loader)
 {
 	createMap(loader, _infos.getMapSize());
 	for (unsigned int i = 0; i < 4; ++i) {
@@ -79,8 +88,6 @@ void bomb::game::Game::createGame(IAssetManager &loader,
 			     {i % 2 ? 1 : _infos.getMapSize() - 2, 0,
 			      i > 1 ? _infos.getMapSize() - 2 : 1}, i);
 	}
-	reset();
-	(void) texture;
 }
 
 void bomb::game::Game::createMap(

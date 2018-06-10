@@ -35,6 +35,7 @@ namespace bomb {
 			void loadSounds(IAssetManager &loader);
 			void explodeBombs(bomb::IAssetManager &loader);
 			void checkVictory();
+			void createGame(IAssetManager &loader);
 
 			bomb::menu::Menu _menu;
 			game::CharacterLoader _charLoader;

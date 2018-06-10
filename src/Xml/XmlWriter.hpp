@@ -27,7 +27,8 @@ namespace bomb {
 			bool iObjectToSection(std::unique_ptr<IObject> &);
 			bool mapBlockToSection(BomberMap::BlockType, int, int);
 			bool mapToSection(std::shared_ptr<BomberMap> &);
-			bool playerToSection(const game::Player &);
+			bool playerToSection(const game::Player &,
+					     const PlayerInfo &playerInfo);
 
 		private:
 			std::ofstream _fstream;

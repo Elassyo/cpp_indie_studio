@@ -13,7 +13,8 @@ bomb::xml::XmlReader::XmlReader(const std::string &filePath) :
 	_nullDevice = irr::createDevice(irr::video::EDT_NULL);
 	if (!_nullDevice)
 		throw Exception("XmlReader", "can't create nullDevice");
-	_xmlReader = _nullDevice->getFileSystem()->createXMLReader(filePath.c_str());
+	_xmlReader = _nullDevice->getFileSystem()->createXMLReader(
+		filePath.c_str());
 	if (!_xmlReader)
 		throw Exception("XmlReader", "Can't create irr::XmlReader");
 }
@@ -48,7 +49,13 @@ int bomb::xml::XmlReader::getIntValue(const std::wstring &properties) const
 	return _xmlReader->getAttributeValueAsInt(properties.c_str());
 }
 
-std::wstring bomb::xml::XmlReader::getStringValue(const std::wstring &prop) const
+float bomb::xml::XmlReader::getFloatValue(const std::wstring &prop) const
+{
+	return _xmlReader->getAttributeValueAsFloat(prop.c_str());
+}
+
+std::wstring bomb::xml::XmlReader::getStringValue(
+	const std::wstring &prop) const
 {
 	return _xmlReader->getAttributeValueSafe(prop.c_str());
 }

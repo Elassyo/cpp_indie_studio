@@ -10,7 +10,7 @@
 
 bomb::xml::XmlWriter::XmlWriter(const std::string &fileName) :
 	_fstream(fileName),
-	_blockTypeStr({	      {BomberMap::BlockType::BOMB, "Bomb"},
+	_blockTypeStr({	      {BomberMap::BlockType::BOMB, "Empty"},
 			      {BomberMap::BlockType::BREAKABLE, "Breakable"},
 			      {BomberMap::BlockType::UNBREAKABLE, "Unbreakable"},
 			      {BomberMap::BlockType::EMPTY, "Empty"}})
@@ -41,7 +41,8 @@ bool bomb::xml::XmlWriter::mapBlockToSection(BomberMap::BlockType blockType,
 
 bool bomb::xml::XmlWriter::mapToSection(std::shared_ptr<bomb::BomberMap> &map)
 {
-	_fstream << "\t<BomberMap>" << std::endl;
+	_fstream << "\t<BomberMap size=\"" << map->getSize() << "\">" <<
+		 std::endl;
 	int size = map->getSize();
 	for (int i = 0; i < size * size; i++) {
 		_fstream << "\t\t";
@@ -51,14 +52,19 @@ bool bomb::xml::XmlWriter::mapToSection(std::shared_ptr<bomb::BomberMap> &map)
 	return true;
 }
 
-bool bomb::xml::XmlWriter::playerToSection(const game::Player &player)
+bool bomb::xml::XmlWriter::playerToSection(const game::Player &player,
+					   const PlayerInfo &playerInfo)
 {
 	auto pos = player.getExactPos();
 
-	_fstream << "<PlayerInfo isAI=\"" << player.isAI() << "\" isAlive=\"" <<
-		player.isAlive() << "\" x=\"" << pos.X << "\" y=\"" << pos.Y <<
+	_fstream << "<PlayerInfo character=\"" << playerInfo.getCharacter() <<
+		 "\" isAI=\"" << player.isAI() << "\" isAlive=\"" <<
+		player.isAlive() << "\" x=\"" << pos.X << "\" z=\"" << pos.Z <<
 		"\" isGhost=\"" << player.isGhostMode() <<
-		"\" isBombGhost=\"" << player.isGhostBombMode() << "\"/>" <<
-		std::endl;
+		"\" isBombGhost=\"" << player.isGhostBombMode() <<
+		"\" speed=\"" << std::to_string(player.getSpeed()) <<
+		"\" range=\"" << std::to_string(player.getBombRange()) <<
+		"\" nbBombs=\"" << std::to_string(player.getNbBombs()) <<
+		 "\"/>" << std::endl;
 	return true;
 }
