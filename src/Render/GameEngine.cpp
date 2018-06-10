@@ -139,8 +139,8 @@ const irr::core::dimension2d<irr::u32> &bomb::GameEngine::getScreenSize()
 std::unique_ptr<bomb::PlaneObject>
 bomb::GameEngine::createPlaneObject(const std::string &name,
 				    irr::core::vector3df pos,
-				    irr::core::vector3df rot,
-				    irr::core::vector3df scale)
+				    irr::core::vector3df scale,
+				    irr::core::vector3df rot)
 {
 	irr::scene::IAnimatedMesh *imesh = _sceneManager->addHillPlaneMesh
 		(irr::io::path(name.c_str()), irr::core::dimension2df(10, 10),
@@ -170,8 +170,8 @@ void bomb::GameEngine::pauseAll()
 
 std::unique_ptr<bomb::BillboardObject>
 bomb::GameEngine::createBillboardObject(irr::core::vector3df pos,
-					irr::core::vector3df rot,
-					irr::core::vector3df scale)
+					irr::core::vector3df scale,
+					irr::core::vector3df rot)
 {
 	auto ptr = std::make_unique<bomb::BillboardObject>(
 		_sceneManager->addBillboardSceneNode(),
