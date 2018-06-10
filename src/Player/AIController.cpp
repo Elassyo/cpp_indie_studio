@@ -46,7 +46,7 @@ void bomb::ai::AIController::executerRandomAI(
 	auto move = moves[rand() % 4];
 	if (rand() % 10000 < 5)
 		actionner.sendAction(map, players[index],
-				     IPlayerController::PUT_BOMB);
+				IPlayerController::PUT_BOMB);
 	else
 		actionner.sendAction(map, players[index], move);
 }
@@ -58,7 +58,6 @@ void bomb::ai::AIController::executeDefensiveAI(
 	bomb::BomberMap &map, int index)
 
 {
-	std::cout << map.getBombRanges() << std::endl;
 	Map safeMap(map.getSize());
 	safeMap.addWalls();
 	auto myPos = players[index].getExactPos();
