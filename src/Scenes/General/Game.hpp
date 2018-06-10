@@ -48,13 +48,14 @@ namespace bomb {
 				irr::video::ITexture *pTexture,
 				const std::string &fileName
 			);
-			int getMapSize() const;
+
 			void execute(IAssetManager &loader);
 			bool handleEvent(const irr::SEvent &event);
-			std::shared_ptr<BomberMap> &getMap();
 
-			std::vector<std::pair<Player, PlayerActionner>>
-				&getPlayers();
+
+			std::shared_ptr<BomberMap> &getMap();
+			int getMapSize() const;
+			std::array<Player, 4> & getPlayers();
 		private:
 			void createMap(
 				IAssetManager &loader,
@@ -65,11 +66,10 @@ namespace bomb {
 				xml::XmlReader &
 			);
 
-			void createPlayer(
-				IAssetLoader &loader,
-				const std::string &path,
-				std::unique_ptr<IPlayerController> controller,
-				const irr::core::vector3di &spawn);
+			void createPlayer(IAssetLoader &loader,
+					  const std::string &path,
+					  const irr::core::vector3di &spawn,
+					  unsigned int index);
 			void killPlayersInBlast(
 				irr::core::vector2di blast,
 				IAssetManager &loader);
@@ -91,14 +91,18 @@ namespace bomb {
 
 			PersistentInfo &_infos;
 			bomb::game::CharacterLoader _charLoader;
-			std::vector<std::pair<Player, PlayerActionner>>
-				_players;
+			std::array<Player, 4> _players;
+			std::array<PlayerActionner, 4> _playersActionners;
+//			std::map<Player *, PlayerActionner> _players;
 			std::shared_ptr<bomb::BomberMap> _map;
 			std::vector<bomb::object::Bomb *> _bombs;
 			std::vector<std::unique_ptr<bomb::object::Power>>
 				_powers;
+			bomb::ai::AIController _controller;
+
 			std::unordered_map
 				<std::wstring, BomberMap::BlockType> _strBlk;
+
 			int _mapSize;
 			bomb::object::PowerFactory _factory;
 		};

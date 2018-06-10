@@ -53,9 +53,9 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::loop(
 
 void bomb::scene::SceneGame::explodeBombs(bomb::IAssetManager &loader)
 {
-	for (auto &bomb : _bombs)
+/*	for (auto &bomb : _bombs)
 		bomb.get()->tryToActivate(*_game.getMap(),
-		_game.getPlayers(), loader);
+		_game.getPlayers(), loader);*/
 	(void) loader;
 }
 
@@ -64,14 +64,14 @@ void bomb::scene::SceneGame::checkVictory()
 	int alive = 0;
 	auto &players = _game.getPlayers();
 	for (auto &player : players)
-		alive += player.first.isAlive();
+		alive += player.isAlive();
 	if (alive > 1)
 		return;
 	_playing = false;
 	for (unsigned int i = 0; i < players.size(); ++i)
-		if (players[i].first.isAlive()) {
+		if (players[i].isAlive()) {
 			_menu.setElementText(
-				1, players[i].first.isAI() ? L"GAME OVER" :
+				1, players[i].isAI() ? L"GAME OVER" :
 				   std::wstring(
 					   L"PLAYER " + std::to_wstring(i + 1))
 					   .append(L"\nVICTORY").c_str());
@@ -89,7 +89,7 @@ void bomb::scene::SceneGame::save()
 
 	xmlWriter.mapToSection(_game.getMap());
 	for (size_t i = 0; i < _game.getPlayers().size(); i++) {
-		xmlWriter.playerToSection(_game.getPlayers()[i].first);
+		xmlWriter.playerToSection(_game.getPlayers()[i]);
 	}
 }
 
@@ -108,9 +108,8 @@ void bomb::scene::SceneGame::clean(IAssetManager &loader)
 	_game.getMap()->clean(loader);
 	auto &p = _game.getPlayers();
 	for (unsigned int i = 0; i < _game.getPlayers().size(); ++i) {
-		p[i].first.setAlive(false, loader);
+		p[i].setAlive(false, loader);
 	}
-	p.clear();
 	_running = true;
 }
 

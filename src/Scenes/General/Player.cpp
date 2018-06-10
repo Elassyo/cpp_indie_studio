@@ -9,7 +9,6 @@
 
 bomb::game::Player::Player(IAssetLoader &loader,
 			   const std::string &path,
-			   std::unique_ptr<bomb::IPlayerController> &controller,
 			   const irr::core::vector3df &pos,
 			   const irr::core::vector3df &scale,
 			   const irr::core::vector3df &rotation,
@@ -23,7 +22,6 @@ bomb::game::Player::Player(IAssetLoader &loader,
 	_alive(true),
 	_AI(false),
 	_bombReady(false),
-	_controller(std::move(controller)),
 	_genericInfos(info)
 {
 	info.getActionFromKey(irr::KEY_UP);
@@ -31,7 +29,7 @@ bomb::game::Player::Player(IAssetLoader &loader,
 }
 
 bomb::IPlayerController::Actions
-bomb::game::Player::getActionFromEvent(const irr::SEvent &event)
+bomb::game::Player::getActionFromEvent(const irr::SEvent &event) const
 {
 	return _genericInfos.getActionFromKey(event.KeyInput.Key);
 }
@@ -134,3 +132,6 @@ irr::core::vector3df bomb::game::Player::getExactPos() const
 		static_cast<irr::f32>(pos.Y),
 		static_cast<irr::f32>(pos.Z)};
 }
+
+bomb::game::Player::Player()
+{}

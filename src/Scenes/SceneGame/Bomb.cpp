@@ -8,15 +8,12 @@
 #include "Bomb.hpp"
 
 bomb::object::Bomb::Bomb(bomb::IAssetManager &loader,
-			 bomb::game::Player &player,
-			int playerIdx) :
+			 bomb::game::Player &player, int playerIdx) :
 	_model(loader.createAnimatedObject("models/bob-bomb.x",
 		player.getExactPos(), {.5, .5, .5})),
 	_timer(2000), _playerIdx(playerIdx)
 {
 }
-
-
 
 bool bomb::object::Bomb::deleteBlock(bomb::BomberMap &map,
 				irr::core::vector3di pos)

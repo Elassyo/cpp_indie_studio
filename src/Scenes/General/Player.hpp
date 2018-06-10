@@ -19,16 +19,17 @@ namespace bomb {
 	namespace game {
 		class Player {
 		public:
+			Player();
+
 			Player(IAssetLoader &loader,
 			       const std::string &path,
-			       std::unique_ptr<bomb::IPlayerController> &ctrl,
 			       const irr::core::vector3df &pos,
 			       const irr::core::vector3df &scale,
 			       const irr::core::vector3df &rotation,
 			       bomb::PlayerInfo &info);
 
 			IPlayerController::Actions
-			getActionFromEvent(const irr::SEvent &event);
+			getActionFromEvent(const irr::SEvent &event)const;
 
 			uint8_t getNbBombs() const;
 			float getSpeed() const;
@@ -62,7 +63,6 @@ namespace bomb {
 			bool _bombReady;
 
 			std::unique_ptr<AnimatedObject> _model;
-			std::unique_ptr<IPlayerController> _controller;
 			bomb::PlayerInfo _genericInfos;
 		};
 	}

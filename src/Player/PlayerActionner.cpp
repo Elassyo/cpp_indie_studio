@@ -9,6 +9,9 @@
 #include "PlayerActionner.hpp"
 #include "../Scenes/General/Player.hpp"
 
+bomb::PlayerActionner::PlayerActionner() : PlayerActionner(true)
+{}
+
 bomb::PlayerActionner::PlayerActionner(bool permanent) :
 	_moves{{IPlayerController::UNDEFINED, {0, 0, 0}},
 		{IPlayerController::MV_UP, {0, 0, -1}},
@@ -147,4 +150,9 @@ bomb::PlayerActionner::removeAction(bomb::IPlayerController::Actions actions)
 		if (_repeatActionMode && _currentAction == _nextAction)
 			_nextAction = IPlayerController::UNDEFINED;
 	}
+}
+
+bomb::IPlayerController::Actions bomb::PlayerActionner::getAction()
+{
+	return _currentAction;
 }
