@@ -5,7 +5,9 @@
 // Player.cpp
 //
 
+#include <iostream>
 #include "Player.hpp"
+#include "../SceneKeyMenu/IrrKeyToStr.hpp"
 
 bomb::game::Player::Player(IAssetLoader &loader,
 			   const std::string &path,
@@ -24,7 +26,6 @@ bomb::game::Player::Player(IAssetLoader &loader,
 	_bombReady(false),
 	_genericInfos(info)
 {
-	info.getActionFromKey(irr::KEY_UP);
 	_model = loader.createAnimatedObject(path, pos, scale, rotation);
 }
 
@@ -133,5 +134,22 @@ irr::core::vector3df bomb::game::Player::getExactPos() const
 		static_cast<irr::f32>(pos.Z)};
 }
 
-bomb::game::Player::Player()
-{}
+void bomb::game::Player::setKeys(std::map<irr::EKEY_CODE,
+	bomb::IPlayerController::Actions> keys)
+{
+	_genericInfos.setKeys(keys);
+}
+
+bomb::game::Player::Player() :
+	_maxNbBombs(1),
+	_nbBombs(1),
+	_speed(0.05f),
+	_bombRange(1),
+	_ghostMode(false),
+	_ghostBombMode(false),
+	_alive(true),
+	_AI(false),
+	_bombReady(false),
+	_genericInfos()
+{
+}

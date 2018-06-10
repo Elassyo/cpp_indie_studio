@@ -24,7 +24,7 @@ bomb::game::CharacterLoader::CharacterLoader() :
 				"models/characters/shyGuy/shyGuyRed.obj",
 				"images/characters/MK8_ShyGuy_Icon.png",
 				"sfx/shy-guy-hit.ogg")},
-		     {DRYBONES, CharacterInfo(L"Dry Bones",
+		     {DRYBONES, CharacterInfo(L" Dry\nBones",
 				"models/characters/dryBones/dryBones.obj",
 				"images/characters/MK8_Dry_Bones_Icon.png",
 				"sfx/dry-bones-hit.ogg")},

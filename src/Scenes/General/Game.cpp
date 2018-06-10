@@ -108,6 +108,7 @@ void bomb::game::Game::createPlayer(IAssetLoader &loader,
 	_players[index] = bomb::game::Player(
 		loader, path, {(float)spawn.X, (float)spawn.Y, (float)spawn.Z},
 		{.5, .5, .5}, {0, 0, 0}, pInfos);
+	_players[index].setKeys(_infos.getPlayerInfos(index).getKeys());
 	_playersActionners[index] = bomb::PlayerActionner(!pInfos.isAI());
 }
 
