@@ -54,5 +54,26 @@ void bomb::ai::AIController::executeOffensiveAI(
 		IPlayerController::MV_RIGHT,
 		IPlayerController::MV_UP};
 	auto move = moves[rand() % 4];
-	actionner.sendAction(map, players[index], move);
+	unsigned int closestP = getClosestEnenemy(players, index);
+	auto hisPos = players[closestP].getExactPos();
+	auto myPos = players[index].getExactPos();
+	auto dir = vecToDir(hisPos - myPos);
+	actionner.sendAction(map, players[index], dir);
+}
+
+unsigned int bomb::ai::AIController::getClosestEnenemy(
+	std::array<bomb::game::Player, 4> &array, int index)
+{
+	return 0;
+}
+
+bomb::IPlayerController::Actions
+bomb::ai::AIController::vecToDir(irr::core::vector3d<irr::f32> dir)
+{
+	dir.normalize();
+	if (std::abs(dir.X) > std::abs(dir.Z))
+		return dir.X > 0 ? IPlayerController::MV_LEFT :
+		       IPlayerController::MV_RIGHT;
+	return dir.Z > 0 ? IPlayerController::MV_DOWN :
+		IPlayerController::MV_UP;
 }

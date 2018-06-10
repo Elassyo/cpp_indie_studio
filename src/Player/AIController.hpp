@@ -27,6 +27,10 @@ namespace bomb {
 		private:
 			std::unordered_map<bomb::IPlayerController::Actions,
 				irr::core::vector3df> _moves;
+
+			unsigned int getClosestEnenemy(std::array<game::Player, 4> &array, int index);
+
+			IPlayerController::Actions vecToDir(irr::core::vector3d<irr::f32> vector3d);
 		};
 	}
 }
