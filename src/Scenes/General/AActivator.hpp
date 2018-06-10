@@ -18,12 +18,12 @@ namespace bomb {
 		public:
 			AActivator();
 			bool tryToActivate(bomb::BomberMap &map,
-				std::vector<std::pair<Player, PlayerActionner>>
-				&players, IAssetManager &loader);
+					   std::array<Player, 4> &players,
+					   IAssetManager &loader);
 
 		private:
-			virtual int isActivable(bomb::BomberMap &map, std::vector
-				<std::pair<Player, PlayerActionner>> &) = 0;
+			virtual int isActivable(bomb::BomberMap &map,
+						std::array<Player, 4> &) = 0;
 			virtual bool activate(bomb::BomberMap &map,
 					      bomb::game::Player &player,
 					      IAssetManager &loader) = 0;

@@ -30,14 +30,13 @@ void bomb::object::Power::addPower(bomb::game::Player &player)
 }
 
 int bomb::object::Power::isActivable(bomb::BomberMap &map,
-	std::vector<std::pair<bomb::game::Player,
-	bomb::PlayerActionner>> &vector)
+				     std::array<bomb::game::Player, 4> &vector)
 {
 	auto pos = _model->getPos();
 	for (unsigned int i = 0; i < vector.size(); ++i) {
-		if (!vector[i].first.isAlive())
+		if (!vector[i].isAlive())
 			continue;
-		auto playerPos = vector[i].first.getExactPos();
+		auto playerPos = vector[i].getExactPos();
 		if ((int)playerPos.X == (int)pos.X
 		    && (int)playerPos.Z == (int)pos.Z)
 			return i;

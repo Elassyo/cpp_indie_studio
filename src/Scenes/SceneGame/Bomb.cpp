@@ -8,15 +8,12 @@
 #include "Bomb.hpp"
 
 bomb::object::Bomb::Bomb(bomb::IAssetManager &loader,
-			 bomb::game::Player &player,
-			int playerIdx) :
+			 bomb::game::Player &player, int playerIdx) :
 	_model(loader.createAnimatedObject("models/bob-bomb.x",
 		player.getExactPos(), {.5, .5, .5})),
 	_timer(2000), _playerIdx(playerIdx)
 {
 }
-
-
 
 bool bomb::object::Bomb::deleteBlock(bomb::BomberMap &map,
 				irr::core::vector3di pos)
@@ -63,15 +60,14 @@ bool bomb::object::Bomb::activate(bomb::BomberMap &map,
 }
 
 int bomb::object::Bomb::isActivable(bomb::BomberMap &map,
-	std::vector<std::pair<bomb::game::Player,
-		bomb::PlayerActionner>> &player)
+				std::array<bomb::game::Player, 4> &player)
 {
 	if (_timer.isReady())
 		return _playerIdx;
 	return -1;
 	(void) map;
 	(void) player;
-}
+};
 
 const std::vector<std::pair<irr::core::vector2di, bomb::BomberMap::BlockType>>
 &bomb::object::Bomb::getBlast() const
@@ -121,4 +117,4 @@ void bomb::object::Bomb::simulateBlast(bomb::BomberMap &map,
 int bomb::object::Bomb::getPlayerIdx() const
 {
 	return _playerIdx;
-};
+}

@@ -17,6 +17,8 @@
 namespace bomb {
 	class PlayerActionner {
 	public:
+		PlayerActionner();
+
 		PlayerActionner(bool enableRepeat);
 
 		void actionnate(BomberMap &map, bomb::game::Player &player);
@@ -26,6 +28,7 @@ namespace bomb {
 		void setSpeedRatio(float speedRatio);
 
 		void removeAction(IPlayerController::Actions actions);
+		IPlayerController::Actions getAction();
 
 	private:
 		std::unordered_map<bomb::IPlayerController::Actions,

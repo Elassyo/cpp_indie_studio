@@ -11,7 +11,7 @@ bomb::game::AActivator::AActivator() : _activated(false) {}
 
 bool bomb::game::AActivator::tryToActivate(
 	bomb::BomberMap &map,
-	std::vector<std::pair<Player, PlayerActionner>> &players,
+	std::array<Player, 4> &players,
 	IAssetManager &loader)
 {
 	if (!_activated) {
@@ -19,7 +19,7 @@ bool bomb::game::AActivator::tryToActivate(
 		if (idx < 0)
 			return _activated;
     		_activated = activate(map, players.at(
-			static_cast<unsigned long>(idx)).first, loader);
+			static_cast<unsigned long>(idx)), loader);
 	}
 	return _activated;
 }

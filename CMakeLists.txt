@@ -27,7 +27,7 @@ elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     set(LIBEXTRA_NAME Shell32)
 
     set(SRC_RESOURCES
-            win/bombermario.rc)
+            win/bombermario.rc src/Player/AIController.cpp src/Player/AIController.hpp)
 endif()
 
 set(SRC_FILES
@@ -78,8 +78,6 @@ set(SRC_FILES
         src/Menu/Menu.cpp
         src/Menu/Menu.hpp
 
-        src/Player/APlayerController.cpp
-        src/Player/APlayerController.hpp
         src/Player/AIController.cpp
         src/Player/AIController.hpp
         src/Player/PlayerActionner.cpp
@@ -177,12 +175,6 @@ set(SRC_FILES
         ${SRC_FILES}
         ${SRC_RESOURCES}
         src/BomberMario.cpp)
-
-        add_executable(tests_map_gen
-        ${SRC_FILES}
-        tests/MapGen.cpp)
-
-        target_link_libraries(tests_map_gen Irrlicht ${LIBOPENAL_NAME} ${LIBVORBISFILE_NAME} ${LIBEXTRA_NAME})
 
         target_link_libraries(bombermario Irrlicht ${LIBOPENAL_NAME} ${LIBVORBISFILE_NAME} ${LIBEXTRA_NAME})
 

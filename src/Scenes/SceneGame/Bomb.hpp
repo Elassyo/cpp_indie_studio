@@ -28,8 +28,8 @@ namespace bomb {
 			int getPlayerIdx() const;
 		private:
 			int isActivable(bomb::BomberMap &map,
-				std::vector<std::pair<game::Player,
-				PlayerActionner>> &vector) override;
+					std::array<bomb::game::Player, 4>
+					        &vector) override;
 			bool activate(bomb::BomberMap &map,
 				      bomb::game::Player &player,
 				      IAssetManager &loader) override;
