@@ -88,7 +88,7 @@ namespace bomb {
 		irr::video::IVideoDriver *_videoDriver;
 		irr::scene::ISceneManager *_sceneManager;
 		irr::scene::ICameraSceneNode *_camera;
-		std::string _assetsPath;
+		Version _version;
 		AudioManager _audioMgr;
 	};
 }

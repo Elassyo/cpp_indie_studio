@@ -21,11 +21,14 @@ namespace bomb {
 		static Version GetCurrentVersion();
 
 		const std::string &getAssetsPath() const;
+		const std::string &getSavePath() const;
 
 	private:
-		explicit Version(const std::string &assetsPath);
+		explicit Version(const std::string &assetsPath,
+			const std::string &savePath);
 
 		std::string _assetsPath;
+		std::string _savePath;
 	};
 }
 
