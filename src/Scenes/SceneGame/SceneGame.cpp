@@ -18,10 +18,10 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetManager &loader)
 	_charLoader.loadImages(loader);
 	_charLoader.loadSounds(loader);
 	_menu.createMenu(loader);
-	_menu.addText(L"", {.5, .45}, 1);
+	_menu.addText(L"", {.5f, .45f}, 1);
 	_menu.setElementFont(1, menu::TITLE);
-	_menu.addImage(loader.loadTexture("images/empty.png"), {.5, .55}, 2);
-	_menu.setElementSize(2, {.1, .1});
+	_menu.addImage(loader.loadTexture("images/empty.png"), {.5f, .55f}, 2);
+	_menu.setElementSize(2, {.1f, .1f});
 	_menu.setElementRenderMode(2, menu::GraphicElement::HEIGHT_BASED);
 	_playing = true;
 	_blocksTextures = loader.loadTexture("models/blocks/spritesheet.png");

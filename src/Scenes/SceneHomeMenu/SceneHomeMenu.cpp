@@ -15,19 +15,19 @@ bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(
 {
 	_running = true;
 	_menu.createMenu(loader);
-	_menu.addImage(loader.loadTexture("images/menuBack.png"), {.5, .5}, 5);
+	_menu.addImage(loader.loadTexture("images/menuBack.png"), {.5f, .5f}, 5);
 	_menu.setElementSize(5, {1, 1});
-	_menu.addText(L"SUPER\nBOMBERMARIO\nBROS.", {.5, .15}, 0);
+	_menu.addText(L"SUPER\nBOMBERMARIO\nBROS.", {.5f, .15f}, 0);
 	_menu.setElementFont(0, menu::TITLE);
-	_menu.addButton(L"Play", {.5, .35}, 1);
+	_menu.addButton(L"Play", {.5f, .35f}, 1);
 	_menu.setButtonEvent(1, [this](){
 		_nextScene = "character_scene";
 	});
-	_menu.addButton(L"Options", {.5, .5}, 2);
+	_menu.addButton(L"Options", {.5f, .5f}, 2);
 	_menu.setButtonEvent(2, [this](){
 		_nextScene = "option_scene";
 	});
-	_menu.addButton(L"Quit", {.5, .65}, 3);
+	_menu.addButton(L"Quit", {.5f, .65f}, 3);
 	_menu.setButtonEvent(3, [this](){
 		_nextScene = "";
 	});

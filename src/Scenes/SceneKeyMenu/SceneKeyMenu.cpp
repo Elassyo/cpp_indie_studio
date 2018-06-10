@@ -18,9 +18,9 @@ bomb::scene::SceneStatus bomb::scene::SceneKeyMenu::start(
 	_ctrl = IPlayerController::NONE;
 	_keys = _infos.getPlayerInfos(0).getKeys();
 	_menu.createMenu(loader);
-	_menu.addImage(loader.loadTexture("images/menuBack.png"), {.5, .5}, 5);
+	_menu.addImage(loader.loadTexture("images/menuBack.png"), {.5f, .5f}, 5);
 	_menu.setElementSize(5, {1, 1});
-	_menu.addText(L"SUPER\nBOMBERMARIO\nBROS.", {.5, .15}, 0);
+	_menu.addText(L"SUPER\nBOMBERMARIO\nBROS.", {.5f, .15f}, 0);
 	_menu.setElementFont(0, menu::TITLE);
 	createKeyButtons();
 	createButtons();
@@ -31,40 +31,40 @@ bomb::scene::SceneStatus bomb::scene::SceneKeyMenu::start(
 
 void bomb::scene::SceneKeyMenu::createButtons()
 {
-	_menu.addButton(L"Player 1", {.5, .35}, 1);
+	_menu.addButton(L"Player 1", {.5f, .35f}, 1);
 	_menu.setButtonEvent(1, [this](){
 		changePlayer();
 	});
-	_menu.addButton(L"Back", {.5, .75}, 2);
+	_menu.addButton(L"Back", {.5f, .75f}, 2);
 	_menu.setButtonEvent(2, [this](){
 		_nextScene = "option_scene";
 		_running = false;
 	});
-	_menu.addButton(L"PRESS ANY KEY", {.5, .5}, 3);
+	_menu.addButton(L"PRESS ANY KEY", {.5f, .5f}, 3);
 	_menu.setElementFont(3, menu::TITLE);
-	_menu.setElementSize(3, {.5, .5});
-	_menu.setElementPos(3, {10, 10});
+	_menu.setElementSize(3, {.5f, .5f});
+	_menu.setElementPos(3, {10.0f, 10.0f});
 }
 
 void bomb::scene::SceneKeyMenu::createKeyButtons()
 {
-	_menu.addButton(L"Key UP", {.25, .45}, 6);
+	_menu.addButton(L"Key UP", {.25f, .45f}, 6);
 	_menu.setButtonEvent(6, [this](){
 		setCtrl(IPlayerController::MV_UP);
 	});
-	_menu.addButton(L"Key DOWN", {.25, .65}, 7);
+	_menu.addButton(L"Key DOWN", {.25f, .65f}, 7);
 	_menu.setButtonEvent(7, [this](){
 		setCtrl(IPlayerController::MV_DOWN);
 	});
-	_menu.addButton(L"Key LEFT", {.75, .45}, 8);
+	_menu.addButton(L"Key LEFT", {.75f, .45f}, 8);
 	_menu.setButtonEvent(8, [this](){
 		setCtrl(IPlayerController::MV_LEFT);
 	});
-	_menu.addButton(L"Ley RIGHT", {.75, .65}, 9);
+	_menu.addButton(L"Ley RIGHT", {.75f, .65f}, 9);
 	_menu.setButtonEvent(9, [this](){
 		setCtrl(IPlayerController::MV_RIGHT);
 	});
-	_menu.addButton(L"Key BOMB", {.5, .55}, 10);
+	_menu.addButton(L"Key BOMB", {.5f, .55f}, 10);
 	_menu.setButtonEvent(10, [this](){
 		setCtrl(IPlayerController::PUT_BOMB);
 	});
@@ -83,7 +83,7 @@ void bomb::scene::SceneKeyMenu::changePlayer()
 	_keys = _infos.getPlayerInfos(_player).getKeys();
 	_menu.setElementText(1, std::wstring(
 		L"Player " + std::to_wstring(_player + 1)).c_str());
-	_menu.setElementPos(3, {10, 10});
+	_menu.setElementPos(3, {10.0f, 10.0f});
 	updateKeys();
 }
 

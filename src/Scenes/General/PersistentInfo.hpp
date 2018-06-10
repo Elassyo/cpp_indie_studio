@@ -8,8 +8,8 @@
 #ifndef CPP_INDIE_STUDIO_PERSISTENTINFO_HPP
 	#define CPP_INDIE_STUDIO_PERSISTENTINFO_HPP
 
+	#include <array>
 	#include <string>
-	#include <vector>
 	#include "PlayerInfo.hpp"
 
 namespace bomb {
