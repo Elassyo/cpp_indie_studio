@@ -127,6 +127,21 @@ void bomb::game::Game::execute(bomb::IAssetManager &loader)
 	executePlayers(loader);
 	executeBombs(loader);
 	executePowers(loader);
+	executeBlast(loader);
+}
+
+void bomb::game::Game::executeBlast(bomb::IAssetManager &manager)
+{
+	auto blast = _explosionBlasts.begin();
+	for (;blast != _explosionBlasts.end();) {
+		if (blast->isFinished()) {
+			manager.deleteObject(blast->releasePtr());
+			blast = _explosionBlasts.erase(blast);
+		} else {
+			blast->scaleDown();
+			blast++;
+		}
+	}
 }
 
 void bomb::game::Game::executePowers(bomb::IAssetManager &loader)
@@ -196,6 +211,12 @@ void bomb::game::Game::blastObjects(
 	bomb::IAssetManager &manager)
 {
 	for (auto &b : blast) {
+		auto p = manager.createBillboardObject(
+			{(float) b.first.X, 0.5f, (float) b.first.Y},
+			{3.f, 3.f});
+		p->setTexture(0, manager.loadTexture("images/explosion.png"));
+		_explosionBlasts.emplace_back(object::ExplosionBlast(
+			std::move(p)));
 		killPlayersInBlast(b.first, manager);
 		killPowersInBlast(b.first, manager);
 		fuseBombInBlast(b.first);
@@ -230,10 +251,8 @@ void bomb::game::Game::killPlayersInBlast(irr::core::vector2di pos,
 		if (!_players.at(i).isAlive())
 			continue;
 		irr::core::vector2di playerPos(
-			static_cast<irr::s32>(
-				_players[i].getExactPos().X),
-			static_cast<irr::s32>(
-				_players[i].getExactPos().Z));
+			static_cast<irr::s32>(_players[i].getExactPos().X),
+			static_cast<irr::s32>(_players[i].getExactPos().Z));
 		if (playerPos == pos) {
 			_players[i].getModel()->playSound(
 				_charLoader.getHitSfxPath(

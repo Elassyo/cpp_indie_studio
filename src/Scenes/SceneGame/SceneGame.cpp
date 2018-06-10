@@ -40,13 +40,13 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetManager &loader)
 bomb::scene::SceneStatus bomb::scene::SceneGame::loop(
 	bomb::IAssetManager &loader)
 {
+	_menu.updateButtons(loader, true);
 	explodeBombs(loader);
 	_game.execute(loader);
 	if (_playing)
 		checkVictory();
 	if (_running)
 		return CONTINUE;
-	loader.stopAll();
 	return END;
 }
 

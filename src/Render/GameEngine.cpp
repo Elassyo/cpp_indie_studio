@@ -54,8 +54,11 @@ irr::gui::IGUIEnvironment *bomb::GameEngine::getGui()
 
 irr::video::ITexture *bomb::GameEngine::loadTexture(const std::string &path)
 {
-	return _videoDriver->getTexture(
+	auto ptr = _videoDriver->getTexture(
 		(_version.getAssetsPath() + path).c_str());
+	if (!ptr)
+		throw Exception("GameEngine", "can't open texture " + path);
+	return ptr;
 }
 
 void bomb::GameEngine::loadAudioFile(const std::string &path)
@@ -174,7 +177,7 @@ void bomb::GameEngine::pauseAll()
 
 std::unique_ptr<bomb::BillboardObject>
 bomb::GameEngine::createBillboardObject(irr::core::vector3df pos,
-					irr::core::vector3df scale,
+					irr::core::vector2df size,
 					irr::core::vector3df rot)
 {
 	auto ptr = std::make_unique<bomb::BillboardObject>(
@@ -182,7 +185,7 @@ bomb::GameEngine::createBillboardObject(irr::core::vector3df pos,
 		_audioMgr);
 	ptr->setPos(pos);
 	ptr->setRot(rot);
-	ptr->setScale(scale);
+	ptr->setSize(size);
 	return ptr;
 }
 

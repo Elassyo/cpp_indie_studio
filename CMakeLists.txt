@@ -109,6 +109,8 @@ set(SRC_FILES
 
         src/Scenes/SceneGame/Bomb.cpp
         src/Scenes/SceneGame/Bomb.hpp
+        src/Scenes/SceneGame/ExplosionBlast.cpp
+        src/Scenes/SceneGame/ExplosionBlast.hpp
         src/Scenes/SceneGame/Powers/BombDown.cpp
         src/Scenes/SceneGame/Powers/BombDown.hpp
         src/Scenes/SceneGame/Powers/BombFull.cpp

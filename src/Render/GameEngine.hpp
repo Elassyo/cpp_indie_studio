@@ -65,7 +65,7 @@ namespace bomb {
 
 		std::unique_ptr<BillboardObject>
 		createBillboardObject(irr::core::vector3df pos,
-				      irr::core::vector3df scale,
+				      irr::core::vector2df size,
 				      irr::core::vector3df rot) override;
 
 		void deleteObject(std::unique_ptr<IObject> obj) override;

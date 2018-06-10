@@ -15,11 +15,19 @@ bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(
 {
 	launchMainMusic(loader);
 	_running = true;
+	_cam = loader.getCamera();
 	_menu.createMenu(loader);
 	_menu.addImage(loader.loadTexture("images/menuBack.png"), {.5f, .5f}, 5);
 	_menu.setElementSize(5, {1, 1});
 	_menu.addText(L"SUPER\nBOMBERMARIO\nBROS.", {.5f, .15f}, 0);
 	_menu.setElementFont(0, menu::TITLE);
+	addButtons();
+	_menu.updateButtons(loader, true);
+	return BEGIN;
+}
+
+void bomb::scene::SceneHomeMenu::addButtons()
+{
 	_menu.addButton(L"Play", {.5f, .35f}, 1);
 	_menu.setButtonEvent(1, [this](){
 		_nextScene = "character_scene";
@@ -30,14 +38,15 @@ bomb::scene::SceneStatus bomb::scene::SceneHomeMenu::start(
 	});
 	_menu.addButton(L"Quit", {.5f, .65f}, 3);
 	_menu.setButtonEvent(3, [this](){
+		_cam->playSound("sfx/thwomp.ogg");
+		std::this_thread::sleep_for(std::chrono::seconds(1));
 		_nextScene = "";
 	});
-	_menu.updateButtons(loader, true);
-	return BEGIN;
 }
 
 void bomb::scene::SceneHomeMenu::launchMainMusic(IAssetManager &loader)
 {
+	loader.loadAudioFile("sfx/thwomp.ogg");
 	if (!_infos.MainMusic()) {
 		loader.loadAudioFile(
 			"music/mario-and-luigi-partners-in-time.ogg");
@@ -65,6 +74,8 @@ void bomb::scene::SceneHomeMenu::reset(bomb::IAssetManager &loader)
 
 void bomb::scene::SceneHomeMenu::clean(IAssetManager &loader)
 {
+	if (_nextScene.empty())
+		loader.stopAll();
 	_menu.clean();
 	(void) loader;
 }
