@@ -15,8 +15,8 @@
 namespace bomb {
 	class PersistentInfo {
 	public:
-		PersistentInfo(int = 1, bool = true, const std::string & = "");
-
+		PersistentInfo(int = 1, bool = true,
+			       const std::string & = "map.xml");
 		const std::string &getFileName() const;
 		int getPlayerNbr() const;
 		std::array<PlayerInfo, 4> getPlayerInfos() const;
@@ -28,7 +28,7 @@ namespace bomb {
 		void setVolume(float volume);
 		void setFileName(const std::string &);
 		void setPlayerNbr(int playerNbr);
-		void setgenerateMap(bool gm);
+		void setGenerateMap(bool gm);
 		void setMainMusic(bool mainMusic);
 		void setPlayerInfos(std::array<PlayerInfo, 4> playerInfos);
 		void setPlayerInfos(int idx, PlayerInfo playerinfo);
@@ -39,6 +39,7 @@ namespace bomb {
 		int _playerNbr;
 		float _volume;
 		bool _generateMap;
+		bool _loadMap;
 		bool _mainMusic;
 		std::string _fileMap;
 		std::array<PlayerInfo, 4> _playerInfos;

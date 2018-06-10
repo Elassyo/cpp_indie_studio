@@ -26,7 +26,7 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetManager &loader)
 	plane->setTexture(0, loader.loadTexture("images/grass.png"));
 	_playing = true;
 	_blocksTextures = loader.loadTexture("models/blocks/spritesheet.png");
-	_game.createGame(loader, _blocksTextures);
+	createGame(loader);
 	auto cam = loader.getCamera();
 	float mid = (float)(_game.getMapSize() - 1) / 2;
 	cam->setPos({mid, (float)_game.getMapSize() * 0.8f,
@@ -35,6 +35,16 @@ bomb::scene::SceneStatus bomb::scene::SceneGame::start(IAssetManager &loader)
 	loadSounds(loader);
 	_menu.updateButtons(loader, true);
 	return BEGIN;
+}
+
+void bomb::scene::SceneGame::createGame(IAssetManager &loader)
+{
+	if(_infos.generateMap())
+		_game.createGame(loader);
+	else
+		_game.createGame(loader, _infos.getFileName());
+	_infos.setGenerateMap(true);
+
 }
 
 bomb::scene::SceneStatus bomb::scene::SceneGame::loop(
@@ -93,11 +103,12 @@ void bomb::scene::SceneGame::checkVictory()
 
 void bomb::scene::SceneGame::save()
 {
-	xml::XmlWriter xmlWriter("test.xml");
+	xml::XmlWriter xmlWriter(_infos.getFileName());
 
 	xmlWriter.mapToSection(_game.getMap());
 	for (size_t i = 0; i < _game.getPlayers().size(); i++) {
-		xmlWriter.playerToSection(_game.getPlayers()[i]);
+		xmlWriter.playerToSection(_game.getPlayers()[i],
+		_infos.getPlayerInfos(i));
 	}
 }
 

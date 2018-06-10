@@ -23,6 +23,7 @@ namespace bomb {
 			bool read();
 			std::wstring getActualSection() const;
 			int getIntValue(const std::wstring &properties) const;
+			float getFloatValue(const std::wstring &prop) const;
 			std::wstring getStringValue(const std::wstring &prop)
 			const;
 			std::wstring getNodeName() const;
