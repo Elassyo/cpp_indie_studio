@@ -8,7 +8,7 @@
 #include "Menu.hpp"
 
 bomb::menu::Menu::Menu() :
-	_buttonRatio(irr::core::vector2df(0.125f, 0.1f))
+	_buttonRatio(irr::core::vector2df(0.15f, 0.1f))
 {
 }
 
@@ -17,7 +17,7 @@ void bomb::menu::Menu::createMenu(IAssetManager &loader)
 	_gui = loader.getGui();
 	_buttonBack = loader.loadTexture("images/buttonBack.png");
 	_buttonPressed = loader.loadTexture("images/buttonPressed.png");
-	_fonts[BASIC] = loader.loadFont("fonts/mario16.xml");
+	_fonts[BASIC] = loader.loadFont("fonts/mario24.xml");
 	_fonts[TITLE] = loader.loadFont("fonts/marioColor36.xml");
 	_gui->getSkin()->setFont(_fonts[BASIC]);
 	_gui->getSkin()->setColor(irr::gui::EGDC_BUTTON_TEXT,
