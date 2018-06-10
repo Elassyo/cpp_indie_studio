@@ -15,4 +15,3 @@ cmake-*
 /win/bombermario.exe
 /win/bombermario-setup.exe
 build/
-*.xml
