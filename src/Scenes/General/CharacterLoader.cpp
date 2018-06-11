@@ -25,7 +25,7 @@ bomb::game::CharacterLoader::CharacterLoader() :
 				"images/characters/MK8_ShyGuy_Icon.png",
 				"sfx/shy-guy.ogg", "sfx/shy-guy-hit.ogg")},
 		     {DRYBONES, CharacterInfo(L" Dry\nBones",
-				"models/characters/dryBones/dryBones.x",
+				"models/characters/dryBones/dryBones.obj",
 				"images/characters/MK8_Dry_Bones_Icon.png",
 				"sfx/dry-bones.ogg", "sfx/dry-bones-hit.ogg")},
 		     {KOOPA, CharacterInfo(L"Koopa",
