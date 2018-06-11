@@ -133,7 +133,6 @@ std::map<irr::core::vector2di, bomb::IPlayerController::Actions>
 				safeMap[pos] = (Map::BlockType) tmp2.first;
 				if (map.getBombRanges()[pos] == Map::EMPTY) {
 					action = tmp.second;
-					printf("find\n");
 					return vec;
 				}
 			}
