@@ -97,7 +97,7 @@ void bomb::scene::SceneGame::checkVictory()
 					getPlayerInfos(i).getCharacter()));
 		}
 	if (!alive)
-		_menu.setElementText(1, L"EGALITY");
+		_menu.setElementText(1, L"IT'S A DRAW");
 }
 
 void bomb::scene::SceneGame::save()
