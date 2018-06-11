@@ -133,8 +133,8 @@ int bomb::game::Game::getMapSize() const
 void bomb::game::Game::execute(bomb::IAssetManager &loader)
 {
 	executePlayers(loader);
-	executeBombs(loader);
 	executePowers(loader);
+	executeBombs(loader);
 	executeBlast(loader);
 }
 
@@ -168,7 +168,7 @@ void bomb::game::Game::executePlayers(bomb::IAssetManager &loader)
 	for (auto i = 0; i < NB_PLAYERS; ++i) {
 		if (!_players[i].isAlive())
 			continue;
-		if (_players[i].isAI())
+		if (_players[i].isAI() && _players[i].isAlive())
 			_controller.executeAI(
 				_playersActionners[i], _players, *_map, i);
 		_playersActionners[i].actionnate(*_map, _players[i]);

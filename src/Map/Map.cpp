@@ -52,28 +52,28 @@ bomb::Map::BlockType &bomb::Map::operator[](irr::core::vector3di pos)
 bomb::Map::BlockType &bomb::Map::operator[](irr::core::vector3df pos)
 {
 	auto idx = static_cast<unsigned int>(pos.X + pos.Z * _size);
-	if (idx < _cells.size())
+//	if (idx < _cells.size())
 		return _cells[idx];
-	throw
-		bomb::Exception("Map", "Invalid index");
+/*	throw
+		bomb::Exception("Map", "Invalid index");*/
 }
 
 bomb::Map::BlockType &bomb::Map::operator[](irr::core::vector2di pos)
 {
 	auto idx = pos.X + pos.Y * _size;
-	if ((unsigned int)idx < _cells.size())
+//	if ((unsigned int)idx < _cells.size())
 		return _cells[idx];
-	throw
-		bomb::Exception("Map", "Invalid index");
+/*	throw
+		bomb::Exception("Map", "Invalid index");*/
 }
 
 bomb::Map::BlockType &bomb::Map::operator[](irr::core::vector2df pos)
 {
 	auto idx = static_cast<unsigned int>(pos.X + pos.Y * _size);
-	if (idx < _cells.size())
+//	if (idx < _cells.size())
 		return _cells[idx];
-	throw
-		bomb::Exception("Map", "Invalid index");
+//	throw
+//		bomb::Exception("Map", "Invalid index");
 }
 
 const std::vector<bomb::Map::BlockType> &bomb::Map::getCells() const
