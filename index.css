@@ -1,0 +1,28 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.header span {
+    vertical-align: middle;
+}
+
+.logo {
+    vertical-align: middle;
+    width: 96px;
+    height: 96px;
+    margin-right: 16px;
+}
+
+footer .row {
+    margin-bottom: 0;
+}
+
+#download-options a {
+    color: black;
+}
