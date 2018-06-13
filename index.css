@@ -19,6 +19,15 @@ main {
     margin-right: 16px;
 }
 
+.carousel {
+    min-height: 600px;
+}
+
+.carousel-item {
+    width: 900px !important;
+    height: 500px !important;
+}
+
 footer .row {
     margin-bottom: 0;
 }
